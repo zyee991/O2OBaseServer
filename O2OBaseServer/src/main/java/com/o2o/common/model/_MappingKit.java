@@ -16,7 +16,13 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 public class _MappingKit {
 	
 	public static void mapping(ActiveRecordPlugin arp) {
-		arp.addMapping("blog", "id", Blog.class);
+		arp.addMapping("tb_base_manager", "id", Manager.class);
+		arp.addMapping("tb_goods", "id", TbGoods.class);
+		arp.addMapping("tb_mplace", "id", TbMplace.class);
+		arp.addMapping("tb_mstaff", "id", TbMstaff.class);
+		arp.addMapping("tb_mtools", "id", TbMtools.class);
+		arp.addMapping("tb_muser", "mid", TbMuser.class);
+		arp.addMapping("tb_user", "openid", TbUser.class);
 	}
 }
 
