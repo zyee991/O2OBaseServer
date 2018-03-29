@@ -11,7 +11,6 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
-import com.o2o.blog.BlogController;
 import com.o2o.common.model._MappingKit;
 import com.o2o.index.IndexController;
 
