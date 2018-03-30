@@ -1,0 +1,31 @@
+#@layout() 
+#define main()
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+		    <tr>
+		        <th class="col-sm-3">导航名称</th>
+		        <th class="col-sm-3">URL</th>
+		        <th class="col-sm-3">类型</th>
+		        <th class="col-sm-3">操作</th>
+		    </tr>
+	    </thead>
+	    <tbody>
+	    #for(navigation : page.list)
+		    <tr>
+		        <td>#(navigation.name)</td>
+		        <td>#(navigation.url) </td>
+   		        <td>#(navigation.parentId == null ? "一级导航" : "二级导航") </td>
+		        <td>
+		        <a href="#" class="btn btn-default btn-xs" role="button">查看</a>
+		        <a href="#" class="btn btn-success btn-xs" role="button">编辑</a>
+		        <a href="#" class="btn btn-warning btn-xs" role="button">添加</a>
+		        <a href="#" class="btn btn-danger btn-xs" role="button">删除</a>
+		        </td>
+		    </tr>
+	    #end
+    	</tbody>
+	</table>
+</div>
+#end
