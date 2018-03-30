@@ -1,5 +1,7 @@
 package com.o2o.common.model;
 
+import java.util.List;
+
 import com.o2o.common.model.base.BaseManager;
 
 /**
@@ -8,4 +10,19 @@ import com.o2o.common.model.base.BaseManager;
 @SuppressWarnings("serial")
 public class Manager extends BaseManager<Manager> {
 	public static final Manager dao = new Manager().dao();
+	
+	public Manager findUserLogin(String username,String password){
+		String querysql="select* from tb_base_manager where username=? and password=?";
+		List<Manager>list;
+		try{
+			list=this.dao().find(querysql,username,password);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		if(list.isEmpty()||list==null){
+			return null;
+		}
+		return list.get(0);
+	}
 }
