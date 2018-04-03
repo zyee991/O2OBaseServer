@@ -55,13 +55,13 @@ public class O2OConfig extends JFinalConfig {
 	 * 配置路由
 	 */
 	public void configRoute(Routes me) {
-		me.add("/", IndexController.class, "/index");	// 第三个参数为该Controller的视图存放路径
-		me.add("/navigation", NavigationController.class);// 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
+		me.add("/", IndexController.class, "/WEB-INF/view/index");	// 第三个参数为该Controller的视图存放路径
+		me.add("/navigation", NavigationController.class,"/WEB-INF/view/navigation");// 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
 	}
 	
 	public void configEngine(Engine me) {
-		me.addSharedFunction("/common/_layout.html");
-		me.addSharedFunction("/common/_paginate.html");
+		me.addSharedFunction("/WEB-INF/view/common/_layout.html");
+		me.addSharedFunction("/WEB-INF/view/common/_paginate.html");
 	}
 	
 	/**

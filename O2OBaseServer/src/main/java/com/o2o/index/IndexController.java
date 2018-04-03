@@ -16,7 +16,6 @@ public class IndexController extends Controller {
 		try {
 			String userInfo = SecurityAuthentication.decode("login", cookie);
 			Manager manager = Manager.dao.findUserLogin(userInfo.split("@")[0], userInfo.split("@")[1]);
-			System.out.println(manager);
 			if(manager == null) {
 				redirect("/toLogin");	
 				return;
@@ -32,6 +31,7 @@ public class IndexController extends Controller {
 		String name=getPara("name");
 		String password=getPara("password");
 		password = SecurityAuthentication.crypt(password);
+		System.out.println(password);
 		Manager manager=Manager.dao.findUserLogin(name,password);
 		if(manager!=null){
 			String cookieValue = SecurityAuthentication.encode("login", name + "@" + password);

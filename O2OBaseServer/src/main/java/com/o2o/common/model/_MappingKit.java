@@ -17,7 +17,10 @@ public class _MappingKit {
 	
 	public static void mapping(ActiveRecordPlugin arp) {
 		arp.addMapping("tb_base_manager", "id", Manager.class);
+		arp.addMapping("tb_base_manager_role", "id", ManagerRole.class);
 		arp.addMapping("tb_base_navigation", "id", Navigation.class);
+		arp.addMapping("tb_base_role", "id", Role.class);
+		arp.addMapping("tb_base_role_navigation", "id", RoleNavigation.class);
 	}
 }
 

@@ -13,7 +13,7 @@ public class SecurityAuthentication {
 	 * @return
 	 */
 	public static String crypt(String password) {
-		return DigestUtils.md5Hex(DigestUtils.md5Hex(password));
+		return DigestUtils.md5Hex(password);
 	}
 
 	/**
