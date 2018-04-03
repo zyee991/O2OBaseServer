@@ -3,54 +3,73 @@
 <html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<script src="/js/jquery-1.4.4.min.js" type="text/javascript" ></script>
-<script src="/bootstrap/js/bootstrap.min.js" type="text/javascript" ></script>
-<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/signin.css" rel="stylesheet">
-<link href="/css/dashboard.css" rel="stylesheet">
+<script src="/js/jQuery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="/js/jQuery/jquery.form.js" type="text/javascript"></script>
+<script src="/js/common.js" type="text/javascript"></script>
+<script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/Font-Awesome-3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+<link href="/css/signin.css" rel="stylesheet" />
+<link href="/css/dashboard.css" rel="stylesheet" />
+<link href="/css/common.css" rel="stylesheet" />
 </head>
 <body>
- <nav class="navbar navbar-inverse navbar-fixed-top">
-   <div class="container-fluid">
-     <div class="navbar-header">
-       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-         <span class="sr-only">Toggle navigation</span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-       </button>
-       <a class="navbar-brand" href="/">O2O汽车快修平台</a>
-     </div>
-     <div id="navbar" class="navbar-collapse collapse">
-       <ul class="nav navbar-nav navbar-right">
-         <li><a href="/sysConfig">系统设置</a></li>
-         <li><a href="#">Settings</a></li>
-         <li><a href="#">Profile</a></li>
-         <li><a href="#">Help</a></li>
-       </ul>
-       <form class="navbar-form navbar-right">
-         <input type="text" class="form-control" placeholder="Search...">
-       </form>
-     </div>
-   </div>
- </nav>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="container">
-        	<h1 class="page-header">#(title)</h1>
-        	<ul class="nav nav-tabs">
-			  <li class="active"><a href="#">Home</a></li>
-			  <li><a href="#">SVN</a></li>
-			  <li><a href="#">iOS</a></li>
-			  <li><a href="#">VB.Net</a></li>
-			  <li><a href="#">Java</a></li>
-			  <li><a href="#">PHP</a></li>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/">O2O汽车快修平台</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/navigation">系统设置</a></li>
+				<li><a href="#">Settings</a></li>
+				<li><a href="#">Profile</a></li>
+				<li><a href="#">Help</a></li>
 			</ul>
-        	#@main()
-        </div>
-      </div>
-    </div>
+			<form class="navbar-form navbar-right">
+				<input type="text" class="form-control" placeholder="Search...">
+			</form>
+		</div>
+	</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="container">
+				<h1 class="page-header">#(title)</h1>
+				<ul class="nav nav-tabs">
+<!-- 					<li class="active"><a href="#">Home</a></li> -->
+<!-- 					<li><a href="#">SVN</a></li> -->
+<!-- 					<li><a href="#">iOS</a></li> -->
+<!-- 					<li><a href="#">VB.Net</a></li> -->
+<!-- 					<li><a href="#">Java</a></li> -->
+<!-- 					<li><a href="#">PHP</a></li> -->
+				</ul>
+				#@main()
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header"></div>
+				<div class="modal-body"></div>
+				<div class="modal-footer"></div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	
 </body>
 </html>
 #end

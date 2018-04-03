@@ -1,0 +1,44 @@
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true">×</button>
+	<h4 class="modal-title" id="myModalLabel">#(navigation.name)</h4>
+</div>
+<div class="modal-body">
+	<form class="form-horizontal" role="form" id="form" action="/navigation/save" method="post">
+		<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">名称</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="name" name="navigation.name" required
+					placeholder="请输入名称">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="url" class="col-sm-2 control-label">URL</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="url" name="navigation.url" required
+					placeholder="请输入url">
+			</div>
+		</div>
+		<input type="hidden" name="navigation.parentId" value="#(navigation.id)" />
+		<input type="hidden" name="navigation.id" value="#(newId)" />
+		<input type="hidden" name="navigation.createDate" value="#(date)" />
+		<div class="form-group">
+			<label class="col-sm-2 control-label">启用标记</label>
+
+			<div class="btn-group col-sm-10" data-toggle="buttons">
+				<label class="btn btn-success active"> <input checked type="radio"
+					name="navigation.useFlag" value="true"> 启用
+				</label> <label class="btn btn-success"> <input type="radio"
+					name="navigation.useFlag" value="false"> 禁用
+				</label>
+			</div>
+		</div>
+
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">
+		关闭</button>
+	<button type="button" class="btn btn-primary" onclick="submitForm('form')">提交</button>
+</div>

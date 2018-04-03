@@ -63,4 +63,22 @@ public abstract class BaseNavigation<M extends BaseNavigation<M>> extends Model<
 		return get("modifyDate");
 	}
 
+	public M setSystemName(java.lang.String systemName) {
+		set("systemName", systemName);
+		return (M)this;
+	}
+	
+	public java.lang.String getSystemName() {
+		return getStr("systemName");
+	}
+
+	public M setUseFlag(java.lang.Boolean useFlag) {
+		set("useFlag", useFlag);
+		return (M)this;
+	}
+	
+	public java.lang.Boolean getUseFlag() {
+		return get("useFlag");
+	}
+
 }

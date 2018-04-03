@@ -13,7 +13,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 import com.o2o.common.model._MappingKit;
 import com.o2o.index.IndexController;
-import com.o2o.web.SysConfigController;
+import com.o2o.web.NavigationController;
 
 /**
  * 本 demo 仅表达最为粗浅的 jfinal 用法，更为有价值的实用的企业级用法
@@ -56,7 +56,7 @@ public class O2OConfig extends JFinalConfig {
 	 */
 	public void configRoute(Routes me) {
 		me.add("/", IndexController.class, "/index");	// 第三个参数为该Controller的视图存放路径
-		me.add("/sysConfig", SysConfigController.class);// 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
+		me.add("/navigation", NavigationController.class);// 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
 	}
 	
 	public void configEngine(Engine me) {
