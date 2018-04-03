@@ -36,7 +36,7 @@ public class IndexController extends Controller {
 		if(manager!=null){
 			String cookieValue = SecurityAuthentication.encode("login", name + "@" + password);
 			this.setCookie("o2oCookie", cookieValue, 3600);
-			render("index.html");
+			redirect("/index");
 		}else{
 			redirect("/toLogin");		
 		}
