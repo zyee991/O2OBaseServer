@@ -10,9 +10,11 @@ import com.jfinal.core.JFinal;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.template.Engine;
 import com.o2o.common.model._MappingKit;
 import com.o2o.index.IndexController;
+import com.o2o.interceptor.LoginInterceptor;
 import com.o2o.web.NavigationController;
 
 /**
@@ -47,7 +49,7 @@ public class O2OConfig extends JFinalConfig {
 	 */
 	public void configConstant(Constants me) {
 		// 加载少量必要配置，随后可用PropKit.get(...)获取值
-		PropKit.use("a_little_config.txt");
+		PropKit.use("application.properties");
 		me.setDevMode(PropKit.getBoolean("devMode", false));
 	}
 	
@@ -69,9 +71,11 @@ public class O2OConfig extends JFinalConfig {
 	 */
 	public void configPlugin(Plugins me) {
 		// 配置 druid 数据库连接池插件
-		DruidPlugin druidPlugin = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password").trim());
+		DruidPlugin druidPlugin = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
 		me.add(druidPlugin);
 		
+		EhCachePlugin ehCachePlugin = new EhCachePlugin();
+		me.add(ehCachePlugin);
 		// 配置ActiveRecord插件
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
 		// 所有映射在 MappingKit 中自动化搞定
@@ -87,7 +91,7 @@ public class O2OConfig extends JFinalConfig {
 	 * 配置全局拦截器
 	 */
 	public void configInterceptor(Interceptors me) {
-		
+		me.add(new LoginInterceptor());
 	}
 	
 	/**

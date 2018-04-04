@@ -14,7 +14,7 @@
 	    <tbody>
 	    #for(navigation : page.list)
 		    <tr id='#(navigation.id)'>
-		        <td><i class="icon-chevron-right" style="color:blue;cursor:pointer;" onclick="showSub('#(navigation.id)',this);"></i>&nbsp;&nbsp;#(navigation.name)</td>
+		        <td><i class="icon-chevron-right" style="color:blue;cursor:pointer;" onclick="showSub('#(navigation.id)',this);"></i>&nbsp;&nbsp; #(navigation.name)</td>
 		        <td>#(navigation.url) </td>
    		        <td>#(navigation.parentId == null ? "一级导航" : "二级导航") </td>
 		        <td>
@@ -45,7 +45,7 @@
 					$("#"+id).after($(element));
 				}
 				$(e).removeClass("icon-chevron-right").addClass("icon-chevron-down");
-				$(e).attr("onclick","hideSub(" + id + ",this)");
+				$(e).attr("onclick","hideSub(\'" + id + "\',this)");
 			}
 		})
 	}
@@ -53,7 +53,7 @@
 	function hideSub(id,e) {
 		$("."+id).remove();
 		$(e).addClass("icon-chevron-right").removeClass("icon-chevron-down");
-		$(e).attr("onclick","showSub(" + id + ",this)");
+		$(e).attr("onclick","showSub(\'" + id + "\',this)");
 	}
 </script>
 #end

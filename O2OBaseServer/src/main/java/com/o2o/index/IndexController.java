@@ -2,6 +2,7 @@ package com.o2o.index;
 
 import com.jfinal.core.Controller;
 import com.o2o.common.model.Manager;
+import com.o2o.util.BaseUtils;
 import com.o2o.util.SecurityAuthentication;
 
 /**
@@ -14,8 +15,8 @@ public class IndexController extends Controller {
 	public void index() {
 		String cookie = getCookie("o2oCookie");
 		try {
-			String userInfo = SecurityAuthentication.decode("login", cookie);
-			Manager manager = Manager.dao.findUserLogin(userInfo.split("@")[0], userInfo.split("@")[1]);
+			String id = SecurityAuthentication.decode("login", cookie);
+			Manager manager = Manager.dao.findFirstByCache(BaseUtils.MANAGER_CACHE, id, "select * from tb_base_manager where id = ?",id);
 			if(manager == null) {
 				redirect("/toLogin");	
 				return;
@@ -31,11 +32,11 @@ public class IndexController extends Controller {
 		String name=getPara("name");
 		String password=getPara("password");
 		password = SecurityAuthentication.crypt(password);
-		System.out.println(password);
 		Manager manager=Manager.dao.findUserLogin(name,password);
 		if(manager!=null){
-			String cookieValue = SecurityAuthentication.encode("login", name + "@" + password);
+			String cookieValue = SecurityAuthentication.encode("login", manager.getId());
 			this.setCookie("o2oCookie", cookieValue, 3600);
+			BaseUtils.putManager(manager,this);
 			redirect("/index");
 		}else{
 			redirect("/toLogin");		

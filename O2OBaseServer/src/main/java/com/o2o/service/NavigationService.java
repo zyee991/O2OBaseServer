@@ -29,7 +29,7 @@ public class NavigationService {
 	}
 
 	public List<Navigation> findChildNavigationByParentId(String id) {
-		List<Navigation> list = dao.find("select * from tb_base_navigation where parentId = "+ id);
+		List<Navigation> list = dao.find("select * from tb_base_navigation where parentId=?",id);
 		return list;
 	}
 }
