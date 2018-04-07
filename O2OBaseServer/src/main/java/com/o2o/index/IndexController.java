@@ -1,5 +1,8 @@
 package com.o2o.index;
 
+import java.util.List;
+import java.util.Map;
+
 import com.jfinal.core.Controller;
 import com.o2o.common.model.Manager;
 import com.o2o.util.BaseUtils;
@@ -23,8 +26,9 @@ public class IndexController extends Controller {
 				redirect("/toLogin");	
 				return;
 			} else {
-				BaseUtils.putNavigation(NavigationController.getNavigationTree(), this);
-				setAttr("treelist",NavigationController.getNavigationTree());
+				List<Map> map = NavigationController.getNavigationTree(manager);
+				BaseUtils.putNavigation(map, this);
+				setAttr("treelist",map);
 			}
 		} catch (Exception e) {
 			redirect("/toLogin");		
@@ -43,7 +47,7 @@ public class IndexController extends Controller {
 			String cookieValue = SecurityAuthentication.encode("login", manager.getId());
 			this.setCookie("o2oCookie", cookieValue, 3600);
 			BaseUtils.putManager(manager,this);
-			BaseUtils.putNavigation(NavigationController.getNavigationTree(), this);
+			BaseUtils.putNavigation(NavigationController.getNavigationTree(manager), this);
 			redirect("/index");
 		}else{
 			redirect("/toLogin");		

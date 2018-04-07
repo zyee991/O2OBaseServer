@@ -1,10 +1,10 @@
 package com.o2o.service;
 
 import java.util.List;
-import java.util.Map;
-
 import com.jfinal.plugin.activerecord.Page;
+import com.o2o.common.model.Manager;
 import com.o2o.common.model.Navigation;
+import com.o2o.util.BaseUtils;
 
 public class NavigationService {
 	private static final Navigation dao = new Navigation().dao();
@@ -37,5 +37,31 @@ public class NavigationService {
 	public List<Navigation> findParentNavigation(){
 		List<Navigation> list=dao.find("select*from tb_base_navigation where parentId is null");
 		return list;
+	}
+	
+	public List<Navigation> findParentNavigationByManager(Manager manager) {
+		if(BaseUtils.isSuperUser(manager)) {
+			return findParentNavigation();
+		} else {
+			String sqlPara = "select n.* from tb_base_navigation as n where n.id = ("
+					+ "select rn.navigationId from tb_base_role_navigation as rn where rn.roleId = ("
+					+ "select mr.roleId from tb_base_manager_role as mr where mr.managerId = ?))"
+					+ "and n.parentId is null";
+			List<Navigation> list = dao.find(sqlPara,manager.getId());
+			return list;
+		}
+	}
+	
+	public List<Navigation> findChildNavigationByParentIdAndManager(Manager manager,String id) {
+		if(BaseUtils.isSuperUser(manager)) {
+			return findChildNavigationByParentId(id);
+		} else { 
+			String sqlPara = "select n.* from tb_base_navigation as n where n.id = ("
+					+ "select rn.navigationId from tb_base_role_navigation as rn where rn.roleId = ("
+					+ "select mr.roleId from tb_base_manager_role as mr where mr.managerId = ?))"
+					+ "and n.parentId = ?";
+			List<Navigation> list = dao.find(sqlPara,manager.getId(),id);
+			return list;
+		}
 	}
 }

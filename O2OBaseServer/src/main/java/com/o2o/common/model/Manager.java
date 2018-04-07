@@ -9,6 +9,8 @@ import com.o2o.common.model.base.BaseManager;
  */
 @SuppressWarnings("serial")
 public class Manager extends BaseManager<Manager> {
+	public static final String SUPERUSER = "c88788e1-e8a2-4e86-9933-e6e13fc44135";
+	
 	public static final Manager dao = new Manager().dao();
 	
 	public Manager findUserLogin(String username,String password){

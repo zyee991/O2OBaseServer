@@ -32,10 +32,11 @@ public class BaseUtils {
 		return null;
 	}
 	
-	public static void putNavigation(List<Map> map,Controller controller) {
+	public static void putNavigation(@SuppressWarnings("rawtypes") List<Map> map,Controller controller) {
 		CacheKit.put(NAVIGATION_CACHE, getManager(controller).getId(), map);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static List<Map> getNavigation(Controller controller) {
 		Manager manager = getManager(controller);
 		if(manager != null) {
@@ -43,5 +44,9 @@ public class BaseUtils {
 		} else {
 			return null;
 		}
+	}
+	
+	public static boolean isSuperUser(Manager manager) {
+		return manager.getId().equals(Manager.SUPERUSER);
 	}
 }

@@ -10,12 +10,10 @@ import java.util.UUID;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
+import com.o2o.common.model.Manager;
 import com.o2o.common.model.Navigation;
 import com.o2o.service.NavigationService;
 import com.o2o.validator.NavigationValidator;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 public class NavigationController extends Controller{
 	
@@ -72,14 +70,13 @@ public class NavigationController extends Controller{
 		redirect("/navigation");
 	}
 	
-	public static List<Map> getNavigationTree(){
-		JSONObject json=new JSONObject();
+	@SuppressWarnings("rawtypes")
+	public static List<Map> getNavigationTree(Manager manager){
 		List<Map> treelist=new ArrayList<Map>();
-		List<Navigation> parentlist=navigationService.findParentNavigation();
-		List<Navigation> onechildParentlist=null;
+		List<Navigation> parentlist=navigationService.findParentNavigationByManager(manager);
 		for(Navigation oneparentmap:parentlist){
 			Map<String,Object> ParentMap=new HashMap<String,Object>();
-			List<Navigation> childlist=navigationService.findChildNavigationByParentId(oneparentmap.getId());
+			List<Navigation> childlist=navigationService.findChildNavigationByParentIdAndManager(manager,oneparentmap.getId());
 			System.out.println(oneparentmap.getId());
 			ParentMap.put("id",oneparentmap.getId().toString());
 			ParentMap.put("name", oneparentmap.getName());
