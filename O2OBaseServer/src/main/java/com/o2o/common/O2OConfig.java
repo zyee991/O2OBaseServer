@@ -17,6 +17,7 @@ import com.o2o.index.IndexController;
 import com.o2o.interceptor.LoginInterceptor;
 import com.o2o.interceptor.NavigationInterceptor;
 import com.o2o.web.NavigationController;
+import com.o2o.web.RoleController;
 
 /**
  * 本 demo 仅表达最为粗浅的 jfinal 用法，更为有价值的实用的企业级用法
@@ -60,6 +61,7 @@ public class O2OConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		me.add("/", IndexController.class, "/WEB-INF/view/index");	// 第三个参数为该Controller的视图存放路径
 		me.add("/navigation", NavigationController.class,"/WEB-INF/view/navigation");// 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
+		me.add("/role", RoleController.class,"/WEB-INF/view/role");// 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
 	}
 	
 	public void configEngine(Engine me) {
