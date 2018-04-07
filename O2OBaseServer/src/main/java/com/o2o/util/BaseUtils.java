@@ -32,11 +32,16 @@ public class BaseUtils {
 		return null;
 	}
 	
-	public static void putNavigation(Map<String,List<String>> map,Controller controller) {
+	public static void putNavigation(List<Map> map,Controller controller) {
 		CacheKit.put(NAVIGATION_CACHE, getManager(controller).getId(), map);
 	}
 	
-	public static Map<String,List<String>> getNavigation(Controller controller) {
-		return CacheKit.get(NAVIGATION_CACHE, getManager(controller).getId());
+	public static List<Map> getNavigation(Controller controller) {
+		Manager manager = getManager(controller);
+		if(manager != null) {
+			return CacheKit.get(NAVIGATION_CACHE, getManager(controller).getId());
+		} else {
+			return null;
+		}
 	}
 }

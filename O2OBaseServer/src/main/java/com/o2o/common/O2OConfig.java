@@ -15,6 +15,7 @@ import com.jfinal.template.Engine;
 import com.o2o.common.model._MappingKit;
 import com.o2o.index.IndexController;
 import com.o2o.interceptor.LoginInterceptor;
+import com.o2o.interceptor.NavigationInterceptor;
 import com.o2o.web.NavigationController;
 
 /**
@@ -92,6 +93,7 @@ public class O2OConfig extends JFinalConfig {
 	 */
 	public void configInterceptor(Interceptors me) {
 		me.add(new LoginInterceptor());
+//		me.add(new NavigationInterceptor());
 	}
 	
 	/**

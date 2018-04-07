@@ -72,19 +72,19 @@ public class NavigationController extends Controller{
 		redirect("/navigation");
 	}
 	
-	public static List<Map>getNavigationTree(){
+	public static List<Map> getNavigationTree(){
 		JSONObject json=new JSONObject();
 		List<Map> treelist=new ArrayList<Map>();
 		List<Navigation> parentlist=navigationService.findParentNavigation();
 		List<Navigation> onechildParentlist=null;
 		for(Navigation oneparentmap:parentlist){
-			Map<String,String> ParentMap=new HashMap<String,String>();
+			Map<String,Object> ParentMap=new HashMap<String,Object>();
 			List<Navigation> childlist=navigationService.findChildNavigationByParentId(oneparentmap.getId());
 			System.out.println(oneparentmap.getId());
 			ParentMap.put("id",oneparentmap.getId().toString());
 			ParentMap.put("name", oneparentmap.getName());
 			ParentMap.put("url", oneparentmap.getUrl());
-			ParentMap.put("chilid",childlist.toString());
+			ParentMap.put("chilid",childlist);
 			treelist.add(ParentMap);
 		}
 		/*JSONArray jsonarray=JSONArray.fromObject(treelist);
