@@ -27,11 +27,23 @@
 			<a class="navbar-brand" href="/">O2O汽车快修平台</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/navigation">系统设置</a></li>
-				<li><a href="#">Settings</a></li>
-				<li><a href="#">Profile</a></li>
-				<li><a href="#">Help</a></li>
+			<ul class="nav navbar-nav navbar-right" id="ul">
+			 #for(navigation : treelist)
+        <li class="dropdown">
+          <a href="#(navigation.url)" class="dropdown-toggle" data-toggle="dropdown" >
+            <span>  #(navigation.name)</span> 
+          </a>
+          <ul class="dropdown-menu">
+           #for(childnavigation:navigation.chilid)
+           <li>
+            <a href="#(childnavigation.get("url"))">
+              <span>#(childnavigation.get("name"))</span>
+            </a>
+           </li>
+           #end
+          </ul>
+        </li>
+     #end
 			</ul>
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search...">
@@ -69,7 +81,6 @@
 		</div>
 		<!-- /.modal-dialog -->
 	</div>
-	
 </body>
 </html>
 #end

@@ -4,6 +4,7 @@ import com.jfinal.core.Controller;
 import com.o2o.common.model.Manager;
 import com.o2o.util.BaseUtils;
 import com.o2o.util.SecurityAuthentication;
+import com.o2o.web.NavigationController;
 
 /**
  * 本 demo 仅表达最为粗浅的 jfinal 用法，更为有价值的实用的企业级用法
@@ -25,6 +26,8 @@ public class IndexController extends Controller {
 			redirect("/toLogin");		
 			return;
 		}
+		setAttr("treelist",NavigationController.getNavigationTree());
+		System.out.println("-----------------------------"+NavigationController.getNavigationTree().toString());
 		render("index.html");
 	}
 	//登陆
