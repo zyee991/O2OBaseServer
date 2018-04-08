@@ -33,7 +33,10 @@ public class BaseUtils {
 	}
 	
 	public static void putNavigation(@SuppressWarnings("rawtypes") List<Map> map,Controller controller) {
-		CacheKit.put(NAVIGATION_CACHE, getManager(controller).getId(), map);
+		Manager manager = getManager(controller);
+		if(manager != null) {
+			CacheKit.put(NAVIGATION_CACHE, getManager(controller).getId(), map);
+		}
 	}
 	
 	@SuppressWarnings("rawtypes")

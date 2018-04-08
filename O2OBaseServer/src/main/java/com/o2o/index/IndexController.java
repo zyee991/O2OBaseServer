@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.o2o.common.model.Manager;
 import com.o2o.util.BaseUtils;
 import com.o2o.util.SecurityAuthentication;
@@ -56,6 +57,13 @@ public class IndexController extends Controller {
 	
 	public void toLogin() {
 		render("login.html");
+	}
+	
+	public void logout() {
+		Manager manager = BaseUtils.getManager(this);
+		removeCookie("o2oCookie");
+		CacheKit.remove(BaseUtils.MANAGER_CACHE, manager.getId());
+		redirect("toLogin");
 	}
 }
 
