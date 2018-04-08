@@ -1,6 +1,21 @@
 #@layout() 
 #define main()
-
+ <script>
+    //打开菜单窗口  
+    function openMenuDialog(){  
+        var selected = $table.bootstrapTable('getSelections');  
+        if (selected != null) {  
+            $("#id").val(selected.id);  
+            //queryMenus(selected.id);  
+            $("#menuWindow").window("open");  
+        } else {  
+         $.messager.alert('提示', "未选择数据！");   
+        }  
+    }  
+    
+  //获取菜单树
+  
+    </script> 
 <div class="table-responsive">
 	<table class="table table-striped">
 		<thead>
@@ -16,11 +31,17 @@
 			        <a href="javascript:void(0);" onclick="modalShow('/role/update?id=#(role.id)')"  class="btn btn-success btn-xs" role="button">编辑</a>
 			        <a href="javascript:void(0);" onclick="modalShow('/role/add?id=#(role.id)')" class="btn btn-warning btn-xs" role="button">添加</a>
 			        <a href="javascript:void(0);" onclick="modalShow('/role/delete?id=#(role.id)')"  class="btn btn-danger btn-xs" role="button">删除</a>
+			        <div onclick="openMenuDialog()"  class="btn btn-danger btn-xs" role="button">设置权限</div>
 		        </td> 		        
 		    </tr>
 	    #end
     	</tbody>
 	</table>
 </div>
-
+ <div id="menuWindow" class="page-sidebar" title="配置权限" data-options="modal:true,iconCls:'icon-save',footer:'#menuWindowfooter'" style="width:350px;height:420px;padding:10px">  
+        <div id="tree" class="ztree" style="padding: 10px 20px;"></div>  
+    </div>  
+    <div id="menuWindowfooter" style="padding:5px;text-align:right;">   
+        <a href="#" onclick="onCheck();" class="btn btn-primary" data-options="iconCls:'icon-save'">提交</a>  
+    </div> 
 #end
