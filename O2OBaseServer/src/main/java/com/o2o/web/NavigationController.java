@@ -20,7 +20,7 @@ public class NavigationController extends Controller{
 	static NavigationService navigationService = new NavigationService();
 	
 	public void index() {
-		setAttr("title","系统设置");
+		setAttr("title","导航设置");
 		Page<Navigation> page = navigationService.paginate(1, 10);
 		setAttr("page",page);
 		render("index.html");
