@@ -39,6 +39,13 @@ public class NavigationService {
 		return list;
 	}
 	
+	public List<Navigation> findNavigationByRoleId(String roleId) {
+		String sqlPara = "select n.* from tb_base_navigation as n where n.id = ("
+				+ "select rn.navigationId from tb_base_role_navigation as rn where "
+				+ "rn.roleId = ? )";
+		return dao.find(sqlPara,roleId);
+	}
+	
 	public List<Navigation> findParentNavigationByManager(Manager manager) {
 		if(BaseUtils.isSuperUser(manager)) {
 			return findParentNavigation();

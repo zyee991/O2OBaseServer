@@ -77,7 +77,6 @@ public class NavigationController extends Controller{
 		for(Navigation oneparentmap:parentlist){
 			Map<String,Object> ParentMap=new HashMap<String,Object>();
 			List<Navigation> childlist=navigationService.findChildNavigationByParentIdAndManager(manager,oneparentmap.getId());
-			System.out.println(oneparentmap.getId());
 			ParentMap.put("id",oneparentmap.getId().toString());
 			ParentMap.put("name", oneparentmap.getName());
 			ParentMap.put("url", oneparentmap.getUrl());

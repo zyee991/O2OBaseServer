@@ -5,12 +5,14 @@ function modalShow(url){
 			remote:url
 	}
 	$("#myModal").modal(options);
-	$("#myModal").on("hidden.bs.modal", function() {  
-	  $(this).removeData("bs.modal"); 
-	  /*modal页面加载$()错误,由于移除缓存时加载到<span style="color: rgb(51, 51, 255);"><div class="modal-content"></div></span>未移除的数据，手动移除加载的内容*/
-	  $(this).find(".modal-content").children().remove();  
-	});
 }
+
+jQuery(function() {
+	$("#myModal").on("hidden.bs.modal", function() {
+		$(this).removeData("bs.modal"); 
+		$(this).find(".modal-content").children().remove();  
+	});
+})
 
 /**
  * Cookie utils
@@ -76,7 +78,7 @@ function submitForm(id,url,method) {
 			url:url,
 			type:method,
 			success:function(){
-				$("#myModal").hide();
+				$("#myModal").modal('hide');
 			}
 		})
 	}
