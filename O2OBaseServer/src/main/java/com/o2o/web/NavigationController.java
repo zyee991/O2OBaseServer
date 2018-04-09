@@ -35,8 +35,10 @@ public class NavigationController extends Controller{
 	
 	public void add() {
 		String id = getPara("id");
+		if(id!=null){
 		Navigation navigation = navigationService.findById(id);
 		setAttr("navigation",navigation);
+		}
 		setAttr("newId",UUID.randomUUID());
 		setAttr("date",new Date());
 		render("add.html");
