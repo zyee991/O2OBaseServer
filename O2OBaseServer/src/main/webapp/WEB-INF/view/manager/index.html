@@ -1,10 +1,60 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+#@layout() 
+#define main()
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+		    <tr>
+		        <th class="col-sm-9">角色名称</th>
+		        <th class="col-sm-9">用户名</th>
+              <th class="col-sm-9">E-mail</th>
+              <th class="col-sm-9">姓名</th>
+              <th class="col-sm-9">所属部门</th>
+              <th class="col-sm-9">最后登录时间</th>
+              <th class="col-sm-9">最后登录IP</th>
+              <th class="col-sm-9">状态</th>
+              <th class="col-sm-9">创建日期</th>
+		        <th class="col-sm-3">操作
+   			        <a href="javascript:void(0);" onclick="modalShow('/role/add')" class="btn btn-warning btn-xs" role="button">添加</a>
+		        </th>
+		    </tr>
+	    </thead>
+	    <tbody>
+	    #for(manager : page.list)
+		    <tr id='#(role.id)'>
+		       <td>#(manager.username) </td>
+		       <td>#(manager.email) </td> 
+		       <td>${list.name!"&nbsp;"}</td>
+              <td>${list.department!"&nbsp;"}</td>
+               <td>
+			 	#if (list.loginDate != null && list.loginDate != "")
+				<span title="${list.loginDate,dateFormat="yyyy-MM-dd HH:mm:ss"}">${list.loginDate,dateFormat="yyyy-MM-dd HH:mm:ss"}</span>
+				#else
+				&nbsp;
+				#end
+			  </td>
+			   <td>${list.loginIp!"&nbsp;"}</td>
+			   <td>
+             	#if (list.isAccountEnabled == true && list.isAccountLocked == false && list.isAccountExpired == false && list.isCredentialsExpired == false)
+				<span class="ext-primary">正常</span>
+				#else if (list.isAccountEnabled == false)
+				<span class="text-warning"> 未启用 </span>
+				#else if (list.isAccountLocked == true)
+				<span class="text-warning"> 已锁定 </span>
+				#else if (list.isAccountExpired == true)
+				<span class="text-warning"> 已过期 </span>
+				#else if (list.isCredentialsExpired == true)
+				<span class="text-warning"> 凭证过期 </span>
+				#end
+              </td>
+                <td>${list.modifyDate,dateFormat="yyyy-MM-dd HH:mm:ss"}</td>
+		       <td>
+			        <a href="javascript:void(0);" onclick="modalShow('/manager/update?id=#(role.id)')"  class="btn btn-success btn-xs" role="button">编辑</a>
+			        <a href="javascript:void(0);" onclick="modalShow('/manager/delete?id=#(role.id)')"  class="btn btn-danger btn-xs" role="button">删除</a>
+			        <a href="javascript:void(0);" onclick="modalShow('/manager/setRelation?id=#(role.id)')"  class="btn btn-info btn-xs" role="button">设置权限</div>
+		        </td> 		        
+		    </tr>
+	    #end
+    	</tbody>
+	</table>
+</div>
+#end
