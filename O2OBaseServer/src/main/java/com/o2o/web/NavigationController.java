@@ -13,6 +13,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.o2o.common.model.Manager;
 import com.o2o.common.model.Navigation;
 import com.o2o.service.NavigationService;
+import com.o2o.util.CommonUtils;
 import com.o2o.validator.NavigationValidator;
 
 public class NavigationController extends Controller{
@@ -40,7 +41,7 @@ public class NavigationController extends Controller{
 		setAttr("navigation",navigation);
 		}
 		setAttr("newId",UUID.randomUUID());
-		setAttr("date",new Date());
+		setAttr("date",CommonUtils.sdf.format(new Date()));
 		render("add.html");
 	}
 	
@@ -48,7 +49,8 @@ public class NavigationController extends Controller{
 	public void save() {
 		Navigation navigation = getBean(Navigation.class);
 		navigationService.save(navigation);
-		redirect("/navigation");
+//		redirect("/navigation");
+		renderJavascript("window.location.href='/navigation'");
 	}
 	
 	public void showSub(){
@@ -57,19 +59,19 @@ public class NavigationController extends Controller{
 		renderJson(list);
 	}
 	
-	@Before(NavigationValidator.class)
 	public void update() {
 		String id = getPara("id");
 		Navigation navigation = navigationService.findById(id);
 		setAttr("navigation",navigation);
-		setAttr("date",new Date());
+		setAttr("date",CommonUtils.sdf.format(new Date()));
 		render("update.html");
 	}
 	
 	public void delete() {
 		String id = getPara("id");
 		navigationService.deleteById(id);
-		redirect("/navigation");
+//		redirect("/navigation");
+		renderJavascript("window.location.href='/navigation'");
 	}
 	
 	@SuppressWarnings("rawtypes")

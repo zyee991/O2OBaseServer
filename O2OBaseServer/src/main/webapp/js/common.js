@@ -14,6 +14,27 @@ jQuery(function() {
 	});
 })
 
+function remove(url) {
+	$.confirm({
+		title:'提示',
+		content:'是否确认删除？',
+		buttons:{
+			ok:{
+				text:'确定',
+				btnClass:'btn-success',
+				keys:['enter'],
+				action:function(){
+					$.post(url);
+				}
+			},
+			cancel:{
+				text:'取消',
+				btnClass:'btn-danger'
+			}
+		}
+	})
+}
+
 /**
  * Cookie utils
  * @param c_name

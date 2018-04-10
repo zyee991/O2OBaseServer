@@ -20,7 +20,7 @@
 		        <td>
 			        <a href="javascript:void(0);" onclick="modalShow('/navigation/update?id=#(navigation.id)')"  class="btn btn-success btn-xs" role="button">编辑</a>
 			        <a href="javascript:void(0);" onclick="modalShow('/navigation/add?id=#(navigation.id)')" class="btn btn-warning btn-xs" role="button">添加</a>
-			        <a href="javascript:void(0);" onclick="modalShow('/navigation/delete?id=#(navigation.id)')"  class="btn btn-danger btn-xs" role="button">删除</a>
+			        <a href="javascript:void(0);" onclick="remove('/navigation/delete?id=#(navigation.id)')"  class="btn btn-danger btn-xs" role="button">删除</a>
 		        </td>
 		    </tr>
 	    #end
@@ -34,8 +34,8 @@
 				        '<td>@url </td>'+
 		   		        '<td>@type</td>'+
 				        '<td>'+
-					        '<a href="javascript:void(0);" onclick="modalShow(\'/navigation/update?id=@id)\')" class="btn btn-success btn-xs" role="button">编辑</a>'+
-					        '<a href="javascript:void(0);" onclick="modalShow(\'/navigation/delete?id=@id)\')" class="btn btn-danger btn-xs" role="button">删除</a>'+
+					        '<a href="javascript:void(0);" onclick="modalShow(\'/navigation/update?id=@id\')" class="btn btn-success btn-xs" role="button">编辑</a>'+
+					        '<a href="javascript:void(0);" onclick="remove(\'/navigation/delete?id=@id\')" class="btn btn-danger btn-xs" role="button">删除</a>'+
 				        '</td>'+
 				    '</tr>';
 		$.post('/navigation/showSub',{id:id},function(result){

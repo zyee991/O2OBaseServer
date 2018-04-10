@@ -20,7 +20,7 @@ public class NavigationValidator extends Validator {
 		if (actionKey.equals("/navigation/save"))
 			controller.render("add.html");
 		else if (actionKey.equals("/navigation/update"))
-			controller.render("edit.html");
+			controller.render("update.html");
 	}
 
 }
