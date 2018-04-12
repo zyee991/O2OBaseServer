@@ -8,13 +8,15 @@ import java.util.Map;
 import com.jfinal.core.Controller;
 import com.o2o.common.model.Manager;
 import com.o2o.common.model.Navigation;
+import com.o2o.common.model.Role;
 import com.o2o.service.NavigationService;
+import com.o2o.service.RoleService;
 import com.o2o.util.BaseUtils;
 
 public class TreeController extends Controller{
 	
 	static NavigationService navigationService = new NavigationService();
-	
+	static RoleService roleService=new RoleService();
 	public void navigationTree() {
 		String roleId = getPara("roleId");
 		Map<String,Object> checked = new HashMap<>();
@@ -48,5 +50,17 @@ public class TreeController extends Controller{
 			treelist.add(ParentMap);
 		}
 		renderJson(treelist);
+	}
+	
+	public void roleTree() {
+		String managerId = getPara("managerId");
+		Map<String,Object> checked = new HashMap<>();
+		checked.put("checked", true);
+		Manager manager = BaseUtils.getManager(this);
+		List<Map<String,Object>> treelist=new ArrayList<>();
+		List<Role> rolelist=roleService.findRoleByManager(manager);
+		
+		List<Role> checkedNavigationList=roleService.findRoleByManager(manager);
+		renderJson(rolelist);
 	}
 }
