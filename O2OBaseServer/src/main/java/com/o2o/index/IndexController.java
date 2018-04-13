@@ -1,11 +1,13 @@
 package com.o2o.index;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.o2o.common.model.Manager;
+import com.o2o.service.ManagerService;
 import com.o2o.util.BaseUtils;
 import com.o2o.util.SecurityAuthentication;
 import com.o2o.web.NavigationController;
@@ -17,6 +19,9 @@ import com.o2o.web.NavigationController;
  * IndexController
  */
 public class IndexController extends Controller {
+	
+	static ManagerService managerService = new ManagerService();
+	
 	public void index() {
 		String cookie = getCookie("o2oCookie");
 		try {
@@ -45,6 +50,11 @@ public class IndexController extends Controller {
 		password = SecurityAuthentication.crypt(password);
 		Manager manager=Manager.dao.findUserLogin(name,password);
 		if(manager!=null){
+			String ip = BaseUtils.getIpAddr(this.getRequest());
+			Date date = new Date();
+			manager.setLoginIp(ip);
+			manager.setLoginDate(date);
+			managerService.save(manager);
 			String cookieValue = SecurityAuthentication.encode("login", manager.getId());
 			this.setCookie("o2oCookie", cookieValue, 3600);
 			BaseUtils.putManager(manager,this);

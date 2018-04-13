@@ -1,22 +1,15 @@
 package com.o2o.web;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
-import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.o2o.common.model.Manager;
-import com.o2o.common.model.Navigation;
 import com.o2o.service.ManagerRoleService;
 import com.o2o.service.ManagerService;
 import com.o2o.util.CommonUtils;
 import com.o2o.util.SecurityAuthentication;
-import com.o2o.validator.NavigationValidator;
 
 public class ManagerController extends Controller{
 	

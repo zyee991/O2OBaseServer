@@ -3,6 +3,8 @@ package com.o2o.util;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.o2o.common.model.Manager;
@@ -52,4 +54,21 @@ public class BaseUtils {
 	public static boolean isSuperUser(Manager manager) {
 		return manager.getId().equals(Manager.SUPERUSER);
 	}
+	
+	public static String getIpAddr(HttpServletRequest request) {  
+        String ip = request.getHeader("x-forwarded-for");  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("Proxy-Client-IP");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getHeader("WL-Proxy-Client-IP");  
+        }  
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
+            ip = request.getRemoteAddr();  
+        }  
+        if (ip.equals("0:0:0:0:0:0:0:1")) {  
+            ip = "本地";  
+        }  
+        return ip;  
+    } 
 }
