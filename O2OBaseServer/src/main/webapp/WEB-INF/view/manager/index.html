@@ -1,53 +1,38 @@
-#@layout() 
-#define main()
+#@layout() #define main()
 <div class="table-responsive">
 	<table class="table table-striped">
 		<thead>
-		    <tr>
-		        <th class="col-sm-1">角色名称</th>
-		        <th class="col-sm-1">用户名</th>
-              <th class="col-sm-1">E-mail</th>
-              <th class="col-sm-1">最后登录时间</th>
-              <th class="col-sm-1">最后登录IP</th>
-              <th class="col-sm-1">创建日期</th>
-              <th class="col-sm-1">状态</th>
+			<tr>
+				<th class="col-sm-1">名称</th>
+				<th class="col-sm-1">用户名</th>
+				<th class="col-sm-1">E-mail</th>
+				<th class="col-sm-2">最后登录时间</th>
+				<th class="col-sm-1">最后登录IP</th>
+				<th class="col-sm-2">操作 <ahref="javascript:void(0);" onclick="modalShow('/manager/add')"class="btn btn-warning btn-xs" role="button">添加</th>
+			</tr>
+		</thead>
+		<tbody>
+			#for(manager : page.list)
+			<tr id='#(manager.id)'>
+				<td>#(manager.name)</td>
+				<td>#(manager.username)</td>
+				<td>#(manager.email)</td>
+				<td>#(manager.loginDate)</td>
+				<td>#(manager.loginIp)</td>
 
-		        <th class="col-sm-1">操作
-		        </th>
-		    </tr>
-	    </thead>
-	    <tbody>
-	    #for(manager : page.list)
-		    <tr id='#(manager.id)'>
-		       <td>#(manager.name) </td>
-		       <td>#(manager.username) </td>
-		        <td>#(manager.email) </td> 
-              <td>#(manager.loginDate)</td>           
-			   <td>#(manager.loginIp)</td>
-			      <td>#(manager.createDate)</td>
-			   <td>
-             	#if (manager.isAccountEnabled =='1' && manager.isAccountLocked == '0' && manager.isAccountExpired == '0' && manager.isCredentialsExpired == '0')
-				<span class="text-primary">正常</span>
-				#else if (manager.isAccountEnabled == "1")
-				<span class="text-warning"> 未启用 </span>
-				#else if (manager.isAccountLocked == "1")
-				<span class="text-warning"> 已锁定 </span>
-				#else if (manager.isAccountExpired == "1")
-				<span class="text-warning"> 已过期 </span>
-				#else if (manager.isCredentialsExpired == "1")
-				<span class="text-warning"> 凭证过期 </span>
-				#end
-              </td>
-		       <td>
-			        <a href="javascript:void(0);" onclick="modalShow('/manager/update?id=#(manager.id)')"  class="btn btn-success btn-xs" role="button">编辑</a>
-			        <a href="javascript:void(0);" onclick="modalShow('/manager/delete?id=#(manager.id)')"  class="btn btn-danger btn-xs" role="button">删除</a>
-			        <a href="javascript:void(0);" onclick="modalShow('/manager/add')"  class="btn btn-info btn-xs" role="button">添加</div>
-			        <a href="javascript:void(0);" onclick="modalShow('/manager/setRole?id=#(manager.id)')"  class="btn btn-info btn-xs" role="button">设置角色</div>
-			        
-		        </td> 		        
-		    </tr>
-	    #end
-    	</tbody>
+				<td><a href="javascript:void(0);"
+					onclick="modalShow('/manager/update?id=#(manager.id)')"
+					class="btn btn-success btn-xs" role="button">编辑</a> <a
+					href="javascript:void(0);"
+					onclick="modalShow('/manager/delete?id=#(manager.id)')"
+					class="btn btn-danger btn-xs" role="button">删除</a>
+						</div> <a href="javascript:void(0);"
+						onclick="modalShow('/manager/setRole?id=#(manager.id)')"
+						class="btn btn-info btn-xs" role="button">设置角色
+							</div></td>
+			</tr>
+			#end
+		</tbody>
 	</table>
 </div>
 #end

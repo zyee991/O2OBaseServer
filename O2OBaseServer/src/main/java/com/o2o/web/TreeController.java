@@ -53,14 +53,23 @@ public class TreeController extends Controller{
 	}
 	
 	public void roleTree() {
-		String managerId = getPara("managerId");
 		Map<String,Object> checked = new HashMap<>();
 		checked.put("checked", true);
 		Manager manager = BaseUtils.getManager(this);
 		List<Map<String,Object>> treelist=new ArrayList<>();
-		List<Role> rolelist=roleService.findRoleByManager(manager);
+		List<Role> roleList=roleService.findAllRoleByManager();
+		List<Role> checkedRoleList=roleService.findRoleByManager(manager);
 		
-		List<Role> checkedNavigationList=roleService.findRoleByManager(manager);
-		renderJson(rolelist);
+		for(Role role : roleList) {
+			Map<String, Object> roleMap = new HashMap<>();
+			if(checkedRoleList.contains(role)) {
+				roleMap.put("state", checked);
+			}
+			roleMap.put("id",role.getId().toString());
+			roleMap.put("text", role.getName());
+			treelist.add(roleMap);
+		}
+		
+		renderJson(treelist);
 	}
 }

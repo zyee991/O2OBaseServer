@@ -32,19 +32,14 @@ private static final Role dao = new Role().dao();
 	}
 
 	public List<Role> findRoleByManager(Manager manager) {
-		if(BaseUtils.isSuperUser(manager)) {
-			return findParentRole();
-		} else {
-			String sqlPara = "select n.* from tb_base_role as n where n.id = ("
-					+ "select rn.roleId from tb_base_manager_role as rn where rn.managerId = ("
-					+ "select mr.managerId from tb_base_manager_role as mr where mr.managerId = ?))";
-			List<Role> list = dao.find(sqlPara,manager.getId());
-			return list;
-		}
+		String sqlPara = "select r.* from tb_base_role as r where r.id = (select mr.roleId from tb_base_manager_role"
+				+ " as mr where mr.managerId = ?)";
+		List<Role> list = dao.find(sqlPara,manager.getId());
+		return list;
 	}
-	
-	public List<Role> findParentRole(){
-		List<Role> list=dao.find("select*from tb_base_role");
+
+	public List<Role> findAllRoleByManager() {
+		List<Role> list = dao.find("SELECT * from tb_base_role");
 		return list;
 	}
 	

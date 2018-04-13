@@ -12,7 +12,7 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.o2o.common.model.Manager;
 import com.o2o.common.model.Navigation;
-import com.o2o.service.ManagerRoleService2;
+import com.o2o.service.ManagerRoleService;
 import com.o2o.service.ManagerService;
 import com.o2o.util.CommonUtils;
 import com.o2o.util.SecurityAuthentication;
@@ -21,7 +21,7 @@ import com.o2o.validator.NavigationValidator;
 public class ManagerController extends Controller{
 	
 	static ManagerService managerService = new ManagerService();
-	static ManagerRoleService2 managerRoleService2=new ManagerRoleService2();
+	static ManagerRoleService managerRoleService = new ManagerRoleService();
 	
 	public void index() {
 		setAttr("title","用户管理");
@@ -75,7 +75,7 @@ public class ManagerController extends Controller{
 	public void saveRelation() {
 		String managerIds= getPara("managerId");
 		String roleIds = getPara("roleIds");
-		managerRoleService2.save(roleIds,managerIds);
+		managerRoleService.save(roleIds,managerIds);
 		redirect("/role");
 	}
 	

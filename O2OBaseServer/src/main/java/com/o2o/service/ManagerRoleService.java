@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.o2o.common.model.ManagerRole;
 
 
-public class ManagerRoleService2 {
+public class ManagerRoleService {
 	private static final ManagerRole dao = new ManagerRole().dao();
 
 	public void save(String managerId, String roleIds) {
