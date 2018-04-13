@@ -17,7 +17,7 @@ import com.o2o.common.O2OConfig;
 public class _JFinalDemoGenerator {
 	
 	public static DataSource getDataSource() {
-		PropKit.use("a_little_config.txt");
+		PropKit.use("application.properties");
 		DruidPlugin druidPlugin = O2OConfig.createDruidPlugin();
 		druidPlugin.start();
 		return druidPlugin.getDataSource();

@@ -1,7 +1,6 @@
 package com.o2o.common.model.base;
 
 import com.jfinal.plugin.activerecord.Model;
-import com.o2o.common.model.Navigation;
 import com.jfinal.plugin.activerecord.IBean;
 
 /**
@@ -81,4 +80,14 @@ public abstract class BaseNavigation<M extends BaseNavigation<M>> extends Model<
 	public java.lang.Boolean getUseFlag() {
 		return get("useFlag");
 	}
+
+	public M setSortNumber(java.lang.Integer sortNumber) {
+		set("sortNumber", sortNumber);
+		return (M)this;
+	}
+	
+	public java.lang.Integer getSortNumber() {
+		return getInt("sortNumber");
+	}
+
 }

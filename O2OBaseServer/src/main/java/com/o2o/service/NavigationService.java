@@ -10,7 +10,7 @@ public class NavigationService {
 	private static final Navigation dao = new Navigation().dao();
 	
 	public Page<Navigation> paginate(int pageNumber,int pageSize) {
-		return dao.paginate(pageNumber, pageSize, "select *","from tb_base_navigation where parentId is null");
+		return dao.paginate(pageNumber, pageSize, "select *","from tb_base_navigation where parentId is null order by sortNumber");
 	}
 	
 	public Navigation findById(String id) {
@@ -30,19 +30,19 @@ public class NavigationService {
 	}
 
 	public List<Navigation> findChildNavigationByParentId(String id) {
-		List<Navigation> list = dao.find("select * from tb_base_navigation where parentId=?",id);
+		List<Navigation> list = dao.find("select * from tb_base_navigation where parentId=? order by sortNumber",id);
 		return list;
 	}
 	
 	public List<Navigation> findParentNavigation(){
-		List<Navigation> list=dao.find("select*from tb_base_navigation where parentId is null");
+		List<Navigation> list=dao.find("select*from tb_base_navigation where parentId is null order by sortNumber");
 		return list;
 	}
 	
 	public List<Navigation> findNavigationByRoleId(String roleId) {
 		String sqlPara = "select n.* from tb_base_navigation as n where n.id = ("
 				+ "select rn.navigationId from tb_base_role_navigation as rn where "
-				+ "rn.roleId = ? )";
+				+ "rn.roleId = ? ) order by n.sortNumber";
 		return dao.find(sqlPara,roleId);
 	}
 	
@@ -53,7 +53,7 @@ public class NavigationService {
 			String sqlPara = "select n.* from tb_base_navigation as n where n.id = ("
 					+ "select rn.navigationId from tb_base_role_navigation as rn where rn.roleId = ("
 					+ "select mr.roleId from tb_base_manager_role as mr where mr.managerId = ?))"
-					+ "and n.parentId is null";
+					+ "and n.parentId is null order by n.sortNumber";
 			List<Navigation> list = dao.find(sqlPara,manager.getId());
 			return list;
 		}
@@ -66,7 +66,7 @@ public class NavigationService {
 			String sqlPara = "select n.* from tb_base_navigation as n where n.id = ("
 					+ "select rn.navigationId from tb_base_role_navigation as rn where rn.roleId = ("
 					+ "select mr.roleId from tb_base_manager_role as mr where mr.managerId = ?))"
-					+ "and n.parentId = ?";
+					+ "and n.parentId = ? order by n.sortNumber";
 			List<Navigation> list = dao.find(sqlPara,manager.getId(),id);
 			return list;
 		}
