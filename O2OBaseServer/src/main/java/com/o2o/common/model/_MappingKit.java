@@ -22,6 +22,7 @@ public class _MappingKit {
 		arp.addMapping("tb_base_navigation", "id", Navigation.class);
 		arp.addMapping("tb_base_role", "id", Role.class);
 		arp.addMapping("tb_base_role_navigation", "id", RoleNavigation.class);
+		arp.addMapping("tb_base_user", "user_openid", User.class);
 	}
 }
 
