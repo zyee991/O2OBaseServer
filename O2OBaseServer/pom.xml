@@ -52,6 +52,19 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+	    <groupId>javax</groupId>
+		<artifactId>javaee-api</artifactId>
+		<version>7.0</version>
+		<scope>provided</scope>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
+	<dependency>
+	    <groupId>org.eclipse.jetty</groupId>
+	    <artifactId>jetty-server</artifactId>
+	    <version>9.4.9.v20180320</version>
+	</dependency>
+	
+    <dependency>
     	<groupId>com.jfinal</groupId>
     	<artifactId>jetty-server</artifactId>
     	<version>8.1.8</version>

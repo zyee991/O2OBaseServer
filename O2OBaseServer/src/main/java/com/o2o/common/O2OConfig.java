@@ -21,6 +21,7 @@ import com.o2o.web.ManagerController;
 import com.o2o.web.NavigationController;
 import com.o2o.web.RoleController;
 import com.o2o.web.TreeController;
+import com.o2o.websocket.WebSocketHandler;
 
 /**
  * 本 demo 仅表达最为粗浅的 jfinal 用法，更为有价值的实用的企业级用法
@@ -110,6 +111,6 @@ public class O2OConfig extends JFinalConfig {
 	 * 配置处理器
 	 */
 	public void configHandler(Handlers me) {
-		
+		me.add(new WebSocketHandler("^/websocket"));
 	}
 }
