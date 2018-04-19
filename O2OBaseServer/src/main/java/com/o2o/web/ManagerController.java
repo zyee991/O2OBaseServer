@@ -26,7 +26,7 @@ public class ManagerController extends Controller{
 	public void view() {
 		String id = getPara("id");
 		Manager manager = managerService.findById(id);
-		setAttr("manager",manager);
+		setAttr("manager",manager); 
 		render("view.html");
 	}
 	

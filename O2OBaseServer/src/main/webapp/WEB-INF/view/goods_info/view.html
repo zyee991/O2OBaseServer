@@ -1,0 +1,38 @@
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true">×</button>
+	<h4 class="modal-title" id="myModalLabel">商品基本信息</h4>
+</div>
+<div class="modal-body">
+ <form action="" class="form-horizontal" role="form" id="form" >
+  <div class="form-group">
+   <label for="name" class="col-sm-2 control-label">商品名称</label>
+   <div class="col-sm-10">
+    <input type="text" class="form-control" id="goodsinfo_name" name="goodsinfo_name" required 
+    placeholder="请输入名称">
+   </div>
+  </div>
+  <div class="form-group">
+  <label for="sec_type_id" class="col-sm-2 control-label">商品类型</label>
+  <div class="col-sm-10">
+    <select class="form-control" onchange="">
+     <option>类型一</option>
+     <option>类型二</option>
+    </select>
+  </div>
+  </div>
+  <div class="form-group">
+   <label class="col-sm-2 control-label">是否启用积分</label>
+  <div class="btn-group col-sm-10" id="points" data-toggle="buttons">
+    <label class="btn btn-success active"><input checked type="radio" name="" value="true">启用积分</label>
+     <label class="btn btn-success"><input type="radio" name="" value="false">不启用积分</label>
+   </div>
+  </div>
+ </form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">
+		关闭</button>
+<!-- 	<button type="button" class="btn btn-primary">提交</button> -->
+</div>

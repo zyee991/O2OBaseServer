@@ -14,15 +14,22 @@
     </tr>
   </thead>
   <tbody>
-   <tr id=''>
-   <th></th>
-   <th></th>
-   <th></th>
-   <th></th>
-   <th></th>
-   <th></th>
-   <th></th> 
-   </tr>
+   #for(goodsinfo:page.list)
+   <tr id='#(goodsinfo.id)'>
+   <td>#(goodsinfo.goodsinfo_name)</td>
+   <td>#(goodsinfo.goodsinfo_primary_price)</td>
+   <td>#(goodsinfo.goodsinfo_points_flag)</td>
+   <td>#(goodsinfo.goodsinfo_points)</td>
+   <td>#(goodsinfo.goodsinfo_desc)</td>
+   <td>#(goodsinfo.goodsinfo_descdetail)</td>
+   <td>
+   <a href="javascript:void(0);" onclick="modalShow('/goods_info/view?id=#(goodsinfo.id)')"  class="btn btn-success btn-xs" role="button">查看</a>
+   <a href="javascript:void(0);" onclick="modalShow('/goods_info/update?id=#(goodsinfo.id)')"  class="btn btn-success btn-xs" role="button">编辑</a>
+   <a href="javascript:void(0);" onclick="modalShow('/goods_info/add?id=#(goodsinfo.id)')" class="btn btn-warning btn-xs" role="button">添加</a>
+   <a href="javascript:void(0);" onclick="remove('/goods_info/delete?id=#(goodsinfo.id)')"  class="btn btn-danger btn-xs" role="button">删除</a>
+  </td>
+  </tr>
+  #end
   </tbody>
  </table>
 </div>
