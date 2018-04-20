@@ -1,0 +1,6 @@
+.float-botton {
+	position: fixed;
+    z-index: 999;
+    right: 1%;
+    top: 30%;
+}
