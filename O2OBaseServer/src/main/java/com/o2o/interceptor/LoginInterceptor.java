@@ -17,6 +17,7 @@ public class LoginInterceptor extends PrototypeInterceptor{
 			Controller controller = inv.getController();
 			controller.setAttr("treelist", BaseUtils.getNavigation(controller));
 			controller.setAttr("showLogout", true);
+			controller.setAttr("manager", manager);
 			inv.invoke();	
 		}
 	}
