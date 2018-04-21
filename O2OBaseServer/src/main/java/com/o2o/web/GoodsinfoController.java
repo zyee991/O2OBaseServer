@@ -63,5 +63,6 @@ public class GoodsinfoController extends Controller {
 			goodsinfoService.save(goodsinfo);
 //			redirect("/manager");
 			renderJavascript("window.location.href='/manager'");
-		}	
+		}
+		
 }

@@ -10,7 +10,8 @@
     <th class="col-sm-1">商品积分</th>
     <th class="col-sm-1">商品简短描述</th>
     <th class="col-sm-1">商品详细描述</th>
-   <th class="col-sm-1">操作 </th>
+   <th class="col-sm-1">操作   <a href="javascript:void(0);" onclick="modalShow('/goods_info/add')" class="btn btn-warning btn-xs" role="button">添加</a>
+    </th>
     </tr>
   </thead>
   <tbody>
@@ -25,7 +26,6 @@
    <td>
    <a href="javascript:void(0);" onclick="modalShow('/goods_info/view?id=#(goodsinfo.id)')"  class="btn btn-success btn-xs" role="button">查看</a>
    <a href="javascript:void(0);" onclick="modalShow('/goods_info/update?id=#(goodsinfo.id)')"  class="btn btn-success btn-xs" role="button">编辑</a>
-   <a href="javascript:void(0);" onclick="modalShow('/goods_info/add?id=#(goodsinfo.id)')" class="btn btn-warning btn-xs" role="button">添加</a>
    <a href="javascript:void(0);" onclick="remove('/goods_info/delete?id=#(goodsinfo.id)')"  class="btn btn-danger btn-xs" role="button">删除</a>
   </td>
   </tr>
