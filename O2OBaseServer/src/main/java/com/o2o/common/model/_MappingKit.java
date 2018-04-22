@@ -16,15 +16,26 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 public class _MappingKit {
 	
 	public static void mapping(ActiveRecordPlugin arp) {
+		arp.addMapping("tb_base_feedback", "feedback_id", Feedback.class);
 		arp.addMapping("tb_base_firsttype", "first_type_id", Firsttype.class);
 		arp.addMapping("tb_base_goodsinfo", "goodsinfo_id", Goodsinfo.class);
 		arp.addMapping("tb_base_manager", "id", Manager.class);
 		arp.addMapping("tb_base_manager_role", "id", ManagerRole.class);
 		arp.addMapping("tb_base_navigation", "id", Navigation.class);
+		arp.addMapping("tb_base_order", "order_id", Order.class);
+		arp.addMapping("tb_base_paigong_order", "forward_id", PaigongOrder.class);
 		arp.addMapping("tb_base_role", "id", Role.class);
 		arp.addMapping("tb_base_role_navigation", "id", RoleNavigation.class);
 		arp.addMapping("tb_base_sectype", "sec_type_id", Sectype.class);
+		arp.addMapping("tb_base_service", "service_id", Service.class);
+		arp.addMapping("tb_base_service_confirm", "service_confirm_id", ServiceConfirm.class);
+		arp.addMapping("tb_base_service_order", "service_order_id", ServiceOrder.class);
+		arp.addMapping("tb_base_shangjiaoperation", "shop_goods_id", Shangjiaoperation.class);
+		arp.addMapping("tb_base_shop", "shop_id", Shop.class);
+		arp.addMapping("tb_base_taocan", "tao_good_id", Taocan.class);
 		arp.addMapping("tb_base_user", "user_openid", User.class);
+		arp.addMapping("tb_base_wx_menu1", "wx_menu1_id", WxMenu1.class);
+		arp.addMapping("tb_base_wx_menu2", "wx_menu2_id", WxMenu2.class);
 	}
 }
 
