@@ -1,15 +1,17 @@
 package com.o2o.web;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
+import com.google.gson.Gson;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.upload.UploadFile;
 import com.o2o.common.model.Goodsinfo;
-import com.o2o.common.model.Manager;
+import com.o2o.common.model.Sectype;
 import com.o2o.service.GoodsinfoService;
 import com.o2o.util.CommonUtils;
-import com.o2o.util.SecurityAuthentication;
 
 public class GoodsinfoController extends Controller {
 
@@ -60,9 +62,20 @@ public class GoodsinfoController extends Controller {
 		//保存
 		public void save() {
 			Goodsinfo goodsinfo = getBean(Goodsinfo.class);
+			UploadFile uf=getFile(getPara("file"));
+			String filename=uf.getFileName();
+			System.out.println(filename+"-------------------------");
+			goodsinfo.setGoodsinfoImage(filename);
 			goodsinfoService.save(goodsinfo);
 //			redirect("/manager");
 			renderJavascript("window.location.href='/manager'");
+		}
+		
+		//
+		public void getTypeList(){
+			List<Sectype> typelist=goodsinfoService.getTypeList();
+			setAttr("typelist",typelist);
+			renderJson();
 		}
 		
 }

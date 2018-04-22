@@ -26,6 +26,12 @@
    </div>
   </div>
   <div class="form-group">
+  <label class="col-sm-2 control-label">上传商品图片</label>
+  <div class="col-sm-10">
+    <input type="file" id="imageUpload" name="imageUpload" class="form-control">
+  </div>
+  </div>
+  <div class="form-group">
   <label for="sec_type_id" class="col-sm-2 control-label">商品类型</label>
   <div class="col-sm-10">
     <select class="form-control" id="type_list" name="type_list">
@@ -115,7 +121,7 @@
     	    data:null,
     	    success:function(data){
     	    	for(var i=0;i<data.length;i++){
-    	    		$("#select_list").append("<option"+ "value=" +data[i].tid+">"+data[i].typename+"</option>");
+    	    		$("#type_list").append("<option"+ "value=" +data[i].sec_type_id+">"+data[i].sec_type_name+"</option>");
     	    	}
     	    },
     	    error:function(err){
@@ -123,5 +129,6 @@
     	    }
     	});
     });
-
+    
+    
 </script>   

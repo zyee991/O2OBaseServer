@@ -1,0 +1,62 @@
+#@layout() 
+#define main()
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+		    <tr>
+		        <th class="col-sm-3">导航名称</th>
+		        <th class="col-sm-3">URL</th>
+		        <th class="col-sm-2">类型</th>
+		        <th class="col-sm-1">排序</th>
+		        <th class="col-sm-3">操作 <a href="javascript:void(0);" onclick="modalShow('/navigation/add?id=null')" class="btn btn-warning btn-xs" role="button">添加</a></th>
+		    </tr>
+	    </thead>
+	    <tbody>
+	    #for(navigation : page.list)
+		    <tr id='#(navigation.id)'>
+		        <td><i class="icon-chevron-right" style="color:blue;cursor:pointer;" onclick="showSub('#(navigation.id)',this);"></i>&nbsp;&nbsp; #(navigation.name)</td>
+		        <td>#(navigation.url) </td>
+   		        <td>#(navigation.parentId == null ? "一级导航" : "二级导航") </td>
+    		    <td>#(navigation.sortNumber) </td>
+		        <td>
+			        <a href="javascript:void(0);" onclick="modalShow('/navigation/update?id=#(navigation.id)')"  class="btn btn-success btn-xs" role="button">编辑</a>
+			        <a href="javascript:void(0);" onclick="modalShow('/navigation/add?id=#(navigation.id)')" class="btn btn-warning btn-xs" role="button">添加</a>
+			        <a href="javascript:void(0);" onclick="remove('/navigation/delete?id=#(navigation.id)')"  class="btn btn-danger btn-xs" role="button">删除</a>
+		        </td>
+		    </tr>
+	    #end
+    	</tbody>
+	</table>
+</div>
+<script>
+	function showSub(id,e) {
+		var ele = '<tr class=' + id + '>'+
+				        '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@name</td>'+
+				        '<td>@url </td>'+
+		   		        '<td>@type</td>'+
+		   		        '<td>@sortNumber</td>'+
+				        '<td>'+
+					        '<a href="javascript:void(0);" onclick="modalShow(\'/navigation/update?id=@id\')" class="btn btn-success btn-xs" role="button">编辑</a>'+
+					        '<a href="javascript:void(0);" onclick="remove(\'/navigation/delete?id=@id\')" class="btn btn-danger btn-xs" role="button">删除</a>'+
+				        '</td>'+
+				    '</tr>';
+		$.post('/navigation/showSub',{id:id},function(result){
+			if(result) {
+				for(var i in result) {
+					var element = ele.replace("@name",result[i].name).replace("@url",result[i].url).replace("@type","二级导航").replace("@sortNumber",result[i].sortNumber).replace(/@id/g,result[i].id);
+					$("#"+id).after($(element));
+				}
+				$(e).removeClass("icon-chevron-right").addClass("icon-chevron-down");
+				$(e).attr("onclick","hideSub(\'" + id + "\',this)");
+			}
+		})
+	}
+	
+	function hideSub(id,e) {
+		$("."+id).remove();
+		$(e).addClass("icon-chevron-right").removeClass("icon-chevron-down");
+		$(e).attr("onclick","showSub(\'" + id + "\',this)");
+	}
+</script>
+#end
