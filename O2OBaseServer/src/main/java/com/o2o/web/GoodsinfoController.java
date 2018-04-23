@@ -50,12 +50,14 @@ public class GoodsinfoController extends Controller {
 		//添加
 		public void add() {
 			String id = getPara("id");
+			List<Sectype> typelist=goodsinfoService.getTypeList();
 			if(id!=null){
 			Goodsinfo goodsinfo = goodsinfoService.findById(id);
 			setAttr("goodsinfo",goodsinfo);
 			}
 			setAttr("newId",UUID.randomUUID());
 			setAttr("date",CommonUtils.sdf.format(new Date()));
+			setAttr("typelist",typelist);
 			render("add.html");
 		}
 		
@@ -68,7 +70,7 @@ public class GoodsinfoController extends Controller {
 			goodsinfo.setGoodsinfoImage(filename);
 			goodsinfoService.save(goodsinfo);
 //			redirect("/manager");
-			renderJavascript("window.location.href='/manager'");
+			renderJavascript("window.location.href='/goods_info'");
 		}
 		
 		//
