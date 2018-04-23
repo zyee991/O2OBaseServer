@@ -36,13 +36,4 @@ public abstract class BaseService<M extends BaseService<M>> extends Model<M> imp
 		return getFloat("service_price");
 	}
 
-	public M setAttribute32(java.lang.String attribute32) {
-		set("Attribute_32", attribute32);
-		return (M)this;
-	}
-	
-	public java.lang.String getAttribute32() {
-		return getStr("Attribute_32");
-	}
-
 }
