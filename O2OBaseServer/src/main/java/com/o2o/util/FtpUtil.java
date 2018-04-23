@@ -1,119 +1,193 @@
 package com.o2o.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.util.Properties;
 
-import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
-/**
- * ftp上传下载工具类
- * <p>Title: FtpUtil</p>
- * <p>Description: </p>
- * <p>Company:</p> 
- * @author    
- * @date 
- * @version 1.0
- */
 public class FtpUtil {
+	// ftp服务器地址
+	public static String hostname;
+	// ftp服务器端口号默认为21
+	public static Integer port;
+	// ftp登录账号
+	public static String username;
+	// ftp登录密码
+	public static String password;
+	// 远程文件地址
+	public static String remoteUrl;
 
-    /** 
-     * Description: 向FTP服务器上传文件 
-     * @param host FTP服务器hostname 
-     * @param port FTP服务器端口 
-     * @param username FTP登录账号 
-     * @param password FTP登录密码 
-     * @param basePath FTP服务器基础目录
-     * @param filePath FTP服务器文件存放路径。例如分日期存放：/2015/01/01。文件的路径为basePath+filePath
-     * @param filename 上传到FTP服务器上的文件名 
-     * @param input 输入流 
-     * @return 成功返回true，否则返回false 
-     */  
-    public static String uploadFile( String filePath, String filename, InputStream input) {
-        boolean result = false;
-        String host="";
-        int port=0;
-        String username="";
-        String password="";
-        String basePath="";
-        Properties ps=new Properties();
-        try {
-			FileInputStream is=new FileInputStream("src/main/resources/ftpconfig.properties");
-			ps.load(is);
-			host=ps.getProperty("host");
-			port=Integer.parseInt(ps.getProperty("port"));
-			username=ps.getProperty("username");
-			password=ps.getProperty("password");
-			basePath=ps.getProperty("basePath");
-		} catch (Exception e1) {
-		
-			e1.printStackTrace();
+	public FTPClient ftpClient = null;
+
+	static {
+		Properties properties = new Properties();
+		try {
+			properties.load(FtpUtil.class.getClassLoader().getResourceAsStream("ftpconfig.properties"));
+			hostname = properties.getProperty("host");
+			port = Integer.valueOf(properties.getProperty("port"));
+			username = properties.getProperty("username");
+			password = properties.getProperty("password");
+			remoteUrl = properties.getProperty("remoteUrl");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-        FTPClient ftp = new FTPClient();
-        try {
-            int reply;
-            ftp.connect(host, port);// 连接FTP服务器
-            // 如果采用默认端口，可以使用ftp.connect(host)的方式直接连接FTP服务器
-            ftp.login(username, password);// 登录
-            reply = ftp.getReplyCode();
-            if (!FTPReply.isPositiveCompletion(reply)) {
-                ftp.disconnect();
-                //return result;
-                return "";
-            }
-            //切换到上传目录
-            if (!ftp.changeWorkingDirectory(basePath+filePath)) {
-                //如果目录不存在创建目录
-                String[] dirs = filePath.split("/");
-                String tempPath = basePath;
-                for (String dir : dirs) {
-                    if (null == dir || "".equals(dir)) continue;
-                    tempPath += "/" + dir;
-                    if (!ftp.changeWorkingDirectory(tempPath)) {
-                        if (!ftp.makeDirectory(tempPath)) {
-                        	System.out.println(ftp.makeDirectory(tempPath)+"-------ftp.makeDirectory(tempPath)");
-                            return tempPath;
-                        } else {
-                            ftp.changeWorkingDirectory(tempPath);
-                        }
-                    }
-                }
-            }
-            //设置上传文件的类型为二进制类型
-            ftp.setFileType(FTP.BINARY_FILE_TYPE);
-            //上传文件
-            if (!ftp.storeFile(filename, input)) {
-            	System.out.println(ftp.storeFile(filename, input)+"----------ftp.storeFile(filename, input)");
-                return "";
-            }
-            input.close();
-            ftp.logout();
-            result = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (ftp.isConnected()) {
-                try {
-                    ftp.disconnect();
-                } catch (IOException ioe) {
-                }
-            }
-        }
-        return filePath+filename;
-    }
-    
-    public static void main(String[] args) {
-        try {  
-            FileInputStream in=new FileInputStream(new File("D:\\logs\\debug.log"));  
-            String result= uploadFile("/2015/01/21", "debug.log", in);  
-            System.out.println(result+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");  
-        } catch (FileNotFoundException e) {  
-            e.printStackTrace();  
-        }  
-    }
+	}
+
+	/**
+	 * 初始化ftp服务器
+	 */
+	public void initFtpClient() {
+		ftpClient = new FTPClient();
+		ftpClient.setControlEncoding("utf-8");
+		try {
+			System.out.println("connecting...ftp服务器:" + this.hostname + ":" + this.port);
+			ftpClient.connect(hostname, port); // 连接ftp服务器
+			ftpClient.login(username, password); // 登录ftp服务器
+			int replyCode = ftpClient.getReplyCode(); // 是否成功登录服务器
+			if (!FTPReply.isPositiveCompletion(replyCode)) {
+				System.out.println("connect failed...ftp服务器:" + this.hostname + ":" + this.port);
+			}
+			System.out.println("connect successfu...ftp服务器:" + this.hostname + ":" + this.port);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 上传文件
+	 * 
+	 * @param pathname
+	 *            ftp服务保存地址
+	 * @param fileName
+	 *            上传到ftp的文件名
+	 * @param inputStream
+	 *            输入文件流
+	 * @return
+	 */
+	public String uploadFile(String pathname, String fileName, InputStream inputStream) {
+		try {
+			System.out.println("开始上传文件");
+			initFtpClient();
+			ftpClient.setFileType(ftpClient.BINARY_FILE_TYPE);
+			CreateDirecroty(pathname);
+			ftpClient.makeDirectory(pathname);
+			ftpClient.changeWorkingDirectory(pathname);
+			ftpClient.storeFile(fileName, inputStream);
+			inputStream.close();
+			ftpClient.logout();
+			System.out.println("上传文件成功");
+		} catch (Exception e) {
+			System.out.println("上传文件失败");
+			e.printStackTrace();
+		} finally {
+			if (ftpClient.isConnected()) {
+				try {
+					ftpClient.disconnect();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (null != inputStream) {
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		String result = new StringBuilder().append(remoteUrl).append("/").append(pathname).append("/").append(fileName).toString();
+		return result;
+	}
+
+	// 改变目录路径
+	public boolean changeWorkingDirectory(String directory) {
+		boolean flag = true;
+		try {
+			flag = ftpClient.changeWorkingDirectory(directory);
+			if (flag) {
+				System.out.println("进入文件夹" + directory + " 成功！");
+
+			} else {
+				System.out.println("进入文件夹" + directory + " 失败！开始创建文件夹");
+			}
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+		return flag;
+	}
+
+	// 创建多层目录文件，如果有ftp服务器已存在该文件，则不创建，如果无，则创建
+	public boolean CreateDirecroty(String remote) throws IOException {
+		boolean success = true;
+		String directory = remote + "/";
+		// 如果远程目录不存在，则递归创建远程服务器目录
+		if (!directory.equalsIgnoreCase("/") && !changeWorkingDirectory(new String(directory))) {
+			int start = 0;
+			int end = 0;
+			if (directory.startsWith("/")) {
+				start = 1;
+			} else {
+				start = 0;
+			}
+			end = directory.indexOf("/", start);
+			String path = "";
+			String paths = "";
+			while (true) {
+				String subDirectory = new String(remote.substring(start, end).getBytes("GBK"), "iso-8859-1");
+				path = path + "/" + subDirectory;
+				if (!existFile(path)) {
+					if (makeDirectory(subDirectory)) {
+						changeWorkingDirectory(subDirectory);
+					} else {
+						System.out.println("创建目录[" + subDirectory + "]失败");
+						changeWorkingDirectory(subDirectory);
+					}
+				} else {
+					changeWorkingDirectory(subDirectory);
+				}
+
+				paths = paths + "/" + subDirectory;
+				start = end + 1;
+				end = directory.indexOf("/", start);
+				// 检查所有目录是否创建完毕
+				if (end <= start) {
+					break;
+				}
+			}
+		}
+		return success;
+	}
+
+	// 判断ftp服务器文件是否存在
+	public boolean existFile(String path) throws IOException {
+		boolean flag = false;
+		FTPFile[] ftpFileArr = ftpClient.listFiles(path);
+		if (ftpFileArr.length > 0) {
+			flag = true;
+		}
+		return flag;
+	}
+
+	// 创建目录
+	public boolean makeDirectory(String dir) {
+		boolean flag = true;
+		try {
+			flag = ftpClient.makeDirectory(dir);
+			if (flag) {
+				System.out.println("创建文件夹" + dir + " 成功！");
+
+			} else {
+				System.out.println("创建文件夹" + dir + " 失败！");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
 }
