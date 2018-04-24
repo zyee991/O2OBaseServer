@@ -1,3 +1,30 @@
+$.fn.datetimepicker.defaults = {
+	//默认语言
+	language : 'zh-CN',
+	//默认选择格式
+	format : "yyyy-mm-dd hh:ii:ss",
+	autoclose : true,
+	todayBtn : true,
+	//选择板所在输入框位置
+	pickerPosition : "bottom-left"
+};
+
+$(function() {
+
+	var picker1 = $('#startTime').datetimepicker();
+	var picker2 = $("#endTime").datetimepicker();
+
+	//动态设置最小值(选择前面一个日期后：后面一个日期不能小于前面一个)
+	picker1.on('changeDate', function(e) {
+		picker2.datetimepicker('setStartDate', e.date);
+	});
+	//动态设置最大值(选择后面一个日期后：前面一个日期不能大于前面一个）
+	picker2.on('changeDate', function(e) {
+		picker1.datetimepicker('setEndDate', e.date);
+	});
+
+});
+
 function modalShow(url){
 	var options = {
 			backdrop:false,

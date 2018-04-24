@@ -1,25 +1,10 @@
-<script>
-	$.fn.datetimepicker.defaults = {
-		//默认语言
-		language : 'zh-CN',
-		//默认选择格式
-		format : "yyyy-mm-dd hh:ii:ss",
-		autoclose : true,
-		todayBtn : true,
-		//选择板所在输入框位置
-		pickerPosition : "bottom-left"
-	};
-</script>
-
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal"
 		aria-hidden="true">×</button>
 	<h4 class="modal-title" id="myModalLabel">商品基本信息</h4>
 </div>
 <div class="modal-body">
-
-	<form action="/file/save" method="post" class="form-horizontal" enctype="multipart/form-data"
-		role="form" id="file_form">
+	<form class="form-horizontal">
 		<div class="form-group">
 			<label for="file" class="col-sm-2 control-label">商品图片</label>
 			<div class="col-sm-10">
@@ -41,7 +26,9 @@
 			<label for="sec_type_id" class="col-sm-2 control-label">商品类型</label>
 			<div class="col-sm-10">
 				<select class="form-control" id="type_list"
-					name="goodsinfo.secTypeId"> #for(typelist:typelist)
+					name="goodsinfo.secTypeId">
+					<option name="goodsinfo.secTypeId" value="">请选择</option>
+					 #for(typelist:typelist)
 					<option name="goodsinfo.secTypeId" value="#(typelist.sec_type_id)">#(typelist.sec_type_name)</option>
 					#end
 				</select>
@@ -50,17 +37,17 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">是否启用积分</label>
 			<div class="btn-group col-sm-10" id="points" data-toggle="buttons">
-				<label class="btn btn-success active"><input checked
+				<label class="btn btn-success active" onclick="changePointsFlag(1)"><input checked
 					type="radio" name="goodsinfo.goodsinfoPointsFlag" value="1">启用积分</label>
-				<label class="btn btn-success"><input type="radio"
+				<label class="btn btn-success" onclick="changePointsFlag(0)"><input type="radio"
 					name="goodsinfo.goodsinfoPointsFlag" value="0">不启用积分</label>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group" id="PointsFlag">
 			<label class="col-sm-2 control-label">商品积分</label>
 			<div class="col-sm-10">
 				<input type="number" class="form-control" id="goodsinfo_points"
-					name="goodsinfo.goodsinfoPoints" size="16" required
+					name="goodsinfo.goodsinfoPoints" size="16" 
 					placeholder="请输入积分">
 			</div>
 		</div>
@@ -81,7 +68,7 @@
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2 control-label">是否为永久商品</label>
-			<div class="btn-group col-sm-10" id="points" data-toggle="buttons">
+			<div class="btn-group col-sm-10" id="isforever" data-toggle="buttons">
 				<label class="btn btn-success active" onclick="changeForever(1)"><input
 					checked type="radio" name="goodsinfo.goodsinfoFoever" value="1">是</label>
 				<label class="btn btn-success" onclick="changeForever(0)"><input
@@ -97,8 +84,8 @@
 		</div>
 		<input type="hidden" id="goodsinfoId" name="goodsinfo.goodsinfoId"
 			value="#(newId)" />
-		<input type="hidden" id="goodsinfoImage" name="goodsinfo.goodsinfoImage"
-			value="" />
+		<input type="hidden" id="goodsinfoImage"
+			name="goodsinfo.goodsinfoImage" value="" />
 	</form>
 </div>
 <div class="modal-footer">
@@ -110,42 +97,6 @@
 
 
 <script>
-	$(function() {
-
-		var picker1 = $('#startTime').datetimepicker();
-		var picker2 = $("#endTime").datetimepicker();
-
-		//动态设置最小值(选择前面一个日期后：后面一个日期不能小于前面一个)
-		picker1.on('changeDate', function(e) {
-			picker2.datetimepicker('setStartDate', e.date);
-		});
-		//动态设置最大值(选择后面一个日期后：前面一个日期不能大于前面一个）
-		picker2.on('changeDate', function(e) {
-			picker1.datetimepicker('setEndDate', e.date);
-		});
-
-	});
-
-	/*  //商品类型
-	 $(function(){
-	 	$.ajax({
-	 		type:"POST",
-	 	    contentType:"application/json;charset=utf-8",//内容类型
-	 	    dataType:"json",
-	 	    url:"/goods_info/getTypeList",
-	 	    data:null,
-	 	    success:function(data){
-	 	    	alert(data[i]+"!!!!!!!!!!!!!!!!!!!!!!!!1");
-	 	    	for(var i=0;i<data.length;i++){
-	 	    		$("#type_list").append("<option"+ "value=" +data[i].sec_type_id+">"+data[i].sec_type_name+"</option>");
-	 	    	}
-	 	    },
-	 	    error:function(err){
-	 	    	alert("err:"+err);
-	 	    }
-	 	});
-	 });
-	 */
 	$('#file').fileinput({
 		allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
 		language : "zh",
@@ -153,13 +104,15 @@
 		showCaption : false,
 		autoReplace : true,
 		showUpload : true, //是否显示上传按钮
-		showRemove : true
-	//显示移除按钮
-	}).on("fileuploaded", function (event, data, previewId, index){
+		showRemove : true,//显示移除按钮
+		uploadUrl : "/file/save",
+	})
+
+	$("#file").on("fileuploaded", function(event, data, previewId, index) {
 		alert(1)
 		var result = data.response;
 		var path = result.path;
-		if(path) {
+		if (path) {
 			$("#goodsinfoImage").val(path);
 		}
 	});
@@ -169,6 +122,14 @@
 			$("#forever").addClass("hidden");
 		} else {
 			$("#forever").removeClass("hidden");
+		}
+	}
+	
+	function changePointsFlag(status) {
+		if (status == 0) {
+			$("#PointsFlag").addClass("hidden");
+		} else {
+			$("#PointsFlag").removeClass("hidden");
 		}
 	}
 </script>
