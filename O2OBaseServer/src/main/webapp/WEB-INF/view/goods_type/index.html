@@ -12,11 +12,11 @@
 	    <tbody>
 	    #for(type : page.list)
 		    <tr id='#(type.first_type_id)'>
-		        <td><i class="icon-chevron-right" style="color:blue;cursor:pointer;" onclick="showSub('#(type.first_typeid)',this);"></i>&nbsp;&nbsp; #(type.first_type_name)</td>
+		        <td><i class="icon-chevron-right" style="color:blue;cursor:pointer;" onclick="showSub('#(type.firstTypeId)',this);"></i>&nbsp;&nbsp; #(type.first_type_name)</td>
 		        <td>
-			        <a href="javascript:void(0);" onclick="modalShow('/goods_type/update?id=#(type.first_type_id)')"  class="btn btn-success btn-xs" role="button">编辑</a>
-			        <a href="javascript:void(0);" onclick="modalShow('/goods_type/add?id=#(type.first_type_id)')" class="btn btn-warning btn-xs" role="button">添加</a>
-			        <a href="javascript:void(0);" onclick="remove('/goods_type/delete?id=#(type.first_type_id)')"  class="btn btn-danger btn-xs" role="button">删除</a>
+			        <a href="javascript:void(0);" onclick="modalShow('/goods_type/update?firstid=#(type.firstTypeId)')"  class="btn btn-success btn-xs" role="button">编辑</a>
+			        <a href="javascript:void(0);" onclick="modalShow('/goods_type/add?firstid=#(type.firstTypeId)')" class="btn btn-warning btn-xs" role="button">添加</a>
+			        <a href="javascript:void(0);" onclick="remove('/goods_type/delete?firstid=#(type.firstTypeId)')"  class="btn btn-danger btn-xs" role="button">删除</a>
 		        </td>
 		    </tr>
 	    #end
@@ -28,14 +28,16 @@
 		var ele = '<tr class=' + id + '>'+
 				        '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@name</td>'+
 				        '<td>'+
-					        '<a href="javascript:void(0);" onclick="modalShow(\'/goods_type/update?id=@id\')" class="btn btn-success btn-xs" role="button">编辑</a>'+
-					        '<a href="javascript:void(0);" onclick="remove(\'/goods_type/delete?id=@id\')" class="btn btn-danger btn-xs" role="button">删除</a>'+
+					        '<a href="javascript:void(0);" onclick="modalShow(\'/goods_type/update?secid=@id\')" class="btn btn-success btn-xs" role="button">编辑</a>'+
+					        '<a href="javascript:void(0);" onclick="remove(\'/goods_type/delete?secid=@id\')" class="btn btn-danger btn-xs" role="button">删除</a>'+
 				        '</td>'+
 				    '</tr>';
 		$.post('/goods_type/showSub',{id:id},function(result){
 			if(result) {
+				console.log(result)
 				for(var i in result) {
-					var element = ele.replace("@name",result[i].sec_type_name);
+
+					var element = ele.replace("@name",result[i].sec_type_name).replace("@id",result[i].sec_type_id);
 					$("#"+id).after($(element));
 				}
 				$(e).removeClass("icon-chevron-right").addClass("icon-chevron-down");
