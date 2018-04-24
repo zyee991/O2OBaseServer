@@ -1,14 +1,14 @@
 <script>
-    $.fn.datetimepicker.defaults = {
-        //默认语言
-        language: 'zh-CN',
-        //默认选择格式
-        format: "yyyy-mm-dd hh:ii:ss",
-        autoclose: true,
-        todayBtn: true,
-        //选择板所在输入框位置
-        pickerPosition: "bottom-left"
-    };
+	$.fn.datetimepicker.defaults = {
+		//默认语言
+		language : 'zh-CN',
+		//默认选择格式
+		format : "yyyy-mm-dd hh:ii:ss",
+		autoclose : true,
+		todayBtn : true,
+		//选择板所在输入框位置
+		pickerPosition : "bottom-left"
+	};
 </script>
 
 <div class="modal-header">
@@ -17,133 +17,158 @@
 	<h4 class="modal-title" id="myModalLabel">商品基本信息</h4>
 </div>
 <div class="modal-body">
- <form action="/goods_info/save" method="post" class="form-horizontal" role="form" id="form">
-  <div class="form-group">
-   <label for="name" class="col-sm-2 control-label">商品名称</label>
-   <div class="col-sm-10">
-    <input type="text" class="form-control" id="goodsinfo_name" name="goodsinfo.goodsinfoName" required 
-    placeholder="请输入名称">
-   </div>
-  </div>
-  <div class="form-group">
-  <label class="col-sm-2 control-label">上传商品图片</label>
-  <div class="col-sm-10">
-  <input type="file" class="file file-upload" id="file" name="pic"/>
-  </div>
-  </div>
-  <div class="form-group">
-  <label for="sec_type_id" class="col-sm-2 control-label">商品类型</label>
-  <div class="col-sm-10">
-    <select class="form-control" id="type_list" name="goodsinfo.secTypeId">
-    #for(typelist:typelist)
-    <option name="goodsinfo.secTypeId" value="#(typelist.sec_type_id)">#(typelist.sec_type_name)</option>
-    #end
-    </select>
-  </div>
-  </div>
-  <div class="form-group">
-   <label class="col-sm-2 control-label">是否启用积分</label>
-  <div class="btn-group col-sm-10" id="points" data-toggle="buttons">
-    <label class="btn btn-success active"><input checked type="radio" name="goodsinfo.goodsinfoPointsFlag" value="1">启用积分</label>
-     <label class="btn btn-success"><input type="radio" name="goodsinfo.goodsinfoPointsFlag" value="0">不启用积分</label>
-   </div>
-  </div>
-  <div class="form-group">
-   <label class="col-sm-2 control-label">商品积分</label>
-   <div class="col-sm-10">
-    <input type="number" class="form-control" id="goodsinfo_points" name="goodsinfo.goodsinfoPoints" size="16" required 
-    placeholder="请输入积分">
-   </div>
-  </div>
-  <div class="form-group">
-  <label class="col-sm-2 control-label">商品价格</label>
-  <div class="col-sm-10">
-    <input type="number" class="form-control" id="goodsinfo_primary_price" name="goodsinfo.goodsinfoPrimaryPrice" size="16" required 
-    placeholder="请输入商品价格">
-   </div>
-  </div>
-  <div class="form-group">
-   <label for="desc" class="col-sm-2 control-label">商品简短描述</label>
-   <div class="col-sm-10">
-    <input type="text" class="form-control" id="goodsinfo_desc" name="goodsinfo.goodsinfoDesc" required 
-    placeholder="请输入简短描述">
-   </div>
-  </div>
-  <div class="form-group">
-   <label class="col-sm-2 control-label">是否为永久商品</label>
-  <div class="btn-group col-sm-10" id="points" data-toggle="buttons">
-    <label class="btn btn-success active"  onclick="changeForever(1)"><input checked type="radio" name="goodsinfo.goodsinfoFoever" value="1">是</label>
-     <label class="btn btn-success" onclick="changeForever(0)"><input type="radio" name="goodsinfo.goodsinfoFoever" value="0" >否</label>
-   </div>
-  </div>
-  <div class="form-group hidden" id="forever">
-   <label class="col-sm-2 control-label">有效日期</label>
-  <div class="col-sm-10 input-append date form_datetime" >
-    <input name="goodsinfo.goodsinfoExpiration" size="16" type="text" value="" id="startTime" readonly>
-   </div>
-  </div>
-  <input type="hidden" id="goodsinfoId" name="goodsinfo.goodsinfoId" value="#(newId)"/>
- </form>
+
+	<form action="/file/save" method="post" class="form-horizontal" enctype="multipart/form-data"
+		role="form" id="file_form">
+		<div class="form-group">
+			<label for="file" class="col-sm-2 control-label">商品图片</label>
+			<div class="col-sm-10">
+				<input type="file" class="form-control" id="file" name="file">
+			</div>
+		</div>
+	</form>
+	<form action="/goods_info/save" method="post" class="form-horizontal"
+		role="form" id="form">
+		<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">商品名称</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="goodsinfo_name"
+					name="goodsinfo.goodsinfoName" required placeholder="请输入名称">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="sec_type_id" class="col-sm-2 control-label">商品类型</label>
+			<div class="col-sm-10">
+				<select class="form-control" id="type_list"
+					name="goodsinfo.secTypeId"> #for(typelist:typelist)
+					<option name="goodsinfo.secTypeId" value="#(typelist.sec_type_id)">#(typelist.sec_type_name)</option>
+					#end
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">是否启用积分</label>
+			<div class="btn-group col-sm-10" id="points" data-toggle="buttons">
+				<label class="btn btn-success active"><input checked
+					type="radio" name="goodsinfo.goodsinfoPointsFlag" value="1">启用积分</label>
+				<label class="btn btn-success"><input type="radio"
+					name="goodsinfo.goodsinfoPointsFlag" value="0">不启用积分</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">商品积分</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="goodsinfo_points"
+					name="goodsinfo.goodsinfoPoints" size="16" required
+					placeholder="请输入积分">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">商品价格</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control"
+					id="goodsinfo_primary_price" name="goodsinfo.goodsinfoPrimaryPrice"
+					size="16" required placeholder="请输入商品价格">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="desc" class="col-sm-2 control-label">商品简短描述</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="goodsinfo_desc"
+					name="goodsinfo.goodsinfoDesc" required placeholder="请输入简短描述">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">是否为永久商品</label>
+			<div class="btn-group col-sm-10" id="points" data-toggle="buttons">
+				<label class="btn btn-success active" onclick="changeForever(1)"><input
+					checked type="radio" name="goodsinfo.goodsinfoFoever" value="1">是</label>
+				<label class="btn btn-success" onclick="changeForever(0)"><input
+					type="radio" name="goodsinfo.goodsinfoFoever" value="0">否</label>
+			</div>
+		</div>
+		<div class="form-group hidden" id="forever">
+			<label class="col-sm-2 control-label">有效日期</label>
+			<div class="col-sm-10 input-append date form_datetime">
+				<input name="goodsinfo.goodsinfoExpiration" size="16" type="text"
+					value="" id="startTime" readonly>
+			</div>
+		</div>
+		<input type="hidden" id="goodsinfoId" name="goodsinfo.goodsinfoId"
+			value="#(newId)" />
+		<input type="hidden" id="goodsinfoImage" name="goodsinfo.goodsinfoImage"
+			value="" />
+	</form>
 </div>
 <div class="modal-footer">
 	<button type="button" class="btn btn-default" data-dismiss="modal">
 		关闭</button>
-<button type="button" class="btn btn-primary"  onclick="submitForm('form')">提交</button> 
+	<button type="button" class="btn btn-primary"
+		onclick="submitForm('form')">提交</button>
 </div>
 
 
 <script>
-    $(function () {
+	$(function() {
 
-        var picker1 = $('#startTime').datetimepicker();
-        var picker2 = $("#endTime").datetimepicker();
+		var picker1 = $('#startTime').datetimepicker();
+		var picker2 = $("#endTime").datetimepicker();
 
-        //动态设置最小值(选择前面一个日期后：后面一个日期不能小于前面一个)
-        picker1.on('changeDate', function (e) {
-            picker2.datetimepicker('setStartDate', e.date);
-        });
-        //动态设置最大值(选择后面一个日期后：前面一个日期不能大于前面一个）
-        picker2.on('changeDate', function (e) {
-            picker1.datetimepicker('setEndDate', e.date);
-        });
+		//动态设置最小值(选择前面一个日期后：后面一个日期不能小于前面一个)
+		picker1.on('changeDate', function(e) {
+			picker2.datetimepicker('setStartDate', e.date);
+		});
+		//动态设置最大值(选择后面一个日期后：前面一个日期不能大于前面一个）
+		picker2.on('changeDate', function(e) {
+			picker1.datetimepicker('setEndDate', e.date);
+		});
 
-    });
-        
-   /*  //商品类型
-    $(function(){
-    	$.ajax({
-    		type:"POST",
-    	    contentType:"application/json;charset=utf-8",//内容类型
-    	    dataType:"json",
-    	    url:"/goods_info/getTypeList",
-    	    data:null,
-    	    success:function(data){
-    	    	alert(data[i]+"!!!!!!!!!!!!!!!!!!!!!!!!1");
-    	    	for(var i=0;i<data.length;i++){
-    	    		$("#type_list").append("<option"+ "value=" +data[i].sec_type_id+">"+data[i].sec_type_name+"</option>");
-    	    	}
-    	    },
-    	    error:function(err){
-    	    	alert("err:"+err);
-    	    }
-    	});
-    });
-     */
-    $('#file').fileinput({
-        allowedFileExtensions: ['jpg', 'png', 'gif'],
-        language: "zh",
-        dropZoneEnabled: false,
-        showCaption:false,
-        autoReplace:true,
-        showUpload:false, //是否显示上传按钮
-        showRemove :false //显示移除按钮
-    });
-     
-     function changeForever(status) {
-    	 if(status == 1) {
-    		 $("#forever").addClass("hidden");
-    	 } else {
-    		 $("#forever").removeClass("hidden");
-    	 }
-     }
-</script>   
+	});
+
+	/*  //商品类型
+	 $(function(){
+	 	$.ajax({
+	 		type:"POST",
+	 	    contentType:"application/json;charset=utf-8",//内容类型
+	 	    dataType:"json",
+	 	    url:"/goods_info/getTypeList",
+	 	    data:null,
+	 	    success:function(data){
+	 	    	alert(data[i]+"!!!!!!!!!!!!!!!!!!!!!!!!1");
+	 	    	for(var i=0;i<data.length;i++){
+	 	    		$("#type_list").append("<option"+ "value=" +data[i].sec_type_id+">"+data[i].sec_type_name+"</option>");
+	 	    	}
+	 	    },
+	 	    error:function(err){
+	 	    	alert("err:"+err);
+	 	    }
+	 	});
+	 });
+	 */
+	$('#file').fileinput({
+		allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
+		language : "zh",
+		dropZoneEnabled : false,
+		showCaption : false,
+		autoReplace : true,
+		showUpload : true, //是否显示上传按钮
+		showRemove : true
+	//显示移除按钮
+	}).on("fileuploaded", function (event, data, previewId, index){
+		alert(1)
+		var result = data.response;
+		var path = result.path;
+		if(path) {
+			$("#goodsinfoImage").val(path);
+		}
+	});
+
+	function changeForever(status) {
+		if (status == 1) {
+			$("#forever").addClass("hidden");
+		} else {
+			$("#forever").removeClass("hidden");
+		}
+	}
+</script>

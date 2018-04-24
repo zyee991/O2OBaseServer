@@ -16,6 +16,7 @@ import com.o2o.common.model._MappingKit;
 import com.o2o.index.IndexController;
 import com.o2o.interceptor.LoginInterceptor;
 import com.o2o.interceptor.NavigationInterceptor;
+import com.o2o.web.FileController;
 import com.o2o.web.GoodsOrderController;
 import com.o2o.web.GoodsTypeController;
 import com.o2o.web.GoodsinfoController;
@@ -77,6 +78,7 @@ public class O2OConfig extends JFinalConfig {
 		me.add("/service",ServiceController.class,"WEB-INF/view/service");
 		me.add("/service_order",ServiceOrderController.class,"WEB-INF/view/service_order");
 		me.add("/goods_order",GoodsOrderController.class,"WEB-INF/view/goods_order");
+		me.add("/file",FileController.class,"WEB-INF/view");
 	}
 	
 	public void configEngine(Engine me) {
