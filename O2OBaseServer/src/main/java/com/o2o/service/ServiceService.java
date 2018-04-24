@@ -11,4 +11,19 @@ public class ServiceService {
 		return dao.paginate(pageNumber,pageSize,"select*","from tb_base_service");
 	}
 
+	public void save(Service service){
+		try{
+			service.save();
+		}catch(Exception e){
+			service.update();
+		}	
+	}
+
+	public Service findById(String id) {
+	 return dao.findById(id);
+	}
+
+	public void deleteById(String id) {
+		dao.deleteById(id);
+	}
 }

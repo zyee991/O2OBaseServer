@@ -9,13 +9,13 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseService<M extends BaseService<M>> extends Model<M> implements IBean {
 
-	public M setServiceId(java.lang.Integer serviceId) {
+	public M setServiceId(java.lang.String serviceId) {
 		set("service_id", serviceId);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getServiceId() {
-		return getInt("service_id");
+	public java.lang.String getServiceId() {
+		return getStr("service_id");
 	}
 
 	public M setServiceName(java.lang.String serviceName) {
