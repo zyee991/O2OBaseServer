@@ -17,26 +17,26 @@
 	<h4 class="modal-title" id="myModalLabel">商品基本信息</h4>
 </div>
 <div class="modal-body">
- <form action="" class="form-horizontal" role="form" id="form" >
+ <form action="/goods_info/save" method="post" class="form-horizontal" role="form" id="form">
   <div class="form-group">
    <label for="name" class="col-sm-2 control-label">商品名称</label>
    <div class="col-sm-10">
-    <input type="text" class="form-control" id="goodsinfo_name" name="goodsinfo_name" required 
+    <input type="text" class="form-control" id="goodsinfo_name" name="goodsinfo.goodsinfoName" required 
     placeholder="请输入名称">
    </div>
   </div>
   <div class="form-group">
   <label class="col-sm-2 control-label">上传商品图片</label>
   <div class="col-sm-10">
-  <input type="file" class="file file-upload" id="file"/>
+  <input type="file" class="file file-upload" id="file" name="pic"/>
   </div>
   </div>
   <div class="form-group">
   <label for="sec_type_id" class="col-sm-2 control-label">商品类型</label>
   <div class="col-sm-10">
-    <select class="form-control" id="type_list" name="type_list">
+    <select class="form-control" id="type_list" name="goodsinfo.secTypeId">
     #for(typelist:typelist)
-    <option value="#(typelist.sec_type_id)">#(typelist.sec_type_name)</option>
+    <option name="goodsinfo.secTypeId" value="#(typelist.sec_type_id)">#(typelist.sec_type_name)</option>
     #end
     </select>
   </div>
@@ -44,56 +44,51 @@
   <div class="form-group">
    <label class="col-sm-2 control-label">是否启用积分</label>
   <div class="btn-group col-sm-10" id="points" data-toggle="buttons">
-    <label class="btn btn-success active"><input checked type="radio" name="" value="true">启用积分</label>
-     <label class="btn btn-success"><input type="radio" name="" value="false">不启用积分</label>
+    <label class="btn btn-success active"><input checked type="radio" name="goodsinfo.goodsinfoPointsFlag" value="1">启用积分</label>
+     <label class="btn btn-success"><input type="radio" name="goodsinfo.goodsinfoPointsFlag" value="0">不启用积分</label>
    </div>
   </div>
   <div class="form-group">
    <label class="col-sm-2 control-label">商品积分</label>
    <div class="col-sm-10">
-    <input type="number" class="form-control" id="goodsinfo_points" name="goodsinfo_points" size="16" required 
+    <input type="number" class="form-control" id="goodsinfo_points" name="goodsinfo.goodsinfoPoints" size="16" required 
     placeholder="请输入积分">
    </div>
   </div>
   <div class="form-group">
   <label class="col-sm-2 control-label">商品价格</label>
   <div class="col-sm-10">
-    <input type="number" class="form-control" id="goodsinfo_primary_price" name="goodsinfo_primary_price" size="16" required 
+    <input type="number" class="form-control" id="goodsinfo_primary_price" name="goodsinfo.goodsinfoPrimaryPrice" size="16" required 
     placeholder="请输入商品价格">
    </div>
   </div>
   <div class="form-group">
    <label for="desc" class="col-sm-2 control-label">商品简短描述</label>
    <div class="col-sm-10">
-    <input type="text" class="form-control" id="goodsinfo_desc" name="goodsinfo_desc" required 
+    <input type="text" class="form-control" id="goodsinfo_desc" name="goodsinfo.goodsinfoDesc" required 
     placeholder="请输入简短描述">
    </div>
   </div>
   <div class="form-group">
    <label class="col-sm-2 control-label">是否为永久商品</label>
   <div class="btn-group col-sm-10" id="points" data-toggle="buttons">
-    <label class="btn btn-success active"><input checked type="radio" name="" value="true">是</label>
-     <label class="btn btn-success"><input type="radio" name="" value="false">否</label>
+    <label class="btn btn-success active"  onclick="changeForever(1)"><input checked type="radio" name="goodsinfo.goodsinfoFoever" value="1">是</label>
+     <label class="btn btn-success" onclick="changeForever(0)"><input type="radio" name="goodsinfo.goodsinfoFoever" value="0" >否</label>
    </div>
   </div>
-  <div class="form-group">
+  <div class="form-group hidden" id="forever">
    <label class="col-sm-2 control-label">有效日期</label>
   <div class="col-sm-10 input-append date form_datetime" >
-    <input size="16" type="text" value="" id="startTime" readonly>
+    <input name="goodsinfo.goodsinfoExpiration" size="16" type="text" value="" id="startTime" readonly>
    </div>
   </div>
-  <div class="form-group">
-   <label class="col-sm-2 control-label">商品详细描述</label>
-  <div class="col-sm-10" >
-   <textarea class="form-control" rows="3"></textarea> 
-   </div>
-  </div>
+  <input type="hidden" id="goodsinfoId" name="goodsinfo.goodsinfoId" value="#(newId)"/>
  </form>
 </div>
 <div class="modal-footer">
 	<button type="button" class="btn btn-default" data-dismiss="modal">
 		关闭</button>
-<button type="button" class="btn btn-primary">提交</button> 
+<button type="button" class="btn btn-primary"  onclick="submitForm('form')">提交</button> 
 </div>
 
 
@@ -139,6 +134,16 @@
         language: "zh",
         dropZoneEnabled: false,
         showCaption:false,
-        autoReplace:true
+        autoReplace:true,
+        showUpload:false, //是否显示上传按钮
+        showRemove :false //显示移除按钮
     });
+     
+     function changeForever(status) {
+    	 if(status == 1) {
+    		 $("#forever").addClass("hidden");
+    	 } else {
+    		 $("#forever").removeClass("hidden");
+    	 }
+     }
 </script>   

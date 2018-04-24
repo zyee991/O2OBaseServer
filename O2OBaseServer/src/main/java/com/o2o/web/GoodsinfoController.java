@@ -1,17 +1,20 @@
 package com.o2o.web;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import com.google.gson.Gson;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.upload.UploadFile;
 import com.o2o.common.model.Goodsinfo;
 import com.o2o.common.model.Sectype;
 import com.o2o.service.GoodsinfoService;
-import com.o2o.util.CommonUtils;
+import com.o2o.util.FtpUtil;
 
 public class GoodsinfoController extends Controller {
 
@@ -49,14 +52,9 @@ public class GoodsinfoController extends Controller {
 		
 		//添加
 		public void add() {
-			String id = getPara("id");
 			List<Sectype> typelist=goodsinfoService.getTypeList();
-			if(id!=null){
-			Goodsinfo goodsinfo = goodsinfoService.findById(id);
-			setAttr("goodsinfo",goodsinfo);
-			}
+			
 			setAttr("newId",UUID.randomUUID());
-			setAttr("date",CommonUtils.sdf.format(new Date()));
 			setAttr("typelist",typelist);
 			render("add.html");
 		}
@@ -64,10 +62,19 @@ public class GoodsinfoController extends Controller {
 		//保存
 		public void save() {
 			Goodsinfo goodsinfo = getBean(Goodsinfo.class);
-			UploadFile uf=getFile(getPara("file"));
-			String filename=uf.getFileName();
-			System.out.println(filename+"-------------------------");
-			goodsinfo.setGoodsinfoImage(filename);
+			System.out.println(getPara("goodsinfoId"));
+			System.out.println(goodsinfo.getGoodsinfoId());
+			UploadFile file = getFile("pic");
+			if(file != null) {
+				File f = file.getFile();
+				try {
+					InputStream in = new FileInputStream(f);
+					String image = new FtpUtil().uploadFile("goodsinfo", new Date().getTime()+"", in);
+					goodsinfo.setGoodsinfoImage(image);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
 			goodsinfoService.save(goodsinfo);
 //			redirect("/manager");
 			renderJavascript("window.location.href='/goods_info'");
