@@ -119,10 +119,14 @@
 					value="#(goodsinfo.goodsinfoId)" />
 				<input type="hidden" id="goodsinfoImage"
 					name="goodsinfo.goodsinfoImage" value="#(goodsinfo.goodsinfoImage)" />
+				<input type="hidden" id="goodsinfoIsTaocan"
+					name="goodsinfo.goodsinfoIsTaocan" value="0" />
 			</form>
 		</div>
 	</div>
-
+	<div class="row">
+		#@editor()
+	</div>
 </div>
 <script>
 	$(function() {
