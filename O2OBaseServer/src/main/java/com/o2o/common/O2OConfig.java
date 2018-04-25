@@ -25,6 +25,7 @@ import com.o2o.web.NavigationController;
 import com.o2o.web.RoleController;
 import com.o2o.web.ServiceController;
 import com.o2o.web.ServiceOrderController;
+import com.o2o.web.ShopController;
 import com.o2o.web.TreeController;
 import com.o2o.websocket.WebSocketHandler;
 
@@ -79,6 +80,7 @@ public class O2OConfig extends JFinalConfig {
 		me.add("/service_order",ServiceOrderController.class,"WEB-INF/view/service_order");
 		me.add("/goods_order",GoodsOrderController.class,"WEB-INF/view/goods_order");
 		me.add("/file",FileController.class,"WEB-INF/view");
+		me.add("/shop",ShopController.class,"WEB-INF/view/shop");
 	}
 	
 	public void configEngine(Engine me) {
