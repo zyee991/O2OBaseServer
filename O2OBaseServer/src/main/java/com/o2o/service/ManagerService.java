@@ -27,7 +27,6 @@ public class ManagerService {
 		try {
 			manager.save();	
 		} catch(Exception e) {
-			e.printStackTrace();
 			manager.update();	
 		}
 	}
