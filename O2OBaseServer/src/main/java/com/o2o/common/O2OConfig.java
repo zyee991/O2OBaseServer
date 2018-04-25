@@ -75,6 +75,7 @@ public class O2OConfig extends JFinalConfig {
 		me.add("/role", RoleController.class,"/WEB-INF/view/role");// 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
 		me.add("/tree", TreeController.class);// 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
 		me.add("/goods_info", GoodsinfoController.class,"WEB-INF/view/goods_info");
+		me.add("/taocan", GoodsinfoController.class,"WEB-INF/view/taocan");
 		me.add("/goods_type", GoodsTypeController.class,"WEB-INF/view/goods_type");
 		me.add("/service",ServiceController.class,"WEB-INF/view/service");
 		me.add("/service_order",ServiceOrderController.class,"WEB-INF/view/service_order");

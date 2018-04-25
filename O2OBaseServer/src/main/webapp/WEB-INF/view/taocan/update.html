@@ -1,0 +1,233 @@
+#@layout() #define main()
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3">
+			<h4>#(goodsinfo.goodsinfoName)</h4>
+			<img src="#(goodsinfo.goodsinfoImage)" class="img-responsive" />
+		</div>
+		<div class="col-sm-9">
+			<div class="row">
+				<br>
+			</div>
+			<form class="form-horizontal">
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="file" class="col-sm-2 control-label">更改图片</label>
+							<div class="col-sm-10">
+								<input type="file" class="form-control" id="file" name="file">
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<form action="/goods_info/save" method="post" class="form-horizontal"
+				role="form" id="form">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="name" class="col-sm-4 control-label">套餐名称</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="name"
+									name="goodsinfo.goodsinfoName"
+									value="#(goodsinfo.goodsinfoName)">
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="sec_type_id" class="col-sm-4 control-label">套餐类型</label>
+							<div class="col-sm-8">
+								<select class="form-control" id="type_list"
+									name="goodsinfo.secTypeId">
+									<option name="goodsinfo.secTypeId" value="">请选择</option>
+									#for( type : typelist )
+									<option name="goodsinfo.secTypeId" value="#(type.secTypeId)" 
+										#(goodsinfo.secTypeId == type.secTypeId ? 'selected' : '')>#(type.secTypeName)</option>
+									#end
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="col-sm-4 control-label">是否启用积分</label>
+							<div class="btn-group col-sm-8" id="points" data-toggle="buttons">
+								<label class="btn btn-success #(goodsinfo.goodsinfoPointsFlag == true ? 'active':'')" onclick="changePointsFlag(1)">
+								<input #(goodsinfo.goodsinfoPointsFlag == true ? 'checked':'')
+									type="radio" name="goodsinfo.goodsinfoPointsFlag" value="1">启用积分</label>
+								<label class="btn btn-success #(goodsinfo.goodsinfoPointsFlag == false ? 'active':'')" onclick="changePointsFlag(0)">
+								<input type="radio" #(goodsinfo.goodsinfoPointsFlag == false ? 'checked':'')
+									name="goodsinfo.goodsinfoPointsFlag" value="0">不启用积分</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group #(goodsinfo.goodsinfoPointsFlag == false ? 'hidden':'')" id="PointsFlag">
+							<label class="col-sm-4 control-label">套餐积分</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" id="goodsinfo_points"
+									name="goodsinfo.goodsinfoPoints" size="16" required
+									placeholder="请输入积分">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="col-sm-4 control-label">套餐价格</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" value="#(goodsinfo.goodsinfoPrimaryPrice)"
+									id="goodsinfo_primary_price" name="goodsinfo.goodsinfoPrimaryPrice"
+									size="16" required placeholder="请输入商品价格">
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="desc" class="col-sm-4 control-label">套餐简短描述</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="goodsinfo_desc" value="#(goodsinfo.goodsinfoDesc)"
+									name="goodsinfo.goodsinfoDesc" required placeholder="请输入简短描述">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="col-sm-4 control-label">是否为永久商品</label>
+							<div class="btn-group col-sm-8" id="isforever" data-toggle="buttons">
+								<label class="btn btn-success 
+								#(goodsinfo.goodsinfoFoever == true ? 'active' : '')"  onclick="changeForever(1)">
+								<input #(goodsinfo.goodsinfoFoever == true ? 'checked' : '')
+									type="radio" name="goodsinfo.goodsinfoFoever" value="1">是</label>
+								<label class="btn btn-success 
+								#(goodsinfo.goodsinfoFoever == false ? 'active' : '')"  onclick="changeForever(0)"><input
+								#(goodsinfo.goodsinfoFoever == false ? 'checked' : '') type="radio"
+									name="goodsinfo.goodsinfoFoever" value="0">否</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group #(goodsinfo.goodsinfoFoever == true ? 'hidden' : '')" id="forever">
+							<label class="col-sm-4 control-label">有效日期</label>
+							<div class="col-sm-8">
+								<input name="goodsinfo.goodsinfoExpiration" size="16" type="text"
+									value="#(goodsinfo.goodsinfoExpiration)" id="startTime" readonly>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<input type="hidden" id="goodsinfoId" name="goodsinfo.goodsinfoId"
+					value="#(goodsinfo.goodsinfoId)" />
+				<input type="hidden" id="goodsinfoImage"
+					name="goodsinfo.goodsinfoImage" value="#(goodsinfo.goodsinfoImage)" />
+				<input type="hidden" id="goodsinfoIsTaocan"
+					name="goodsinfo.goodsinfoIsTaocan" value="0" />
+				<input type="hidden" id="goodsinfoDescdetail"
+					name="goodsinfo.goodsinfoDescdetail" value="" />
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div  class="col-sm-12">
+			<h4>编辑详细描述</h4>
+			<div id="editor">
+		        #(goodsinfo.goodsinfoDescdetail)
+		    </div>
+		
+		    <!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+		    <script type="text/javascript">
+		        var E = window.wangEditor
+		        var editor = new E('#editor')
+		        // 或者 var editor = new E( document.getElementById('editor') )
+		        editor.create()
+		    </script>
+	    </div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="btn-group pull-right">
+			    <button type="button" class="btn btn-success" onclick="save('form')">保存</button>
+			    <a type="button" class="btn btn-default" href="/goods_info">返回</a>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	function save(form) {
+		var desc = editor.txt.html();
+		$("#goodsinfoDescdetail").val(desc);
+		$("#"+form).ajaxSubmit({
+			success:function() {
+				swal({
+					text: "保存成功!",
+					type: "success",
+					icon:"success",
+					confirmButtonText: "确定" 
+				})
+			}
+		});
+	}
+
+	$(function() {
+
+		var picker1 = $('#startTime').datetimepicker();
+		var picker2 = $("#endTime").datetimepicker();
+
+		//动态设置最小值(选择前面一个日期后：后面一个日期不能小于前面一个)
+		picker1.on('changeDate', function(e) {
+			picker2.datetimepicker('setStartDate', e.date);
+		});
+		//动态设置最大值(选择后面一个日期后：前面一个日期不能大于前面一个）
+		picker2.on('changeDate', function(e) {
+			picker1.datetimepicker('setEndDate', e.date);
+		});
+
+	});
+
+	$('#file').fileinput({
+		allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
+		language : "zh",
+		dropZoneEnabled : false,
+		showCaption : true,
+		autoReplace : true,
+		showUpload : true, //是否显示上传按钮
+		showRemove : true,//显示移除按钮
+		uploadUrl : "/file/save",
+	})
+
+	$("#file").on("fileuploaded", function(event, data, previewId, index) {
+		alert(1)
+		var result = data.response;
+		var path = result.path;
+		if (path) {
+			$("#goodsinfoImage").val(path);
+		}
+	});
+
+	function changeForever(status) {
+		if (status == 1) {
+			$("#forever").addClass("hidden");
+		} else {
+			$("#forever").removeClass("hidden");
+		}
+	}
+
+	function changePointsFlag(status) {
+		if (status == 0) {
+			$("#PointsFlag").addClass("hidden");
+		} else {
+			$("#PointsFlag").removeClass("hidden");
+		}
+	}
+</script>
+#end
