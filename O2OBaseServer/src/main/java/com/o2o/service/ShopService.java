@@ -19,4 +19,8 @@ public class ShopService {
 	public List<Record> getGoodList() {
 		return Db.find("select goodsinfo_name from tb_base_goodsinfo");
 	}
+	public void save(Shop shop) {
+		shop.save();
+	}
+	
 }

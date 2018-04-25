@@ -6,16 +6,65 @@
 </div>
 <div class="modal-body">
 	<form class="form-horizontal" role="form" id="form" action="/shop/save" method="post">
+     <input type="hidden" name="shopid" value="#(newId)" />
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">商品名称</label>
 			<div class="col-sm-10">
 				<select class="form-control" id="goodslist"
 					name="goodslist">
-					<option name="goodsinfo.secTypeId" value="">请选择</option>
+					<option name="goodsname" value="">请选择</option>
 					 #for(good:goodslist)
-					<option name="goodsname" value="">#(good.goodsinfo_name)</option>
+					<option name="goodsname" value="#(good.goodsinfo_id)">#(good.goodsinfo_name)</option>
 					#end
 				</select>
+			</div>
+			</div>
+			<div class="form-group">
+			 <label for="shoplot" class="col-sm-2 control-label">商品批次</label>
+			 <div class="col-sm-10">
+			 <input type="number" class="form-control" id="shoplot" name="shoplot" required
+					placeholder="请输入批次">
+			 </div>
+			</div>
+			<div class="form-group">
+			<label for="endtime" class="col-sm-2 control-label">截至时间</label>
+			<div class="col-sm-10">
+		    <input type="datetime" value="" name="start_time" id="start_time_picker" class="datetimepicker" readonly>
+			</div> 
+			</div>
+			<div class="form-group">
+			 <label for="number" class="col-sm-2 control-label">库存总量</label>
+			 <div class="col-sm-10">
+			  <input type="number" class="form-control" id="number"
+					name="number" size="16" 
+					placeholder="请输入库存量">
+			 </div>
+			</div>
+		<div class="form-group">
+			 <label for="shopon" class="col-sm-2 control-label">是否在售</label>
+			 <div class="col-sm-10">
+			 <label class="btn btn-success active" onclick="changeForever(1)"><input
+					checked type="radio" name="shopon" value="1">是</label>
+				<label class="btn btn-success" onclick="changeForever(0)"><input
+					type="radio" name="shopon" value="0">否</label>
+			 </div>
+			</div>
+			<div class="form-group">
+			 <label for="shopprice" class="col-sm-2 control-label">是否为套餐</label>
+			 <div class="col-sm-10">
+			 <label class="btn btn-success active" onclick="changeForever(1)"><input
+					checked type="radio" name="istaocan" value="true">是</label>
+				<label class="btn btn-success" onclick="changeForever(0)"><input
+					type="radio" name="istaocan" value="false">否</label>
+			 </div>
+			</div>
+			<div class="form-group">
+			 <label for="number" class="col-sm-2 control-label">商品售价</label>
+			 <div class="col-sm-10">
+			  <input type="number" class="form-control" id="shopprice"
+					name="shopprice" size="16" 
+					placeholder="请输入商品售价">
+			 </div>
 			</div>
 	</form>
 </div>
@@ -24,3 +73,12 @@
 		关闭</button>
 	<button type="button" class="btn btn-primary" onclick="submitForm('form')">提交</button>
 </div>
+
+<script>
+$('.datetimepicker').datetimepicker({
+    format: 'yyyy-mm-dd hh:ii:ss',
+    autoclose: true,
+    minView: 0,
+    minuteStep:1
+});
+</script>
