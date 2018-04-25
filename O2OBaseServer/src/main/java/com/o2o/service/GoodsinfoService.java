@@ -34,7 +34,6 @@ public void save(Goodsinfo goodsinfo) {
 		try {
 			goodsinfo.save();	
 		} catch(Exception e) {
-			e.printStackTrace();
 			goodsinfo.update();	
 		}
 }

@@ -9,7 +9,6 @@
     <th class="col-sm-1">是否启用积分</th>
     <th class="col-sm-1">商品积分</th>
     <th class="col-sm-1">商品简短描述</th>
-    <th class="col-sm-1">商品详细描述</th>
    <th class="col-sm-1">操作   <a href="javascript:void(0);" onclick="modalShow('/goods_info/add')" class="btn btn-warning btn-xs" role="button">添加</a>
     </th>
     </tr>
@@ -19,12 +18,10 @@
    <tr id='#(goodsinfo.id)'>
    <td>#(goodsinfo.goodsinfo_name)</td>
    <td>#(goodsinfo.goodsinfo_primary_price)</td>
-   <td>#(goodsinfo.goodsinfo_points_flag)</td>
+   <td>#(goodsinfo.goodsinfo_points_flag ? '启用' : '不启用')</td>
    <td>#(goodsinfo.goodsinfo_points)</td>
    <td>#(goodsinfo.goodsinfo_desc)</td>
-   <td>#(goodsinfo.goodsinfo_descdetail)</td>
    <td>
-   <a href="javascript:void(0);" onclick="modalShow('/goods_info/view?id=#(goodsinfo.goodsinfoId)')"  class="btn btn-info btn-xs" role="button">查看</a>
    <a href="/goods_info/update?id=#(goodsinfo.goodsinfoId)"  class="btn btn-success btn-xs" role="button">编辑</a>
    <a href="javascript:void(0);" onclick="remove('/goods_info/delete?id=#(goodsinfo.goodsinfoId)')"  class="btn btn-danger btn-xs" role="button">删除</a>
   </td>
