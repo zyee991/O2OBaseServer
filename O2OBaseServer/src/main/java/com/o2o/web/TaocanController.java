@@ -9,14 +9,14 @@ import com.o2o.common.model.Goodsinfo;
 import com.o2o.common.model.Sectype;
 import com.o2o.service.GoodsinfoService;
 
-public class GoodsinfoController extends Controller {
+public class TaocanController extends Controller {
 
 	static GoodsinfoService goodsinfoService = new GoodsinfoService();
 
 	// 显示
 	public void index() {
-		setAttr("title", "商品基本信息");
-		Page<Goodsinfo> page = goodsinfoService.paginate(1, 10);
+		setAttr("title", "套餐信息");
+		Page<Goodsinfo> page = goodsinfoService.paginateTaocan(1, 10);
 		setAttr("page", page);
 		render("index.html");
 	}
@@ -31,7 +31,7 @@ public class GoodsinfoController extends Controller {
 
 	// 编辑
 	public void update() {
-		setAttr("title", "商品基本信息");
+		setAttr("title", "套餐信息");
 		String id = getPara("id");
 		Goodsinfo goodsinfo = goodsinfoService.findById(id);
 		setAttr("goodsinfo", goodsinfo);
@@ -52,6 +52,7 @@ public class GoodsinfoController extends Controller {
 	// 添加
 	public void add() {
 		List<Sectype> typelist = goodsinfoService.getTypeList();
+
 		setAttr("newId", UUID.randomUUID());
 		setAttr("typelist", typelist);
 		render("add.html");
@@ -61,7 +62,7 @@ public class GoodsinfoController extends Controller {
 	public void save() {
 		Goodsinfo goodsinfo = getBean(Goodsinfo.class);
 		goodsinfoService.save(goodsinfo);
-		renderJavascript("window.location.href='/goods_info'");
+		renderJavascript("window.location.href='/taocan'");
 	}
 
 	//
