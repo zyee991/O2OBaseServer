@@ -59,7 +59,6 @@ public class GoodsinfoController extends Controller {
 	// 添加
 	public void add() {
 		List<Sectype> typelist = goodsinfoService.getTypeList();
-
 		setAttr("newId", UUID.randomUUID());
 		setAttr("typelist", typelist);
 		render("add.html");

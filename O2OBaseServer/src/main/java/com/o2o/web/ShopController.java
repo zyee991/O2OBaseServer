@@ -1,22 +1,16 @@
 package com.o2o.web;
 
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
-import org.joda.time.DateTime;
-
 import com.jfinal.core.Controller;
-import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.o2o.common.model.Shangjiaoperation;
 import com.o2o.common.model.Shop;
 import com.o2o.service.ShopService;
-import com.sun.tools.javac.util.Convert;
 
 public class ShopController extends Controller {
 
@@ -37,13 +31,18 @@ public class ShopController extends Controller {
 	
 	public void save(){
 		Shop shop=new Shop();
+		Shangjiaoperation shangjiaoperation=new Shangjiaoperation();
+		shangjiaoperation.setGoodsinfoId(getPara("goodsname"));
+		shangjiaoperation.setShopId(getPara("shopid"));
+		shangjiaoperation.setShopGoodsId(UUID.randomUUID().toString());
 		shop.setShopId(getPara("shopid"));
+		System.out.println(getPara("number"));
 		shop.setShopCount(Integer.parseInt(getPara("number")));
 		shop.setShopIstaocan(Boolean.valueOf(getPara("istaocan")));
 		shop.setShopLot(Integer.parseInt(getPara("shoplot")));
 		shop.setShopOn(Boolean.valueOf("shopon"));
 		shop.setShopPrice(Float.parseFloat(getPara("shopprice")));
-	    String date=getPara("endtime");
+	    String date=getPara("start_time");
 	    SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    try {
 	    	System.out.println(date);
@@ -53,7 +52,22 @@ public class ShopController extends Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		shopService.save(shop);
+		shopService.save(shop,shangjiaoperation);
 		renderJavascript("window.location.href='/shop'");
+	}
+	
+	public void update(){
+		String id=getPara("id");
+		List<Record> shoplist=shopService.findById(id);
+		System.out.println(shoplist.toString());
+		setAttr("shoplist",shoplist);
+		render("update.html");
+	}
+	
+	public void delete(){
+		String id=getPara("id");
+		String shopgoodsid=getPara("shopgoodsid");
+		shopService.deleteById(id,shopgoodsid);
+		redirect("/shop");
 	}
 }

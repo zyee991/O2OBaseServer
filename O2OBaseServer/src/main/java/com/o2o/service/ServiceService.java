@@ -1,11 +1,15 @@
 package com.o2o.service;
 
+import java.util.List;
+
 import com.jfinal.plugin.activerecord.Page;
+import com.o2o.common.model.Sectype;
 import com.o2o.common.model.Service;
 
 public class ServiceService {
 
 	private static final Service dao=new Service().dao();
+	private static final Sectype typedao=new Sectype().dao();
 	public Page<Service> paginage(int pageNumber, int pageSize) {
 	
 		return dao.paginate(pageNumber,pageSize,"select*","from tb_base_service");
@@ -25,5 +29,10 @@ public class ServiceService {
 
 	public void deleteById(String id) {
 		dao.deleteById(id);
+	}
+
+	public List<Sectype> getTypeList() {
+		List<Sectype> typelist=typedao.find("select a.* from tb_base_sectype a where a.first_type_id=2");
+		return typelist;
 	}
 }

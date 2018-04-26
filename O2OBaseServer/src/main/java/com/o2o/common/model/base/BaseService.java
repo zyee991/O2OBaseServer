@@ -36,4 +36,76 @@ public abstract class BaseService<M extends BaseService<M>> extends Model<M> imp
 		return getFloat("service_price");
 	}
 
+	public M setSecTypeId(java.lang.String secTypeId) {
+		set("sec_type_id", secTypeId);
+		return (M)this;
+	}
+	
+	public java.lang.String getSecTypeId() {
+		return getStr("sec_type_id");
+	}
+
+	public M setServicePoints(java.lang.Integer servicePoints) {
+		set("service_points", servicePoints);
+		return (M)this;
+	}
+	
+	public java.lang.Integer getServicePoints() {
+		return getInt("service_points");
+	}
+
+	public M setServicePrimaryPrice(java.lang.Float servicePrimaryPrice) {
+		set("service_primary_price", servicePrimaryPrice);
+		return (M)this;
+	}
+	
+	public java.lang.Float getServicePrimaryPrice() {
+		return getFloat("service_primary_price");
+	}
+
+	public M setServicePointsFlag(java.lang.Boolean servicePointsFlag) {
+		set("service_points_flag", servicePointsFlag);
+		return (M)this;
+	}
+	
+	public java.lang.Boolean getServicePointsFlag() {
+		return get("service_points_flag");
+	}
+
+	public M setServiceForever(java.lang.Boolean serviceForever) {
+		set("service_forever", serviceForever);
+		return (M)this;
+	}
+	
+	public java.lang.Boolean getServiceForever() {
+		return get("service_forever");
+	}
+
+	public M setServiceImage(java.lang.String serviceImage) {
+		set("service_image", serviceImage);
+		return (M)this;
+	}
+	
+	public java.lang.String getServiceImage() {
+		return getStr("service_image");
+	}
+
+	public M setServiceDesc(java.lang.String serviceDesc) {
+		set("service_desc", serviceDesc);
+		return (M)this;
+	}
+	
+	public java.lang.String getServiceDesc() {
+		return getStr("service_desc");
+	}
+
+	public M setServiceDescdetail(java.lang.String serviceDescdetail) {
+		set("service_descdetail", serviceDescdetail);
+		return (M)this;
+	}
+	
+	public java.lang.String getServiceDescdetail() {
+		return getStr("service_descdetail");
+	}
+
 }

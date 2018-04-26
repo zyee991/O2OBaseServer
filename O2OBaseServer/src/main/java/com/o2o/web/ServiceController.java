@@ -1,10 +1,12 @@
 package com.o2o.web;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
+import com.o2o.common.model.Sectype;
 import com.o2o.common.model.Service;
 import com.o2o.service.ServiceService;
 import com.o2o.util.CommonUtils;
@@ -21,7 +23,10 @@ public class ServiceController extends Controller {
 	}
 	
 	public void add(){
-		setAttr("ServiceId",UUID.randomUUID());
+		List<Sectype> typelist=serviceService.getTypeList();
+		System.out.println(typelist.toString());
+		setAttr("typelist", typelist);
+		setAttr("newId",UUID.randomUUID());
 		render("add.html");
 	}
 	
@@ -32,10 +37,10 @@ public class ServiceController extends Controller {
 	}
 	
 	public void update(){
+		setAttr("title","服务基本信息");
 		String id=getPara("id");
 		Service service=serviceService.findById(id);
 		setAttr("service",service);
-		setAttr("date",new Date());
 		render("update.html");
 	}
 	
