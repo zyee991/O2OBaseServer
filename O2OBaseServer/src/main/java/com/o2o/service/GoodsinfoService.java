@@ -1,16 +1,21 @@
 package com.o2o.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.Gson;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Goodsinfo;
 import com.o2o.common.model.Sectype;
+import com.o2o.common.model.Taocan;
 
 public class GoodsinfoService {
 
 	private static final Goodsinfo dao = new Goodsinfo().dao();
 	private static final Sectype typedao = new Sectype().dao();
+	private static final Taocan taocanDao = new Taocan().dao();
 
 	// 查询商品
 	public Page<Goodsinfo> paginate(int pageNumber, int pageSize) {
@@ -46,9 +51,10 @@ public class GoodsinfoService {
 		 */
 		return typelist;
 	}
-	
+
 	public List<Sectype> getTypeListForTaocanSelect() {
-		List<Sectype> typelist = typedao.find("select a.* from tb_base_sectype a where a.first_type_id=1 and a.sec_type_id <> 0");
+		List<Sectype> typelist = typedao
+				.find("select a.* from tb_base_sectype a where a.first_type_id=1 and a.sec_type_id <> 0");
 		/*
 		 * Gson gson=new Gson(); String str=gson.toJson(typelist);
 		 */
@@ -56,7 +62,17 @@ public class GoodsinfoService {
 	}
 
 	public List<Goodsinfo> findByTypeId(String typeId) {
-		List<Goodsinfo> goodinfoList = dao.find("select * from tb_base_goodsinfo where sec_type_id=? and goodsinfo_is_taocan=false", typeId);
+		List<Goodsinfo> goodinfoList = dao
+				.find("select * from tb_base_goodsinfo where sec_type_id=? and goodsinfo_is_taocan=false", typeId);
 		return goodinfoList;
+	}
+
+	public List<Record> findTaocanByTaocanId(String taocanId) {
+		List<Record> taocanList = Db.find(
+				"select tg.*,g.goodsinfo_name,s.sec_type_name,s.sec_type_id from tb_base_taocan as tg join tb_base_goodsinfo"
+				+ " as g on tg.goodsinfo_id = g.goodsinfo_id join tb_base_sectype as s on"
+				+ " g.sec_type_id = s.sec_type_id where tg.taocan_id = ?",
+				taocanId);
+		return taocanList;
 	}
 }

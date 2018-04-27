@@ -1,10 +1,12 @@
 package com.o2o.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Goodsinfo;
 import com.o2o.common.model.Sectype;
 import com.o2o.common.model.Taocan;
@@ -39,6 +41,10 @@ public class TaocanController extends Controller {
 		
 		List<Sectype> typelist = goodsinfoService.getTypeList();
 		setAttr("typelist", typelist);
+		
+		List<Record> taocanList = goodsinfoService.findTaocanByTaocanId(goodsinfo.getGoodsinfoId());
+		setAttr("detailList",taocanList);
+		System.out.println(taocanList);
 
 		render("update.html");
 	}

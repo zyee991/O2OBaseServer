@@ -32,6 +32,7 @@
 							<td>商品类型</td>
 							<td>商品名称</td>
 							<td>商品数量</td>
+							<td><button type='button' onclick='addone(this)' class='btn btn-xs btn-success'>增加</button></td>
 						</tr>
 						<tr>
 							<td>
@@ -47,9 +48,9 @@
 							</td>
 							<td>
 								<input value='1' class='count' type='number' style='width: 50%; height: 20px' />
-								<button type='button' onclick='addone(this)' class='btn btn-xs btn-success'>增加</button>
-								<button type='button' onclick='deletetr(this)' class='btn btn-xs btn-danger'>删除</button>
+								
 							</td>
+							<td><button type='button' onclick='deletetr(this)' class='btn btn-xs btn-danger'>删除</button></td>
 						</tr>
 					</table>
 				</div>
@@ -170,9 +171,7 @@
 				"</td>"+
 				"<td>"+
 				"	<input class='count' value='1' type='number' style='width: 50%; height: 20px' />"+
-				"	<button type='button' onclick='addone(this)' class='btn btn-xs btn-success'>增加</button>"+
-				"	<button type='button' onclick='deletetr(this)' class='btn btn-xs btn-danger'>删除</button>"+
-				"</td></tr>");
+				"</td><td><button type='button' onclick='deletetr(this)' class='btn btn-xs btn-danger'>删除</button></td></tr>");
 		table.append(tr);
 	}
 
