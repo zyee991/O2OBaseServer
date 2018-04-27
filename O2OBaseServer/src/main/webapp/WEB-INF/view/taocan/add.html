@@ -12,7 +12,7 @@
 			</div>
 		</div>
 	</form>
-	<form action="/goods_info/save" method="post" class="form-horizontal"
+	<form action="/taocan/save" method="post" class="form-horizontal"
 		role="form" id="form">
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">套餐名称</label>
@@ -21,52 +21,56 @@
 					name="goodsinfo.goodsinfoName" required placeholder="请输入名称">
 			</div>
 		</div>
-
-		<div class="form-group">
-			<label for="sec_type_id" class="col-sm-2 control-label">套餐类型</label>
-			<div class="col-sm-10">
-				<select class="form-control" id="type_list"
-					name="goodsinfo.secTypeId">
-					<option name="goodsinfo.secTypeId" value="">请选择</option>
-					 #for(typelist:typelist)
-					<option name="goodsinfo.secTypeId" value="#(typelist.sec_type_id)">#(typelist.sec_type_name)</option>
-					#end
-				</select>
-			</div>
-		</div>
+		<input type="hidden" value="0" name="goodsinfo.secTypeId">
 		<!-- 选择商品 start-->
 		<div class="form-group" id="parentrow">
-		<label for="goodsinform" class="col-sm-2 control-label">添加商品</label>
-		<div class="col-sm-10 tab-content" id="myTabContent">
-        <button type="button" class="btn btn-success dropdown-toggle" id="addRowbtn">
-        <span class="glyphicon glyphicon  glyphicon-plus" aria-hidden="true"></span>增加
-        </button>
-         <button type="button" class="btn btn-info" onclick="javascript:sava()" id="sava">
-              <span class=" glyphicon glyphicon-floppy-save" aria-hidden="true"></span>保存
-         </button>
-         <div>
-    <table class="table table-striped table-hover" id="reportTable">
-     <tr><td>商品类型</td><td>商品名称</td><td>商品数量</td></tr>
-    </table>
-     </div> 
-		</div>
+			<label for="goodsinform" class="col-sm-2 control-label">添加商品</label>
+			<div class="col-sm-10 tab-content" id="myTabContent">
+				<div>
+					<table class="table table-striped table-hover" id="reportTable">
+						<tr>
+							<td>商品类型</td>
+							<td>商品名称</td>
+							<td>商品数量</td>
+							<td><button type='button' onclick='addone(this)' class='btn btn-xs btn-success'>增加</button></td>
+						</tr>
+						<tr>
+							<td>
+								<select onchange='getgoods(this)' style='width: 100%;height=20px'>
+									<option value=''>请选择</option>
+									#for(typelist:typelist)
+									<option value='#(typelist.sec_type_id)'>#(typelist.sec_type_name)</option>
+									#end
+								</select>
+							</td>
+							<td>
+								<select class='goods' style='width: 100%; height: 20px'></select>
+							</td>
+							<td>
+								<input value='1' class='count' type='number' style='width: 50%; height: 20px' />
+								
+							</td>
+							<td><button type='button' onclick='deletetr(this)' class='btn btn-xs btn-danger'>删除</button></td>
+						</tr>
+					</table>
+				</div>
+			</div>
 		</div>
 		<!-- 选择商品end -->
 		<div class="form-group">
 			<label class="col-sm-2 control-label">是否启用积分</label>
 			<div class="btn-group col-sm-10" id="points" data-toggle="buttons">
-				<label class="btn btn-success active" onclick="changePointsFlag(1)"><input checked
-					type="radio" name="goodsinfo.goodsinfoPointsFlag" value="1">启用积分</label>
-				<label class="btn btn-success" onclick="changePointsFlag(0)"><input type="radio"
-					name="goodsinfo.goodsinfoPointsFlag" value="0">不启用积分</label>
+				<label class="btn btn-success active" onclick="changePointsFlag(1)"><input
+					checked type="radio" name="goodsinfo.goodsinfoPointsFlag" value="1">启用积分</label>
+				<label class="btn btn-success" onclick="changePointsFlag(0)"><input
+					type="radio" name="goodsinfo.goodsinfoPointsFlag" value="0">不启用积分</label>
 			</div>
 		</div>
 		<div class="form-group" id="PointsFlag">
 			<label class="col-sm-2 control-label">套餐积分</label>
 			<div class="col-sm-10">
 				<input type="number" class="form-control" id="goodsinfo_points"
-					name="goodsinfo.goodsinfoPoints" size="16" 
-					placeholder="请输入积分">
+					name="goodsinfo.goodsinfoPoints" size="16" placeholder="请输入积分">
 			</div>
 		</div>
 		<div class="form-group">
@@ -101,18 +105,17 @@
 			</div>
 		</div>
 		<input type="hidden" id="goodsinfoId" name="goodsinfo.goodsinfoId"
-			value="#(newId)" />
-		<input type="hidden" id="goodsinfoImage"
-			name="goodsinfo.goodsinfoImage" value="" />
-		<input type="hidden" id="goodsinfoIsTaocan"
-			name="goodsinfo.goodsinfoIsTaocan" value="1" />
+			value="#(newId)" /> <input type="hidden" id="goodsinfoImage"
+			name="goodsinfo.goodsinfoImage" value="" /> <input type="hidden"
+			id="goodsinfoIsTaocan" name="goodsinfo.goodsinfoIsTaocan" value="1" />
+			<input id="goodsDetail" type="hidden" name="goodsDetail" value />
 	</form>
 </div>
 <div class="modal-footer">
 	<button type="button" class="btn btn-default" data-dismiss="modal">
 		关闭</button>
 	<button type="button" class="btn btn-primary"
-		onclick="submitForm('form')">提交</button>
+		onclick="submitTaocan('form')">提交</button>
 </div>
 
 
@@ -144,7 +147,7 @@
 			$("#forever").removeClass("hidden");
 		}
 	}
-	
+
 	function changePointsFlag(status) {
 		if (status == 0) {
 			$("#PointsFlag").addClass("hidden");
@@ -152,36 +155,44 @@
 			$("#PointsFlag").removeClass("hidden");
 		}
 	}
-	$('#addRowbtn').click(function(){
-       var table=$("#reportTable");
-       var tr= $("<tr>" +  
-    	        "<td>"+"<select id='goodstype' onclick='getTypelist(this)' onchange='getgoods()' style='width:100%;height=20px'></select>"+"</td>" +  
-    	        "<td>"+"<select id='goods' style='width:100%;height:20px'></select>"+"</td>" +
-    	        "<td><input type='text' style='width:50%;height:20px'/><button type='button' onclick='deletetr(this)'  class='btn btn-xs btn-link' >"+"删除"+"</button></td></tr>");  
-       table.append(tr);
-    });
-	 
-	function deletetr(tdobject){
-		var td=$(tdobject);
+
+	function addone(e) {
+		var table = $("#reportTable");
+		var tr = $("<tr><td>"+
+				"	<select onchange='getgoods(this)' style='width: 100%;height=20px'>"+
+				"		<option value=''>请选择</option>"+
+						#for(typelist:typelist)
+				"		<option value='#(typelist.sec_type_id)'>#(typelist.sec_type_name)</option>"+
+						#end
+				"	</select>"+
+				"</td>"+
+				"<td>"+
+				"	<select class='goods' style='width: 100%; height: 20px'></select>"+
+				"</td>"+
+				"<td>"+
+				"	<input class='count' value='1' type='number' style='width: 50%; height: 20px' />"+
+				"</td><td><button type='button' onclick='deletetr(this)' class='btn btn-xs btn-danger'>删除</button></td></tr>");
+		table.append(tr);
+	}
+
+	function deletetr(tdobject) {
+		var td = $(tdobject);
 		td.parents("tr").remove();
 	}
 
-	function getTypelist(object){
-		$.ajax({
-			url:"/taocan/getTypeList",
-			type:"get",
-			async:true,
-		    success:function(data){
-		    for(var i=0;i<data.typelist.length;i++){
-		    	$(object).append("<option value='"+data.typelist[i].sec_type_id+"'>"+data.typelist[i].sec_type_name+"</option>");
-		    }
-		    },error:function(data){
-		    	alert("出错了");
-		    }
-		});
+	function getgoods(e) {
+		var typeId = $(e).val();
+		var option = "<option value='@goodsinfoId'>@goodsinfoName</option>";
+		var select = $(e).parent().next().children(".goods");
+		select.empty();
+		select.append($("<option value=''>请选择</option>"))
+		$.post("/taocan/getGoods",{typeId:typeId},function(data){
+			if(data) {
+				for(var i in data) {
+					var ele = option.replace("@goodsinfoId",data[i].goodsinfo_id).replace("@goodsinfoName",data[i].goodsinfo_name);
+					select.append($(ele));
+				}
+			}
+		})
 	}
-	
-	function getgoods(){
-		alert("############");
-	}
-	</script>
+</script>
