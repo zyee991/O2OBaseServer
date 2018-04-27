@@ -9,13 +9,13 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseOrder<M extends BaseOrder<M>> extends Model<M> implements IBean {
 
-	public M setOrderId(java.lang.Integer orderId) {
+	public M setOrderId(java.lang.String orderId) {
 		set("order_id", orderId);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getOrderId() {
-		return getInt("order_id");
+	public java.lang.String getOrderId() {
+		return getStr("order_id");
 	}
 
 	public M setFeedbackId(java.lang.Integer feedbackId) {
@@ -79,6 +79,33 @@ public abstract class BaseOrder<M extends BaseOrder<M>> extends Model<M> impleme
 	
 	public java.lang.Integer getOrderStatus() {
 		return getInt("order_status");
+	}
+
+	public M setOrderPayType(java.lang.String orderPayType) {
+		set("order_pay_type", orderPayType);
+		return (M)this;
+	}
+	
+	public java.lang.String getOrderPayType() {
+		return getStr("order_pay_type");
+	}
+
+	public M setOrderPrice(java.lang.String orderPrice) {
+		set("order_price", orderPrice);
+		return (M)this;
+	}
+	
+	public java.lang.String getOrderPrice() {
+		return getStr("order_price");
+	}
+
+	public M setOrderIsdelete(java.lang.Boolean orderIsdelete) {
+		set("order_isdelete", orderIsdelete);
+		return (M)this;
+	}
+	
+	public java.lang.Boolean getOrderIsdelete() {
+		return get("order_isdelete");
 	}
 
 }

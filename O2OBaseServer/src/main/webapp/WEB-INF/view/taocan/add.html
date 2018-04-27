@@ -155,7 +155,7 @@
 	$('#addRowbtn').click(function(){
        var table=$("#reportTable");
        var tr= $("<tr>" +  
-    	        "<td>"+"<select id='goodstype' onclick='getTypelist(this)' onchange='getgoods(this)' style='width:100%;height=20px'></select>"+"</td>" +  
+    	        "<td>"+"<select id='goodstype' onclick='getTypelist(this)' onchange='getgoods()' style='width:100%;height=20px'></select>"+"</td>" +  
     	        "<td>"+"<select id='goods' style='width:100%;height:20px'></select>"+"</td>" +
     	        "<td><input type='text' style='width:50%;height:20px'/><button type='button' onclick='deletetr(this)'  class='btn btn-xs btn-link' >"+"删除"+"</button></td></tr>");  
        table.append(tr);
@@ -181,7 +181,7 @@
 		});
 	}
 	
-	function getgoods(object1){
-		alert("############333");
+	function getgoods(){
+		alert("############");
 	}
 	</script>

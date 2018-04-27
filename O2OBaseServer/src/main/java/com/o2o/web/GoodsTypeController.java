@@ -34,7 +34,7 @@ public class GoodsTypeController extends Controller {
    }
    
    public void save(){
-	   String firstid=getPara("firstTypeId");
+	   String firstid=getPara("firsttTypeId");
 	   String name=getPara("typename");
 	   String id=getPara("newId");
 	   if(firstid!=null){
@@ -54,7 +54,6 @@ public class GoodsTypeController extends Controller {
    
    public void showSub(){
 		String id = getPara("id");
-		System.out.println("--------------"+id);
 		List<Sectype> list =goodsTypeService .findChildNavigationByParentId(id);
 		renderJson(list);
 	}

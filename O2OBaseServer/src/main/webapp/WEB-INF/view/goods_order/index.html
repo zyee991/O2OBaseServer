@@ -1,0 +1,44 @@
+#@layout()
+ #define main()
+<ul class="nav nav-tabs">
+	<li class="active"><a href="/goods_order?order_pay_status=0">待支付</a></li> 
+    <li><a href="/goods_order?order_pay_status=1">待处理</a></li>
+     <li><a href="/goods_order?order_status=3">已完成</a></li> 
+     <li><a href="/goods_order">全部</a></li>
+ </ul>
+ <div class="table-responsive">
+ <table class="table table-striped">
+ <thead>
+   <tr>
+   <th class="col-sm-1">商品订单编号</th>
+   <th class="col-sm-1">商品类型</th>
+   <th class="col-sm-1">创建时间</th>
+   <th class="col-sm-1">用户姓名</th>
+   <th class="col-sm-1">支付类型</th>
+   <th class="col-sm-1">支付金额</th>
+   <th class="col-sm-1">是否派单</th>
+   <th class="col-sm-1">是否删除</th>
+   <th class="col-sm-1">状态</th>
+   <th class="col-sm-1">操作</th>
+   </tr>
+ </thead>
+ <tbody>	
+	#for(goodorder:goodorderlist)
+    <tr>
+    <th class="col-sm-1">#(goodorder.order_id)</th>
+    <th class="col-sm-1">#(goodorder.sec_type_name)</th>
+    <th class="col-sm-1">#(goodorder.order_createtime)</th>
+    <th class="col-sm-1">#(goodorder.user_nickname)</th>
+    <th class="col-sm-1">#(goodorder.order_payType)</th>
+    <th class="col-sm-1">#(goodorder.order_price)</th>
+    <th class="col-sm-1">#(goodorder.order_isforward)</th>
+    <th class="col-sm-1">#(goodorder.order_isdelete)</th>
+    <th class="col-sm-1">#(goodorder.order_status)</th>
+    <th class="col-sm-1"> <a href="javascript:void(0);" onclick="/goods_order/forward"  class="btn btn-danger btn-xs" role="button">派单</a>
+    </th>
+    </tr>
+	#end			
+  </tbody>
+ </table>
+ </div>
+ #end
