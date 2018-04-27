@@ -34,6 +34,24 @@
 				</select>
 			</div>
 		</div>
+		<!-- 选择商品 start-->
+		<div class="form-group" id="parentrow">
+		<label for="goodsinform" class="col-sm-2 control-label">添加商品</label>
+		<div class="col-sm-10 tab-content" id="myTabContent">
+        <button type="button" class="btn btn-success dropdown-toggle" id="addRowbtn">
+        <span class="glyphicon glyphicon  glyphicon-plus" aria-hidden="true"></span>增加
+        </button>
+         <button type="button" class="btn btn-info" onclick="javascript:sava()" id="sava">
+              <span class=" glyphicon glyphicon-floppy-save" aria-hidden="true"></span>保存
+         </button>
+         <div>
+    <table class="table table-striped table-hover" id="reportTable">
+     <tr><td>商品类型</td><td>商品名称</td><td>商品数量</td></tr>
+    </table>
+     </div> 
+		</div>
+		</div>
+		<!-- 选择商品end -->
 		<div class="form-group">
 			<label class="col-sm-2 control-label">是否启用积分</label>
 			<div class="btn-group col-sm-10" id="points" data-toggle="buttons">
@@ -134,4 +152,36 @@
 			$("#PointsFlag").removeClass("hidden");
 		}
 	}
-</script>
+	$('#addRowbtn').click(function(){
+       var table=$("#reportTable");
+       var tr= $("<tr>" +  
+    	        "<td>"+"<select id='goodstype' onclick='getTypelist(this)' onchange='getgoods(this)' style='width:100%;height=20px'></select>"+"</td>" +  
+    	        "<td>"+"<select id='goods' style='width:100%;height:20px'></select>"+"</td>" +
+    	        "<td><input type='text' style='width:50%;height:20px'/><button type='button' onclick='deletetr(this)'  class='btn btn-xs btn-link' >"+"删除"+"</button></td></tr>");  
+       table.append(tr);
+    });
+	 
+	function deletetr(tdobject){
+		var td=$(tdobject);
+		td.parents("tr").remove();
+	}
+
+	function getTypelist(object){
+		$.ajax({
+			url:"/taocan/getTypeList",
+			type:"get",
+			async:true,
+		    success:function(data){
+		    for(var i=0;i<data.typelist.length;i++){
+		    	$(object).append("<option value='"+data.typelist[i].sec_type_id+"'>"+data.typelist[i].sec_type_name+"</option>");
+		    }
+		    },error:function(data){
+		    	alert("出错了");
+		    }
+		});
+	}
+	
+	function getgoods(object1){
+		alert("############333");
+	}
+	</script>

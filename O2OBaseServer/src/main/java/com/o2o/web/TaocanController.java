@@ -52,7 +52,7 @@ public class TaocanController extends Controller {
 	// 添加
 	public void add() {
 		List<Sectype> typelist = goodsinfoService.getTypeList();
-
+    System.out.println(typelist.toString());
 		setAttr("newId", UUID.randomUUID());
 		setAttr("typelist", typelist);
 		render("add.html");
@@ -68,7 +68,13 @@ public class TaocanController extends Controller {
 	//
 	public void getTypeList() {
 		List<Sectype> typelist = goodsinfoService.getTypeList();
+		System.out.println(typelist.toString());
 		setAttr("typelist", typelist);
+		renderJson();
+	}
+	
+	public void getgoodsList(){
+		System.out.println(getPara("type_id"));
 		renderJson();
 	}
 
