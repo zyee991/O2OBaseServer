@@ -131,3 +131,51 @@ function submitForm(id,url,method) {
 		})
 	}
 }
+
+function submitTaocan(id,url,method) {
+	if(!url) {
+		url = $("#"+id).attr("action");
+	}
+
+	if(!method) {
+		method = $("#"+id).attr("method");
+	}
+	
+	var validate = true;
+	
+	$("#"+id).find("input").each(function(i,e){
+		if($(e).attr("required")) {
+			if(!$(e).val()) {
+				$(e).parents(".form-group").addClass("has-error");
+				validate = false;
+			}
+		}
+	})
+	
+	$(".has-error").find("input").focus(function(){
+		$(this).parents(".has-error").removeClass("has-error");
+	})
+	
+	var goodsDetailVal = "";
+	var goodsDetailEle = $(".goods");
+	goodsDetailEle.each(function(i,e){
+		var name = $(e).val();
+		var count = $(e).parent().next().children(".count").val();
+		if(name && count) {
+			itemVal = name + ":" + count;
+			goodsDetailVal = goodsDetailVal+","+itemVal;
+		}
+	})
+	
+	$("#goodsDetail").val(goodsDetailVal);
+	
+	if(validate) {
+		$("#"+id).ajaxSubmit({
+			url:url,
+			type:method,
+			success:function(){
+				$("#myModal").modal('hide');
+			}
+		})
+	}
+}

@@ -7,6 +7,7 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.o2o.common.model.Goodsinfo;
 import com.o2o.common.model.Sectype;
+import com.o2o.common.model.Taocan;
 import com.o2o.service.GoodsinfoService;
 
 public class TaocanController extends Controller {
@@ -46,13 +47,12 @@ public class TaocanController extends Controller {
 	public void delete() {
 		String id = getPara("id");
 		goodsinfoService.deleteById(id);
-		renderJavascript("window.location.href='/goods_info'");
+		renderJavascript("window.location.href='/taocan'");
 	}
 
 	// 添加
 	public void add() {
-		List<Sectype> typelist = goodsinfoService.getTypeList();
-    System.out.println(typelist.toString());
+		List<Sectype> typelist = goodsinfoService.getTypeListForTaocanSelect();
 		setAttr("newId", UUID.randomUUID());
 		setAttr("typelist", typelist);
 		render("add.html");
@@ -62,20 +62,31 @@ public class TaocanController extends Controller {
 	public void save() {
 		Goodsinfo goodsinfo = getBean(Goodsinfo.class);
 		goodsinfoService.save(goodsinfo);
+		String goodsDetail = getPara("goodsDetail");
+		if(!"".equals(goodsDetail)) {
+			String[] goodsArray = goodsDetail.split(",");
+			for(String goods:goodsArray) {
+				if(!"".equals(goods)) {
+					Taocan taocan = new Taocan();
+					String taocanId = goodsinfo.getGoodsinfoId();
+					String goodsinfoId = goods.split(":")[0];
+					String itemCount = goods.split(":")[1];
+					String id = UUID.randomUUID().toString();
+					taocan.setTaoGoodId(id);
+					taocan.setTaocanId(taocanId);
+					taocan.setGoodsinfoId(goodsinfoId);
+					taocan.setItemCount(Integer.valueOf(itemCount));
+					taocan.save();
+				}
+			}
+		}
 		renderJavascript("window.location.href='/taocan'");
 	}
-
-	//
-	public void getTypeList() {
-		List<Sectype> typelist = goodsinfoService.getTypeList();
-		System.out.println(typelist.toString());
-		setAttr("typelist", typelist);
-		renderJson();
-	}
 	
-	public void getgoodsList(){
-		System.out.println(getPara("type_id"));
-		renderJson();
+	public void getGoods(){
+		String typeId = getPara("typeId");
+		List<Goodsinfo> list = goodsinfoService.findByTypeId(typeId);
+		renderJson(list);
 	}
 
 }
