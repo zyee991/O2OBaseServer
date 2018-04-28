@@ -29,6 +29,7 @@ public class GoodsTypeService {
 	  try{
 		  firsttype.save();
 	  }catch(Exception e){
+		  e.printStackTrace();
 		  firsttype.update();
 	  }
   }

@@ -1,0 +1,36 @@
+#@layout() 
+#define main()
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+		    <tr>
+		        <th class="col-sm-2">门店名称</th>
+		        <th class="col-sm-2">门店地址</th>
+		        <th class="col-sm-2">门店号码</th>
+		        <th class="col-sm-2">门店网址</th>
+		        <th class="col-sm-2">门店具体地址</th>
+		        <th class="col-sm-2">门店类型</th>
+		        <th class="col-sm-4">操作
+   			        <a href="javascript:void(0);" onclick="modalShow('/realshop/add')" class="btn btn-warning btn-xs" role="button">添加</a>
+		        </th>
+		    </tr>
+	    </thead>
+	    <tbody>
+	    #for(realshop : realshoplist)
+		    <tr id='#(realshop.realshop_id)'>
+		       <td>#(realshop.realshop_name)</td>
+		       <td>#(realshop.district_name)</td>
+		       <td>#(realshop.realshop_phone)</td>
+		       <td>#(realshop.realshop_pic)</td>
+		       <td>#(realshop.realshop_detail_address)</td>
+		       <td>#(realshop.sec_type_name)</td>  
+		       <td>
+			        <a href="javascript:void(0);" onclick="modalShow('/realshop/update?id=#(realshop.realshop_id)&district_id=#(realshop.district_id)&typeid=#(realshop.realshop_type)')"  class="btn btn-success btn-xs" role="button">编辑</a>
+			        <a href="javascript:void(0);" onclick="modalShow('/realshop/delete?id=#(realshop.realshop_id)')"  class="btn btn-danger btn-xs" role="button">删除</a>
+		        </td> 		        
+		    </tr>
+	    #end
+    	</tbody>
+	</table>
+</div>
+#end

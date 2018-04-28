@@ -10,22 +10,20 @@
  <table class="table table-striped">
  <thead>
    <tr>
-   <th class="col-sm-1">商品订单编号</th>
-   <th class="col-sm-1">商品类型</th>
-   <th class="col-sm-1">创建时间</th>
-   <th class="col-sm-1">用户姓名</th>
-   <th class="col-sm-1">支付类型</th>
-   <th class="col-sm-1">支付金额</th>
-   <th class="col-sm-1">是否派单</th>
-   <th class="col-sm-1">是否删除</th>
-   <th class="col-sm-1">状态</th>
-   <th class="col-sm-1">操作</th>
+   <th class="col-sm-0">订单类型</th>
+   <th class="col-sm-0">创建时间</th>
+   <th class="col-sm-0">用户姓名</th>
+   <th class="col-sm-0">支付类型</th>
+   <th class="col-sm-0">支付金额</th>
+   <th class="col-sm-0">是否派单</th>
+   <th class="col-sm-0">删除</th>
+   <th class="col-sm-0">状态</th>
+   <th class="col-sm-0">操作</th>
    </tr>
  </thead>
  <tbody>	
 	#for(goodorder:goodorderlist)
     <tr>
-    <th class="col-sm-1">#(goodorder.order_id)</th>
     <th class="col-sm-1">#(goodorder.sec_type_name)</th>
     <th class="col-sm-1">#(goodorder.order_createtime)</th>
     <th class="col-sm-1">#(goodorder.user_nickname)</th>
@@ -34,7 +32,10 @@
     <th class="col-sm-1">#(goodorder.order_isforward)</th>
     <th class="col-sm-1">#(goodorder.order_isdelete)</th>
     <th class="col-sm-1">#(goodorder.order_status)</th>
-    <th class="col-sm-1"> <a href="javascript:void(0);" onclick="/goods_order/forward"  class="btn btn-danger btn-xs" role="button">派单</a>
+    <th class="col-sm-1"> 
+    <a href="javascript:void(0);" onclick="modalShow('/goods_order/forward?id=#(goodorder.order_id)')" class="btn btn-danger btn-xs" role="button">确认发货</a>
+    <a href="javascript:void(0);" onclick="modalShow('/goods_order/orderdetail?id=#(goodorder.order_id)')"  class="btn btn-danger btn-xs" role="button">订单详情</a>
+    <a href="javascript:void(0);" onclick="modalShow('/goods_order/paidandetail?id=#(goodorder.order_id)')"  class="btn btn-danger btn-xs" role="button">派单详情</a>
     </th>
     </tr>
 	#end			
@@ -42,3 +43,9 @@
  </table>
  </div>
  #end
+ <script>
+
+ function confirm(){
+	alert("发货成功");
+}
+ </script>

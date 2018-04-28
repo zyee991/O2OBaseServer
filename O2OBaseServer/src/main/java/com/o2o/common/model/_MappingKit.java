@@ -16,6 +16,8 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 public class _MappingKit {
 	
 	public static void mapping(ActiveRecordPlugin arp) {
+		arp.addMapping("tb_base_city", "city_id", City.class);
+		arp.addMapping("tb_base_district", "district_id", District.class);
 		arp.addMapping("tb_base_feedback", "feedback_id", Feedback.class);
 		arp.addMapping("tb_base_firsttype", "first_type_id", Firsttype.class);
 		arp.addMapping("tb_base_goodsinfo", "goodsinfo_id", Goodsinfo.class);
@@ -24,6 +26,8 @@ public class _MappingKit {
 		arp.addMapping("tb_base_navigation", "id", Navigation.class);
 		arp.addMapping("tb_base_order", "order_id", Order.class);
 		arp.addMapping("tb_base_paigong_order", "forward_id", PaigongOrder.class);
+		arp.addMapping("tb_base_province", "province_id", Province.class);
+		arp.addMapping("tb_base_realshop", "realshop_id", Realshop.class);
 		arp.addMapping("tb_base_role", "id", Role.class);
 		arp.addMapping("tb_base_role_navigation", "id", RoleNavigation.class);
 		arp.addMapping("tb_base_sectype", "sec_type_id", Sectype.class);

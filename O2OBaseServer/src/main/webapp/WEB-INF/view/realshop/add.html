@@ -1,0 +1,110 @@
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true">×</button>
+	<h4 class="modal-title" id="myModalLabel">新增门店</h4>
+</div>
+<div class="modal-body">
+	<form class="form-horizontal" role="form" id="form" action="/realshop/save" method="post">
+		<div class="form-group">
+			<label for="realshop.realshopname" class="col-sm-2 control-label">门店名称</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="name" name="realshop.realshopName" required
+					placeholder="请输入名称">
+				<input type="hidden" name="realshop.realshopId" value="#(newId)" />
+			</div>
+			</div>
+			<div class="form-group">
+                        <label class="col-sm-2 control-label"><i>*</i>所在地址</label>
+                        <div class="col-sm-3">
+                            <select name="input_province" id="input_province" class="form-control" onchange="getcity(this)">
+                                <option value="">--请选择--</option>
+                                #for(province:provincelist)
+                                <option value="#(province.province_id)">#(province.province_name)</option>
+                                #end
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select name="input_city" id="input_city" class="form-control" onchange="getarea(this)">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select name="realshop.districtId" id="input_area" class="form-control">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+			<div class="form-group">
+			<label for="realshop.realshopPhone" class="col-sm-2 control-label">门店电话</label>
+			<div class="col-sm-10">
+			<input type="text" class="form-control" id="realshopphone" name="realshop.realshopPhone" required
+					placeholder="请输入电话">
+			</div>
+			</div>
+		<div class="form-group">
+			<label for="realshop.realshopPic" class="col-sm-2 control-label">门店网址</label>
+			<div class="col-sm-10">
+			<input type="text" class="form-control" id="realshoppic" name="realshop.realshopPic" required
+					placeholder="请输入门店网址">
+			</div>
+			</div>	
+			<div class="form-group">
+			<label for="realshop.realshopDetailAddress" class="col-sm-2 control-label">门店具体地址</label>
+			<div class="col-sm-10">
+			<input type="text" class="form-control" id="realshopdetailaddress" name="realshop.realshopDetailAddress" required
+					placeholder="请输入门店具体地址">
+			</div>
+			</div>
+			<div class="form-group">
+			<label for="shoptype" class="col-sm-2 control-label">门店类型</label>
+			<div class="col-sm-10">
+			<select style='width: 100%;height=20px' name="realshop.realshopType">
+									<option value=''>请选择</option>
+									#for(typelist:typelist)
+									<option value='#(typelist.sec_type_id)'>#(typelist.sec_type_name)</option>
+									#end
+								</select>
+
+			</div>
+			</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">
+		关闭</button>
+	<button type="button" class="btn btn-primary" onclick="submitForm('form')">提交</button>
+</div>
+<script>
+function getcity(e){
+	var provinceId=$(e).val();
+	var option="<option value='@cityid'>@cityname</option>";
+    var select=$(e).parent().next().children("#input_city");
+    select.empty();
+    select.append($("<option value=''>请选择</option>"));
+    $.post("/realshop/getcity",{provinceId:provinceId},function(data){
+    	if(data){
+    		for(var i in data){
+    			var ele=option.replace("@cityid",data[i].city_id).replace("@cityname",data[i].city_name);
+    			select.append($(ele));
+    		}
+    	}
+    });
+}
+
+function getarea(e) {
+	var cityId = $(e).val();
+	var option = "<option value='@districtId'>@districtName</option>";
+	var select = $(e).parent().next().children("#input_area");
+	select.empty();
+	select.append($("<option value=''>请选择</option>"));
+	$.post("/realshop/getarea",{cityId:cityId},function(data){
+		if(data) {
+			for(var i in data) {
+				var ele = option.replace("@districtId",data[i].district_id).replace("@districtName",data[i].district_name);
+				select.append($(ele));
+			}
+		}
+	})
+}
+</script>

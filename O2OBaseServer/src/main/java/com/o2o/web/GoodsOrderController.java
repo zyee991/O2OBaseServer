@@ -16,4 +16,15 @@ public class GoodsOrderController extends Controller {
 		setAttr("goodorderlist",goodorderlist);
 		render("index.html");
 	}
+	
+	//商品发货，支付状态不变（1---支付成功），0---未支付，1----支付成功，2------要求退款，3-----退款成功
+	//商品订单状态改为（1-----商家发货），0----商家未处理，1-----商家发货，2----确认收货
+	public void forward(){
+		System.out.println("发货了------------");
+	String id=getPara("id");
+	//商家确认发货
+	int status=1;
+	setAttr("message","商家确认发货");
+	renderJavascript("window.location.href='/goods_order'");
+	}
 }

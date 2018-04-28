@@ -22,6 +22,7 @@ import com.o2o.web.GoodsTypeController;
 import com.o2o.web.GoodsinfoController;
 import com.o2o.web.ManagerController;
 import com.o2o.web.NavigationController;
+import com.o2o.web.RealShopController;
 import com.o2o.web.RoleController;
 import com.o2o.web.ServiceController;
 import com.o2o.web.ServiceOrderController;
@@ -83,6 +84,7 @@ public class O2OConfig extends JFinalConfig {
 		me.add("/goods_order",GoodsOrderController.class,"WEB-INF/view/goods_order");
 		me.add("/file",FileController.class,"WEB-INF/view");
 		me.add("/shop",ShopController.class,"WEB-INF/view/shop");
+		me.add("/realshop",RealShopController.class,"WEB-INF/view/realshop");
 	}
 	
 	public void configEngine(Engine me) {

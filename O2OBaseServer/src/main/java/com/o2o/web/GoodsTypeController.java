@@ -37,7 +37,7 @@ public class GoodsTypeController extends Controller {
 	   String firstid=getPara("firsttTypeId");
 	   String name=getPara("typename");
 	   String id=getPara("newId");
-	   if(firstid!=null){
+	   if(firstid!=null&&!"".equals(firstid)){
 		Sectype sectype=new Sectype();
 		sectype.setFirstTypeId(firstid);
 		sectype.setSecTypeId(id);

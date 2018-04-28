@@ -185,7 +185,7 @@
 		var option = "<option value='@goodsinfoId'>@goodsinfoName</option>";
 		var select = $(e).parent().next().children(".goods");
 		select.empty();
-		select.append($("<option value=''>请选择</option>"))
+		select.append($("<option value=''>请选择</option>"));
 		$.post("/taocan/getGoods",{typeId:typeId},function(data){
 			if(data) {
 				for(var i in data) {
@@ -195,4 +195,5 @@
 			}
 		})
 	}
+	
 </script>

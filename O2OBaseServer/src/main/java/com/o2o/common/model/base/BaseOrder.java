@@ -108,4 +108,13 @@ public abstract class BaseOrder<M extends BaseOrder<M>> extends Model<M> impleme
 		return get("order_isdelete");
 	}
 
+	public M setDistrictId(java.lang.String districtId) {
+		set("district_id", districtId);
+		return (M)this;
+	}
+	
+	public java.lang.String getDistrictId() {
+		return getStr("district_id");
+	}
+
 }
