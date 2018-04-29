@@ -16,30 +16,43 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 public class _MappingKit {
 	
 	public static void mapping(ActiveRecordPlugin arp) {
-		arp.addMapping("tb_base_city", "city_id", City.class);
-		arp.addMapping("tb_base_district", "district_id", District.class);
-		arp.addMapping("tb_base_feedback", "feedback_id", Feedback.class);
-		arp.addMapping("tb_base_firsttype", "first_type_id", Firsttype.class);
-		arp.addMapping("tb_base_goodsinfo", "goodsinfo_id", Goodsinfo.class);
-		arp.addMapping("tb_base_manager", "id", Manager.class);
-		arp.addMapping("tb_base_manager_role", "id", ManagerRole.class);
-		arp.addMapping("tb_base_navigation", "id", Navigation.class);
-		arp.addMapping("tb_base_order", "order_id", Order.class);
-		arp.addMapping("tb_base_paigong_order", "forward_id", PaigongOrder.class);
-		arp.addMapping("tb_base_province", "province_id", Province.class);
-		arp.addMapping("tb_base_realshop", "realshop_id", Realshop.class);
-		arp.addMapping("tb_base_role", "id", Role.class);
-		arp.addMapping("tb_base_role_navigation", "id", RoleNavigation.class);
-		arp.addMapping("tb_base_sectype", "sec_type_id", Sectype.class);
-		arp.addMapping("tb_base_service", "service_id", Service.class);
-		arp.addMapping("tb_base_service_confirm", "service_confirm_id", ServiceConfirm.class);
-		arp.addMapping("tb_base_service_order", "service_order_id", ServiceOrder.class);
-		arp.addMapping("tb_base_shangjiaoperation", "shop_goods_id", Shangjiaoperation.class);
-		arp.addMapping("tb_base_shop", "shop_id", Shop.class);
-		arp.addMapping("tb_base_taocan", "tao_good_id", Taocan.class);
-		arp.addMapping("tb_base_user", "user_openid", User.class);
-		arp.addMapping("tb_base_wx_menu1", "wx_menu1_id", WxMenu1.class);
-		arp.addMapping("tb_base_wx_menu2", "wx_menu2_id", WxMenu2.class);
+		arp.addMapping("tb_base_manager", "id",Manager.class);
+		arp.addMapping("tb_base_message", "message_id", BaseMessage.class);
+		arp.addMapping("tb_base_navigation", "id",Navigation.class);
+		arp.addMapping("tb_city", "city_id", City.class);
+		arp.addMapping("tb_dispatch", "pac_id", Dispatch.class);
+		arp.addMapping("tb_dispatch_qiang", "pacq_id", DispatchQiang.class);
+		arp.addMapping("tb_district", "district_id", District.class);
+		arp.addMapping("tb_feedback", "feedback_id", Feedback.class);
+		arp.addMapping("tb_first_type", "first_type_id", Firsttype.class);
+		arp.addMapping("tb_goodsinfo", "goodsinfo_id", Goodsinfo.class);
+		arp.addMapping("tb_muser", "mid", Muser.class);
+		arp.addMapping("tb_order", "order_id", Order.class);
+		arp.addMapping("tb_order_detail", "order_detail_id", OrderDetail.class);
+		arp.addMapping("tb_pact_employ", "pem_id", PactEmploy.class);
+		arp.addMapping("tb_pact_factory", "pfa_id", PactFactory.class);
+		arp.addMapping("tb_pact_rent", "pre_id", PactRent.class);
+		arp.addMapping("tb_paigong_order", "forward_id", PaigongOrder.class);
+		arp.addMapping("tb_province", "province_id", Province.class);
+		arp.addMapping("tb_realshop", "realshop_id", Realshop.class);
+		arp.addMapping("tb_recruit_info", "rid", RecruitInfo.class);
+		arp.addMapping("tb_rent_factory", "pid", RentFactory.class);
+		arp.addMapping("tb_rent_tools", "tid", RentTools.class);
+		arp.addMapping("tb_sec_type", "sec_type_id", Sectype.class);
+		arp.addMapping("tb_service", "service_id", Service.class);
+		arp.addMapping("tb_service_confirm", "service_confirm_id", ServiceConfirm.class);
+		arp.addMapping("tb_service_order", "service_order_id", ServiceOrder.class);
+		arp.addMapping("tb_shangjiaoperation", "shop_goods_id", Shangjiaoperation.class);
+		arp.addMapping("tb_shop", "shop_id", Shop.class);
+		arp.addMapping("tb_shopcar", "shopcar_id", Shopcar.class);
+		arp.addMapping("tb_taocan", "tao_good_id", Taocan.class);
+		arp.addMapping("tb_technology", "fat_id", Technology.class);
+		arp.addMapping("tb_user", "user_openid", User.class);
+		arp.addMapping("tb_wx_menu1", "wx_menu1_id", WxMenu1.class);
+		arp.addMapping("tb_wx_menu2", "wx_menu2_id", WxMenu2.class);
+		arp.addMapping("tb_base_manager_role", "id",ManagerRole.class);
+		arp.addMapping("tb_base_role_navigation","id", RoleNavigation.class);
+		arp.addMapping("tb_base_role","id",Role.class);
 	}
 }
 

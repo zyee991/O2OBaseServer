@@ -63,15 +63,6 @@ public abstract class BaseGoodsinfo<M extends BaseGoodsinfo<M>> extends Model<M>
 		return get("goodsinfo_points_flag");
 	}
 
-	public M setGoodsinfoIsTaocan(java.lang.Boolean goodsinfoIsTaocan) {
-		set("goodsinfo_is_taocan", goodsinfoIsTaocan);
-		return (M)this;
-	}
-	
-	public java.lang.Boolean getGoodsinfoIsTaocan() {
-		return get("goodsinfo_is_taocan");
-	}
-
 	public M setGoodsinfoExpiration(java.util.Date goodsinfoExpiration) {
 		set("goodsinfo_expiration", goodsinfoExpiration);
 		return (M)this;
@@ -115,6 +106,15 @@ public abstract class BaseGoodsinfo<M extends BaseGoodsinfo<M>> extends Model<M>
 	
 	public java.lang.String getGoodsinfoDescdetail() {
 		return getStr("goodsinfo_descdetail");
+	}
+
+	public M setGoodsinfoIstaocan(java.lang.Boolean goodsinfoIstaocan) {
+		set("goodsinfo_istaocan", goodsinfoIstaocan);
+		return (M)this;
+	}
+	
+	public java.lang.Boolean getGoodsinfoIstaocan() {
+		return get("goodsinfo_istaocan");
 	}
 
 }

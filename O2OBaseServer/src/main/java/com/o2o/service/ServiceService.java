@@ -12,7 +12,7 @@ public class ServiceService {
 	private static final Sectype typedao=new Sectype().dao();
 	public Page<Service> paginage(int pageNumber, int pageSize) {
 	
-		return dao.paginate(pageNumber,pageSize,"select*","from tb_base_service");
+		return dao.paginate(pageNumber,pageSize,"select*","from tb_service");
 	}
 
 	public void save(Service service){
@@ -32,7 +32,7 @@ public class ServiceService {
 	}
 
 	public List<Sectype> getTypeList() {
-		List<Sectype> typelist=typedao.find("select a.* from tb_base_sectype a where a.first_type_id=2");
+		List<Sectype> typelist=typedao.find("select a.* from tb_sectype a where a.first_type_id=2");
 		return typelist;
 	}
 }

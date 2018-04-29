@@ -48,6 +48,7 @@ public class IndexController extends Controller {
 		String name=getPara("name");
 		String password=getPara("password");
 		password = SecurityAuthentication.crypt(password);
+		System.out.println(password+"------------------------"+name);
 		Manager manager=Manager.dao.findUserLogin(name,password);
 		if(manager!=null){
 			String ip = BaseUtils.getIpAddr(this.getRequest());

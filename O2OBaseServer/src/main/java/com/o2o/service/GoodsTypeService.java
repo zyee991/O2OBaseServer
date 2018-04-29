@@ -12,7 +12,7 @@ public class GoodsTypeService {
 	private static final Firsttype dao=new Firsttype().dao();
 	private static final Sectype secdao=new Sectype().dao();
 	public Page<Firsttype> paginage(int pageNumber, int pageSize) {
-		return dao.paginate(pageNumber, pageSize, "select *","from tb_base_firsttype");
+		return dao.paginate(pageNumber, pageSize, "select *","from tb_firsttype");
 	}
 	//查找一级类型
 	public Firsttype findById(String id) {		
@@ -34,7 +34,7 @@ public class GoodsTypeService {
 	  }
   }
 public List<Sectype> findChildNavigationByParentId(String id) {
-	List<Sectype> list = secdao.find("select*from tb_base_sectype where first_type_id=?", id);
+	List<Sectype> list = secdao.find("select*from tb_sectype where first_type_id=?", id);
 	return list;
 }
 public Sectype findChildById(String secid) {

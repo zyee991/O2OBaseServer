@@ -18,13 +18,13 @@ public abstract class BaseOrder<M extends BaseOrder<M>> extends Model<M> impleme
 		return getStr("order_id");
 	}
 
-	public M setFeedbackId(java.lang.Integer feedbackId) {
+	public M setFeedbackId(java.lang.String feedbackId) {
 		set("feedback_id", feedbackId);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getFeedbackId() {
-		return getInt("feedback_id");
+	public java.lang.String getFeedbackId() {
+		return getStr("feedback_id");
 	}
 
 	public M setUserOpenid(java.lang.String userOpenid) {
@@ -115,6 +115,24 @@ public abstract class BaseOrder<M extends BaseOrder<M>> extends Model<M> impleme
 	
 	public java.lang.String getDistrictId() {
 		return getStr("district_id");
+	}
+
+	public M setAddDetail(java.lang.String addDetail) {
+		set("add_detail", addDetail);
+		return (M)this;
+	}
+	
+	public java.lang.String getAddDetail() {
+		return getStr("add_detail");
+	}
+
+	public M setOrderPhone(java.lang.String orderPhone) {
+		set("order_phone", orderPhone);
+		return (M)this;
+	}
+	
+	public java.lang.String getOrderPhone() {
+		return getStr("order_phone");
 	}
 
 }

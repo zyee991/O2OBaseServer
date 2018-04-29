@@ -9,22 +9,13 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseFeedback<M extends BaseFeedback<M>> extends Model<M> implements IBean {
 
-	public M setFeedbackId(java.lang.Integer feedbackId) {
+	public M setFeedbackId(java.lang.String feedbackId) {
 		set("feedback_id", feedbackId);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getFeedbackId() {
-		return getInt("feedback_id");
-	}
-
-	public M setOrderId(java.lang.Integer orderId) {
-		set("order_id", orderId);
-		return (M)this;
-	}
-	
-	public java.lang.Integer getOrderId() {
-		return getInt("order_id");
+	public java.lang.String getFeedbackId() {
+		return getStr("feedback_id");
 	}
 
 	public M setFeedbackComments(java.lang.String feedbackComments) {

@@ -12,7 +12,7 @@ public class OrderService {
 
 	private static final Order dao=new Order().dao();
 	public List<Record> paginate(int i, int j) {
-		Page<Record> page=Db.paginate(i, j,"select a.*,u.user_nickname,t.sec_type_name","from tb_base_sectype t,tb_base_order a,tb_base_user u"
+		Page<Record> page=Db.paginate(i, j,"select a.*,u.user_nickname,t.sec_type_name","from tb_sectype t,tb_order a,tb_user u"
 				+" where a.user_openid=u.user_openid and t.sec_type_id=a.order_type");
 		return page.getList();
 	}

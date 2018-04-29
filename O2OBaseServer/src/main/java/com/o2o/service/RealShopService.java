@@ -19,27 +19,27 @@ public class RealShopService {
     private static final District districtdao=new District().dao();
     private static final Sectype sectypedao=new Sectype().dao();
 	public List<Record> paginage(int i, int j) {
-	Page<Record> page=Db.paginate(i,j,"select a.*,d.district_name,t.sec_type_name","from tb_base_district d,tb_base_sectype t,tb_base_realshop a"
+	Page<Record> page=Db.paginate(i,j,"select a.*,d.district_name,t.sec_type_name","from tb_district d,tb_sectype t,tb_realshop a"
 			+ " where a.district_id=d.district_id and t.sec_type_id=a.realshop_type");
 	return page.getList();
 	}
 
 	public List<Province> getProvinceList() {
 	 
-		return provincedao.find("select* from tb_base_province");
+		return provincedao.find("select* from tb_province");
 	}
 
 	public List<City> findByProvinceId(String provinceId) {
-		return citydao.find("select*from tb_base_city where province_id=?",provinceId);
+		return citydao.find("select*from tb_city where province_id=?",provinceId);
 	}
 
 	public List<District> findByCityId(String cityId) {
 		
-		return districtdao.find("select*from tb_base_district where city_id=?",cityId);
+		return districtdao.find("select*from tb_district where city_id=?",cityId);
 	}
 
 	public List<Sectype> getTypeList() {
-		return sectypedao.find("select*from tb_base_sectype where first_type_id=6");
+		return sectypedao.find("select*from tb_sectype where first_type_id=6");
 	}
 
 	public void save(Realshop realshop) {
@@ -48,7 +48,7 @@ public class RealShopService {
 	}
 
 	public List<Record> getdictlist(String district) {
-		List<Record>list=Db.find("select a.*,b.city_name,c.province_name from tb_base_district a,tb_base_city b,tb_base_province c where a.city_id=b.city_id and "
+		List<Record>list=Db.find("select a.*,b.city_name,c.province_name from tb_district a,tb_city b,tb_province c where a.city_id=b.city_id and "
 				+ "c.province_id=b.province_id");
 		return list;
 	}
@@ -59,7 +59,7 @@ public class RealShopService {
 
 	public List<Record> getTypeList(String typeid) {
 		
-		List<Record> typelist=Db.find("select* from tb_base_sectype where sec_type_id=?",typeid);
+		List<Record> typelist=Db.find("select* from tb_sectype where sec_type_id=?",typeid);
 		return typelist;
 	}
 

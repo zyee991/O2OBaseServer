@@ -19,12 +19,12 @@ public class GoodsinfoService {
 
 	// 查询商品
 	public Page<Goodsinfo> paginate(int pageNumber, int pageSize) {
-		return dao.paginate(pageNumber, pageSize, "select*", "from tb_base_goodsinfo where goodsinfo_is_taocan = 0");
+		return dao.paginate(pageNumber, pageSize, "select*", "from tb_goodsinfo where goodsinfo_is_taocan = 0");
 	}
 
 	// 查询套餐
 	public Page<Goodsinfo> paginateTaocan(int pageNumber, int pageSize) {
-		return dao.paginate(pageNumber, pageSize, "select*", "from tb_base_goodsinfo where goodsinfo_is_taocan = 1");
+		return dao.paginate(pageNumber, pageSize, "select*", "from tb_goodsinfo where goodsinfo_is_taocan = 1");
 	}
 
 	public Goodsinfo findById(String id) {
@@ -45,7 +45,7 @@ public class GoodsinfoService {
 	}
 
 	public List<Sectype> getTypeList() {
-		List<Sectype> typelist = typedao.find("select a.* from tb_base_sectype a where a.first_type_id=1");
+		List<Sectype> typelist = typedao.find("select a.* from tb_sectype a where a.first_type_id=1");
 		/*
 		 * Gson gson=new Gson(); String str=gson.toJson(typelist);
 		 */
@@ -54,7 +54,7 @@ public class GoodsinfoService {
 
 	public List<Sectype> getTypeListForTaocanSelect() {
 		List<Sectype> typelist = typedao
-				.find("select a.* from tb_base_sectype a where a.first_type_id=1 and a.sec_type_id <> 0");
+				.find("select a.* from tb_sectype a where a.first_type_id=1 and a.sec_type_id <> 0");
 		/*
 		 * Gson gson=new Gson(); String str=gson.toJson(typelist);
 		 */
@@ -63,14 +63,14 @@ public class GoodsinfoService {
 
 	public List<Goodsinfo> findByTypeId(String typeId) {
 		List<Goodsinfo> goodinfoList = dao
-				.find("select * from tb_base_goodsinfo where sec_type_id=? and goodsinfo_is_taocan=false", typeId);
+				.find("select * from tb_goodsinfo where sec_type_id=? and goodsinfo_is_taocan=false", typeId);
 		return goodinfoList;
 	}
 
 	public List<Record> findTaocanByTaocanId(String taocanId) {
 		List<Record> taocanList = Db.find(
-				"select tg.*,g.goodsinfo_name,s.sec_type_name,s.sec_type_id from tb_base_taocan as tg join tb_base_goodsinfo"
-				+ " as g on tg.goodsinfo_id = g.goodsinfo_id join tb_base_sectype as s on"
+				"select tg.*,g.goodsinfo_name,s.sec_type_name,s.sec_type_id from tb_taocan as tg join tb_goodsinfo"
+				+ " as g on tg.goodsinfo_id = g.goodsinfo_id join tb_sectype as s on"
 				+ " g.sec_type_id = s.sec_type_id where tg.taocan_id = ?",
 				taocanId);
 		return taocanList;

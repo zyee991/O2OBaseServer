@@ -39,7 +39,12 @@ public class _JFinalDemoGenerator {
 		// 设置是否生成链式 setter 方法
 		generator.setGenerateChainSetter(false);
 		// 添加不需要生成的表名
-		generator.addExcludedTable("");
+		generator.addExcludedTable("tb_base_navigation");
+		generator.addExcludedTable("tb_base_manager");
+		generator.addExcludedTable("tb_base_role");
+		generator.addExcludedTable("tb_base_role_navigation");
+		generator.addExcludedTable("tb_base_manager_role");
+		generator.addExcludedTable("tb_shangjiaoperation1");
 		// 设置是否在 Model 中生成 dao 对象
 		generator.setGenerateDaoInModel(true);
 		// 设置是否生成链式 setter 方法
@@ -47,7 +52,7 @@ public class _JFinalDemoGenerator {
 		// 设置是否生成字典文件
 		generator.setGenerateDataDictionary(false);
 		// 设置需要被移除的表名前缀用于生成modelName。例如表名 "osc_user"，移除前缀 "osc_"后生成的model名为 "User"而非 OscUser
-		generator.setRemovedTableNamePrefixes("tb_base");
+		generator.setRemovedTableNamePrefixes("tb");
 		// 生成
 		generator.generate();
 	}
