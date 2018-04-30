@@ -19,7 +19,7 @@ public class RealShopService {
     private static final District districtdao=new District().dao();
     private static final Sectype sectypedao=new Sectype().dao();
 	public List<Record> paginage(int i, int j) {
-	Page<Record> page=Db.paginate(i,j,"select a.*,d.district_name,t.sec_type_name","from tb_district d,tb_sectype t,tb_realshop a"
+	Page<Record> page=Db.paginate(i,j,"select a.*,d.district_name,t.sec_type_name","from tb_district d,tb_sec_type t,tb_realshop a"
 			+ " where a.district_id=d.district_id and t.sec_type_id=a.realshop_type");
 	return page.getList();
 	}
@@ -39,7 +39,7 @@ public class RealShopService {
 	}
 
 	public List<Sectype> getTypeList() {
-		return sectypedao.find("select*from tb_sectype where first_type_id=6");
+		return sectypedao.find("select*from tb_sec_type where first_type_id=6");
 	}
 
 	public void save(Realshop realshop) {
@@ -59,7 +59,7 @@ public class RealShopService {
 
 	public List<Record> getTypeList(String typeid) {
 		
-		List<Record> typelist=Db.find("select* from tb_sectype where sec_type_id=?",typeid);
+		List<Record> typelist=Db.find("select* from tb_sec_type where sec_type_id=?",typeid);
 		return typelist;
 	}
 

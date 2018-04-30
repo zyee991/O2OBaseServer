@@ -19,12 +19,12 @@ public class GoodsinfoService {
 
 	// 查询商品
 	public Page<Goodsinfo> paginate(int pageNumber, int pageSize) {
-		return dao.paginate(pageNumber, pageSize, "select*", "from tb_goodsinfo where goodsinfo_is_taocan = 0");
+		return dao.paginate(pageNumber, pageSize, "select*", "from tb_goodsinfo where goodsinfo_istaocan = 0");
 	}
 
 	// 查询套餐
 	public Page<Goodsinfo> paginateTaocan(int pageNumber, int pageSize) {
-		return dao.paginate(pageNumber, pageSize, "select*", "from tb_goodsinfo where goodsinfo_is_taocan = 1");
+		return dao.paginate(pageNumber, pageSize, "select*", "from tb_goodsinfo where goodsinfo_istaocan = 1");
 	}
 
 	public Goodsinfo findById(String id) {

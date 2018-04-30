@@ -62,7 +62,6 @@
 			<select style='width: 100%;height=20px' name="realshop.realshopType" >
 									<option value=''>请选择</option>
 									#for(typelist:typelist)
-									<option name="goodsinfo.secTypeId" value="#(typelist[0].sec_type_id)">#(typelist[0].sec_type_name)</option> 
 									<option value='#(typelist.sec_type_id)'>#(typelist.sec_type_name)</option>
 									#end
 								</select>
