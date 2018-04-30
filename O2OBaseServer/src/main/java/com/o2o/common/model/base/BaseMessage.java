@@ -36,12 +36,12 @@ public abstract class BaseMessage<M extends BaseMessage<M>> extends Model<M> imp
 		return getStr("message_receiver");
 	}
 
-	public M setMessageType(java.lang.Boolean messageType) {
+	public M setMessageType(java.lang.Integer messageType) {
 		set("message_type", messageType);
 		return (M)this;
 	}
 	
-	public java.lang.Boolean getMessageType() {
+	public java.lang.Integer getMessageType() {
 		return get("message_type");
 	}
 
@@ -70,6 +70,15 @@ public abstract class BaseMessage<M extends BaseMessage<M>> extends Model<M> imp
 	
 	public java.lang.String getMessageName() {
 		return getStr("message_name");
+	}
+	
+	public M setMessageDataId(java.lang.String messageDataId) {
+		set("message_data_id", messageDataId);
+		return (M)this;
+	}
+	
+	public java.lang.String getMessageDataId() {
+		return getStr("message_data_id");
 	}
 
 }
