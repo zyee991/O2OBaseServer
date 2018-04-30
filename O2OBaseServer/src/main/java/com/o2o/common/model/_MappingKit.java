@@ -17,7 +17,7 @@ public class _MappingKit {
 	
 	public static void mapping(ActiveRecordPlugin arp) {
 		arp.addMapping("tb_base_manager", "id",Manager.class);
-		arp.addMapping("tb_base_message", "message_id", BaseMessage.class);
+		arp.addMapping("tb_base_message", "message_id", Message.class);
 		arp.addMapping("tb_base_navigation", "id",Navigation.class);
 		arp.addMapping("tb_city", "city_id", City.class);
 		arp.addMapping("tb_dispatch", "pac_id", Dispatch.class);
