@@ -34,14 +34,3 @@ function echo(ws,message) {
     }
 }
 
-o2oWS.onmessage = function(event) {
-	var data = null;
-    try {
-        data = JSON.parse(event.data);
-        if(data.type == 1) {
-            
-        }
-    } catch (e) {
-        return;
-    }
-}
