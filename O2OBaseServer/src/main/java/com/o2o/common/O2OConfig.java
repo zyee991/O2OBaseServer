@@ -24,6 +24,7 @@ import com.o2o.web.GoodsinfoController;
 import com.o2o.web.ManagerController;
 import com.o2o.web.NavigationController;
 import com.o2o.web.RealShopController;
+import com.o2o.web.RecruitController;
 import com.o2o.web.RoleController;
 import com.o2o.web.ServiceController;
 import com.o2o.web.ServiceOrderController;
@@ -87,6 +88,7 @@ public class O2OConfig extends JFinalConfig {
 		me.add("/shop",ShopController.class,"WEB-INF/view/shop");
 		me.add("/realshop",RealShopController.class,"WEB-INF/view/realshop");
 		me.add("/employee", EmployeeController.class,"WEB-INF/view/employee");
+		me.add("/recruit",RecruitController.class,"WEB-INF/view/recruit");
 	}
 	
 	public void configEngine(Engine me) {
@@ -129,6 +131,6 @@ public class O2OConfig extends JFinalConfig {
 	 * 配置处理器
 	 */
 	public void configHandler(Handlers me) {
-		me.add(new WebSocketHandler("^/websocket"));
+		me.add(new WebSocketHandler("^/wsmsg"));
 	}
 }
