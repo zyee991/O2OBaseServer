@@ -1,0 +1,37 @@
+#@layout()
+#define main()
+<div class="table-responsive">
+ <table class="table table-striped">
+  <thead>
+    <tr>
+    <th class="col-sm-1">招聘职位</th>
+    <th class="col-sm-1">工作性质</th>
+    <th class="col-sm-1">工作地点</th>
+    <th class="col-sm-1">要求学历</th>
+    <th class="col-sm-1">发布时间</th>
+    <th class="col-sm-1">截至时间</th>
+    <th class="col-sm-1">招聘人数</th>
+   <th class="col-sm-1">操作   <a href="javascript:void(0);" onclick="modalShow('/employee/add')" class="btn btn-warning btn-xs" role="button">添加</a>
+    </th>
+    </tr>
+  </thead>
+  <tbody>
+   #for(employeeinfo:page.list)
+   <tr id='#(employeeinfo.rid)'>
+   <td>#(employeeinfo.position)</td>
+   <td>#(employeeinfo.category)</td>
+   <td>#(employeeinfo.workpalce)</td>
+   <td>#(employeeinfo.education)</td>
+   <td>#(employeeinfo.realse_time)</td>
+   <td>#(employeeinfo.Validity)</td>
+   <td>#(employeeinfo.number)</td>
+   <td>
+   <a href="/employee/update?id=#(employeeinfo.rid)"  class="btn btn-success btn-xs" role="button">编辑</a>
+   <a href="javascript:void(0);" onclick="remove('/employeeinfo/delete?id=#(employeeinfo.rid)')"  class="btn btn-danger btn-xs" role="button">删除</a>
+  </td>
+  </tr>
+  #end
+  </tbody>
+ </table>
+</div>
+#end

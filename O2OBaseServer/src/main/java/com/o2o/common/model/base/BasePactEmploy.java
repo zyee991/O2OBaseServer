@@ -36,6 +36,15 @@ public abstract class BasePactEmploy<M extends BasePactEmploy<M>> extends Model<
 		return getInt("mid");
 	}
 
+	public M setCreateTime(java.util.Date createTime) {
+		set("create_time", createTime);
+		return (M)this;
+	}
+	
+	public java.util.Date getCreateTime() {
+		return get("create_time");
+	}
+
 	public M setPeStime(java.util.Date peStime) {
 		set("pe_stime", peStime);
 		return (M)this;
@@ -70,6 +79,33 @@ public abstract class BasePactEmploy<M extends BasePactEmploy<M>> extends Model<
 	
 	public java.lang.Float getPreIncome() {
 		return getFloat("pre_income");
+	}
+
+	public M setJobType(java.lang.String jobType) {
+		set("job_type", jobType);
+		return (M)this;
+	}
+	
+	public java.lang.String getJobType() {
+		return getStr("job_type");
+	}
+
+	public M setWorkAddress(java.lang.String workAddress) {
+		set("work_address", workAddress);
+		return (M)this;
+	}
+	
+	public java.lang.String getWorkAddress() {
+		return getStr("work_address");
+	}
+
+	public M setAttachment(java.lang.String attachment) {
+		set("attachment", attachment);
+		return (M)this;
+	}
+	
+	public java.lang.String getAttachment() {
+		return getStr("attachment");
 	}
 
 }

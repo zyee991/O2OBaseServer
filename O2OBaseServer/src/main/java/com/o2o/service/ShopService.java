@@ -19,7 +19,7 @@ public class ShopService {
 		return page.getList();
 	}
 	public List<Record> getGoodList() {
-		return Db.find("select goodsinfo_name from tb_goodsinfo");
+		return Db.find("select * from tb_goodsinfo");
 	}
 	public void save(Shop shop, Shangjiaoperation shangjiaoperation) {
 		shop.save();

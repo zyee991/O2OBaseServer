@@ -32,7 +32,7 @@ public class ServiceService {
 	}
 
 	public List<Sectype> getTypeList() {
-		List<Sectype> typelist=typedao.find("select a.* from tb_sectype a where a.first_type_id=2");
+		List<Sectype> typelist=typedao.find("select a.* from tb_sec_type a where a.first_type_id=2");
 		return typelist;
 	}
 }

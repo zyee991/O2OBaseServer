@@ -40,12 +40,13 @@ public class GoodsinfoService {
 		try {
 			goodsinfo.save();
 		} catch (Exception e) {
+			e.printStackTrace();
 			goodsinfo.update();
 		}
 	}
 
 	public List<Sectype> getTypeList() {
-		List<Sectype> typelist = typedao.find("select a.* from tb_sectype a where a.first_type_id=1");
+		List<Sectype> typelist = typedao.find("select a.* from tb_sec_type a where a.first_type_id=1");
 		/*
 		 * Gson gson=new Gson(); String str=gson.toJson(typelist);
 		 */
@@ -54,7 +55,7 @@ public class GoodsinfoService {
 
 	public List<Sectype> getTypeListForTaocanSelect() {
 		List<Sectype> typelist = typedao
-				.find("select a.* from tb_sectype a where a.first_type_id=1 and a.sec_type_id <> 0");
+				.find("select a.* from tb_sec_type a where a.first_type_id=1 and a.sec_type_id <> 0");
 		/*
 		 * Gson gson=new Gson(); String str=gson.toJson(typelist);
 		 */
@@ -63,14 +64,14 @@ public class GoodsinfoService {
 
 	public List<Goodsinfo> findByTypeId(String typeId) {
 		List<Goodsinfo> goodinfoList = dao
-				.find("select * from tb_goodsinfo where sec_type_id=? and goodsinfo_is_taocan=false", typeId);
+				.find("select * from tb_goodsinfo where sec_type_id=? and goodsinfo_istaocan=false", typeId);
 		return goodinfoList;
 	}
 
 	public List<Record> findTaocanByTaocanId(String taocanId) {
 		List<Record> taocanList = Db.find(
 				"select tg.*,g.goodsinfo_name,s.sec_type_name,s.sec_type_id from tb_taocan as tg join tb_goodsinfo"
-				+ " as g on tg.goodsinfo_id = g.goodsinfo_id join tb_sectype as s on"
+				+ " as g on tg.goodsinfo_id = g.goodsinfo_id join tb_sec_type as s on"
 				+ " g.sec_type_id = s.sec_type_id where tg.taocan_id = ?",
 				taocanId);
 		return taocanList;

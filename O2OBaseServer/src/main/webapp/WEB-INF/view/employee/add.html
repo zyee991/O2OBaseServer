@@ -1,0 +1,158 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true">×</button>
+	<h4 class="modal-title" id="myModalLabel">添加招聘信息</h4>
+</div>
+<div class="modal-body">
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label for="file" class="col-sm-2 control-label">附件上传</label>
+			<div class="col-sm-10">
+				<input type="file" class="form-control" id="file" name="file">
+			</div>
+		</div>
+	</form>
+	<form action="/employee/save" method="post" class="form-horizontal"
+		role="form" id="form">
+		<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">招聘职位</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="position"
+					name="recruitInfo.postion" required placeholder="请输入职位">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="experice" class="col-sm-2 control-label">工作经验</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="experice" name="recruitInfo.experice">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">职位薪资</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="salary" name="recruitInfo.salary" size="16" placeholder="请输入薪资"/>
+			</div>
+		</div>
+		<div class="form-group" id="PointsFlag">
+			<label class="col-sm-2 control-label">有效时间</label>
+			<div class="col-sm-10 input-append date form_datetime">
+				<input name="recruitInfo.validityTime" size="16" type="text"
+					value="" id="startTime">
+			</div>
+		</div>
+	
+		<div class="form-group">
+			<label class="col-sm-2 control-label">招聘人数</label>
+			<div class="col-sm-10" id="number" >
+				<input type="number" class="form-control" id="number" name="recruitInfo.number" size="16" placeholder="请输入人数"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="workpalce" class="col-sm-2 control-label">工作地点</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="workpalce" name="recruitInfo.workpalce">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="description" class="col-sm-2 control-label">工作描述</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="description" name="recruitInfo.description">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="education" class="col-sm-2 control-label">学历要求</label>
+			<div class="col-sm-10">
+			<select class="form-control" id="type_list"
+					name="recruitInfo.education">
+					<option name="education" value="">请选择</option>
+					<option name="education" value="研究生">研究生</option>
+					<option name="education" value="本科">本科</option>
+					<option name="education" value="高中">高中</option>
+					<option name="education" value="高中">小学</option>
+				</select>
+				</div>
+		</div>
+		<div class="form-group">
+			<label for="category" class="col-sm-2 control-label">工作性质</label>
+			<div class="col-sm-10">
+			<select class="form-control" id="category"
+					name="recruitInfo.category">
+					<option name="education" value="">请选择</option>
+					<option name="education" value="长期">长期</option>
+					<option name="education" value="短期">短期</option>
+				</select>
+				</div>
+		</div>
+		<div class="form-group">
+			<label for="phone" class="col-sm-2 control-label">电话号码</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="phone" name="recruitInfo.phone">
+			</div>
+		</div>
+		<input type="hidden" id="attachment"
+			name="recruitInfo.attachment" value="" />
+			<input type="hidden" id="rid" name="recruitInfo.rid" value="#(newId)"/>
+			<input type="hidden" id="realse_time" name="recruitInfo.realseTime" value="new Date()"/>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">
+		关闭</button>
+	<button type="button" class="btn btn-primary"
+		onclick="submitForm('form')">提交</button>
+</div>
+
+
+<script>
+	$('#file').fileinput({
+		allowedFileExtensions : [ 'word', 'pdf','docx' ],
+		language : "zh",
+		dropZoneEnabled : false,
+		showCaption : false,
+		autoReplace : true,
+		showUpload : true, //是否显示上传按钮
+		showRemove : true,//显示移除按钮
+		uploadUrl : "/file/save",
+	})
+
+	$("#file").on("fileuploaded", function(event, data, previewId, index) {
+		alert(1)
+		var result = data.response;
+		var path = result.path;
+		if (path) {
+			$("#attachment").val(path);
+		}
+	});
+
+	function changeForever(status) {
+		if (status == 1) {
+			$("#forever").addClass("hidden");
+		} else {
+			$("#forever").removeClass("hidden");
+		}
+	}
+	
+	function changePointsFlag(status) {
+		if (status == 0) {
+			$("#PointsFlag").addClass("hidden");
+		} else {
+			$("#PointsFlag").removeClass("hidden");
+		}
+	}
+	$(function() {
+
+		var picker1 = $('#startTime').datetimepicker();
+		/* var picker2 = $("#endTime").datetimepicker();
+
+		//动态设置最小值(选择前面一个日期后：后面一个日期不能小于前面一个)
+		picker1.on('changeDate', function(e) {
+			picker2.datetimepicker('setStartDate', e.date);
+		});
+		//动态设置最大值(选择后面一个日期后：前面一个日期不能大于前面一个）
+		picker2.on('changeDate', function(e) {
+			picker1.datetimepicker('setEndDate', e.date);
+		});
+ */
+	});
+</script>

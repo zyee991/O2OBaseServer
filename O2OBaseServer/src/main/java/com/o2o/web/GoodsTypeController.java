@@ -24,7 +24,7 @@ public class GoodsTypeController extends Controller {
    }
    
    public void add(){
-	   String id=getPara("id");
+	   String id=getPara("firstid");
 	   if(id!=null){
 		 Firsttype firsttype=goodsTypeService.findById(id);
 		 setAttr("firsttype",firsttype);

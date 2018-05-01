@@ -9,31 +9,13 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseRecruitInfo<M extends BaseRecruitInfo<M>> extends Model<M> implements IBean {
 
-	public M setRid(java.lang.Integer rid) {
+	public M setRid(java.lang.String rid) {
 		set("rid", rid);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getRid() {
-		return getInt("rid");
-	}
-
-	public M setPostion(java.lang.String postion) {
-		set("postion", postion);
-		return (M)this;
-	}
-	
-	public java.lang.String getPostion() {
-		return getStr("postion");
-	}
-
-	public M setRealseTime(java.util.Date realseTime) {
-		set("realse_time", realseTime);
-		return (M)this;
-	}
-	
-	public java.util.Date getRealseTime() {
-		return get("realse_time");
+	public java.lang.String getRid() {
+		return getStr("rid");
 	}
 
 	public M setExperice(java.lang.String experice) {
@@ -45,13 +27,67 @@ public abstract class BaseRecruitInfo<M extends BaseRecruitInfo<M>> extends Mode
 		return getStr("experice");
 	}
 
-	public M setCategory(java.lang.String category) {
-		set("category", category);
+	public M setPosition(java.lang.String position) {
+		set("position", position);
 		return (M)this;
 	}
 	
-	public java.lang.String getCategory() {
-		return getStr("category");
+	public java.lang.String getPosition() {
+		return getStr("position");
+	}
+
+	public M setValidity(java.util.Date Validity) {
+		set("Validity", Validity);
+		return (M)this;
+	}
+	
+	public java.util.Date getValidity() {
+		return get("Validity");
+	}
+
+	public M setRealseTime(java.util.Date realseTime) {
+		set("realse_time", realseTime);
+		return (M)this;
+	}
+	
+	public java.util.Date getRealseTime() {
+		return get("realse_time");
+	}
+
+	public M setNumber(java.lang.Integer number) {
+		set("number", number);
+		return (M)this;
+	}
+	
+	public java.lang.Integer getNumber() {
+		return getInt("number");
+	}
+
+	public M setWorkplace(java.lang.String workplace) {
+		set("workplace", workplace);
+		return (M)this;
+	}
+	
+	public java.lang.String getWorkplace() {
+		return getStr("workplace");
+	}
+
+	public M setAttachment(java.lang.String attachment) {
+		set("attachment", attachment);
+		return (M)this;
+	}
+	
+	public java.lang.String getAttachment() {
+		return getStr("attachment");
+	}
+
+	public M setCompany(java.lang.String company) {
+		set("company", company);
+		return (M)this;
+	}
+	
+	public java.lang.String getCompany() {
+		return getStr("company");
 	}
 
 	public M setEducation(java.lang.String education) {
@@ -72,40 +108,31 @@ public abstract class BaseRecruitInfo<M extends BaseRecruitInfo<M>> extends Mode
 		return getStr("description");
 	}
 
-	public M setCompany(java.lang.String company) {
-		set("company", company);
+	public M setCategory(java.lang.String category) {
+		set("category", category);
 		return (M)this;
 	}
 	
-	public java.lang.String getCompany() {
-		return getStr("company");
+	public java.lang.String getCategory() {
+		return getStr("category");
 	}
 
-	public M setWorkpalce(java.lang.String workpalce) {
-		set("workpalce", workpalce);
+	public M setPhone(java.lang.String phone) {
+		set("phone", phone);
 		return (M)this;
 	}
 	
-	public java.lang.String getWorkpalce() {
-		return getStr("workpalce");
+	public java.lang.String getPhone() {
+		return getStr("phone");
 	}
 
-	public M setNumber(java.lang.Integer number) {
-		set("number", number);
+	public M setSalary(java.lang.Integer salary) {
+		set("salary", salary);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getNumber() {
-		return getInt("number");
-	}
-
-	public M setValidity(java.util.Date Validity) {
-		set("Validity", Validity);
-		return (M)this;
-	}
-	
-	public java.util.Date getValidity() {
-		return get("Validity");
+	public java.lang.Integer getSalary() {
+		return getInt("salary");
 	}
 
 }
