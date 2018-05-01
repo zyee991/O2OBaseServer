@@ -1,26 +1,115 @@
 #@layout() #define main()
-<ul class="nav nav-tabs">
-	<li class="active"><a href="">待支付</a></li> 
-    <li><a href="#">待处理</a></li>
-     <li><a href="#">已完成</a></li> 
-     <li><a href="#">全部</a></li>
- </ul>
-<div class="table-responsive">
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th class="col-sm-1">服务订单编号</th>
-				<th class="col-sm-1">服务名称</th>
-				<th class="col-sm-1">创建时间</th>
-                <th class="col-sm-1">支付金额</th>
-				<th class="col-sm-1">是否派单</th>
-				<th class="col-sm-1">订单状态</th>
-				<th class="col-sm-1">操作</th>
-			</tr>
-		</thead>
-		<tbody>	
-				
-		</tbody>
-	</table>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="#unpay" data-toggle="tab">待支付</a></li>
+    <li><a href="#tobedone" data-toggle="tab">待处理</a></li>
+    <li><a href="#done" data-toggle="tab">已完成</a></li>
+    <li><a href="#all" data-toggle="tab">全部</a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="unpay">
+	    <div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th class="col-sm-1">服务订单编号</th>
+						<th class="col-sm-1">服务名称</th>
+						<th class="col-sm-1">创建时间</th>
+		                <th class="col-sm-1">支付金额</th>
+						<th class="col-sm-1">是否派单</th>
+						<th class="col-sm-1">订单状态</th>
+						<th class="col-sm-1">操作</th>
+					</tr>
+				</thead>
+				<tbody>	
+					
+				</tbody>
+			</table>
+		</div>
+    </div>
+    <div class="tab-pane fade" id="tobedone">
+    	    <div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th class="col-sm-1">服务订单编号</th>
+						<th class="col-sm-1">服务名称</th>
+						<th class="col-sm-1">创建时间</th>
+		                <th class="col-sm-1">支付金额</th>
+						<th class="col-sm-1">是否派单</th>
+						<th class="col-sm-1">订单状态</th>
+						<th class="col-sm-1">操作</th>
+					</tr>
+				</thead>
+				<tbody>	
+						
+				</tbody>
+			</table>
+		</div>
+    </div>
+    <div class="tab-pane fade" id="done">
+    	    <div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th class="col-sm-1">服务订单编号</th>
+						<th class="col-sm-1">服务名称</th>
+						<th class="col-sm-1">创建时间</th>
+		                <th class="col-sm-1">支付金额</th>
+						<th class="col-sm-1">是否派单</th>
+						<th class="col-sm-1">订单状态</th>
+						<th class="col-sm-1">操作</th>
+					</tr>
+				</thead>
+				<tbody>	
+						
+				</tbody>
+			</table>
+		</div>
+    </div>
+    <div class="tab-pane fade" id="all">
+    	    <div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th class="col-sm-1">服务订单编号</th>
+						<th class="col-sm-1">服务名称</th>
+						<th class="col-sm-1">创建时间</th>
+		                <th class="col-sm-1">支付金额</th>
+						<th class="col-sm-1">是否派单</th>
+						<th class="col-sm-1">订单状态</th>
+						<th class="col-sm-1">操作</th>
+					</tr>
+				</thead>
+				<tbody>	
+						
+				</tbody>
+			</table>
+		</div>
+    </div>
 </div>
+
+<!-- <ul class="nav nav-tabs"> -->
+<!-- 	<li class="active"><a href="">待支付</a></li>  -->
+<!--     <li><a href="#">待处理</a></li> -->
+<!--      <li><a href="#">已完成</a></li>  -->
+<!--      <li><a href="#">全部</a></li> -->
+<!--  </ul> -->
+<!-- <div class="table-responsive"> -->
+<!-- 	<table class="table table-striped"> -->
+<!-- 		<thead> -->
+<!-- 			<tr> -->
+<!-- 				<th class="col-sm-1">服务订单编号</th> -->
+<!-- 				<th class="col-sm-1">服务名称</th> -->
+<!-- 				<th class="col-sm-1">创建时间</th> -->
+<!--                 <th class="col-sm-1">支付金额</th> -->
+<!-- 				<th class="col-sm-1">是否派单</th> -->
+<!-- 				<th class="col-sm-1">订单状态</th> -->
+<!-- 				<th class="col-sm-1">操作</th> -->
+<!-- 			</tr> -->
+<!-- 		</thead> -->
+<!-- 		<tbody>	 -->
+				
+<!-- 		</tbody> -->
+<!-- 	</table> -->
+<!-- </div> -->
 #end
