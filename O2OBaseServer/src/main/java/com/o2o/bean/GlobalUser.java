@@ -1,7 +1,5 @@
 package com.o2o.bean;
 
-import java.util.Map;
-
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
@@ -16,7 +14,7 @@ public class GlobalUser {
 	 */
 	private Integer type;
 	
-	public static GlobalUser createOne(String id) {
+	public static GlobalUser findOne(String id) {
 		GlobalUser globalUser = null;
 		Record record = Db.findFirst("select * from view_global_user where id=?",id);
 		if(record != null) {

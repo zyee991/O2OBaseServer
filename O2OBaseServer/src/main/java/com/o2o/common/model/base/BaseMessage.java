@@ -35,6 +35,15 @@ public abstract class BaseMessage<M extends BaseMessage<M>> extends Model<M> imp
 	public java.lang.String getMessageReceiver() {
 		return getStr("message_receiver");
 	}
+	
+	public M setMessageReceiverBatch(java.lang.String messageReceiverBatch) {
+		set("message_receiver_batch", messageReceiverBatch);
+		return (M)this;
+	}
+	
+	public java.lang.String getMessageReceiverBatch() {
+		return getStr("message_receiver_batch");
+	}
 
 	public M setMessageType(java.lang.Integer messageType) {
 		set("message_type", messageType);

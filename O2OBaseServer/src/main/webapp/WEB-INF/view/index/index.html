@@ -1,4 +1,9 @@
 #@layout()
 #define main()
 <h1>欢迎使用O2O汽车快修平台</h1>
+#if(initWS)
+<script>
+	var ws = connect("#(wsUrl)");
+</script>
+#end
 #end

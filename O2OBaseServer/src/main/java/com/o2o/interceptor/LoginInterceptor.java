@@ -11,6 +11,7 @@ public class LoginInterceptor extends PrototypeInterceptor{
 	@Override
 	public void doIntercept(Invocation inv) {
 		Manager manager = BaseUtils.getManager(inv.getController());
+		System.out.println(manager);
 		if(manager == null && !"/login".equals(inv.getActionKey())) {
 			inv.getController().render("/WEB-INF/view/index/login.html");
 		} else {

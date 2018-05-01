@@ -129,6 +129,6 @@ public class O2OConfig extends JFinalConfig {
 	 * 配置处理器
 	 */
 	public void configHandler(Handlers me) {
-		me.add(new WebSocketHandler("^/websocket"));
+		me.add(new WebSocketHandler("^/wsmsg"));
 	}
 }

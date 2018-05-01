@@ -1,4 +1,3 @@
-var o2oWS = null;
 
 function connect(url) {
     var ws = null;
