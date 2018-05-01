@@ -12,14 +12,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.o2o.bean.GlobalUser;
 
-@ServerEndpoint(value = "/websocket")
-public class WebSocketController {
-	// 连接map
-    private static final HashMap<String,Object> CONNECT = new HashMap<String,Object>();
+@ServerEndpoint(value = "/wsmsg")
+public class WebSocketEndpoint {
     // 用户map
-    private static final HashMap<String,Object> USERMAP = new HashMap<String,Object>();
+    public static final HashMap<String,GlobalUser> USER_MAP = new HashMap<String,GlobalUser>();
+    // session Map
+    public static final HashMap<String,Session> SESSION_MAP = new HashMap<String,Session>();
 
-    private Session session;
     
 	@OnOpen
 	public void onOpen(Session session) {
@@ -32,18 +31,19 @@ public class WebSocketController {
 				e.printStackTrace();
 			}
 		} else {
-			GlobalUser globalUser = GlobalUser.createOne(userId);
+			GlobalUser globalUser = GlobalUser.findOne(userId);
 			if(globalUser != null) {
-				this.session = session;
-				CONNECT.put(session.getId(), this);
-				USERMAP.put(session.getId(), globalUser);
+				USER_MAP.put(session.getId(), globalUser);
+				SESSION_MAP.put(userId,session);
 			}
 		}
 	}	
 	
 	@OnClose
 	public void onClose(Session session) {
- 
+		String userId = USER_MAP.get(session.getId()).getId();
+		USER_MAP.remove(session.getId());
+		SESSION_MAP.remove(userId);
 	}	
 	
 	@OnMessage

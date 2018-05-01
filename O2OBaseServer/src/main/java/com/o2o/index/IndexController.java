@@ -1,27 +1,52 @@
 package com.o2o.index;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+
+import org.apache.commons.net.ftp.FTPClient;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.o2o.common.model.Manager;
 import com.o2o.service.ManagerService;
 import com.o2o.util.BaseUtils;
+import com.o2o.util.FtpUtil;
 import com.o2o.util.SecurityAuthentication;
 import com.o2o.web.NavigationController;
 
 /**
- * 本 demo 仅表达最为粗浅的 jfinal 用法，更为有价值的实用的企业级用法
- * 详见 JFinal 俱乐部: http://jfinal.com/club
- * 
- * IndexController
+ * 登录
+ * @author z
+ *
  */
 public class IndexController extends Controller {
 	
+	// websocket服务器地址
+	public static String hostname;
+	// websocket端口
+	public static Integer port;
+	// endpoint
+	public static String endpoint;
+
+
+	static {
+		Properties properties = new Properties();
+		try {
+			properties.load(FtpUtil.class.getClassLoader().getResourceAsStream("websocket.properties"));
+			hostname = properties.getProperty("host");
+			endpoint = properties.getProperty("endpoint");
+			port = Integer.valueOf(properties.getProperty("port"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	static ManagerService managerService = new ManagerService();
 	
+	@SuppressWarnings("rawtypes")
 	public void index() {
 		String cookie = getCookie("o2oCookie");
 		try {
@@ -40,7 +65,7 @@ public class IndexController extends Controller {
 			redirect("/toLogin");		
 			return;
 		}
-//		System.out.println("-----------------------------"+NavigationController.getNavigationTree().toString());
+		setAttr("initWS",false);
 		render("index.html");
 	}
 	//登陆
@@ -48,7 +73,6 @@ public class IndexController extends Controller {
 		String name=getPara("name");
 		String password=getPara("password");
 		password = SecurityAuthentication.crypt(password);
-		System.out.println(password+"------------------------"+name);
 		Manager manager=Manager.dao.findUserLogin(name,password);
 		if(manager!=null){
 			String ip = BaseUtils.getIpAddr(this.getRequest());
@@ -60,6 +84,9 @@ public class IndexController extends Controller {
 			this.setCookie("o2oCookie", cookieValue, 3600);
 			BaseUtils.putManager(manager,this);
 			BaseUtils.putNavigation(NavigationController.getNavigationTree(manager), this);
+			setAttr("initWS",true);
+			String wsUrl = "ws://" + hostname + ":" + port + "/" + endpoint + "?id=" + manager.getId();
+			setAttr("wsUrl",wsUrl);
 			redirect("/index");
 		}else{
 			redirect("/toLogin");		
