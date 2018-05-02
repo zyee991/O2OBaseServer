@@ -14,37 +14,40 @@ public class SecurityAuthentication {
 		return DigestUtils.md5Hex(password);
 	}
 
-	/**
-	 * 数据加密
-	 * @param key
-	 * @param data
-	 * @return
-	 * @throws Exception
-	 */
-	public static String encode(String key,String data) throws Exception{
-		DES des = null;
-		try {
-			des = new DES(key);
-			return des.encrypt(data);
-		} catch (Exception e) {
-			throw new Exception(e.getMessage() + "认证失败,请重新操作");
-		}
-	}
-	
-	/**
-	 * 数据解密
-	 * @param key
-	 * @param data
-	 * @return
-	 * @throws Exception
-	 */
-	public static String decode(String key,String data) throws Exception {
-		DES des = null;
-		try {
-			des = new DES(key);
-			return des.decrypt(data);
-		} catch (Exception e) {
-			throw new Exception(e.getMessage() + "认证失败,请重新操作");
-		}
-	}
+//	/**
+//	 * 数据加密
+//	 * @param key
+//	 * @param data
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public static String encode(String key,String data) throws Exception{
+//		DES des = null;
+//		try {
+//			des = new DES(key);
+//			return des.encrypt(data);
+//		} catch (Exception e) {
+//			throw new Exception(e.getMessage() + "认证失败,请重新操作");
+//		}
+//	}
+//	
+//	/**
+//	 * 数据解密
+//	 * @param key
+//	 * @param data
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public static String decode(String key,String data) throws Exception {
+//		DES des = null;
+//		try {
+//			des = new DES(key);
+//			System.out.println("--------");
+//			String result = des.decrypt(data);
+//			System.out.println(result);
+//			return result;
+//		} catch (Exception e) {
+//			throw new Exception(e.getMessage() + "认证失败,请重新操作");
+//		}
+//	}
 }
