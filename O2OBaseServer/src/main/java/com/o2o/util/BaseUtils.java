@@ -8,19 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.o2o.common.model.Manager;
+import com.o2o.web.NavigationController;
 
 public class BaseUtils {
 	public static String MANAGER_CACHE = "ManagerCache";
 	public static String NAVIGATION_CACHE = "NavigationCache";
 	
-	public static void putManager(Manager manager,Controller controller) {
-		String cookie = controller.getCookie("o2oCookie");
-		try {
-//			String id = SecurityAuthentication.decode("login", cookie);
-			CacheKit.put(MANAGER_CACHE, cookie, manager);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public static void putManager(Manager manager,Controller controller,String id) {
+		CacheKit.put(MANAGER_CACHE, id, manager);
 	}
 	
 	public static Manager getManager(Controller controller) {
@@ -38,18 +33,19 @@ public class BaseUtils {
 		return null;
 	}
 	
-	public static void putNavigation(@SuppressWarnings("rawtypes") List<Map> map,Controller controller) {
-		Manager manager = getManager(controller);
-		if(manager != null) {
-			CacheKit.put(NAVIGATION_CACHE, getManager(controller).getId(), map);
-		}
+	public static void putNavigation(@SuppressWarnings("rawtypes") List<Map> map,Controller controller,String id) {
+		CacheKit.put(NAVIGATION_CACHE, id, map);
 	}
 	
 	@SuppressWarnings("rawtypes")
 	public static List<Map> getNavigation(Controller controller) {
 		Manager manager = getManager(controller);
 		if(manager != null) {
-			return CacheKit.get(NAVIGATION_CACHE, getManager(controller).getId());
+			List<Map> mapList = CacheKit.get(NAVIGATION_CACHE, getManager(controller).getId());
+			if(mapList == null) {
+				mapList = NavigationController.getNavigationTree(manager);
+			}
+			return mapList;
 		} else {
 			return null;
 		}

@@ -65,8 +65,8 @@ public class IndexController extends Controller {
 //			String cookieValue = SecurityAuthentication.encode("login", manager.getId());
 			String cookieValue =  manager.getId();
 			this.setCookie("o2oCookie", cookieValue, 3600);
-			BaseUtils.putManager(manager,this);
-			BaseUtils.putNavigation(NavigationController.getNavigationTree(manager), this);
+			BaseUtils.putManager(manager,this,manager.getId());
+			BaseUtils.putNavigation(NavigationController.getNavigationTree(manager), this,manager.getId());
 			redirect("/index");
 		}else{
 			redirect("/toLogin");
