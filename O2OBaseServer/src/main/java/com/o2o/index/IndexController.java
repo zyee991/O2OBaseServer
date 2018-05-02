@@ -23,27 +23,6 @@ import com.o2o.web.NavigationController;
  *
  */
 public class IndexController extends Controller {
-	
-	// websocket服务器地址
-	public static String hostname;
-	// websocket端口
-	public static Integer port;
-	// endpoint
-	public static String endpoint;
-
-
-	static {
-		Properties properties = new Properties();
-		try {
-			properties.load(FtpUtil.class.getClassLoader().getResourceAsStream("websocket.properties"));
-			hostname = properties.getProperty("host");
-			endpoint = properties.getProperty("endpoint");
-			port = Integer.valueOf(properties.getProperty("port"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	static ManagerService managerService = new ManagerService();
 	
 	public void index() {

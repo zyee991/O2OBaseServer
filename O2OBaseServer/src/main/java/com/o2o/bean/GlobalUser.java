@@ -12,7 +12,7 @@ public class GlobalUser {
 	 * 2：微信用户 （客户）
 	 * 3：app 用户 （技师）
 	 */
-	private Integer type;
+	private Long type;
 	
 	public static GlobalUser findOne(String id) {
 		GlobalUser globalUser = null;
@@ -32,11 +32,11 @@ public class GlobalUser {
 		if(record != null) {
 			this.id = (String) record.get("id");
 			this.name = (String) record.get("name");
-			this.type = (Integer) record.get("type");
+			this.type = (Long) record.get("type");
 		}
 	}
 
-	public GlobalUser(String id, String name, Integer type) {
+	public GlobalUser(String id, String name, Long type) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -46,7 +46,7 @@ public class GlobalUser {
 	public GlobalUser(Record map) {
 		this.id = (String) map.get("id");
 		this.name = (String) map.get("name");
-		this.type = (Integer) map.get("type");
+		this.type = (Long) map.get("type");
 	}
 
 	public String getId() {
@@ -73,14 +73,19 @@ public class GlobalUser {
 
 
 
-	public Integer getType() {
+	public Long getType() {
 		return type;
 	}
 
 
 
-	public void setType(Integer type) {
+	public void setType(Long type) {
 		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "GlobalUser [id=" + id + ", name=" + name + ", type=" + type + "]";
 	}
 	
 	

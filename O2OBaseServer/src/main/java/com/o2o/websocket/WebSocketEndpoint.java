@@ -9,6 +9,8 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.o2o.bean.GlobalUser;
 
@@ -18,7 +20,8 @@ public class WebSocketEndpoint {
     public static final HashMap<String,GlobalUser> USER_MAP = new HashMap<String,GlobalUser>();
     // session Map
     public static final HashMap<String,Session> SESSION_MAP = new HashMap<String,Session>();
-
+    
+    private static Logger log = LoggerFactory.getLogger(WebSocketEndpoint.class);
     
 	@OnOpen
 	public void onOpen(Session session) {
@@ -35,6 +38,7 @@ public class WebSocketEndpoint {
 			if(globalUser != null) {
 				USER_MAP.put(session.getId(), globalUser);
 				SESSION_MAP.put(userId,session);
+				log.info("WebSocket已连接------" + globalUser);
 			}
 		}
 	}	

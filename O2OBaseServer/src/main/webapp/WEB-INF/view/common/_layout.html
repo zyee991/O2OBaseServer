@@ -125,5 +125,10 @@
 	    </div>
 	</div>
 </body>
+<script>
+	if(!ws) {
+		var ws = connect("#(wsUrl)");
+	}
+</script>
 </html>
 #end
