@@ -27,7 +27,10 @@ public class BaseUtils {
 		String cookie = controller.getCookie("o2oCookie");
 		try {
 //			String id = SecurityAuthentication.decode("login", cookie);
-			return CacheKit.get(MANAGER_CACHE, cookie);		
+			Manager manager = CacheKit.get(MANAGER_CACHE, cookie);
+			if(manager == null) {
+				manager = Manager.dao.findById(cookie);
+			}	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
