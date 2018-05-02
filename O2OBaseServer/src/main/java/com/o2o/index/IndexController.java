@@ -46,28 +46,10 @@ public class IndexController extends Controller {
 	
 	static ManagerService managerService = new ManagerService();
 	
-	@SuppressWarnings("rawtypes")
 	public void index() {
-		String cookie = getCookie("o2oCookie");
-		try {
-			String id = SecurityAuthentication.decode("login", cookie);
-			Manager manager = Manager.dao.findFirstByCache(BaseUtils.MANAGER_CACHE, id, "select * from tb_base_manager where id = ?",id);
-			
-			if(manager == null) {
-				redirect("/toLogin");	
-				return;
-			} else {
-				List<Map> map = NavigationController.getNavigationTree(manager);
-				BaseUtils.putNavigation(map, this);
-				setAttr("treelist",map);
-			}
-		} catch (Exception e) {
-			redirect("/toLogin");		
-			return;
-		}
-		setAttr("initWS",false);
 		render("index.html");
 	}
+	
 	//登陆
 	public void login() throws Exception{
 		String name=getPara("name");
@@ -80,16 +62,14 @@ public class IndexController extends Controller {
 			manager.setLoginIp(ip);
 			manager.setLoginDate(date);
 			managerService.save(manager);
-			String cookieValue = SecurityAuthentication.encode("login", manager.getId());
+//			String cookieValue = SecurityAuthentication.encode("login", manager.getId());
+			String cookieValue =  manager.getId();
 			this.setCookie("o2oCookie", cookieValue, 3600);
 			BaseUtils.putManager(manager,this);
 			BaseUtils.putNavigation(NavigationController.getNavigationTree(manager), this);
-			setAttr("initWS",true);
-			String wsUrl = "ws://" + hostname + ":" + port + "/" + endpoint + "?id=" + manager.getId();
-			setAttr("wsUrl",wsUrl);
 			redirect("/index");
 		}else{
-			redirect("/toLogin");		
+			redirect("/toLogin");
 		}
 	}
 	

@@ -16,8 +16,8 @@ public class BaseUtils {
 	public static void putManager(Manager manager,Controller controller) {
 		String cookie = controller.getCookie("o2oCookie");
 		try {
-			String id = SecurityAuthentication.decode("login", cookie);
-			CacheKit.put(MANAGER_CACHE, id, manager);
+//			String id = SecurityAuthentication.decode("login", cookie);
+			CacheKit.put(MANAGER_CACHE, cookie, manager);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -26,8 +26,11 @@ public class BaseUtils {
 	public static Manager getManager(Controller controller) {
 		String cookie = controller.getCookie("o2oCookie");
 		try {
-			String id = SecurityAuthentication.decode("login", cookie);
-			return CacheKit.get(MANAGER_CACHE, id);		
+//			String id = SecurityAuthentication.decode("login", cookie);
+			Manager manager = CacheKit.get(MANAGER_CACHE, cookie);
+			if(manager == null) {
+				manager = Manager.dao.findById(cookie);
+			}	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
