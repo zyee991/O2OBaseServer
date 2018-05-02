@@ -3,6 +3,7 @@ package com.o2o.web;
 import java.util.List;
 
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.service.OrderService;
 
@@ -15,9 +16,8 @@ public class GoodsOrderController extends Controller {
 		String orderstatus=getPara("order_status");
 		String anotherstatus=getPara("another_status");
 		System.out.println(paystatus+"---------------"+orderstatus);
-		List<Record>goodorderlist=orderService.paginate(getParaToInt(0, 1), 10,paystatus,orderstatus,anotherstatus);
-		System.out.println(goodorderlist);
-		setAttr("goodorderlist",goodorderlist);
+		Page<Record>page=orderService.paginate(getParaToInt(0, 1), 10,paystatus,orderstatus,anotherstatus);
+		setAttr("page", page);
 		render("index.html");
 	}
 }
