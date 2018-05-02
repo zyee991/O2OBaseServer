@@ -17,7 +17,7 @@ public class ShopController extends Controller {
 	static ShopService shopService=new ShopService();
 	public void index(){
 		setAttr("title","库存管理");
-		List<Record> shoplist=shopService.paginate1(1, 10);
+		List<Record> shoplist=shopService.paginate1(getParaToInt(0, 1), 10);
 		setAttr("list",shoplist);
 		render("index.html");
 	}

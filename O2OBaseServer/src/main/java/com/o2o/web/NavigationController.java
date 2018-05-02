@@ -22,7 +22,7 @@ public class NavigationController extends Controller{
 	
 	public void index() {
 		setAttr("title","导航设置");
-		Page<Navigation> page = navigationService.paginate(1, 10);
+		Page<Navigation> page = navigationService.paginate(getParaToInt(0, 1), 10);
 		setAttr("page",page);
 		render("index.html");
 	}

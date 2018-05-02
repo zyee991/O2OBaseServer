@@ -13,7 +13,7 @@ static EmployeeService employeeService=new EmployeeService();
 //显示
 	public void index(){
 		setAttr("title","招聘信息");
-		Page<RecruitInfo> page=employeeService.paginage(1,10);
+		Page<RecruitInfo> page=employeeService.paginage(getParaToInt(0, 1), 10);
 		setAttr("page",page);
 		render("index.html"); 
 	}
@@ -27,7 +27,9 @@ static EmployeeService employeeService=new EmployeeService();
 	}
 	
 	public void delete(){
-		
+		String id = getPara("id");
+		employeeService.deleteById(id);
+		renderJavascript("window.location.href='/employee'");
 	}
 	
 	public void add(){

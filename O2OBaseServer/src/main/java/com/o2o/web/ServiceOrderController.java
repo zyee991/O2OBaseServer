@@ -8,7 +8,7 @@ public class ServiceOrderController extends Controller {
 	static ServiceOrderService serviceOrderService=new ServiceOrderService();
 	
 	public void index(){
-		setAttr("title","订单管理");
+		setAttr("title","服务订单管理");
 		render("index.html");
 	}
 }

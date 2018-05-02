@@ -17,7 +17,7 @@ public class ServiceController extends Controller {
 	
 	public void index(){
 		setAttr("title","服务管理");
-		Page<Service> page=serviceService.paginage(1,10);
+		Page<Service> page=serviceService.paginage(getParaToInt(0, 1), 10);
 		setAttr("page",page);
 		render("index.html");
 	}
