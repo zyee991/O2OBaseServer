@@ -31,6 +31,7 @@ public class BaseUtils {
 			if(manager == null) {
 				manager = Manager.dao.findById(cookie);
 			}	
+			return manager;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
