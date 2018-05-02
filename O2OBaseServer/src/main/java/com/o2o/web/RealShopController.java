@@ -20,7 +20,7 @@ public class RealShopController extends Controller {
 	
 	public void index(){
 		setAttr("title","门店管理");
-		List<Record>realshoplist=realShopService.paginage(1, 10);
+		List<Record>realshoplist=realShopService.paginage(getParaToInt(0, 1), 10);
 		setAttr("realshoplist",realshoplist);
 		render("index.html");
 	}

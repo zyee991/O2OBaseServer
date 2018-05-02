@@ -1,0 +1,38 @@
+#@layout() 
+#define main()
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+		    <tr>
+		        <th class="col-sm-1">应聘者</th>
+		        <th class="col-sm-1">期望薪资</th>
+		        <th class="col-sm-1">工作类型</th>
+		        <th class="col-sm-1">工作地点</th>
+                <th class="col-sm-1">应聘时间</th>
+                <th class="col-sm-1">审核时间</th>
+                <th class="col-sm-1">状态</th>
+		        <th class="col-sm-1">操作    
+		        </th>
+		    </tr>
+	    </thead>
+	    <tbody>
+	    #for(employer :employerlist)
+		    <tr id='#(employer.pem_id)'>
+		       <td>#(employer.muser)</td>
+		       <td>#(employer.job_type)</td>
+		       <td>#(employer.work_address)</td>
+<!-- 		       <td>#(realshop.realshop_pic)</td> -->
+		       <td>#(employer.pe_stime)</td>
+		       <td>#(employer.pe_etime)</td>  
+		       <td>#(employer.pe_state)</td>
+		       <td>
+			        <a href="javascript:void(0);" onclick=""  class="btn btn-success btn-xs" role="button">审核</a>
+			        <a href="javascript:void(0);" onclick=""  class="btn btn-danger btn-xs" role="button">查看附件</a>
+		        </td> 		        
+		    </tr>
+	    #end
+    	</tbody>
+    		#@paginate(page.pageNumber, page.totalPage, "/recruit")
+	</table>
+</div>
+#end

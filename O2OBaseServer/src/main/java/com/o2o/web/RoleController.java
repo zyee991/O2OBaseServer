@@ -16,7 +16,7 @@ public class RoleController extends Controller {
 	
 	public void index(){
 		setAttr("title","角色管理");
-		Page<Role> page = roleService.paginate(1, 10);
+		Page<Role> page = roleService.paginate(getParaToInt(0, 1), 10);
 		setAttr("page",page);
 		render("index.html");
 	}

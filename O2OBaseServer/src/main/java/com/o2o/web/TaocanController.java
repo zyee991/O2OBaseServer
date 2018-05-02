@@ -19,7 +19,7 @@ public class TaocanController extends Controller {
 	// 显示
 	public void index() {
 		setAttr("title", "套餐信息");
-		Page<Goodsinfo> page = goodsinfoService.paginateTaocan(1, 10);
+		Page<Goodsinfo> page = goodsinfoService.paginateTaocan(getParaToInt(0, 1), 10);
 		setAttr("page", page);
 		render("index.html");
 	}

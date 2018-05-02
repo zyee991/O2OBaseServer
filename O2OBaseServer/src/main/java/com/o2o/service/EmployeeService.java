@@ -21,6 +21,10 @@ public class EmployeeService {
 		return dao.findById(id);
 
 	}
+	public void deleteById(String id) {
+		dao.deleteById(id);
+		
+	}
 
 	
 }

@@ -1,16 +1,20 @@
 #@layout()
  #define main()
-<ul class="nav nav-tabs">
-	<li class="active"><a href="/goods_order?order_pay_status=0">待支付</a></li> 
-    <li><a href="/goods_order?order_pay_status=1">待处理</a></li>
-     <li><a href="/goods_order?order_status=3">已完成</a></li> 
-     <li><a href="/goods_order">全部</a></li>
+<ul class="nav nav-tabs" id="myTab">
+	<li class="active" ><a href="/goods_order?order_pay_status=0&order_status=0" data-toggle="tab"> 待支付</a></li>
+	<li><a href="/goods_order?order_pay_status=2&order_status=0" data-toggle="tab">待退款</a></li> 
+    <li><a href="/goods_order?order_pay_status=1&order_status=0" data-toggle="tab">待发货</a></li>
+     <li><a href="/goods_order?order_pay_status=1&order_status=3&another_status=5" data-toggle="tab">已完成</a></li> 
+     <li><a href="/goods_order?order_pay_status=1&order_status=4" data-toggle="tab">待退货</a></li>    
+     <li><a href="all" data-toggle="tab">全部</a></li>
  </ul>
+ <div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade in active" id="unpay">
  <div class="table-responsive">
  <table class="table table-striped">
  <thead>
    <tr>
-   <th class="col-sm-0">订单类型</th>
+<!--    <th class="col-sm-0">订单类型</th> -->
    <th class="col-sm-0">创建时间</th>
    <th class="col-sm-0">用户姓名</th>
    <th class="col-sm-0">支付类型</th>
@@ -24,30 +28,30 @@
  <tbody>	
 	#for(goodorder:goodorderlist)
     <tr>
-    <th class="col-sm-1">#(goodorder.sec_type_name)</th>
+    <!-- <th class="col-sm-1">#(goodorder.sec_type_name)</th> -->
     <th class="col-sm-1">#(goodorder.order_createtime)</th>
     <th class="col-sm-1">#(goodorder.user_nickname)</th>
-    <th class="col-sm-1">#(goodorder.order_payType)</th>
+    <th class="col-sm-1">#(goodorder.pay_type_name)</th>
     <th class="col-sm-1">#(goodorder.order_price)</th>
-    <th class="col-sm-1">#(goodorder.order_isforward)</th>
+    <th class="col-sm-1">#(goodorder.order_isforward==null?"否":"是")</th>
     <th class="col-sm-1">#(goodorder.order_isdelete)</th>
-    <th class="col-sm-1">#(goodorder.order_status)</th>
+    <th class="col-sm-1">#(goodorder.order_status==0?"待支付":goodorder.order_status==1?"待收货":goodorder.order_status==2?"待退货":"已完成")</th>
     <th class="col-sm-1"> 
-    <a href="javascript:void(0);" onclick="modalShow('/goods_order/forward?id=#(goodorder.order_id)')" class="btn btn-danger btn-xs" role="button">确认发货</a>
-    <a href="javascript:void(0);" onclick="modalShow('/goods_order/orderdetail?id=#(goodorder.order_id)')"  class="btn btn-danger btn-xs" role="button">订单详情</a>
+    <a href="javascript:void(0);" onclick="modalShow('/goods_order/forward?id=#(goodorder.order_id)')" class="btn btn-success btn-xs" role="button">确认发货</a>
+    <a href="javascript:void(0);" onclick="modalShow('/goods_order/orderdetail?id=#(goodorder.order_id)')"  class="btn btn-warning btn-xs" role="button">订单详情</a>
     <a href="javascript:void(0);" onclick="modalShow('/goods_order/paidandetail?id=#(goodorder.order_id)')"  class="btn btn-danger btn-xs" role="button">派单详情</a>
     </th>
     </tr>
 	#end			
   </tbody>
+  	#@paginate(page.pageNumber, page.totalPage, "/goods_order")
  </table>
  </div>
+ </div>
+ </div>
+ #@paginate()
  #end
  <script>
-window.onload=initPage();
-function initPage(){
-	
-}
  function confirm(){
 	alert("发货成功");
 }

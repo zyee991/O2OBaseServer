@@ -20,18 +20,20 @@
    <tr id='#(employeeinfo.rid)'>
    <td>#(employeeinfo.position)</td>
    <td>#(employeeinfo.category)</td>
-   <td>#(employeeinfo.workpalce)</td>
+   <td>#(employeeinfo.workplace)</td>
    <td>#(employeeinfo.education)</td>
    <td>#(employeeinfo.realse_time)</td>
    <td>#(employeeinfo.Validity)</td>
    <td>#(employeeinfo.number)</td>
    <td>
-   <a href="/employee/update?id=#(employeeinfo.rid)"  class="btn btn-success btn-xs" role="button">编辑</a>
-   <a href="javascript:void(0);" onclick="remove('/employeeinfo/delete?id=#(employeeinfo.rid)')"  class="btn btn-danger btn-xs" role="button">删除</a>
+   <a href="javascript:void(0);" onclick="modalShow('/employee/update?id=#(employeeinfo.rid)')" class="btn btn-success btn-xs" role="button">编辑</a>
+   <a href="javascript:void(0);" onclick="remove('/employee/delete?id=#(employeeinfo.rid)')"  class="btn btn-danger btn-xs" role="button">删除</a>
+   <a href="/recruit?id=#(employeeinfo.rid)" class="btn btn-warning btn-xs" role="button">查看应聘者</a>
   </td>
   </tr>
   #end
   </tbody>
+  #@paginate(page.pageNumber, page.totalPage, "/employee")
  </table>
 </div>
 #end

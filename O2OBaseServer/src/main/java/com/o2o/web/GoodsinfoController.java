@@ -16,7 +16,7 @@ public class GoodsinfoController extends Controller {
 	// 显示
 	public void index() {
 		setAttr("title", "商品基本信息");
-		Page<Goodsinfo> page = goodsinfoService.paginate(1, 10);
+		Page<Goodsinfo> page = goodsinfoService.paginate(getParaToInt(0, 1), 10);
 		setAttr("page", page);
 		render("index.html");
 	}

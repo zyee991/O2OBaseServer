@@ -18,7 +18,7 @@ public class GoodsTypeController extends Controller {
 
    public void index(){
 	   setAttr("title","商品类型");
-	   Page<Firsttype> page=goodsTypeService.paginage(1,10);
+	   Page<Firsttype> page=goodsTypeService.paginage(getParaToInt(0, 1), 10);
 	   setAttr("page",page);
 	   render("index.html");
    }

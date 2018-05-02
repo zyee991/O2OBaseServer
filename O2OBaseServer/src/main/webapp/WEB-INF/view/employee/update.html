@@ -18,7 +18,7 @@
 			<label for="name" class="col-sm-2 control-label">招聘职位</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" id="position"
-					name="recruitInfo.postion" required value="#(recruitInfo.postion)">
+					name="recruitInfo.postion" required value="#(recruitInfo.position)">
 			</div>
 		</div>
 
@@ -31,14 +31,14 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">职位薪资</label>
 			<div class="col-sm-10">
-				<input type="number" class="form-control" id="salary" name="recruitInfo.salary" size="16" value="recruitInfo..salary"/>
+				<input type="number" class="form-control" id="salary" name="recruitInfo.salary" size="16" value="#(recruitInfo.salary)"/>
 			</div>
 		</div>
 		<div class="form-group" id="validityTime">
 			<label class="col-sm-2 control-label">有效时间</label>
 			<div class="col-sm-10 input-append date form_datetime">
 				<input name="recruitInfo.validityTime" size="16" type="text"
-					value="#(recruitInfo.validityTime)" id="startTime">
+					value="#(recruitInfo.Validity)" id="startTime">
 			</div>
 		</div>
 	
@@ -51,7 +51,7 @@
 		<div class="form-group">
 			<label for="workpalce" class="col-sm-2 control-label">工作地点</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="workpalce" name="recruitInfo.workpalce" value="#(recruitInfo.workpalce)">
+				<input type="text" class="form-control" id="workpalce" name="recruitInfo.workpalce" value="#(recruitInfo.workplace)">
 			</div>
 		</div>
 		<div class="form-group">
@@ -65,7 +65,7 @@
 			<div class="col-sm-10">
 			<select class="form-control" id="type_list"
 					name="recruitInfo.education">
-					<option name="education" value="#(recruitInfo.education)"></option>
+					<option name="education" value="#(recruitInfo.education)">#(recruitInfo.education)</option>
 					<option name="education" value="研究生">研究生</option>
 					<option name="education" value="本科">本科</option>
 					<option name="education" value="高中">高中</option>
@@ -78,7 +78,7 @@
 			<div class="col-sm-10">
 			<select class="form-control" id="category"
 					name="recruitInfo.category">
-					<option name="education" value="#(recruitInfo.category)"></option>
+					<option name="education" value="#(recruitInfo.category)">#(recruitInfo.category)</option>
 					<option name="education" value="长期">长期</option>
 					<option name="education" value="短期">短期</option>
 				</select>
@@ -87,7 +87,7 @@
 		<div class="form-group">
 			<label for="phone" class="col-sm-2 control-label">电话号码</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="phone" name="recruitInfo.phone" value="recruitInfo.phone">
+				<input type="text" class="form-control" id="phone" name="recruitInfo.phone" value="#(recruitInfo.phone)">
 			</div>
 		</div>
 		<input type="hidden" id="attachment"
@@ -105,25 +105,26 @@
 
 
 <script>
-	$('#file').fileinput({
-		allowedFileExtensions : [ 'word', 'pdf','docx' ],
-		language : "zh",
-		dropZoneEnabled : false,
-		showCaption : false,
-		autoReplace : true,
-		showUpload : true, //是否显示上传按钮
-		showRemove : true,//显示移除按钮
-		uploadUrl : "/file/save",
-	})
+$('#file').fileinput({
+	allowedFileExtensions : [ 'word', 'doc', 'docx' ],
+	language : "zh",
+	dropZoneEnabled : false,
+	showCaption : true,
+	autoReplace : true,
+	showUpload : true, //是否显示上传按钮
+	showRemove : true,//显示移除按钮
+	uploadUrl : "/file/save",
+})
 
-	$("#file").on("fileuploaded", function(event, data, previewId, index) {
-		alert(1)
-		var result = data.response;
-		var path = result.path;
-		if (path) {
-			$("#attachment").val(path);
-		}
-	});
+$("#file").on("fileuploaded", function(event, data, previewId, index) {
+	alert(1)
+	var result = data.response;
+	var path = result.path;
+	if (path) {
+		$("#attachment").val(path);
+	}
+});
+
 
 	function changeForever(status) {
 		if (status == 1) {
