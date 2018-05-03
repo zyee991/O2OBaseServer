@@ -18,7 +18,7 @@
 <script type="text/javascript">
 	var websocket = null; //判断当前浏览器是否支持WebSocket
 	if ('WebSocket' in window) {
-		websocket = new WebSocket("ws://localhost:8080/websocket?id=123&type=1");
+		websocket = new WebSocket("ws://localhost:8080/wsmsg?id=c88788e1-e8a2-4e86-9933-e6e13fc44135");
 	} else {
 		alert('当前浏览器 Not support websocket')
 	} //连接发生错误的回调方法
