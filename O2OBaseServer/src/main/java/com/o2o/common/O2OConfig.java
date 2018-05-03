@@ -24,6 +24,7 @@ import com.o2o.web.GoodsTypeController;
 import com.o2o.web.GoodsinfoController;
 import com.o2o.web.ManagerController;
 import com.o2o.web.NavigationController;
+import com.o2o.web.QuickOperationController;
 import com.o2o.web.RealShopController;
 import com.o2o.web.RecruitController;
 import com.o2o.web.RoleController;
@@ -93,6 +94,7 @@ public class O2OConfig extends JFinalConfig {
 		me.add("/recruit",RecruitController.class,"WEB-INF/view/recruit");
 		me.add("/factory",FactoryController.class,"WEB-INF/view/factory");
 		me.add("/tools",ToolController.class,"WEB-INF/view/tool");
+		me.add("/quickOperation", QuickOperationController.class,"WEB-INF/view/quick_operation");
 	}
 	
 	public void configEngine(Engine me) {

@@ -4,3 +4,11 @@
     right: 1%;
     top: 30%;
 }
+
+.qo-modal {
+    position: fixed;
+    z-index: 999;
+    left: auto;
+    right: 5%;
+    top: 25%;
+}

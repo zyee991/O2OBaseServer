@@ -25,6 +25,22 @@ $(function() {
 
 });
 
+function modalShowQO(url){
+	var options = {
+			backdrop:false,
+			show:true,
+			remote:url
+	}
+	$("#qo-model").modal(options);
+}
+
+jQuery(function() {
+	$("#qo-model").on("hidden.bs.modal", function() {
+		$(this).removeData("bs.modal"); 
+		$(this).find(".modal-content").children().remove();  
+	});
+})
+
 function modalShow(url){
 	var options = {
 			backdrop:false,
