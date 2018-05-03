@@ -89,5 +89,14 @@ public abstract class BaseMessage<M extends BaseMessage<M>> extends Model<M> imp
 	public java.lang.String getMessageDataId() {
 		return getStr("message_data_id");
 	}
+	
+	public M setMessageTableName(java.lang.String messageTableName) {
+		set("message_table_name", messageTableName);
+		return (M)this;
+	}
+	
+	public java.lang.String getMessageTableName() {
+		return getStr("message_table_name");
+	}
 
 }
