@@ -64,7 +64,8 @@ public class GoodsinfoService {
 
 	public List<Goodsinfo> findByTypeId(String typeId) {
 		List<Goodsinfo> goodinfoList = dao
-				.find("select * from tb_goodsinfo where sec_type_id=? and goodsinfo_istaocan=false", typeId);
+				.find("select * from tb_shop p,tb_goodsinfo g,tb_shangjiaoperation s where g.goodsinfo_id=s.goodsinfo_id and p.shop_id=s.shop_id "
+						+ "and sec_type_id=? and shop_istaocan=true", typeId);
 		return goodinfoList;
 	}
 

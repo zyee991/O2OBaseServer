@@ -35,24 +35,28 @@
     <th class="col-sm-1">#(goodorder.order_price)</th>
     <th class="col-sm-1">#(goodorder.order_isforward==null?"否":"是")</th>
     <th class="col-sm-1">#(goodorder.order_isdelete)</th>
-    <th class="col-sm-1">#(goodorder.order_status==0?"待支付":goodorder.order_status==1?"待收货":goodorder.order_status==2?"待退货":"已完成")</th>
+    <th class="col-sm-1">#(goodorder.order_status==0&&goodorder.order_pay_status==1?"待发货":goodorder.order_status==1?"待收货":goodorder.order_status==2?"待退货":"已完成")</th>
     <th class="col-sm-1"> 
-    <a href="javascript:void(0);" onclick="modalShow('/goods_order/forward?id=#(goodorder.order_id)')" class="btn btn-success btn-xs" role="button">确认发货</a>
+    <a href="javascript:void(0);" onclick="confirm('#(goodorder.order_id)')" class="btn btn-success btn-xs" role="button">确认发货</a>
     <a href="javascript:void(0);" onclick="modalShow('/goods_order/orderdetail?id=#(goodorder.order_id)')"  class="btn btn-warning btn-xs" role="button">订单详情</a>
     <a href="javascript:void(0);" onclick="modalShow('/goods_order/paidandetail?id=#(goodorder.order_id)')"  class="btn btn-danger btn-xs" role="button">派单详情</a>
     </th>
     </tr>
 	#end			
   </tbody>
-  	#@paginate(page.pageNumber, page.totalPage, "/goods_order")
  </table>
+ 	#@paginate(page.pageNumber, page.totalPage, "/goods_order")
  </div>
  </div>
  </div>
- #@paginate()
  #end
  <script>
- function confirm(){
-	alert("发货成功");
+ function confirm(id){
+	 alert("确认发货");
+  $.post("/goods_order/confirm",{id:id},function(data){
+	  if(data.success){
+		  alert(data.message);
+	  }
+  });
 }
  </script>

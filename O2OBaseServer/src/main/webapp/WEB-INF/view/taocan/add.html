@@ -107,7 +107,7 @@
 		<input type="hidden" id="goodsinfoId" name="goodsinfo.goodsinfoId"
 			value="#(newId)" /> <input type="hidden" id="goodsinfoImage"
 			name="goodsinfo.goodsinfoImage" value="" /> <input type="hidden"
-			id="goodsinfoIsTaocan" name="goodsinfo.goodsinfoIsTaocan" value="1" />
+			id="goodsinfoIsTaocan" name="goodsinfo.goodsinfoIstaocan" value="1" />
 			<input id="goodsDetail" type="hidden" name="goodsDetail" value />
 	</form>
 </div>
@@ -189,7 +189,7 @@
 		$.post("/taocan/getGoods",{typeId:typeId},function(data){
 			if(data) {
 				for(var i in data) {
-					var ele = option.replace("@goodsinfoId",data[i].goodsinfo_id).replace("@goodsinfoName",data[i].goodsinfo_name);
+					var ele = option.replace("@goodsinfoId",data[i].shop_id).replace("@goodsinfoName",data[i].goodsinfo_name);
 					select.append($(ele));
 				}
 			}

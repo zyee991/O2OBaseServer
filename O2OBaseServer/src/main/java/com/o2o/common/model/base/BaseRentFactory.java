@@ -9,13 +9,13 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseRentFactory<M extends BaseRentFactory<M>> extends Model<M> implements IBean {
 
-	public M setPid(java.lang.Integer pid) {
+	public M setPid(java.lang.String pid) {
 		set("pid", pid);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getPid() {
-		return getInt("pid");
+	public java.lang.String getPid() {
+		return getStr("pid");
 	}
 
 	public M setNameP(java.lang.String nameP) {
@@ -72,13 +72,31 @@ public abstract class BaseRentFactory<M extends BaseRentFactory<M>> extends Mode
 		return get("state_t");
 	}
 
-	public M setAddressPid(java.lang.Integer addressPid) {
+	public M setAddressPid(java.lang.String addressPid) {
 		set("address_pid", addressPid);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getAddressPid() {
-		return getInt("address_pid");
+	public java.lang.String getAddressPid() {
+		return getStr("address_pid");
+	}
+
+	public M setPriceF(java.lang.Float priceF) {
+		set("price_f", priceF);
+		return (M)this;
+	}
+	
+	public java.lang.Float getPriceF() {
+		return getFloat("price_f");
+	}
+
+	public M setState(java.lang.Boolean state) {
+		set("state", state);
+		return (M)this;
+	}
+	
+	public java.lang.Boolean getState() {
+		return get("state");
 	}
 
 }

@@ -18,10 +18,10 @@ public class RealShopService {
     private static final City citydao=new City().dao();
     private static final District districtdao=new District().dao();
     private static final Sectype sectypedao=new Sectype().dao();
-	public List<Record> paginage(int i, int j) {
+	public Page<Record> paginage(int i, int j) {
 	Page<Record> page=Db.paginate(i,j,"select a.*,d.district_name,t.sec_type_name","from tb_district d,tb_sec_type t,tb_realshop a"
 			+ " where a.district_id=d.district_id and t.sec_type_id=a.realshop_type");
-	return page.getList();
+	return page;
 	}
 
 	public List<Province> getProvinceList() {

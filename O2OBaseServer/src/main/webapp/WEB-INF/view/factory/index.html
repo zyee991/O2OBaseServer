@@ -1,0 +1,43 @@
+#@layout()
+#define main()
+<div class="table-responsive">
+ <table class="table table-striped">
+  <thead>
+    <tr>
+    <th class="col-sm-1">场地名称</th>
+    <th class="col-sm-1">长度</th>
+    <th class="col-sm-1">高度</th>
+    <th class="col-sm-1">宽度</th>
+    <th class="col-sm-1">其他设备</th>
+    <th class="col-sm-1">是否有工具</th>
+    <th class="col-sm-1">场地地址</th>
+    <th class="col-sm-1">价格</th>
+    <th class="col-sm-1">状态</th>
+   <th class="col-sm-1">操作   <a href="javascript:void(0);" onclick="modalShow('factory/add')" class="btn btn-warning btn-xs" role="button">添加</a>
+    </th>
+    </tr>
+  </thead>
+  <tbody>
+   #for(factory:page.list)
+   <tr id='#(factory.pid)'>
+   <td>#(factory.name_p)</td>
+   <td>#(factory.lenth)</td>
+   <td>#(factory.height)</td>
+   <td>#(factory.width)</td>
+   <td>#(factory.other)</td>
+   <td>#(factory.state_t==0 ? '是' : '否')</td>
+   <td>#(factory.district_name)</td>
+   <td>#(factory.price_f)</td>
+   <td>#(factory.state==0?'已租':'未租')</td>
+   <td>
+   <a href="/factory/update?id=#(factory.pid)"  class="btn btn-success btn-xs" role="button">编辑</a>
+   <a href="javascript:void(0);" onclick="remove('/factory/delete?id=#(factory.pid)')"  class="btn btn-danger btn-xs" role="button">删除</a>
+  </td>
+  </tr>
+  #end
+  </tbody>
+ </table>
+   	#@paginate(page.pageNumber, page.totalPage, "/factory/")
+ 
+</div>
+#end

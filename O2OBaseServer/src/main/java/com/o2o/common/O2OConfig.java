@@ -17,6 +17,7 @@ import com.o2o.index.IndexController;
 import com.o2o.interceptor.LoginInterceptor;
 import com.o2o.interceptor.NavigationInterceptor;
 import com.o2o.web.EmployeeController;
+import com.o2o.web.FactoryController;
 import com.o2o.web.FileController;
 import com.o2o.web.GoodsOrderController;
 import com.o2o.web.GoodsTypeController;
@@ -30,6 +31,7 @@ import com.o2o.web.ServiceController;
 import com.o2o.web.ServiceOrderController;
 import com.o2o.web.ShopController;
 import com.o2o.web.TaocanController;
+import com.o2o.web.ToolController;
 import com.o2o.web.TreeController;
 import com.o2o.websocket.WebSocketHandler;
 
@@ -89,6 +91,8 @@ public class O2OConfig extends JFinalConfig {
 		me.add("/realshop",RealShopController.class,"WEB-INF/view/realshop");
 		me.add("/employee", EmployeeController.class,"WEB-INF/view/employee");
 		me.add("/recruit",RecruitController.class,"WEB-INF/view/recruit");
+		me.add("/factory",FactoryController.class,"WEB-INF/view/factory");
+		me.add("/tools",ToolController.class,"WEB-INF/view/tool");
 	}
 	
 	public void configEngine(Engine me) {

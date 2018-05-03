@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.City;
 import com.o2o.common.model.District;
@@ -20,8 +21,8 @@ public class RealShopController extends Controller {
 	
 	public void index(){
 		setAttr("title","门店管理");
-		List<Record>realshoplist=realShopService.paginage(getParaToInt(0, 1), 10);
-		setAttr("realshoplist",realshoplist);
+		Page<Record>page=realShopService.paginage(getParaToInt(0, 1), 10);
+		setAttr("page",page);
 		render("index.html");
 	}
 	

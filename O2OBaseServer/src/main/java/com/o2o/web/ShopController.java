@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Shangjiaoperation;
 import com.o2o.common.model.Shop;
@@ -17,8 +18,8 @@ public class ShopController extends Controller {
 	static ShopService shopService=new ShopService();
 	public void index(){
 		setAttr("title","库存管理");
-		List<Record> shoplist=shopService.paginate1(getParaToInt(0, 1), 10);
-		setAttr("list",shoplist);
+		Page<Record> page=shopService.paginate1(getParaToInt(0, 1), 10);
+		setAttr("page",page);
 		render("index.html");
 	}
 	
@@ -40,7 +41,7 @@ public class ShopController extends Controller {
 		shop.setShopCount(Integer.parseInt(getPara("number")));
 		shop.setShopIstaocan(Boolean.valueOf(getPara("istaocan")));
 		shop.setShopLot(Integer.parseInt(getPara("shoplot")));
-		shop.setShopOn(Boolean.valueOf("shopon"));
+		shop.setShopOn(Boolean.valueOf(getPara("shopon")));
 		shop.setShopPrice(Float.parseFloat(getPara("shopprice")));
 	    String date=getPara("start_time");
 	    SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

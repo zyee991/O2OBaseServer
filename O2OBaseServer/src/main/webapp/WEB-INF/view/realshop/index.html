@@ -16,7 +16,7 @@
 		    </tr>
 	    </thead>
 	    <tbody>
-	    #for(realshop : realshoplist)
+	    #for(realshop : page.list)
 		    <tr id='#(realshop.realshop_id)'>
 		       <td>#(realshop.realshop_name)</td>
 		       <td>#(realshop.district_name)</td>
@@ -31,7 +31,7 @@
 		    </tr>
 	    #end
     	</tbody>
-    		#@paginate(page.pageNumber, page.totalPage, "/realshop")
 	</table>
+    #@paginate(page.pageNumber, page.totalPage, "/realshop/")
 </div>
 #end

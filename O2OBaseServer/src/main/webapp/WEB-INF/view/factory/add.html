@@ -1,0 +1,149 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true">×</button>
+	<h4 class="modal-title" id="myModalLabel">添加场地租赁信息</h4>
+</div>
+<div class="modal-body">
+	</form>
+	<form action="/factory/save" method="post" class="form-horizontal"
+		role="form" id="form">
+		<form class="form-horizontal">
+		<div class="form-group">
+			<label for="file" class="col-sm-2 control-label">场地名称</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="name_p" name="rentFactory.nameP">
+			</div>
+		</div>
+		<div class="form-group" id="length">
+			<label class="col-sm-2 control-label">长度</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="length"
+					name="rentFactory.lenth" size="16" 
+					placeholder="请输入长度">
+			</div>
+		</div>
+
+		<div class="form-group" id="length">
+			<label class="col-sm-2 control-label">高度</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="height"
+					name="rentFactory.height" size="16" 
+					placeholder="请输入高度">
+			</div>
+		</div>
+		<div class="form-group" id="length">
+			<label class="col-sm-2 control-label">宽度</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="width"
+					name="rentFactory.width" size="16" 
+					placeholder="请输入宽度">
+			</div>
+		</div>
+		<div class="form-group" id="length">
+			<label class="col-sm-2 control-label">租赁价格</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="width"
+					name="rentFactory.priceF" size="16" 
+					placeholder="请输入价格">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">是否包含工具</label>
+			<div class="btn-group col-sm-10" id="state_t" data-toggle="buttons">
+				<label class="btn btn-success active" onclick="changeForever(1)"><input
+					checked type="radio" name="rentFactory.stateT" value="1">是</label>
+				<label class="btn btn-success" onclick="changeForever(0)"><input
+					type="radio" name="rentFactory.stateT" value="0">否</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="other" class="col-sm-2 control-label">场地包含工具</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="other"
+					name="rentFactory.other" required placeholder="请输入简短描述">
+			</div>
+		</div>
+		<div class="form-group">
+                        <label class="col-sm-2 control-label"><i>*</i>所在地址</label>
+                        <div class="col-sm-3">
+                            <select name="input_province" id="input_province" class="form-control" onchange="getcity(this)">
+                                <option value="">--请选择--</option>
+                                #for(province:provincelist)
+                                <option value="#(province.province_id)">#(province.province_name)</option>
+                                #end
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select name="input_city" id="input_city" class="form-control" onchange="getarea(this)">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select name="rentFactory.addressPid" id="input_area" class="form-control">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+		<input type="hidden" id="serviceId" name="rentFactory.pid"
+			value="#(newId)" />
+		<input type="hidden" id="state" name="rentFactory.state" value="0"/>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">
+		关闭</button>
+	<button type="button" class="btn btn-primary"
+		onclick="submitForm('form')">提交</button>
+</div>
+
+
+<script>
+
+	function changeForever(status) {
+		if (status == 1) {
+			$("#forever").addClass("hidden");
+		} else {
+			$("#forever").removeClass("hidden");
+		}
+	}
+	
+	function changePointsFlag(status) {
+		if (status == 0) {
+			$("#PointsFlag").addClass("hidden");
+		} else {
+			$("#PointsFlag").removeClass("hidden");
+		}
+	}
+	
+	function getcity(e){
+		var provinceId=$(e).val();
+		var option="<option value='@cityid'>@cityname</option>";
+	    var select=$(e).parent().next().children("#input_city");
+	    select.empty();
+	    select.append($("<option value=''>请选择</option>"));
+	    $.post("/factory/getcity",{provinceId:provinceId},function(data){
+	    	if(data){
+	    		for(var i in data){
+	    			var ele=option.replace("@cityid",data[i].city_id).replace("@cityname",data[i].city_name);
+	    			select.append($(ele));
+	    		}
+	    	}
+	    });
+	}
+
+	function getarea(e) {
+		var cityId = $(e).val();
+		var option = "<option value='@districtId'>@districtName</option>";
+		var select = $(e).parent().next().children("#input_area");
+		select.empty();
+		select.append($("<option value=''>请选择</option>"));
+		$.post("/factory/getarea",{cityId:cityId},function(data){
+			if(data) {
+				for(var i in data) {
+					var ele = option.replace("@districtId",data[i].district_id).replace("@districtName",data[i].district_name);
+					select.append($(ele));
+				}
+			}
+		})
+	}
+</script>

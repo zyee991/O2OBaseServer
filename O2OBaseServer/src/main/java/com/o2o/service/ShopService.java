@@ -13,10 +13,10 @@ public class ShopService {
 
 	private static final Shop dao=new Shop().dao(); 
 	private static final Shangjiaoperation shangjiadao=new Shangjiaoperation().dao();
-	public List<Record> paginate1(int i,int j){
+	public Page<Record> paginate1(int i,int j){
 		Page<Record> page=Db.paginate(i, j, "select a.*,c.*,b.goodsinfo_name","from tb_shop a,tb_shangjiaoperation c,tb_goodsinfo b"
 				+" where a.shop_id=c.shop_id and c.goodsinfo_id=b.goodsinfo_id");
-		return page.getList();
+		return page;
 	}
 	public List<Record> getGoodList() {
 		return Db.find("select * from tb_goodsinfo");
