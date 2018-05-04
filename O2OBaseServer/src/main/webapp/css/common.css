@@ -1,14 +1,16 @@
 .float-botton {
 	position: fixed;
     z-index: 999;
-    right: 1%;
+    right: 5%;
     top: 30%;
 }
 
-.qo-modal {
-    position: fixed;
-    z-index: 999;
-    left: auto;
-    right: 5%;
-    top: 25%;
+.float-btn-group {
+	padding-left:0px;
+}
+
+.float-dialog {
+    padding-left: 0px;
+    padding-right: 0px;
+	
 }
