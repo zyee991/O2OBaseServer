@@ -22,6 +22,7 @@ public class ShopService {
 		return Db.find("select * from tb_goodsinfo");
 	}
 	public void save(Shop shop, Shangjiaoperation shangjiaoperation) {
+		System.out.println(shop);
 		shop.save();
 		shangjiaoperation.save();
 	}

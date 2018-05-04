@@ -54,12 +54,12 @@ public abstract class BaseShop<M extends BaseShop<M>> extends Model<M> implement
 		return get("shop_istaocan");
 	}
 
-	public M setShopOn(java.lang.Boolean shopOn) {
+	public M setShopOn(java.lang.Integer shopOn) {
 		set("shop_on", shopOn);
 		return (M)this;
 	}
 	
-	public java.lang.Boolean getShopOn() {
+	public java.lang.Integer getShopOn() {
 		return get("shop_on");
 	}
 

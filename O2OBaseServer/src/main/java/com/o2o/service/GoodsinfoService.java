@@ -40,7 +40,6 @@ public class GoodsinfoService {
 		try {
 			goodsinfo.save();
 		} catch (Exception e) {
-			e.printStackTrace();
 			goodsinfo.update();
 		}
 	}

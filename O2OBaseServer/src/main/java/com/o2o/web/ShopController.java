@@ -41,7 +41,7 @@ public class ShopController extends Controller {
 		shop.setShopCount(Integer.parseInt(getPara("number")));
 		shop.setShopIstaocan(Boolean.valueOf(getPara("istaocan")));
 		shop.setShopLot(Integer.parseInt(getPara("shoplot")));
-		shop.setShopOn(Boolean.valueOf(getPara("shopon")));
+		shop.setShopOn(Integer.parseInt(getPara("shopon")));
 		shop.setShopPrice(Float.parseFloat(getPara("shopprice")));
 	    String date=getPara("start_time");
 	    SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

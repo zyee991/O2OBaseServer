@@ -78,10 +78,13 @@ public class FtpUtil {
 			CreateDirecroty(pathname);
 			ftpClient.makeDirectory(pathname);
 			ftpClient.changeWorkingDirectory(pathname);
-			ftpClient.storeFile(fileName, inputStream);
+			if(ftpClient.storeFile(fileName, inputStream)){
+				System.out.println("上传文件成功");
+			} else {
+				System.out.println("上传文件失败");
+			}
 			inputStream.close();
 			ftpClient.logout();
-			System.out.println("上传文件成功");
 		} catch (Exception e) {
 			System.out.println("上传文件失败");
 			e.printStackTrace();
