@@ -1,5 +1,7 @@
 package com.o2o.web;
 
+import java.util.List;
+
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
@@ -47,5 +49,12 @@ public class GoodsOrderController extends Controller {
 	   String data="{'message':'发送成功','success':true}";
 	   
 	   renderJson(data);
+   }
+   
+   public void orderdetail(){
+	   String id=getPara("id");
+	   List<Record>goodslist=orderService.findGoodsByOrderId(id);
+	   setAttr("goodslist",goodslist);
+	   render("order_detail.html");
    }
 }

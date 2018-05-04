@@ -26,5 +26,10 @@ public class OrderService {
 				+wheresql);
 		return page;
 	}
+	public List<Record> findGoodsByOrderId(String id) {
+		List<Record>list=Db.find("select g.goodsinfo_name,y.sec_type_name,a.order_detail_num from tb_goodsinfo g,tb_sec_type y,tb_shop p,tb_shangjiaoperation s,tb_order_detail a"
+				+ " where g.goodsinfo_id=s.goodsinfo_id and p.shop_id=s.shop_id and p.shop_id=a.shop_id and y.sec_type_id=g.sec_type_id and a.order_id=?",id);
+		return list;
+	}
 
 }
