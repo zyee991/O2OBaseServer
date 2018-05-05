@@ -21,4 +21,11 @@ public class ServiceOrderController extends Controller {
 		System.out.println(list);
 		renderJson(serviceOrderService.reload(list));
 	}
+	
+	public void dispatch(){
+		String id=getPara("id");
+		String isforward=getPara("is_forward");
+		System.out.println(id+"----------------------"+isforward);
+		render("dispatch.html");
+	}
 }
