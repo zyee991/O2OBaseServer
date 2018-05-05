@@ -73,4 +73,8 @@ public class OrderService {
 		
 		return list;
 	}
+
+	public Order findOne(String orderId) {
+		return dao.findById(orderId);
+	}
 } 

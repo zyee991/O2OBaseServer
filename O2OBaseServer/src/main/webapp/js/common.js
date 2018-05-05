@@ -195,6 +195,7 @@ function closeFD() {
 }
 
 function confirmSend(id) {
+	var url = '/goods_order/confirm';
 	$.confirm({
 		title : '提示',
 		content : '是否确认发货？',
@@ -204,8 +205,8 @@ function confirmSend(id) {
 				btnClass : 'btn-success',
 				keys : [ 'enter' ],
 				action : function() {
-					$.post(url,{id:id},function(){
-						
+					$.post(url,{id:id},function(data){
+						alert(data.content)
 					});
 				}
 			},
