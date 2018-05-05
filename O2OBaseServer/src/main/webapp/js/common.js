@@ -206,7 +206,7 @@ function confirmSend(id) {
 				keys : [ 'enter' ],
 				action : function() {
 					$.post(url,{id:id},function(data){
-						alert(data.content)
+						$.alert(data.content)
 					});
 				}
 			},
