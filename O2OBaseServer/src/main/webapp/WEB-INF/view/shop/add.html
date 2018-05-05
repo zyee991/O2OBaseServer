@@ -9,15 +9,28 @@
      <input type="hidden" name="shopid" value="#(newId)" />
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">商品名称</label>
-			<div class="col-sm-10">
-				<select class="form-control" id="goodsname"
-					name="goodsname">
-					<option name="" value="">请选择</option>
-					 #for(good:goodslist)
-					<option name="" value="#(good.goodsinfo_id)">#(good.goodsinfo_name)</option>
-					#end
-				</select>
+			<div class="col-sm-10 tab-content" id="myTabContent">
+				<div>
+					<table class="table table-striped table-hover" id="reportTable">
+						<tr>
+							<td>商品类型<select onchange='getgoods(this)' style='width: 50%;height=20px;float:right'>
+									<option value=''>请选择</option>
+									#for(typelist:typelist)
+									<option value='#(typelist.sec_type_id)'>#(typelist.sec_type_name)</option>
+									#end
+								</select></td>
+							<td>商品名称<select class='goods' style='width:50%;height:20px;float:right' name="goodsname" onchange="getPrePrice(this)"></select></td>
+						</tr>
+					</table>
+				</div>
 			</div>
+			</div>
+			<div class="form-group">
+			 <label for="shoplot" class="col-sm-2 control-label">商品原价</label>
+			 <div class="col-sm-10">
+			 <input type="number" class="form-control" id="prePrice" name="prePrice" 
+					readonly>
+			 </div>
 			</div>
 			<div class="form-group">
 			 <label for="shoplot" class="col-sm-2 control-label">商品批次</label>
@@ -81,4 +94,26 @@ $('.datetimepicker').datetimepicker({
     minView: 0,
     minuteStep:1
 });
+function getgoods(e) {
+	var typeId = $(e).val();
+	var option = "<option value='@goodsinfoId'>@goodsinfoName</option>";
+	var select = $(e).parent().next().children(".goods");
+	select.empty();
+	select.append($("<option value=''>请选择</option>"));
+	$.post("/shop/getGoods",{typeId:typeId},function(data){
+		if(data) {
+			for(var i in data) {
+				var ele = option.replace("@goodsinfoId",data[i].shop_id).replace("@goodsinfoName",data[i].goodsinfo_name);
+				select.append($(ele));
+			}
+		}
+	})
+}
+
+function getPrePrice(e){
+	var goodsid=$(e).val();
+	$.post("/shop/getGoodsById",{goodsid:goodsid},function(data){
+		$("#prePrice").value(data.goodsinfo_primary_price);
+	})
+}
 </script>

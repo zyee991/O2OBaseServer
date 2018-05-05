@@ -1,6 +1,10 @@
 package com.o2o.web;
 
+import java.util.List;
+
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.o2o.service.ServiceOrderService;
 
 public class ServiceOrderController extends Controller {
@@ -10,5 +14,11 @@ public class ServiceOrderController extends Controller {
 	public void index(){
 		setAttr("title","服务订单管理");
 		render("index.html");
+	}
+	
+	public void tableData() {
+		List<Record> list = serviceOrderService.tableData();
+		System.out.println(list);
+		renderJson(serviceOrderService.reload(list));
 	}
 }

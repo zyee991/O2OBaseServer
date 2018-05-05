@@ -35,4 +35,8 @@ public class ServiceService {
 		List<Sectype> typelist=typedao.find("select a.* from tb_sec_type a where a.first_type_id=2");
 		return typelist;
 	}
+
+	public List<Sectype> getTypeListById(String secTypeId) {
+		return typedao.find("select a.* from tb_sec_type a where a.sec_type_id=?",secTypeId);
+	}
 }

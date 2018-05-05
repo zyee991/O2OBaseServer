@@ -69,11 +69,13 @@ public class GoodsinfoService {
 	}
 
 	public List<Record> findTaocanByTaocanId(String taocanId) {
-		List<Record> taocanList = Db.find(
-				"select tg.*,g.goodsinfo_name,s.sec_type_name,s.sec_type_id from tb_taocan as tg join tb_goodsinfo"
-				+ " as g on tg.goodsinfo_id = g.goodsinfo_id join tb_sec_type as s on"
-				+ " g.sec_type_id = s.sec_type_id where tg.taocan_id = ?",
-				taocanId);
+		String sql="SELECT tb_taocan.tao_good_id, tb_taocan.taocan_id,tb_taocan.goodsinfo_id,tb_taocan.item_count,tb_sec_type.sec_type_name,"+
+                    "tb_goodsinfo.sec_type_id,tb_goodsinfo.goodsinfo_name FROM tb_taocan"+
+                     " INNER JOIN tb_shangjiaoperation ON tb_taocan.goodsinfo_id = tb_shangjiaoperation.shop_id"+
+                     " INNER JOIN tb_goodsinfo ON tb_shangjiaoperation.goodsinfo_id = tb_goodsinfo.goodsinfo_id"+ 
+                     " INNER JOIN tb_sec_type ON tb_goodsinfo.sec_type_id = tb_sec_type.sec_type_id"+
+                     " where tb_taocan.taocan_id=? ";
+		List<Record> taocanList = Db.find(sql,taocanId);
 		return taocanList;
 	}
 }

@@ -40,6 +40,8 @@ public class ServiceController extends Controller {
 		setAttr("title","服务基本信息");
 		String id=getPara("id");
 		Service service=serviceService.findById(id);
+		List<Sectype> typelist = serviceService.getTypeListById(service.getSecTypeId());
+		setAttr("typelist",typelist);
 		setAttr("service",service);
 		render("update.html");
 	}

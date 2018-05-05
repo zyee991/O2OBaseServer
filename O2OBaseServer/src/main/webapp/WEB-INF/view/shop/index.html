@@ -10,6 +10,7 @@
 		        <th class="col-sm-1">上架数量</th>
 		        <th class="col-sm-1">是否是套餐</th>
 		        <th class="col-sm-1">是否在售</th>
+		        <th class="col-sm-1">商品原价</th>
 		        <th class="col-sm-1">售出价格</th>
 		        <th class="col-sm-1">操作 <a href="javascript:void(0);" onclick="modalShow('/shop/add?id=null')" class="btn btn-warning btn-xs" role="button">上架</a></th>
 		    </tr>
@@ -22,6 +23,7 @@
 	     <td>#(shoplist.shop_count)</td>
 	     <td>#(shoplist.shop_istaocan?'是':'否')</td>
 	     <td>#(shoplist.shop_on?'启用':'未启用')</td>
+	     <td>#(shoplist.goodsinfo_primary_price)</td>
 	     <td>#(shoplist.shop_price)</td>
 	     <td>
 	       <a href="javascript:void(0);" onclick="modalShow('/shop/update?id=#(shoplist.shop_id)')"  class="btn btn-success btn-xs" role="button">编辑</a>

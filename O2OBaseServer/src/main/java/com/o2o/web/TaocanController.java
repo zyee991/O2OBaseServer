@@ -28,6 +28,10 @@ public class TaocanController extends Controller {
 	public void view() {
 		String id = getPara("id");
 		Goodsinfo goodsinfo = goodsinfoService.findById(id);
+		List<Record> taocanList = goodsinfoService.findTaocanByTaocanId(goodsinfo.getGoodsinfoId());
+		List<Sectype> typelist = goodsinfoService.getTypeList();
+		setAttr("typelist", typelist);
+		setAttr("detailList",taocanList);
 		setAttr("goodsinfo", goodsinfo);
 		render("view.html");
 	}
@@ -94,5 +98,6 @@ public class TaocanController extends Controller {
 		List<Goodsinfo> list = goodsinfoService.findByTypeId(typeId);
 		renderJson(list);
 	}
+	
 
 }

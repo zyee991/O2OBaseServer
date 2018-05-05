@@ -4,12 +4,14 @@
  <table class="table table-striped">
   <thead>
     <tr>
-    <th class="col-sm-2">服务名称</th>
-    <th class="col-sm-2">服务售价</th>
-    <th class="col-sm-2">服务现价</th>
-    <th class="col-sm-2">是否启用积分</th>
-    <th class="col-sm-2">服务简短描述</th>
-   <th class="col-sm-2">操作   <a href="javascript:void(0);" onclick="modalShow('/service/add')" class="btn btn-warning btn-xs" role="button">添加</a>
+    <th class="col-sm-1">服务名称</th>
+    <th class="col-sm-1">服务售价</th>
+    <th class="col-sm-1">服务现价</th>
+    <th class="col-sm-1">是否启用积分</th>
+    <th class="col-sm-1">是否上架</th>
+    <th class="col-sm-1">服务积分</th>
+    <th class="col-sm-1">服务简短描述</th>
+   <th class="col-sm-1">操作   <a href="javascript:void(0);" onclick="modalShow('/service/add')" class="btn btn-warning btn-xs" role="button">添加</a>
     </th>
     </tr>
   </thead>
@@ -20,6 +22,7 @@
    <td>#(service.service_price)</td>
    <td>#(service.service_primary_price)</td>
    <td>#(service.service_points_flag ? '启用' : '不启用')</td>
+   <td>#(service.service_ison?'在售':'未售')</td>
    <td>#(service.service_points)</td>
    <td>#(service.service_desc)</td>
    <td>

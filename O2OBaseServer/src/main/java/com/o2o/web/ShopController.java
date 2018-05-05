@@ -9,8 +9,11 @@ import java.util.UUID;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.o2o.common.model.Goodsinfo;
+import com.o2o.common.model.Sectype;
 import com.o2o.common.model.Shangjiaoperation;
 import com.o2o.common.model.Shop;
+import com.o2o.service.GoodsinfoService;
 import com.o2o.service.ShopService;
 
 public class ShopController extends Controller {
@@ -25,8 +28,9 @@ public class ShopController extends Controller {
 	
 	public void add(){
 	 setAttr("newId",UUID.randomUUID());
-	 System.out.println(shopService.getGoodList().toString());
-	 setAttr("goodslist",shopService.getGoodList());
+	 String typeId = getPara("typeId");
+	 List<Sectype> typelist = shopService.getTypeList();
+     setAttr("typelist", typelist);
 	 render("add.html");
 	}
 	
@@ -71,4 +75,17 @@ public class ShopController extends Controller {
 		shopService.deleteById(id,shopgoodsid);
 		redirect("/shop");
 	}
+	
+	public void getGoods(){
+		String typeId = getPara("typeId");
+		List<Record> list = shopService.findByTypeId(typeId);
+		renderJson(list);
+	}
+	
+	public void getGoodsById(){
+		String goodsid=getPara("goodsid");
+		List<Record>goodsinfo=shopService.findGoodById(goodsid);
+		renderJson(goodsinfo);
+	}
+	
 }
