@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Sectype;
 import com.o2o.common.model.Service;
 import com.o2o.service.ServiceService;
@@ -17,11 +18,13 @@ public class ServiceController extends Controller {
 	
 	public void index(){
 		setAttr("title","服务管理");
-		Page<Service> page=serviceService.paginage(getParaToInt(0, 1), 10);
-		setAttr("page",page);
 		render("index.html");
 	}
 	
+	public void tableData(){
+		List<Record>list=serviceService.tableData();
+		renderJson(list);
+	}
 	public void add(){
 		List<Sectype> typelist=serviceService.getTypeList();
 		System.out.println(typelist.toString());

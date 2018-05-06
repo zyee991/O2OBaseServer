@@ -1,10 +1,12 @@
 package com.o2o.web;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Manager;
 import com.o2o.service.ManagerRoleService;
 import com.o2o.service.ManagerService;
@@ -18,11 +20,13 @@ public class ManagerController extends Controller{
 	
 	public void index() {
 		setAttr("title","用户管理");
-		Page<Manager> page = managerService.paginate(getParaToInt(0, 1), 10);
-		setAttr("page",page);
 		render("index.html");
 	}
 	
+	public void tableData() {
+		List<Record> list = managerService.tableData();
+		renderJson(list);
+	}
 	public void view() {
 		String id = getPara("id");
 		Manager manager = managerService.findById(id);

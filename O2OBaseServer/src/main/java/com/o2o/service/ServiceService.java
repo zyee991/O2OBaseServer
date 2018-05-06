@@ -2,7 +2,9 @@ package com.o2o.service;
 
 import java.util.List;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Sectype;
 import com.o2o.common.model.Service;
 
@@ -38,5 +40,10 @@ public class ServiceService {
 
 	public List<Sectype> getTypeListById(String secTypeId) {
 		return typedao.find("select a.* from tb_sec_type a where a.sec_type_id=?",secTypeId);
+	}
+
+	public List<Record> tableData() {
+		List<Record>list=Db.find("select* from tb_service");
+		return list;
 	}
 }

@@ -4,16 +4,31 @@
 	<h4 class="modal-title" id="myModalLabel">派单信息</h4>
 </div>
 <div class="modal-body">
-	<form action="/service/save" method="post" class="form-horizontal"
+	<form action="/service_order/saveDispatch" method="post" class="form-horizontal"
 		role="form" id="form">
 		
+			<div class="form-group">
+			<label for="sec_type_id" class="col-sm-2 control-label">选择#(is_forward==0?"场外":"场内")技师</label>
+			<div class="col-sm-10">
+				<select class="form-control" id="type_list"
+					name="dispatch.mid">
+					<option name="service.secTypeId" value="">请选择</option>
+					 #for(muser:muserlist)
+					<option name="dispatch.mid" value="#(muser.mid)">#(muser.muser)</option>
+					#end
+				</select>
+			</div>
+		</div>
+	<input type="hidden" name="dispatch.serviceOrderId" value="#(service_order_id)"/>
+	<input type="hidden" name="dispatch.pacId" value="#(pac_id)"/>
+	<input type="hidden" name="dispatch.pacStime" value="#(pac_stime)"/>
 	</form>
 </div>
 <div class="modal-footer">
 	<button type="button" class="btn btn-default" data-dismiss="modal">
 		关闭</button>
 	<button type="button" class="btn btn-primary"
-		onclick="submitForm('form')">提交</button>
+		onclick="confirmSubmit('form')">提交</button>
 </div>
 
 

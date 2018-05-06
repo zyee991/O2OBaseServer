@@ -1,6 +1,10 @@
 package com.o2o.service;
 
+import java.util.List;
+
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.RecruitInfo;
 
 public class EmployeeService {
@@ -24,6 +28,10 @@ public class EmployeeService {
 	public void deleteById(String id) {
 		dao.deleteById(id);
 		
+	}
+	public List<Record> tableData() {
+		List<Record>list=Db.find("select*from tb_recruit_info");
+		return list;
 	}
 
 	

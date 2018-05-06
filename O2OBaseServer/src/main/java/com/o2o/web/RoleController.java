@@ -1,10 +1,12 @@
 package com.o2o.web;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Role;
 import com.o2o.service.RoleNavigationService;
 import com.o2o.service.RoleService;
@@ -16,11 +18,13 @@ public class RoleController extends Controller {
 	
 	public void index(){
 		setAttr("title","角色管理");
-		Page<Role> page = roleService.paginate(getParaToInt(0, 1), 10);
-		setAttr("page",page);
 		render("index.html");
 	}
 	
+	public void tableData(){
+		List<Record>list=roleService.tableData();
+		renderJson(list);
+	}
 	public void view() {
 		String id = getPara("id");
 		Role role= roleService.findById(id);

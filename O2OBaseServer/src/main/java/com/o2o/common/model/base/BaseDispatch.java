@@ -9,31 +9,31 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseDispatch<M extends BaseDispatch<M>> extends Model<M> implements IBean {
 
-	public M setPacId(java.lang.Integer pacId) {
+	public M setPacId(java.lang.String pacId) {
 		set("pac_id", pacId);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getPacId() {
-		return getInt("pac_id");
+	public java.lang.String getPacId() {
+		return getStr("pac_id");
 	}
 
-	public M setMid(java.lang.Integer mid) {
+	public M setMid(java.lang.String mid) {
 		set("mid", mid);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getMid() {
-		return getInt("mid");
+	public java.lang.String getMid() {
+		return getStr("mid");
 	}
 
-	public M setServiceOrderId(java.lang.Integer serviceOrderId) {
+	public M setServiceOrderId(java.lang.String serviceOrderId) {
 		set("service_order_id", serviceOrderId);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getServiceOrderId() {
-		return getInt("service_order_id");
+	public java.lang.String getServiceOrderId() {
+		return getStr("service_order_id");
 	}
 
 	public M setPacStime(java.util.Date pacStime) {

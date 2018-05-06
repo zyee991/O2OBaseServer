@@ -45,11 +45,18 @@ public class ShopService {
 		 */
 		return typelist;
 	}
+	
 	public List<Record> findByTypeId(String typeId) {
 		return Db.find("select* from tb_goodsinfo where sec_type_id=?",typeId);
 	}
+	
 	public List<Record> findGoodById(String goodsid) {
 		return Db.find("select * from tb_goodsinfo where goodsinfo_id=?",goodsid);
+	}
+	
+	public List<Record> tableData() {
+		List<Record>list=Db.find("select*from view_shop_on_all");
+		return list;
 	}
 	
 

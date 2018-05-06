@@ -2,7 +2,9 @@ package com.o2o.service;
 
 import java.util.List;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Manager;
 import com.o2o.common.model.Navigation;
 import com.o2o.common.model.Role;
@@ -40,6 +42,11 @@ private static final Role dao = new Role().dao();
 
 	public List<Role> findAllRoleByManager() {
 		List<Role> list = dao.find("SELECT * from tb_base_role");
+		return list;
+	}
+
+	public List<Record> tableData() {
+		List<Record>list=Db.find("select * from tb_base_role");
 		return list;
 	}
 	

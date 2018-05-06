@@ -217,3 +217,30 @@ function confirmSend(id) {
 		}
 	})
 }
+
+function confirmSubmit(form) {
+	$.confirm({
+		title : '提示',
+		content : '是否确认？',
+		buttons : {
+			ok : {
+				text : '确定',
+				btnClass : 'btn-success',
+				keys : [ 'enter' ],
+				action : function() {
+					$("#" + form).ajaxSubmit({
+						
+						async:true,
+						success : function() {
+							$("#myModal").modal('hide');
+						}
+					})
+				}
+			},
+			cancel : {
+				text : '取消',
+				btnClass : 'btn-danger'
+			}
+		}
+	})
+}

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Goodsinfo;
 import com.o2o.common.model.Sectype;
 import com.o2o.service.GoodsinfoService;
@@ -16,11 +17,13 @@ public class GoodsinfoController extends Controller {
 	// 显示
 	public void index() {
 		setAttr("title", "商品基本信息");
-		Page<Goodsinfo> page = goodsinfoService.paginate(getParaToInt(0, 1), 10);
-		setAttr("page", page);
 		render("index.html");
 	}
-
+    
+	public void tableData(){
+		List<Record>list=goodsinfoService.tableData();
+		renderJson(list);
+	}
 	// 查看
 	public void view() {
 		String id = getPara("id");

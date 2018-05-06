@@ -21,11 +21,13 @@ public class RealShopController extends Controller {
 	
 	public void index(){
 		setAttr("title","门店管理");
-		Page<Record>page=realShopService.paginage(getParaToInt(0, 1), 10);
-		setAttr("page",page);
 		render("index.html");
 	}
 	
+	public void tableData(){
+		List<Record>list=realShopService.tableData();
+		renderJson(list);
+	}
 	public void add(){
 		setAttr("newId",UUID.randomUUID());
 		List<Province> provincelist=realShopService.getProvinceList();

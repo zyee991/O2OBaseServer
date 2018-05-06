@@ -1,9 +1,11 @@
 package com.o2o.web;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.RecruitInfo;
 import com.o2o.service.EmployeeService;
 
@@ -13,9 +15,11 @@ static EmployeeService employeeService=new EmployeeService();
 //显示
 	public void index(){
 		setAttr("title","招聘信息");
-		Page<RecruitInfo> page=employeeService.paginage(getParaToInt(0, 1), 10);
-		setAttr("page",page);
 		render("index.html"); 
+	}
+	public void tableData(){
+		List<Record>list=employeeService.tableData();
+		renderJson(list);
 	}
 	
 	public void update(){

@@ -68,4 +68,10 @@ public class RealShopService {
 		
 	}
 
+	public List<Record> tableData() {
+		String wheresql=" where a.district_id=d.district_id and t.sec_type_id=a.realshop_type";
+		List<Record>list=Db.find("select a.*,d.district_name,t.sec_type_name from tb_district d,tb_sec_type t,tb_realshop a"+wheresql);
+		return list;
+	}
+
 }

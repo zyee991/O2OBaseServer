@@ -64,8 +64,8 @@ public class OrderService {
 				record.set("status_name", "待发货");
 			} else if (record.get("order_status").equals(1)) {
 				record.set("status_name", "待收货");
-			} else if (record.get("order_status").equals(2)) {
-				record.set("status_name", "待退货");
+			} else if (record.get("order_pay_status").equals(2)) {
+				record.set("status_name", "待退款");
 			} else {
 				record.set("status_name", "已完成");
 			} 

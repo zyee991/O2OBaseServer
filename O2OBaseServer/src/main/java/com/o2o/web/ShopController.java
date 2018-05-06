@@ -21,11 +21,13 @@ public class ShopController extends Controller {
 	static ShopService shopService=new ShopService();
 	public void index(){
 		setAttr("title","库存管理");
-		Page<Record> page=shopService.paginate1(getParaToInt(0, 1), 10);
-		setAttr("page",page);
 		render("index.html");
 	}
 	
+	public void tableData(){
+		List<Record> list=shopService.tableData();
+		renderJson(list);
+	}
 	public void add(){
 	 setAttr("newId",UUID.randomUUID());
 	 String typeId = getPara("typeId");

@@ -1,35 +1,59 @@
-#@layout()
-#define main()
-<div class="table-responsive">
- <table class="table table-striped">
-  <thead>
-    <tr>
-    <th class="col-sm-1">套餐名称</th>
-    <th class="col-sm-1">套餐价格</th>
-    <th class="col-sm-1">是否启用积分</th>
-    <th class="col-sm-1">套餐积分</th>
-    <th class="col-sm-1">套餐简短描述</th>
-   <th class="col-sm-1">操作   <a href="javascript:void(0);" onclick="modalShow('/taocan/add')" class="btn btn-warning btn-xs" role="button">添加</a>
-    </th>
-    </tr>
-  </thead>
-  <tbody>
-   #for(goodsinfo:page.list)
-   <tr id='#(goodsinfo.id)'>
-   <td>#(goodsinfo.goodsinfo_name)</td>
-   <td>#(goodsinfo.goodsinfo_primary_price)</td>
-   <td>#(goodsinfo.goodsinfo_points_flag ? '启用' : '不启用')</td>
-   <td>#(goodsinfo.goodsinfo_points)</td>
-   <td>#(goodsinfo.goodsinfo_desc)</td>
-   <td>
-   <a href="/taocan/update?id=#(goodsinfo.goodsinfoId)"  class="btn btn-success btn-xs" role="button">编辑</a>
-   <a href="/taocan/view?id=#(goodsinfo.goodsinfoId)"  class="btn btn-success btn-xs" role="button">查看</a> 
-   <a href="javascript:void(0);" onclick="remove('/taocan/delete?id=#(goodsinfo.goodsinfoId)')"  class="btn btn-danger btn-xs" role="button">删除</a>
-  </td>
-  </tr>
-  #end
-  </tbody>
- </table>
-   #@paginate(page.pageNumber, page.totalPage, "/taocan/")
+#@layout() #define main()
+<div id="myTabContent" class="tab-content">
+<div class="tab-pane fade in active" id="unpay">
+ <div id="toolbar" class="btn-group">
+      <button id="btn_add" type="button" class="btn btn-default" onclick="modalShow('/taocan/add')" >
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加
+       </button>
+       </button>
+       </div>
+			<div class="table-responsive">
+			<table id="table" class="table table-striped">
+			</table>
+		</div>
+	</div>
 </div>
 #end
+<script>
+	$("#table").bootstrapTable({
+	      method: "post",
+	      url: "/taocan/tableData",
+	      columns: [
+	          {
+	              title: '套餐名称',
+	              field: 'goodsinfo_name',
+            	  sortable:true
+	          },{
+	        	  title:'套餐类型',
+	        	  field:'sec_type_name'
+	          }, {
+	        	  title: '套餐价格',
+	        	  field: 'goodsinfo_primary_price'
+	          }, {
+	        	  title: '是否启用积分',
+	        	  field: 'goodsinfo_points_flag'
+	          }, {
+	        	  title: '积分',
+	        	  field: 'goodsinfo_points'
+	          }, {
+	        	  title: '商品简短描述',
+	        	  field: 'goodsinfo_points_flag',
+	        	  visible: false
+	          }, {
+	        	  title: "操作",
+	              align: 'center',
+	              valign: 'middle',
+	              formatter: function (value, row, index) {
+	            	  var result = "<a href=\"/taocan/update?id="+row.goodsinfo_id+"\"  class=\"btn btn-warning btn-xs\" role=\"button\">编辑</a>&nbsp;&nbsp;"+
+            						"<a href=\"javascript:void(0);\" onclick=\"remove('/taocan/delete?id=" + row.goodsinfo_id + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">删除</a>";
+	                  
+	            	  return result;
+	              }
+	          }
+	      ],
+	      searchAlign:'right',
+	      pagination:true,
+	      search:true,
+	      showRefresh:true
+	});
+</script>

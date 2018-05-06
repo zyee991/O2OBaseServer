@@ -1,39 +1,78 @@
-#@layout()
-#define main()
-<div class="table-responsive">
- <table class="table table-striped">
-  <thead>
-    <tr>
-    <th class="col-sm-1">招聘职位</th>
-    <th class="col-sm-1">工作性质</th>
-    <th class="col-sm-1">工作地点</th>
-    <th class="col-sm-1">要求学历</th>
-    <th class="col-sm-1">发布时间</th>
-    <th class="col-sm-1">截至时间</th>
-    <th class="col-sm-1">招聘人数</th>
-   <th class="col-sm-1">操作   <a href="javascript:void(0);" onclick="modalShow('/employee/add')" class="btn btn-warning btn-xs" role="button">添加</a>
-    </th>
-    </tr>
-  </thead>
-  <tbody>
-   #for(employeeinfo:page.list)
-   <tr id='#(employeeinfo.rid)'>
-   <td>#(employeeinfo.position)</td>
-   <td>#(employeeinfo.category)</td>
-   <td>#(employeeinfo.workplace)</td>
-   <td>#(employeeinfo.education)</td>
-   <td>#(employeeinfo.realse_time)</td>
-   <td>#(employeeinfo.Validity)</td>
-   <td>#(employeeinfo.number)</td>
-   <td>
-   <a href="javascript:void(0);" onclick="modalShow('/employee/update?id=#(employeeinfo.rid)')" class="btn btn-success btn-xs" role="button">编辑</a>
-   <a href="javascript:void(0);" onclick="remove('/employee/delete?id=#(employeeinfo.rid)')"  class="btn btn-danger btn-xs" role="button">删除</a>
-   <a href="/recruit?id=#(employeeinfo.rid)" class="btn btn-warning btn-xs" role="button">查看应聘者</a>
-  </td>
-  </tr>
-  #end
-  </tbody>
- </table>
-  #@paginate(page.pageNumber, page.totalPage, "/employee/")
+#@layout() #define main()
+<!-- <ul class="nav nav-tabs" id="myTab"> -->
+<!-- 	<li class="active"><a -->
+<!-- 		href="/goods_order?order_pay_status=0&order_status=0" -->
+<!-- 		data-toggle="tab"> 待支付</a></li> -->
+<!-- 	<li><a href="/goods_order?order_pay_status=2&order_status=0" -->
+<!-- 		data-toggle="tab">待退款</a></li> -->
+<!-- 	<li><a href="/goods_order?order_pay_status=1&order_status=0" -->
+<!-- 		data-toggle="tab">待发货</a></li> -->
+<!-- 	<li><a -->
+<!-- 		href="/goods_order?order_pay_status=1&order_status=3&another_status=5" -->
+<!-- 		data-toggle="tab">已完成</a></li> -->
+<!-- 	<li><a href="/goods_order?order_pay_status=1&order_status=4" -->
+<!-- 		data-toggle="tab">待退货</a></li> -->
+<!-- 	<li><a href="all" data-toggle="tab">全部</a></li> -->
+<!-- </ul> -->
+<div id="myTabContent" class="tab-content">
+<div class="tab-pane fade in active" id="unpay">
+ <div id="toolbar" class="btn-group">
+      <button id="btn_add" type="button" class="btn btn-default" onclick="modalShow('/employee/add')" >
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加
+       </button>
+       </button>
+       </div>
+			<div class="table-responsive">
+			<table id="table" class="table table-striped">
+			</table>
+		</div>
+	</div>
 </div>
 #end
+<script>
+	$("#table").bootstrapTable({
+	      method: "post",
+	      url: "/employee/tableData",
+	      columns: [
+	          {
+	              title: '招聘职位',
+	              field: 'position',
+            	  sortable:true
+	          },{
+	        	  title:'工作性质',
+	        	  field:'category'
+	          }, {
+	        	  title: '工作地点',
+	        	  field: 'workplace'
+	          }, {
+	        	  title: '要求学历',
+	        	  field: 'education'
+	          }, {
+	        	  title: '发布时间',
+	        	  field: 'realse_time'
+	          }, {
+	        	  title: '截止日期',
+	        	  field: 'Validity',
+	        	  visible: false
+	          }, {
+	        	  title: '招聘人数',
+	        	  field: 'number',
+	        	  visible: false
+	          },{
+	        	  title: "操作",
+	              align: 'center',
+	              valign: 'middle',
+	              formatter: function (value, row, index) {
+	            	  var result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/employee/update?id=" + row.rid + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">编辑</a>&nbsp;&nbsp;"+
+						"<a href=\"javascript:void(0);\" onclick=\"remove('/employee/delete?id=" + row.rid + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">删除</a>&nbsp;&nbsp;"+
+	                   "<a href=\"/recruit?id="+row.rid+"\"  class=\"btn btn-warning btn-xs\" role=\"button\">编辑</a>";
+	            	  return result;
+	              }
+	          }
+	      ],
+	      searchAlign:'right',
+	      pagination:true,
+	      search:true,
+	      showRefresh:true
+	});
+</script>

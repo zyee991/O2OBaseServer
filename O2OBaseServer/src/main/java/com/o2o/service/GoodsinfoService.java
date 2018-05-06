@@ -78,4 +78,16 @@ public class GoodsinfoService {
 		List<Record> taocanList = Db.find(sql,taocanId);
 		return taocanList;
 	}
+
+	public List<Record> tableData() {
+		String wheresql=" where a.sec_type_id=t.sec_type_id and a.goodsinfo_istaocan=0";
+		List<Record>list=Db.find("select a.*,t.sec_type_name from tb_goodsinfo a,tb_sec_type t"+wheresql);
+		return list;
+	}
+
+	public List<Record> tableDataofTaocan() {
+		String wheresql=" where a.sec_type_id=t.sec_type_id and a.goodsinfo_istaocan=1";
+		List<Record>list=Db.find("select a.*,t.sec_type_name from tb_goodsinfo a,tb_sec_type t"+wheresql);
+		return list;
+	}
 }
