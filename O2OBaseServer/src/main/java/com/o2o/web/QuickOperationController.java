@@ -9,15 +9,6 @@ public class QuickOperationController extends Controller {
 		render("msg.html");
 	}
 	
-	public void mail() {
-		setAttr("title","邮件");
-		render("mail.html");
-	}
-	
-	public void workmate() {
-		setAttr("title","同事");
-		render("workmate.html");
-	}
 	
 	public void chat() {
 		setAttr("title","聊天");
