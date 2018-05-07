@@ -20,9 +20,9 @@ import com.o2o.message.MessageHandler;
 
 @ServerEndpoint(value = "/wsmsg")
 public class WebSocketEndpoint {
-    // 用户map
+    // 用户map (key : sessionID value:GlobleUser)
     public static final HashMap<String,GlobalUser> USER_MAP = new HashMap<String,GlobalUser>();
-    // session Map
+    // session Map (key : userId value:Session)
     public static final HashMap<String,Session> SESSION_MAP = new HashMap<String,Session>();
         
 	@OnOpen
@@ -48,19 +48,20 @@ public class WebSocketEndpoint {
 	@OnClose
 	public void onClose(Session session) {
 		String userId = USER_MAP.get(session.getId()).getId();
-		System.out.println("客户端关闭连接------"+USER_MAP.get(session.getId()));
+		System.err.println("客户端关闭连接------"+USER_MAP.get(session.getId()));
 		USER_MAP.remove(session.getId());
 		SESSION_MAP.remove(userId);
 	}	
 	
 	@OnMessage
 	public void onMessage(String text, Session session) throws IOException {
+		System.out.println("客户端发送消息------" + USER_MAP.get(session.getId()));
 		Message message = MessageFactory.findMessage(text);
-		System.out.println(message);
+		MessageHandler.echo(message);
 	}
 	
 	@OnError
 	public void onError(Throwable throwable,Session session) {
-		System.out.println("客户端异常------"+USER_MAP.get(session.getId()));
+		System.err.println("客户端异常------"+USER_MAP.get(session.getId()));
 	}
 }

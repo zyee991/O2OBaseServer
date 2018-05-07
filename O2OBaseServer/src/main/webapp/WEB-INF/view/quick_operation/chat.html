@@ -1,35 +1,43 @@
 <div class="panel panel-info">
 	<div class="panel-heading">
 		<button type="button" class="close" onclick="closeFD()">></button>
-		<h4 class="panel-title">#(title)</h3>
+		<h4 class="panel-title">
+			#(title)
+			</h3>
 	</div>
 	<div class="panel-body">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>名称</th>
-					<th>城市</th>
-					<th>邮编</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Tanmay</td>
-					<td>Bangalore</td>
-					<td>560001</td>
-				</tr>
-				<tr>
-					<td>Sachin</td>
-					<td>Mumbai</td>
-					<td>400003</td>
-				</tr>
-				<tr>
-					<td>Uma</td>
-					<td>Pune</td>
-					<td>411027</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class='well' style="height:200px; width:300px;font-size:12px;overflow-y:scroll" id="msg-list">
+			#for(message : messageList)
+			<p>#(message.messageSender == user.id ? '' : '我')&nbsp;&nbsp;
+				#(message.messageSendTime) &nbsp;:&nbsp; #(message.messageContent)
+			</p> #end
+		</div>
+		<div class="row">
+			<div class="col-sm-9" style="padding-right:0px">
+				<textarea id="msgContent" style="width:100%"></textarea>
+			</div>
+			<div class="col-sm-3" style="padding-left:0px">
+				<button class="btn btn-success btn-lg" onclick="sendMessage('#(user.id)')">发送</button>
+			</div>
+		</div>
 	</div>
 </div>
+
+<script>
+	$(function(){
+		$('#msg-list').scrollTop( $('#msg-list')[0].scrollHeight);
+	})
+
+	function sendMessage(id) {
+		var url = '/quickOperation/sendMessage';
+		var msgContent = $("#msgContent").val();
+		var receiver = id;
+		$.post(url,{receiver:receiver,content:msgContent},function(data){
+			if(data != null) {
+				echo(ws,data.id);
+				$("#msgContent").val('');
+			}
+		})
+	}
+</script>
 

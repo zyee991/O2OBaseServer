@@ -1,5 +1,6 @@
 package com.o2o.message;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,6 +11,8 @@ import com.o2o.common.model.Message;
 public class MessageFactory {
 	private static final String ORDER = "tb_order";
 	private static final String SERVICE_ORDER = "tb_service_order";
+	
+	public static int BASE_TYPE = 1;
 	
 	private static final Message dao = new Message().dao();
 
@@ -32,6 +35,8 @@ public class MessageFactory {
 		message.setMessageReceiver(messageReceiver);
 		message.setMessageDataId(messageDataId);
 		message.setMessageTableName(messageTableName);
+		message.setMessageContent(messageContent);
+		message.setMessageSendTime(new Date());
 		if(messageReceivers != null && messageReceivers.size() > 0) {
 			String messageReceiverBatch = StringUtils.join(messageReceivers.toArray(), ",");
 			message.setMessageReceiverBatch(messageReceiverBatch);

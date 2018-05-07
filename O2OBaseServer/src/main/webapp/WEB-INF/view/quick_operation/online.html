@@ -1,0 +1,66 @@
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<button type="button" class="close" onclick="closeFD()">></button>
+		<h4 class="panel-title">
+			#(title)
+			</h3>
+	</div>
+	<div class="panel-body">
+		<table class="table table-hover" id="msg-table">
+
+		</table>
+	</div>
+</div>
+<script>
+	$("#msg-table")
+			.bootstrapTable(
+					{
+						method : "post",
+						url : "/quickOperation/onlineTableData",
+						columns : [
+								{
+									title : '类型',
+									field : 'type',
+									formatter : function(value, row, index) {
+										if (value == 1) {
+											return "系统用户";
+										} else if (value == 2) {
+											return "微信用户";
+										} else if (value == 3) {
+											return "app用户";
+										}
+									}
+								},
+								{
+									title : '姓名',
+									field : 'name'
+								},
+								{
+									title : "操作",
+									align : 'center',
+									valign : 'middle',
+									formatter : function(value, row, index) {
+										var result = "<a href=\"javascript:void(0);\" onclick=\"toChat('"
+												+ row.sessionId
+												+ "')\"  class=\"btn btn-xs\" role=\"button\"><span class='glyphicon glyphicon-comment' title='消息'></span></a>";
+										return result;
+									}
+								} ],
+						searchAlign : 'left',
+						pagination : true,
+						search : true,
+						showRefresh : true
+					});
+</script>
+<script>
+function toChat(id) {
+	$("#float-dialog").empty();
+	$("#tempForm").ajaxSubmit({
+		url : '/quickOperation/chat?sessionId='+id,
+		type : "post",
+		success : function(result) {
+			$("#float-dialog").append($(result));
+		}
+	})
+}
+</script>

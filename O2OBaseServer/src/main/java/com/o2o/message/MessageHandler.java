@@ -25,7 +25,7 @@ public class MessageHandler {
 				echoBatch(message);
 			}
 			message.setMessageSendTime(new Date());
-			message.save();
+			message.update();
 		}
 	}
 	

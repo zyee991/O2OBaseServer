@@ -12,6 +12,15 @@ function connect(url) {
     ws.onopen = function () {
     };
     ws.onmessage = function (event) {
+    	var id = event.data;
+    	if(id) {
+    		var url = "/quickOperation/getMsg";
+    		$.post(url,{id:id},function(data){
+    			if(data) {
+    				
+    			}
+    		})
+    	}
     };
     ws.onclose = function (event) {
     };

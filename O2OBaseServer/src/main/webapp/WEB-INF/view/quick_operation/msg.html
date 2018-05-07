@@ -16,24 +16,11 @@ $("#msg-table").bootstrapTable({
     columns: [
         {
             title: '创建时间',
-            field: 'service_create_time',
-      	  sortable:true
+            field: 'sendTime',
+      	  	sortable:true
         }, {
       	  title: '用户姓名',
       	  field: 'username'
-        }, {
-      	  title: '支付类型',
-      	  field: 'pay_type_name'
-        }, {
-      	  title: '支付金额',
-      	  field: 'order_price'
-        }, {
-      	  title: '状态',
-      	  field: 'service_order_status',
-      	  visible: false
-        }, {
-      	  title: '状态',
-      	  field: 'status_name',
         }, {
       	  title: "操作",
             align: 'center',
