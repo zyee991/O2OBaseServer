@@ -4,32 +4,58 @@
 		<h4 class="panel-title">#(title)</h3>
 	</div>
 	<div class="panel-body">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>名称</th>
-					<th>城市</th>
-					<th>邮编</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Tanmay</td>
-					<td>Bangalore</td>
-					<td>560001</td>
-				</tr>
-				<tr>
-					<td>Sachin</td>
-					<td>Mumbai</td>
-					<td>400003</td>
-				</tr>
-				<tr>
-					<td>Uma</td>
-					<td>Pune</td>
-					<td>411027</td>
-				</tr>
-			</tbody>
+		<table class="table table-hover" id="msg-table">
+			
 		</table>
 	</div>
 </div>
+<script>
+$("#msg-table").bootstrapTable({
+    method: "post",
+    url: "/quickOperation/msgTableData",
+    columns: [
+        {
+            title: '创建时间',
+            field: 'service_create_time',
+      	  sortable:true
+        }, {
+      	  title: '用户姓名',
+      	  field: 'username'
+        }, {
+      	  title: '支付类型',
+      	  field: 'pay_type_name'
+        }, {
+      	  title: '支付金额',
+      	  field: 'order_price'
+        }, {
+      	  title: '状态',
+      	  field: 'service_order_status',
+      	  visible: false
+        }, {
+      	  title: '状态',
+      	  field: 'status_name',
+        }, {
+      	  title: "操作",
+            align: 'center',
+            valign: 'middle',
+            formatter: function (value, row, index) {
+          	  var result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/service_order/orderdetail?id=" + row.service_order_id + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">订单详情</a>&nbsp;&nbsp;"+
+      						"<a href=\"javascript:void(0);\" onclick=\"modalShow('/service_order/paidandetail?id=" + row.service_order_id + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">派单详情</a>";
+          	  if(row.status_name == '待派单') {
+          		  result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/service_order/dispatch?id="+row.service_order_id+"&is_forward=0')\" class=\"btn btn-success btn-xs\" role=\"button\">厂内派单</a>&nbsp;&nbsp;"+
+          		   "<a href=\"javascript:void(0);\" onclick=\"modalShow('/service_order/dispatch?id="+row.service_order_id+"&is_forward=1')\" class=\"btn btn-success btn-xs\" role=\"button\">外派</a>&nbsp;&nbsp;"+
+          			"<a href=\"javascript:void(0);\" onclick=\"modalShow('/service_order/orderdetail?id=" + row.service_order_id + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">订单详情</a>&nbsp;&nbsp;"+
+          			"<a href=\"javascript:void(0);\" onclick=\"modalShow('/service_order/paidandetail?id=" + row.service_order_id + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">派单详情</a>";
+          	  }
+                
+          	  return result;
+            }
+        }
+    ],
+    searchAlign:'left',
+    pagination:true,
+    search:true,
+    showRefresh:true
+});
+</script>
 
