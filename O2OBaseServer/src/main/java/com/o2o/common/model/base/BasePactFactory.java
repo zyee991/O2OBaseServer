@@ -9,31 +9,31 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BasePactFactory<M extends BasePactFactory<M>> extends Model<M> implements IBean {
 
-	public M setPfaId(java.lang.Integer pfaId) {
+	public M setPfaId(java.lang.String pfaId) {
 		set("pfa_id", pfaId);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getPfaId() {
-		return getInt("pfa_id");
+	public java.lang.String getPfaId() {
+		return getStr("pfa_id");
 	}
 
-	public M setPid(java.lang.Integer pid) {
+	public M setPid(java.lang.String pid) {
 		set("pid", pid);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getPid() {
-		return getInt("pid");
+	public java.lang.String getPid() {
+		return getStr("pid");
 	}
 
-	public M setMid(java.lang.Integer mid) {
+	public M setMid(java.lang.String mid) {
 		set("mid", mid);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getMid() {
-		return getInt("mid");
+	public java.lang.String getMid() {
+		return getStr("mid");
 	}
 
 	public M setPfaStime(java.util.Date pfaStime) {
@@ -54,12 +54,12 @@ public abstract class BasePactFactory<M extends BasePactFactory<M>> extends Mode
 		return get("pfa_etime");
 	}
 
-	public M setPfaState(java.lang.Boolean pfaState) {
+	public M setPfaState(java.lang.Integer pfaState) {
 		set("pfa_state", pfaState);
 		return (M)this;
 	}
 	
-	public java.lang.Boolean getPfaState() {
+	public java.lang.Integer getPfaState() {
 		return get("pfa_state");
 	}
 

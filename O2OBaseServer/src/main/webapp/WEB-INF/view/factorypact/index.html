@@ -11,7 +11,7 @@
 <script>
 	$("#table").bootstrapTable({
 	      method: "post",
-	      url: "/recruit/tableData?id="+#(id),
+	      url: "/factoryPact/tableData?id=#(id)",
 	      columns: [
 	          {
 	              title: '租借人',
@@ -23,11 +23,11 @@
             	  sortable:true
 	          },{
 	              title: '归还时间',
-	              field: 'pe_etime',
+	              field: 'pfa_etime',
             	  sortable:true
 	          },{
 	              title: '支付金额 ',
-	              field: 'pe_etime',
+	              field: 'pfa_income',
             	  sortable:true
 	          },{
 	              title: '状态',

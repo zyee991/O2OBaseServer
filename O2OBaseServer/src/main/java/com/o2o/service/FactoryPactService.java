@@ -7,8 +7,8 @@ import com.jfinal.plugin.activerecord.Record;
 
 public class FactoryPactService {
 
-	public List<Record> tableData() {
-		String wheresql=" where m.mid=p.mid";
+	public List<Record> tableData(String id) {
+		String wheresql=" where m.mid=a.mid and pid='"+id + "'";
 		List<Record>list=Db.find("select a.*,m.muser from tb_pact_factory a,tb_muser m"+wheresql);
 		return list;
 	}

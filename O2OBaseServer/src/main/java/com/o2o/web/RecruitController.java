@@ -1,5 +1,7 @@
 package com.o2o.web;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,8 +30,12 @@ public class RecruitController extends Controller {
 		String status=getPara("status");
 		String pemid=getPara("pemid");
 		String rid=getPara("rid");
+		Date date=new Date();
+		SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		String time=df2.format(date);
 		PactEmploy pactemploy=PactEmploy.dao.findById(pemid);
 		pactemploy.setPeState(Integer.parseInt(status));
+		pactemploy.setPeEtime(date);
 		pactemploy.update();
 		renderJavascript("window.location.href='/recruit?rid='"+rid);
 	}

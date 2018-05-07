@@ -12,12 +12,13 @@ public class FactoryPactController extends Controller {
 	public void index(){
 		String id=getPara("id");
 		setAttr("id",id);
-		setAttr("title","场地租赁信息");
+		setAttr("title","场地租赁记录列表");
 		render("index.html");
 	}
 	
 	public void tableData(){
-		List<Record>list=factoryPactService.tableData();
+		String id=getPara("id");
+		List<Record>list=factoryPactService.tableData(id);
 		renderJson(factoryPactService.reload(list));
 	}
 }
