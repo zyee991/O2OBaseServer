@@ -17,11 +17,13 @@ public class FactoryController extends Controller {
 	public FactoryService factoryservice=new FactoryService();
 	public void index(){
 		setAttr("title","场地租赁");
-		Page<Record>page=factoryservice.paginate(getParaToInt(0,1),10);
-		setAttr("page",page);
 		render("index.html");
 	}
 	
+	public void tableData(){
+		List<Record>list=factoryservice.tableData();
+		renderJson(factoryservice.reload(list));
+	}
 	public void add(){
 		setAttr("newId",UUID.randomUUID());
 		List<Province>provincelist=factoryservice.getProvinceList();
@@ -46,5 +48,14 @@ public class FactoryController extends Controller {
 		System.out.println(rentfactory.toJson());
 		factoryservice.save(rentfactory);
 		renderJavascript("window.location.href='/factory'");
+	}
+	
+	public void update(){
+		String id=getPara("id");
+		List<Province>provincelist=factoryservice.getProvinceList();
+		setAttr("provincelist",provincelist);
+		List<Record>list=factoryservice.findById(id);
+		setAttr("list",list);
+		render("update.html");
 	}
 }

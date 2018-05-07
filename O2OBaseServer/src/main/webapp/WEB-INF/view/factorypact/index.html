@@ -14,19 +14,19 @@
 	      url: "/recruit/tableData?id="+#(id),
 	      columns: [
 	          {
-	              title: '应聘者',
+	              title: '租借人',
 	              field: 'muser',
             	  sortable:true
 	          }, {
-	              title: '期望薪资',
-	              field: 'pre_income',
+	              title: '开始时间',
+	              field: 'pfa_stime',
             	  sortable:true
 	          },{
-	              title: '应聘时间',
-	              field: 'pe_stime',
+	              title: '归还时间',
+	              field: 'pe_etime',
             	  sortable:true
 	          },{
-	              title: '审核时间',
+	              title: '支付金额 ',
 	              field: 'pe_etime',
             	  sortable:true
 	          },{
@@ -38,7 +38,8 @@
 	              align: 'center',
 	              valign: 'middle',
 	              formatter: function (value, row, index) {
-	            	  var result = "<a href=\"javascript:void(0);\" onclick=\"confirmEOK('" + row.pem_id+"',"+#(id)+","+row.pe_state + ")\"  class=\"btn btn-warning btn-xs\" role=\"button\">审核</a>&nbsp;&nbsp;";
+	            	  var result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/role/update?id=" + row.id + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">审核</a>&nbsp;&nbsp;"+
+            						"<a href=\"\" onclick=\"\"  class=\"btn btn-info btn-xs\" role=\"button\">查看附件</a>";
 	                  
 	            	  return result;
 	              }

@@ -17,8 +17,9 @@ public class ToolService {
 	private static final City citydao=new City().dao();
 	private static final District districtdao=new District().dao();
 	public Page<Record> paginate(Integer paraToInt, int i) {
-		Page<Record>page=Db.paginate(i, i, "select t.*,d.district_name,s.sec_type_name as type_name","from tb_rent_tools t,tb_district d,tb_sec_type s"
-				+ " where t.address_tid=d.district_id and s.sec_type_id=t.type_t");
+		String wheresql=" where t.address_tid=d.district_id and s.sec_type_id=t.typ_id";
+		Page<Record>page=Db.paginate(paraToInt, i, "select t.*,d.district_name,s.sec_type_name as type_name"," from tb_rent_tools t,tb_district d,tb_sec_type s"
+				+wheresql);
 		return page;
 	}
 	public List<Province> getProvinceList() {

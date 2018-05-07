@@ -9,40 +9,31 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BasePactEmploy<M extends BasePactEmploy<M>> extends Model<M> implements IBean {
 
-	public M setPemId(java.lang.Integer pemId) {
+	public M setPemId(java.lang.String pemId) {
 		set("pem_id", pemId);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getPemId() {
-		return getInt("pem_id");
+	public java.lang.String getPemId() {
+		return getStr("pem_id");
 	}
 
-	public M setRid(java.lang.Integer rid) {
+	public M setRid(java.lang.String rid) {
 		set("rid", rid);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getRid() {
-		return getInt("rid");
+	public java.lang.String getRid() {
+		return getStr("rid");
 	}
 
-	public M setMid(java.lang.Integer mid) {
+	public M setMid(java.lang.String mid) {
 		set("mid", mid);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getMid() {
-		return getInt("mid");
-	}
-
-	public M setCreateTime(java.util.Date createTime) {
-		set("create_time", createTime);
-		return (M)this;
-	}
-	
-	public java.util.Date getCreateTime() {
-		return get("create_time");
+	public java.lang.String getMid() {
+		return getStr("mid");
 	}
 
 	public M setPeStime(java.util.Date peStime) {
@@ -63,13 +54,13 @@ public abstract class BasePactEmploy<M extends BasePactEmploy<M>> extends Model<
 		return get("pe_etime");
 	}
 
-	public M setPeState(java.lang.Boolean peState) {
+	public M setPeState(java.lang.Integer peState) {
 		set("pe_state", peState);
 		return (M)this;
 	}
 	
-	public java.lang.Boolean getPeState() {
-		return get("pe_state");
+	public java.lang.Integer getPeState() {
+		return getInt("pe_state");
 	}
 
 	public M setPreIncome(java.lang.Float preIncome) {
@@ -79,33 +70,6 @@ public abstract class BasePactEmploy<M extends BasePactEmploy<M>> extends Model<
 	
 	public java.lang.Float getPreIncome() {
 		return getFloat("pre_income");
-	}
-
-	public M setJobType(java.lang.String jobType) {
-		set("job_type", jobType);
-		return (M)this;
-	}
-	
-	public java.lang.String getJobType() {
-		return getStr("job_type");
-	}
-
-	public M setWorkAddress(java.lang.String workAddress) {
-		set("work_address", workAddress);
-		return (M)this;
-	}
-	
-	public java.lang.String getWorkAddress() {
-		return getStr("work_address");
-	}
-
-	public M setAttachment(java.lang.String attachment) {
-		set("attachment", attachment);
-		return (M)this;
-	}
-	
-	public java.lang.String getAttachment() {
-		return getStr("attachment");
 	}
 
 }

@@ -54,4 +54,22 @@ public abstract class BaseDispatch<M extends BaseDispatch<M>> extends Model<M> i
 		return get("pac_etime");
 	}
 
+	public M setType(java.lang.String type) {
+		set("type", type);
+		return (M)this;
+	}
+	
+	public java.lang.String getType() {
+		return getStr("type");
+	}
+
+	public M setFatId(java.lang.String fatId) {
+		set("fat_id", fatId);
+		return (M)this;
+	}
+	
+	public java.lang.String getFatId() {
+		return getStr("fat_id");
+	}
+
 }

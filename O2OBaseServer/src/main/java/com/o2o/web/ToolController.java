@@ -18,6 +18,7 @@ public class ToolController extends Controller {
 	public void index(){
 	setAttr("title","工具租赁列表");
 	Page<Record>page=toolservice.paginate(getParaToInt(0,1),10);
+	System.out.println(page.getList().toString());
 	setAttr("page",page);
 	render("index.html");
 	}

@@ -38,7 +38,7 @@ public class ServiceOrderService {
 
 	public List<Record> finMuserList(String m_type) {
 		
-		return Db.find("select*from tb_muser where m_type=?",m_type);
+		return Db.find("select*from tb_muser where order_state=1 and m_type=?",m_type);
 	}
 
 	public void save(Dispatch dispatch) {

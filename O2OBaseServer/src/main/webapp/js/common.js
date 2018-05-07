@@ -244,3 +244,43 @@ function confirmSubmit(form) {
 		}
 	})
 }
+
+//审核通过
+function confirmEOK(pemid,rid,state){
+	var url='/recruit/confirmOK';
+	if(state!='1'){
+		$.alert("请选择待审批记录");
+		return;
+	}else{
+		$.confirm({
+			title:'审核',
+			content:'是否确认?',
+			buttons:{
+				ok:{
+					text:'通过',
+					btnClass:'btn-success',
+					keys:['enter'],
+					action:function(){
+						$.post(url, {"status":2,"pemid":pemid,"rid":rid},function(){
+								$.alert("审核成功:通过");
+							})
+					}
+				},
+				cancel:{
+					text:'不通过',
+					btnClass:'btn-danger',
+	                action:function(){
+	                	$.post({
+	                		url:url,
+	                		data:{"status":3,"pemid":pemid,"rid":rid},
+	                		async:true,
+	                		success:function(){
+	                			$.alert("审核成功:不通过");
+	                		}
+	                	})
+	                }
+				}
+			}
+		});
+	}
+}

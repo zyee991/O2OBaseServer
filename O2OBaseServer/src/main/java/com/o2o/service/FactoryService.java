@@ -38,4 +38,27 @@ public class FactoryService {
 	public void save(RentFactory rentFactory) {
 		rentFactory.save();	
 	}
+	
+	public List<Record> findById(String id){
+		String wheresql=" where a.address_pid=v.district_id";
+		List<Record>list=Db.find("select*from tb_rent_factory a,view_address v"+wheresql);
+		return list;
+	}
+
+	public List<Record> tableData() {
+		String wheresql=" where f.address_pid=d.district_id";
+		List<Record>list=Db.find("select f.*,d.district_name from tb_district d,tb_rent_factory f"+wheresql);
+		return list;
+	}
+
+	public List<Record> reload(List<Record> list) {
+			for(Record record:list) {
+				if(record.get("state").equals(0) ) {
+					record.set("status_name", "未租");
+				} else if (record.get("state").equals(1)) {
+					record.set("status_name", "已租");
+				} 
+			}
+		return list;
+	}
 }
