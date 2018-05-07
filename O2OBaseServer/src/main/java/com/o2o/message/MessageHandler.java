@@ -24,8 +24,6 @@ public class MessageHandler {
 			if(StringUtils.isNoneBlank(receiverBatch)) {
 				echoBatch(message);
 			}
-			message.setMessageSendTime(new Date());
-			message.update();
 		}
 	}
 	

@@ -9,7 +9,7 @@
 		<div class='well' style="height:200px; width:300px;font-size:12px;overflow-y:scroll" id="msg-list">
 			#for(message : messageList)
 			<p>#(message.messageSender == user.id ? '' : '我')&nbsp;&nbsp;
-				#(message.messageSendTime) &nbsp;:&nbsp; #(message.messageContent)
+				<span style="color:green">#(message.messageSendTime)</span> &nbsp;:&nbsp; #(message.messageContent)
 			</p> #end
 		</div>
 		<div class="row">
@@ -34,8 +34,10 @@
 		var receiver = id;
 		$.post(url,{receiver:receiver,content:msgContent},function(data){
 			if(data != null) {
-				echo(ws,data.id);
+				echo(ws,data.message_id);
 				$("#msgContent").val('');
+				var element = "<p>我&nbsp;&nbsp;<span style='color:green'>" + new Date().format("yyyy-MM-dd hh:mm:ss") + "</span> &nbsp;:&nbsp; "+data.message_content+"</p>";
+				$("#msg-list").append($(element));
 			}
 		})
 	}

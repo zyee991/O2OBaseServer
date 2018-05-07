@@ -64,15 +64,16 @@ public class QuickOperationController extends Controller {
 		String content = getPara("content");
 		Message message = MessageFactory.createMessage("消息", BaseUtils.getManager(this).getId(), receiver, null, null, content, null);
 		message.save();
-		Map<String,String> map = new HashMap<>();
-		map.put("id", message.getMessageId());
-		renderJson(map);
+		renderJson(message);
 	}
 	
 	
 	public void getMsg() {
 		String id = getPara("id");
 		Message message = service.findOne(id);
+		String receiver = message.getMessageReceiver();
+		String sessionId = WebSocketEndpoint.SESSION_MAP.get(receiver).getId();
+		message.put("session_id", sessionId);
 		renderJson(message);
 	}
 }
