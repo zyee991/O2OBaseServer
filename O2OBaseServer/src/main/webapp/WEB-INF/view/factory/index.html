@@ -20,7 +20,6 @@
       <button id="btn_add" type="button" class="btn btn-default" onclick="modalShow('/factory/add')" >
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加
        </button>
-       </button>
        </div>
 			<div class="table-responsive">
 			<table id="table" class="table table-striped">
@@ -74,9 +73,10 @@
 	              }
 	          }
 	      ],
-	      searchAlign:'right',
+	      searchAlign:'left',
 	      pagination:true,
 	      search:true,
-	      showRefresh:true
+	      toolbar:'#toolbar',
+	      toolbarAlign:'right'
 	});
 </script>

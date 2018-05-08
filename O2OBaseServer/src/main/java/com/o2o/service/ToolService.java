@@ -34,4 +34,19 @@ public class ToolService {
 		
 		return districtdao.find("select*from tb_district where city_id=?",cityId);
 	}
+	public List<Record> tableData() {
+		String wheresql=" where t.address_tid=d.district_id";
+		List<Record>list=Db.find("select t.*,d.district_name from tb_rent_tools t,tb_district d");
+		return list;
+	}
+	public List<Record> reload(List<Record> list) {
+		for(Record record:list) {
+			if(record.get("state").equals(0)) {
+				record.set("status_name", "未租");
+			} else {
+				record.set("status_name", "在租中");
+			}
+		}
+		return list;
+	}
 }

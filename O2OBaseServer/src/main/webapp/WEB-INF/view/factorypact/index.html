@@ -38,8 +38,8 @@
 	              align: 'center',
 	              valign: 'middle',
 	              formatter: function (value, row, index) {
-	            	  var result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/role/update?id=" + row.id + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">审核</a>&nbsp;&nbsp;"+
-            						"<a href=\"\" onclick=\"\"  class=\"btn btn-info btn-xs\" role=\"button\">查看附件</a>";
+                    
+	            	  var result = "<a href=\"javascript:void(0);\" onclick=\"confirmPOK('"+row.pfa_id+"','#(id)',"+row.pfa_state+")\"  class=\"btn btn-warning btn-xs\" role=\"button\">审核</a>&nbsp;&nbsp;";
 	                  
 	            	  return result;
 	              }

@@ -127,4 +127,23 @@ public class ServiceOrderController extends Controller {
 		renderJavascript("window.location.href='/service_order'");
 	}
 	
+////确认退款   状态改为3，订单状态改为3
+	public void confirmSRefund(){
+		String orderid=getPara("id");
+		String paystatus=getPara("paystatus");
+		String orderstatus=getPara("orderstatus");
+		Map<String,String> resultMap = new HashMap<>();
+		ServiceOrder order = serviceOrderService.findOne(orderid);
+		if(order!=null){
+			order.setServicePayStatus(Integer.parseInt(paystatus));
+			order.setServiceOrderStatus(Integer.parseInt(orderstatus));
+			resultMap.put("status", "1");
+			resultMap.put("content","退款成功成功");
+		}else {
+			resultMap.put("status", "4");
+			resultMap.put("content", "订单信息不存在");
+		}
+		renderJson(resultMap);
+	}
+	
 }

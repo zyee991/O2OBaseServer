@@ -33,6 +33,7 @@ public class GoodsOrderController extends Controller {
 		renderJson(orderService.reload(list));
 	}
 
+	//服务订单状态-----0-待处理 1--待确认   2----已完成
 	public void confirm() {
 		Map<String,String> resultMap = new HashMap<>();
 		String mobanurl = ApplicationProperties.get("wxTemplateUrl");
@@ -92,11 +93,37 @@ public class GoodsOrderController extends Controller {
 		renderJson(resultMap);
 
 	}
-
-	public void orderdetail() {
+	
+	////确认退款   状态改为3，订单状态改为3
+	public void confirmRefund(){
+		String id=getPara("id");
+		String paystatus=getPara("paystatus");
+		String orderstatus=getPara("orderstatus");
+		Map<String,String> resultMap = new HashMap<>();
+		Order order=orderService.findOne(id);
+		if(order!=null){
+			order.setOrderPayStatus(Integer.parseInt(paystatus));
+			order.setOrderStatus(Integer.parseInt(orderstatus));
+			resultMap.put("status", "1");
+			resultMap.put("content","退款成功成功");
+		}else {
+			resultMap.put("status", "4");
+			resultMap.put("content", "订单信息不存在");
+		}
+		renderJson(resultMap);
+	}
+	public void goodsdetail() {
 		String id = getPara("id");
 		List<Record> goodslist = orderService.findGoodsByOrderId(id);
-		setAttr("goodslist", goodslist);
+		setAttr("goodslist",goodslist);
+		render("goods_detail.html");
+	}
+	
+	public void orderdetail(){
+		String id=getPara("id");
+		List<Record> list=orderService.findOrderByOrderId(id);
+		setAttr("list",list);
 		render("order_detail.html");
 	}
+	
 }

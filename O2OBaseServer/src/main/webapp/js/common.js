@@ -194,6 +194,7 @@ function closeFD() {
 	$("#float-dialog").empty();
 }
 
+//确认发货
 function confirmSend(id) {
 	var url = '/goods_order/confirm';
 	$.confirm({
@@ -218,6 +219,56 @@ function confirmSend(id) {
 	})
 }
 
+//确认退款   状态改为3，订单状态改为3
+function confirmRefuncd(id){
+	var url='/goods_order/confirmRefun';
+	$.confirm({
+		title:'提示',
+		content:'是否确认退款？',
+		buttons:{
+			ok:{
+				text :'确定',
+				btnClass :'btn-success',
+				keys :[ 'enter' ],
+				action :function(){
+					$.post(url,{id:id,paystatus:3,orderstatus:3},function(data){
+						$.alert(data.content);
+					});
+				}
+			},
+			cancel:{
+				text: '取消',
+				btnClass : 'btn-danger'
+			}
+		}
+	})
+}
+
+//服务订单确认退款   状态改为3，订单状态改为3
+//服务状态    0---待使用  1---带评论  2---已完成
+function confirmRefuncd(id){
+	var url='/service_order/confirmSRefun';
+	$.confirm({
+		title:'提示',
+		content:'是否确认退款？',
+		buttons:{
+			ok:{
+				text :'确定',
+				btnClass :'btn-success',
+				keys :[ 'enter' ],
+				action :function(){
+					$.post(url,{id:id,paystatus:3,orderstatus:2},function(data){
+						$.alert(data.content);
+					});
+				}
+			},
+			cancel:{
+				text: '取消',
+				btnClass : 'btn-danger'
+			}
+		}
+	})
+}
 function confirmSubmit(form) {
 	$.confirm({
 		title : '提示',
@@ -285,6 +336,47 @@ function confirmEOK(pemid,rid,state){
 	}
 }
 
+//审核通过
+function confirmPOK(pfaid,pid,state){
+	//
+	var url='/factoryPact/confirmOK';
+	if(state!='0'){
+		$.alert("请选择待审批记录");
+		return;
+	}else{
+		$.confirm({
+			title:'审核',
+			content:'是否确认?',
+			buttons:{
+				ok:{
+					text:'通过',
+					btnClass:'btn-success',
+					keys:['enter'],
+					action:function(){
+						$.post(url, {"status":1,"pfaid":pfaid,"pid":pid},function(){
+								$.alert("审核成功:通过");
+							})
+					}
+				},
+				cancel:{
+					text:'不通过',
+					btnClass:'btn-danger',
+	                action:function(){
+	                	$.post({
+	                		url:url,
+	                		data:{"status":2,"pfaid":pfaid,"pid":pid},
+	                		async:true,
+	                		success:function(){
+	                			$.alert("审核成功:不通过");
+	                		}
+	                	})
+	                }
+				}
+			}
+		});
+	}
+}
+
 /**
  * 日期格式化 用法new Date().format('yyyy-MM-dd HH:ss:mm')
  */
@@ -307,4 +399,6 @@ Date.prototype.format = function(fmt) {
         }
     }
    return fmt; 
-}    
+}   
+
+

@@ -66,7 +66,9 @@ public class OrderService {
 				record.set("status_name", "待收货");
 			} else if (record.get("order_pay_status").equals(2)) {
 				record.set("status_name", "待退款");
-			} else {
+			} else if(record.get("order_status").equals(0)&&record.get("order_pay_status").equals(3)){
+				record.set("status_name", "退款成功");
+			}else {
 				record.set("status_name", "已完成");
 			} 
 		}
@@ -76,5 +78,11 @@ public class OrderService {
 
 	public Order findOne(String orderId) {
 		return dao.findById(orderId);
+	}
+
+	public List<Record> findOrderByOrderId(String id) {
+		String wheresql = " where a.user_openid=u.user_openid and t.sec_type_id=a.order_pay_type and a.district_id=d.district_id  and a.order_id="+id;
+		List<Record>list=Db.find("select a.*,u.user_nickname,t.sec_type_name as pay_type_name from tb_order a,tb_user u,tb_sec_type t,view_address d"+wheresql);
+		return list;
 	}
 } 

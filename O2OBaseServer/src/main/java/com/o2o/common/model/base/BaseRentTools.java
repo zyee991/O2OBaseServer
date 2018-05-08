@@ -9,22 +9,22 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseRentTools<M extends BaseRentTools<M>> extends Model<M> implements IBean {
 
-	public M setTid(java.lang.Integer tid) {
+	public M setTid(java.lang.String tid) {
 		set("tid", tid);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getTid() {
-		return getInt("tid");
+	public java.lang.String getTid() {
+		return getStr("tid");
 	}
 
-	public M setTypId(java.lang.Integer typId) {
+	public M setTypId(java.lang.String typId) {
 		set("typ_id", typId);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getTypId() {
-		return getInt("typ_id");
+	public java.lang.String getTypId() {
+		return getStr("typ_id");
 	}
 
 	public M setNameT(java.lang.String nameT) {
@@ -45,13 +45,13 @@ public abstract class BaseRentTools<M extends BaseRentTools<M>> extends Model<M>
 		return getStr("type_t");
 	}
 
-	public M setAddressTid(java.lang.Integer addressTid) {
+	public M setAddressTid(java.lang.String addressTid) {
 		set("address_tid", addressTid);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getAddressTid() {
-		return getInt("address_tid");
+	public java.lang.String getAddressTid() {
+		return getStr("address_tid");
 	}
 
 	public M setContact(java.lang.String contact) {
@@ -81,13 +81,31 @@ public abstract class BaseRentTools<M extends BaseRentTools<M>> extends Model<M>
 		return getStr("palce");
 	}
 
-	public M setTPrice(java.lang.Float tPrice) {
-		set("t_price", tPrice);
+	public M setPriceT(java.lang.Float priceT) {
+		set("price_t", priceT);
 		return (M)this;
 	}
 	
-	public java.lang.Float getTPrice() {
-		return getFloat("t_price");
+	public java.lang.Float getPriceT() {
+		return getFloat("price_t");
+	}
+
+	public M setState(java.lang.Integer state) {
+		set("state", state);
+		return (M)this;
+	}
+	
+	public java.lang.Integer getState() {
+		return getInt("state");
+	}
+
+	public M setStock(java.lang.Integer stock) {
+		set("stock", stock);
+		return (M)this;
+	}
+	
+	public java.lang.Integer getStock() {
+		return getInt("stock");
 	}
 
 }

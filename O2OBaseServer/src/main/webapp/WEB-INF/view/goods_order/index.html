@@ -65,12 +65,18 @@
 	              align: 'center',
 	              valign: 'middle',
 	              formatter: function (value, row, index) {
-	            	  var result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/goods_order/orderdetail?id=" + row.order_id + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">订单详情</a>&nbsp;&nbsp;"+
-            						"<a href=\"javascript:void(0);\" onclick=\"modalShow('/goods_order/paidandetail?id=" + row.order_id + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">派单详情</a>";
+	            	  var result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/goods_order/goodsdetail?id=" + row.order_id + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">商品详情</a>&nbsp;&nbsp;"+
+            						"<a href=\"javascript:void(0);\" onclick=\"modalShow('/goods_order/orderdetail?id=" + row.order_id + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">订单详情</a>";
 	            	  if(row.status_name == '待发货') {
 	            		  result = "<a href=\"javascript:void(0);\" onclick=\"confirmSend('" + row.order_id + "')\" class=\"btn btn-success btn-xs\" role=\"button\">确认发货</a>&nbsp;&nbsp;"+
-                			"<a href=\"javascript:void(0);\" onclick=\"modalShow('/goods_order/orderdetail?id=" + row.order_id + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">订单详情</a>&nbsp;&nbsp;"+
-                			"<a href=\"javascript:void(0);\" onclick=\"modalShow('/goods_order/paidandetail?id=" + row.order_id + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">派单详情</a>";
+                			"<a href=\"javascript:void(0);\" onclick=\"modalShow('/goods_order/goodsdetail?id=" + row.order_id + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">商品详情</a>&nbsp;&nbsp;"+
+                			"<a href=\"javascript:void(0);\" onclick=\"modalShow('/goods_order/orderdetail?id=" + row.order_id + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">订单详情</a>";
+	            	  }
+	            	  if(row.status_name='待退款'){
+	            		  
+	            		  result = "<a href=\"javascript:void(0);\" onclick=\"confirmRefuncd('" + row.order_id + "')\" class=\"btn btn-success btn-xs\" role=\"button\">确认退款</a>&nbsp;&nbsp;"+
+              			"<a href=\"javascript:void(0);\" onclick=\"modalShow('/goods_order/goodsdetail?id=" + row.order_id + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">商品详情</a>&nbsp;&nbsp;"+
+              			"<a href=\"javascript:void(0);\" onclick=\"modalShow('/goods_order/orderdetail?id=" + row.order_id + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">订单详情</a>"; 
 	            	  }
 	                  
 	            	  return result;

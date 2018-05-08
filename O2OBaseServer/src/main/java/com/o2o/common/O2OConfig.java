@@ -34,6 +34,7 @@ import com.o2o.web.ServiceOrderController;
 import com.o2o.web.ShopController;
 import com.o2o.web.TaocanController;
 import com.o2o.web.ToolController;
+import com.o2o.web.ToolsPactController;
 import com.o2o.web.TreeController;
 import com.o2o.websocket.WebSocketHandler;
 
@@ -97,6 +98,7 @@ public class O2OConfig extends JFinalConfig {
 		me.add("/tools",ToolController.class,"WEB-INF/view/tool");
 		me.add("/quickOperation", QuickOperationController.class,"WEB-INF/view/quick_operation");
 		me.add("/factoryPact",FactoryPactController.class,"WEB-INF/view/factorypact");
+		me.add("/pacttools",ToolsPactController.class,"WEB-INF/view/toolpact");
 	}
 	
 	public void configEngine(Engine me) {

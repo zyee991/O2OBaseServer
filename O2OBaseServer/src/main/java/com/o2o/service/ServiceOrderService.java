@@ -22,12 +22,12 @@ public class ServiceOrderService {
 			if(record.get("service_order_status").equals(0)&&record.get("service_pay_status").equals(1)){
 				record.set("status_name", "待派单");
 			}else if(record.get("service_order_status").equals(0)&&record.get("service_pay_status").equals(0)){
-				record.set("status-name", "待支付");
+				record.set("status_name", "待支付");
 			}else if(record.get("service_order_status").equals(1)){
-				record.set("status_name", "待验收");
+				record.set("status_name", "待评论");
 			}else if(record.get("service_pay_status").equals("2")){
 				record.set("status_name", "待退款");
-			}else if(record.get("service_pay_status").equals(3)&&record.get("service_order_status").equals(3)){
+			}else if(record.get("service_pay_status").equals(3)&&record.get("service_order_status").equals(2)){
 				record.set("status_name","退款完成");
 			}else {
 				record.set("status_name","已完成");

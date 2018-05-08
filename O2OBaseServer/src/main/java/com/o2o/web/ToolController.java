@@ -17,12 +17,13 @@ public class ToolController extends Controller {
 	
 	public void index(){
 	setAttr("title","工具租赁列表");
-	Page<Record>page=toolservice.paginate(getParaToInt(0,1),10);
-	System.out.println(page.getList().toString());
-	setAttr("page",page);
 	render("index.html");
 	}
 	
+	public void tableData(){
+		List<Record>list=toolservice.tableData();
+		renderJson(toolservice.reload(list));
+	}
 	public void add(){
 		setAttr("newId",UUID.randomUUID());
 		List<Province>provincelist=toolservice.getProvinceList();
