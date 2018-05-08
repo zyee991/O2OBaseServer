@@ -16,6 +16,7 @@ import com.o2o.common.model._MappingKit;
 import com.o2o.index.IndexController;
 import com.o2o.interceptor.LoginInterceptor;
 import com.o2o.interceptor.NavigationInterceptor;
+import com.o2o.web.EchartsController;
 import com.o2o.web.EmployeeController;
 import com.o2o.web.FactoryController;
 import com.o2o.web.FactoryPactController;
@@ -99,6 +100,8 @@ public class O2OConfig extends JFinalConfig {
 		me.add("/quickOperation", QuickOperationController.class,"WEB-INF/view/quick_operation");
 		me.add("/factoryPact",FactoryPactController.class,"WEB-INF/view/factorypact");
 		me.add("/pacttools",ToolsPactController.class,"WEB-INF/view/toolpact");
+		me.add("/echarts",EchartsController.class,"WEB-INF/view/echarts");
+		
 	}
 	
 	public void configEngine(Engine me) {

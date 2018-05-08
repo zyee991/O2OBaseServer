@@ -1,7 +1,6 @@
 package com.o2o.message;
 
 import java.io.IOException;
-import java.util.Date;
 import javax.websocket.Session;
 
 import org.apache.commons.lang3.StringUtils;
