@@ -12,7 +12,6 @@ function connect(url) {
     ws.onopen = function () {
     };
     ws.onmessage = function (event) {
-    	console.log(event)
     	var id = event.data;
     	if(id) {
     		var url = "/quickOperation/getMsg";

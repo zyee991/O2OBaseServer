@@ -9,13 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.o2o.common.model.Message;
 
 public class MessageFactory {
-	private static final String ORDER = "tb_order";
-	private static final String SERVICE_ORDER = "tb_service_order";
 	
-	public static int BASE_TYPE = 1;
-	
-	private static final Message dao = new Message().dao();
-
 	/**
 	 * 创建消息
 	 * @param messageName
@@ -43,10 +37,4 @@ public class MessageFactory {
 		}
 		return message;
 	}
-	
-	public static Message findMessage(String id) {
-		Message message = dao.findById(id);
-		return message;
-	}
-	
 }

@@ -1,5 +1,85 @@
-#@layout()
-#define main()
-<h1>欢迎使用O2O汽车快修平台</h1>
+#@layout() #define main()
+<div id="goodCount" style="width: 100%; height: 600px;"></div>
+<div id="serviceCount" style="width: 100%; height: 600px;"></div>
+<script>
+	//基于准备好的dom，初始化echarts实例
+	var goodCount = echarts.init(document.getElementById('goodCount'));
+	var sizeValue = "57%";
+	
+	$.get('/echarts/goodsCount').done(function (data) {
+		goodCount.setOption({
+	        
+	        title: {
+	        	text:"商品销售统计"
+	        },
+	        legend: {},
+	        tooltip: {},
+	        dataset: {
+	            dimensions: ['商品', '销量','评分','销售额'],
+	            source: data
+	        },
+	        grid: [
+	        	{right: sizeValue, bottom: sizeValue},
+	            {left: sizeValue, bottom: sizeValue},
+	            {right: sizeValue, top: sizeValue},
+	        ],
+	        xAxis: [
+	        	{type: 'category', gridIndex: 0},
+	            {type: 'category', gridIndex: 1},
+	            {type: 'category', gridIndex: 2},
+	            
+	        ],
+	        yAxis: [
+	        	{gridIndex: 0},
+	            {gridIndex: 1},
+	            {gridIndex: 2}
+	        ],
+	        series: [
+	        	{type: 'bar', xAxisIndex: 0, yAxisIndex: 0},
+	        	{type: 'bar', xAxisIndex: 1, yAxisIndex: 1},
+	        	{type: 'bar', xAxisIndex: 2, yAxisIndex: 2},
+	        ]
+	        
+	    });
+	});
+	
+	var serviceCount = echarts.init(document.getElementById('serviceCount'));
 
+	$.get('/echarts/serviceCount').done(function (data) {
+		serviceCount.setOption({
+	        
+	        title: {
+	        	text:"服务销售统计"
+	        },
+	        legend: {},
+	        tooltip: {},
+	        dataset: {
+	            dimensions: ['服务', '销量','评分','销售额'],
+	            source: data
+	        },
+	        grid: [
+	        	{right: sizeValue, bottom: sizeValue},
+	            {left: sizeValue, bottom: sizeValue},
+	            {right: sizeValue, top: sizeValue},
+	        ],
+	        xAxis: [
+	        	{type: 'category', gridIndex: 0},
+	            {type: 'category', gridIndex: 1},
+	            {type: 'category', gridIndex: 2},
+	            
+	        ],
+	        yAxis: [
+	        	{gridIndex: 0},
+	            {gridIndex: 1},
+	            {gridIndex: 2}
+	        ],
+	        series: [
+	        	{type: 'bar', xAxisIndex: 0, yAxisIndex: 0},
+	        	{type: 'bar', xAxisIndex: 1, yAxisIndex: 1},
+	        	{type: 'bar', xAxisIndex: 2, yAxisIndex: 2},
+	        ]
+	        
+	    });
+	});
+</script>
 #end
