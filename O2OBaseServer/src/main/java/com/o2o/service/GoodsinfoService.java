@@ -27,9 +27,12 @@ public class GoodsinfoService {
 		return dao.paginate(pageNumber, pageSize, "select*", "from tb_goodsinfo where goodsinfo_istaocan = 1");
 	}
 
-	public Goodsinfo findById(String id) {
-		return dao.findById(id);
+	public List<Record> findGoodListById(String id) {
+		String wheresql=" where a.sec_type_id=t.sec_type_id and goodsinfo_id='"+id+"'";
+		List<Record>list=Db.find("select a.*,t.sec_type_name from tb_goodsinfo a,tb_sec_type t"+wheresql);
+		return list;
 	}
+	
 
 	public void deleteById(String id) {
 		dao.deleteById(id);
@@ -89,5 +92,10 @@ public class GoodsinfoService {
 		String wheresql=" where a.sec_type_id=t.sec_type_id and a.goodsinfo_istaocan=1";
 		List<Record>list=Db.find("select a.*,t.sec_type_name from tb_goodsinfo a,tb_sec_type t"+wheresql);
 		return list;
+	}
+
+	public Goodsinfo findById(String id) {
+		
+		return dao.findById(id);
 	}
 }

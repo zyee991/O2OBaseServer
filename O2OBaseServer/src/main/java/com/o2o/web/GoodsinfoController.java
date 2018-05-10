@@ -26,9 +26,10 @@ public class GoodsinfoController extends Controller {
 	}
 	// 查看
 	public void view() {
+		setAttr("title","查看商品基本信息");
 		String id = getPara("id");
-		Goodsinfo goodsinfo = goodsinfoService.findById(id);
-		setAttr("goodsinfo", goodsinfo);
+		List<Record> list = goodsinfoService.findGoodListById(id);
+		setAttr("goodsinfo", list);
 		render("view.html");
 	}
 

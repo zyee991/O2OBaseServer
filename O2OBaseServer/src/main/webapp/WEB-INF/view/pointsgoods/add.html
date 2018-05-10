@@ -1,0 +1,102 @@
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true">×</button>
+	<h4 class="modal-title" id="myModalLabel">新增积分礼物</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal">
+		<div class="form-group">
+			<label for="file" class="col-sm-2 control-label">礼物图片</label>
+			<div class="col-sm-10">
+				<input type="file" class="form-control" id="file" name="file">
+			</div>
+		</div>
+	</form>
+	<form class="form-horizontal" role="form" id="form" action="/pointsgoods/save" method="post">
+		<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">礼物名称</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="name" name="pointsGift.pointsGiftName" required
+					placeholder="请输入名称">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="points" class="col-sm-2 control-label">消耗积分</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="url" name="pointsGift.pointsGiftPoints" required
+					placeholder="请输入消耗积分">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="url" class="col-sm-2 control-label">兑换截至日期</label>
+			<div class="col-sm-10">
+				<input name="pointsGift.pointsGiftHeadline" size="16" type="text"
+					value="" id="startTime" class="datetimepicker" >
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="url" class="col-sm-2 control-label">礼物描述</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="url" name="pointsGift.pointsGiftDesc" required
+					placeholder="请输入礼物的简短描述">
+			</div>
+		</div>
+		<input type="hidden" name="pointsGift.pointsGiftId" value="#(newId)" />
+		<div class="form-group">
+			<label class="col-sm-2 control-label">启用标记</label>
+
+			<div class="btn-group col-sm-10" data-toggle="buttons">
+				<label class="btn btn-success active"> <input checked type="radio"
+					name="pointsGift.pointsGiftIson" value="1"> 启用
+				</label> <label class="btn btn-success"> <input type="radio"
+					name="pointsGift.pointsGiftIson" value="0"> 禁用
+				</label>
+			</div>
+		</div>
+        <div class="form-group">
+			<label class="col-sm-2 control-label">余量</label>
+
+			<div class="col-sm-10">
+				<input type="number" size="11" name="pointsGift.pointsGiftVol"/>
+			</div>
+		</div>
+		<input type="hidden" id="goodsinfoImage"
+			name="pointsGift.pointsGiftImg" value="" />
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">
+		关闭</button>
+	<button type="button" class="btn btn-primary" onclick="submitForm('form')">提交</button>
+</div>
+<script>
+$('.datetimepicker').datetimepicker({
+    format: 'yyyy-mm-dd hh:ii:ss',
+    autoclose: true,
+    minView: 0,
+    minuteStep:1
+});
+
+$('#file').fileinput({
+	allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
+	language : "zh",
+	dropZoneEnabled : false,
+	showCaption : false,
+	autoReplace : true,
+	showUpload : true, //是否显示上传按钮
+	showRemove : true,//显示移除按钮
+	uploadUrl : "/file/save",
+})
+
+$("#file").on("fileuploaded", function(event, data, previewId, index) {
+	alert(1)
+	var result = data.response;
+	var path = result.path;
+	if (path) {
+		$("#goodsinfoImage").val(path);
+	}
+});
+
+
+</script>

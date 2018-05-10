@@ -146,4 +146,17 @@ public class ServiceOrderController extends Controller {
 		renderJson(resultMap);
 	}
 	
+	public void orderdetail(){
+		String id=getPara("id");
+		List<Record> list=serviceOrderService.getServiceOrderById(id);
+		setAttr("list",list);
+		render("order_detail.html");
+	}
+	
+	public void paidandetail(){
+		String id=getPara("id");
+		List<Record>list=serviceOrderService.findPaidanDetail(id);
+		setAttr("list",list);
+		render("dispatch_detail.html");
+	}
 }

@@ -46,4 +46,9 @@ public class ServiceService {
 		List<Record>list=Db.find("select* from tb_service");
 		return list;
 	}
+
+	public List<Record> findServiceById(String id) {
+		List<Record> list=Db.find("select*from view_service");
+		return list;
+	}
 }

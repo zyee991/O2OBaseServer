@@ -35,14 +35,14 @@
 	      columns: [
 	          {
 	              title: '招聘职位',
-	              field: 'position',
+	              field: 'postion',
             	  sortable:true
 	          },{
 	        	  title:'工作性质',
 	        	  field:'category'
 	          }, {
 	        	  title: '工作地点',
-	        	  field: 'workplace'
+	        	  field: 'workpalce'
 	          }, {
 	        	  title: '要求学历',
 	        	  field: 'education'
@@ -63,6 +63,7 @@
 	              valign: 'middle',
 	              formatter: function (value, row, index) {
 	            	  var result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/employee/update?id=" + row.rid + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">编辑</a>&nbsp;&nbsp;"+
+	            	  "<a href=\"javascript:void(0);\" onclick=\"modalShow('/employee/view?id=" + row.rid + "')\"  class=\"btn btn-success btn-xs\" role=\"button\">查看</a>&nbsp;&nbsp;"+
 						"<a href=\"javascript:void(0);\" onclick=\"remove('/employee/delete?id=" + row.rid + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">删除</a>&nbsp;&nbsp;"+
 	                   "<a href=\"/recruit?id="+row.rid+"\"  class=\"btn btn-success btn-xs\" role=\"button\">查看应聘者</a>";
 	            	  return result;

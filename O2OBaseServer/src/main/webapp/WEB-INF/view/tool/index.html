@@ -67,8 +67,9 @@
 	              align: 'center',
 	              valign: 'middle',
 	              formatter: function (value, row, index) {
-	            	  var result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/tools/update?id=" + row.rid + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">编辑</a>&nbsp;&nbsp;"+
-						"<a href=\"javascript:void(0);\" onclick=\"remove('/employee/delete?id=" + row.rid + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">删除</a>&nbsp;&nbsp;"+
+	            	  var result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/tools/update?id=" + row.tid + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">编辑</a>&nbsp;&nbsp;"+
+	            	  "<a href=\"javascript:void(0);\" onclick=\"modalShow('/tools/view?id=" + row.tid + "')\"  class=\"btn btn-success btn-xs\" role=\"button\">查看</a>&nbsp;&nbsp;"+
+						"<a href=\"javascript:void(0);\" onclick=\"remove('/tools/delete?id=" + row.tid + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">删除</a>&nbsp;&nbsp;"+
 	                   "<a href=\"/pacttools?id="+row.tid+"\"  class=\"btn btn-success btn-xs\" role=\"button\">查看租赁记录</a>";
 	            	  return result;
 	              }

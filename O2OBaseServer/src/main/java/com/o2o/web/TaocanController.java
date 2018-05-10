@@ -27,6 +27,7 @@ public class TaocanController extends Controller {
     }
 	// 查看
 	public void view() {
+		setAttr("title","查看套餐信息");
 		String id = getPara("id");
 		Goodsinfo goodsinfo = goodsinfoService.findById(id);
 		List<Record> taocanList = goodsinfoService.findTaocanByTaocanId(goodsinfo.getGoodsinfoId());

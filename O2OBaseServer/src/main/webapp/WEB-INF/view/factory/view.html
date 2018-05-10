@@ -1,7 +1,7 @@
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal"
 		aria-hidden="true">×</button>
-	<h4 class="modal-title" id="myModalLabel">添加工具租赁信息</h4>
+	<h4 class="modal-title" id="myModalLabel">修改场地租赁信息</h4>
 </div>
 <div class="modal-body">
 	</form>
@@ -9,45 +9,67 @@
 		role="form" id="form">
 		<form class="form-horizontal">
 		<div class="form-group">
-			<label for="name_t" class="col-sm-2 control-label">工具名称</label>
+			<label for="file" class="col-sm-2 control-label">场地名称</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="name_t" name="rentTools.nameT">
+				<input type="text" class="form-control" id="name_p" name="rentFactory.nameP" value="#(list[0].name_p)">
 			</div>
 		</div>
-		<div class="form-group" id="length" hidden>
-			<label class="col-sm-2 control-label">工具类型</label>
-			<div class="col-sm-3">
-                            <select name="type_name" id="typename" class="form-control" name="rentTools.typId">
-                                <option value="">--请选择--</option>
-                                #for(type:typelist)
-                                <option value="#(type.sec_type_id)">#(type.sec_type_name)</option>
-                                #end
-                            </select>
-                        </div>
-		</div>
-       <div class="form-group">
-			<label for="type_t" class="col-sm-2 control-label">具体类型</label>
+		<div class="form-group" id="length">
+			<label class="col-sm-2 control-label">长度</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="type_t" name="rentTools.typeT">
+				<input type="number" class="form-control" id="length"
+					name="rentFactory.lenth" size="16" 
+					placeholder="请输入长度" value="#(list[0].lenth)">
+			</div>
+		</div>
+
+		<div class="form-group" id="length">
+			<label class="col-sm-2 control-label">高度</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="height"
+					name="rentFactory.height" size="16" 
+					placeholder="请输入高度" value="#(list[0].height)">
+			</div>
+		</div>
+		<div class="form-group" id="length">
+			<label class="col-sm-2 control-label">宽度</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="width"
+					name="rentFactory.width" size="16" 
+					placeholder="请输入宽度" value="#(list[0].width)">
+			</div>
+		</div>
+		<div class="form-group" id="length">
+			<label class="col-sm-2 control-label">租赁价格</label>
+			<div class="col-sm-10">
+				<input type="number" class="form-control" id="width"
+					name="rentFactory.priceF" size="16" 
+					value="#(list[0].price_f)">
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="contact" class="col-sm-2 control-label">Contact</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" id="contact" name="rentTools.contact">
+			<label class="col-sm-2 control-label">是否包含工具</label>
+			<div class="btn-group col-sm-10" id="state_t" data-toggle="buttons">
+				<label class="btn btn-success #(list[0].state_t == true ? 'active':'')" onclick="changeForever(1)">
+				<input    #(list[0].state_t == true ? 'checked':'')
+					checked type="radio" name="rentFactory.stateT" value="1">是</label>
+				<label class="btn btn-success #(list[0].state_t == false ? 'active':'')" onclick="changeForever(0)">
+				<input  #(list[0].state_t == false ? 'checked':'')
+					type="radio" name="rentFactory.stateT" value="0">否</label>
 			</div>
 		</div>
-		<div class="form-group">
-			<label for="phone_t" class="col-sm-2 control-label">联系电话</label>
+		<div class="form-group #(list[0].state_t == false ? 'hidden':'')">
+			<label for="other" class="col-sm-2 control-label">场地包含工具</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="phone_t" name="rentTools.phoneT">
+				<input type="text" class="form-control" id="other"
+					name="rentFactory.other" required placeholder="请输入包含工具" value="#(list[0].other)">
 			</div>
 		</div>
 		<div class="form-group">
                         <label class="col-sm-2 control-label"><i>*</i>所在地址</label>
                         <div class="col-sm-3">
                             <select name="input_province" id="input_province" class="form-control" onchange="getcity(this)">
-                                <option value="">--请选择--</option>
+                                <option value="">#(list[0].province_name)</option>
                                 #for(province:provincelist)
                                 <option value="#(province.province_id)">#(province.province_name)</option>
                                 #end
@@ -55,32 +77,23 @@
                         </div>
                         <div class="col-sm-3">
                             <select name="input_city" id="input_city" class="form-control" onchange="getarea(this)">
-                                <option value=""></option>
+                                <option value="#(list[0].city_id)">#(list[0].city_name)</option>
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            <select name="rentTools.addressTid" id="input_area" class="form-control">
-                                <option value=""></option>
+                            <select name="rentFactory.addressPid" id="input_area" class="form-control">
+                                <option value="#(list[0].address_pid)">#(list[0].district_name)</option>
                             </select>
                         </div>
                     </div>
-              <div class="form-group">
-			<label for="phone_t" class="col-sm-2 control-label">详细地址</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" id="palce" name="rentTools.palce">
-			</div>
-		</div>
-		      
 		<input type="hidden" id="serviceId" name="rentFactory.pid"
-			value="#(newId)" />
+			value="#(list[0].pid)" />
 		<input type="hidden" id="state" name="rentFactory.state" value="0"/>
 	</form>
 </div>
 <div class="modal-footer">
 	<button type="button" class="btn btn-default" data-dismiss="modal">
 		关闭</button>
-	<button type="button" class="btn btn-primary"
-		onclick="submitForm('form')">提交</button>
 </div>
 
 
@@ -88,9 +101,9 @@
 
 	function changeForever(status) {
 		if (status == 1) {
-			$("#forever").addClass("hidden");
+			$("#other").addClass("hidden");
 		} else {
-			$("#forever").removeClass("hidden");
+			$("#other").removeClass("hidden");
 		}
 	}
 	

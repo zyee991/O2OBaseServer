@@ -30,6 +30,12 @@ static EmployeeService employeeService=new EmployeeService();
 		render("update.html");
 	}
 	
+	public void view(){
+		setAttr("title","查看招聘信息");
+		String id=getPara("id");
+		RecruitInfo recruitInfo=employeeService.findById(id);
+		setAttr("recruitInfo",recruitInfo);
+	}
 	public void delete(){
 		String id = getPara("id");
 		employeeService.deleteById(id);

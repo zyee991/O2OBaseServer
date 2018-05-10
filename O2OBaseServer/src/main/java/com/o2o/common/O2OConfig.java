@@ -26,6 +26,8 @@ import com.o2o.web.GoodsTypeController;
 import com.o2o.web.GoodsinfoController;
 import com.o2o.web.ManagerController;
 import com.o2o.web.NavigationController;
+import com.o2o.web.PointGoodsController;
+import com.o2o.web.PointsRecordController;
 import com.o2o.web.QuickOperationController;
 import com.o2o.web.RealShopController;
 import com.o2o.web.RecruitController;
@@ -101,6 +103,8 @@ public class O2OConfig extends JFinalConfig {
 		me.add("/factoryPact",FactoryPactController.class,"WEB-INF/view/factorypact");
 		me.add("/pacttools",ToolsPactController.class,"WEB-INF/view/toolpact");
 		me.add("/echarts",EchartsController.class,"WEB-INF/view/echarts");
+		me.add("/pointsgoods",PointGoodsController.class,"WEB-INF/view/pointsgoods");
+		me.add("/exchangelogs",PointsRecordController.class,"WEB-INF/view/pointrecord");
 		
 	}
 	

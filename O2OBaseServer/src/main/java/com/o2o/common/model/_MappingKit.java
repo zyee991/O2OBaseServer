@@ -53,6 +53,8 @@ public class _MappingKit {
 		arp.addMapping("tb_base_role","id",Role.class);
 		arp.addMapping("tb_base_manager_role", "id",ManagerRole.class);
 		arp.addMapping("tb_base_role_navigation","id",RoleNavigation.class);
+		arp.addMapping("tb_points_gift","points_gift_id",PointsGift.class);
+		arp.addMapping("tb_point_record", "point_record_id",PointRecord.class);
 	}
 }
 

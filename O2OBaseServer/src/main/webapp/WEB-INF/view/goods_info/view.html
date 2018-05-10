@@ -1,110 +1,114 @@
+#@layout() #define main()
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3">
+			<h4>#(goodsinfo[0].goodsinfoName)</h4>
+			<img src="#(goodsinfo[0].goodsinfo_image)" class="img-responsive" />
+		</div>
+		<div class="col-sm-9">
+			<div class="row">
+				<br>
+			</div>
+			<form action="/goods_info/save" method="post" class="form-horizontal"
+				role="form" id="form">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="name" class="col-sm-4 control-label">商品名称</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="name"
+									name="goodsinfo.goodsinfoName"
+									value="#(goodsinfo[0].goodsinfo_name)" readonly>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="sec_type_id" class="col-sm-4 control-label">商品类型</label>
+							<div class="col-sm-8">
+								<input type="text" value="#(goodsinfo[0].sec_type_name)"
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="col-sm-4 control-label">是否启用积分</label>
+							<div class="col-sm-8" id="points">
+								<input type="text" value="#(goodsinfo[0].goodsinfo_points_flag == true ?'启用':'不启用')" readonly/>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group #(goodsinfo[0].goodsinfo_points_flag == false ? 'hidden':'')" id="PointsFlag">
+							<label class="col-sm-4 control-label">商品积分</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" id="goodsinfo_points"
+									name="goodsinfo.goodsinfoPoints" size="16"  value="#(goodsinfo[0].goodsinfo_points)" readonly>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="col-sm-4 control-label">商品价格</label>
+							<div class="col-sm-8">
+								<input type="number" class="form-control" value="#(goodsinfo[0].goodsinfo_primary_price)" readonly/>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="desc" class="col-sm-4 control-label">商品简短描述</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="goodsinfo_desc" value="#(goodsinfo[0].goodsinfo_desc)"
+									name="goodsinfo.goodsinfoDesc" readonly>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="col-sm-4 control-label">是否为永久商品</label>
+							<div class=" col-sm-8" id="isforever">
+								<input type="text" value="#(goodsinfo[0].goodsinfo_foever == true ? '是' : '不是')" readonly/>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group #(goodsinfo[0].goodsinfo_foever == true ? 'hidden' : '')" id="forever">
+							<label class="col-sm-4 control-label">有效日期</label>
+							<div class="col-sm-8">
+								<input name="goodsinfo.goodsinfoExpiration" size="16" type="text"
+									value="#(goodsinfo[0].goodsinfo_epiration)" id="startTime" readonly>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div  class="col-sm-12">
+			<h4>编辑详细描述</h4>
+			<div id="editor" >
+		        #(goodsinfo[0].goodsinfo_descdetail)
+		    </div>
+		
+		    <!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+              <script type="text/javascript">
+		        var E = window.wangEditor
+		        var editor = new E('#editor')
+		        // 或者 var editor = new E( document.getElementById('editor') )
+		        editor.create()
+		    </script> 
+	    </div>
+	</div>
+	<br>
+</div>
 <script>
-    $.fn.datetimepicker.defaults = {
-        //默认语言
-        language: 'zh-CN',
-        //默认选择格式
-        format: "yyyy-mm-dd hh:ii:ss",
-        autoclose: true,
-        todayBtn: true,
-        //选择板所在输入框位置
-        pickerPosition: "bottom-left"
-    };
 </script>
-
-<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal"
-		aria-hidden="true">×</button>
-	<h4 class="modal-title" id="myModalLabel">商品基本信息</h4>
-</div>
-<div class="modal-body">
- <form action="" class="form-horizontal" role="form" id="form" >
-  <div class="form-group">
-   <label for="name" class="col-sm-2 control-label">商品名称</label>
-   <div class="col-sm-10">
-    <input type="text" class="form-control" id="goodsinfo_name" name="goodsinfo_name" required 
-    placeholder="请输入名称">
-   </div>
-  </div>
-  <div class="form-group">
-  <label for="sec_type_id" class="col-sm-2 control-label">商品类型</label>
-  <div class="col-sm-10">
-    <select class="form-control" onchange="">
-     <option>类型一</option>
-     <option>类型二</option>
-    </select>
-  </div>
-  </div>
-  <div class="form-group">
-   <label class="col-sm-2 control-label">是否启用积分</label>
-  <div class="btn-group col-sm-10" id="points" data-toggle="buttons">
-    <label class="btn btn-success active"><input checked type="radio" name="" value="true">启用积分</label>
-     <label class="btn btn-success"><input type="radio" name="" value="false">不启用积分</label>
-   </div>
-  </div>
-  <div class="form-group">
-   <label class="col-sm-2 control-label">商品积分</label>
-   <div class="col-sm-10">
-    <input type="number" class="form-control" id="goodsinfo_points" name="goodsinfo_points" size="16" required 
-    placeholder="请输入积分">
-   </div>
-  </div>
-  <div class="form-group">
-  <label class="col-sm-2 control-label">商品价格</label>
-  <div class="col-sm-10">
-    <input type="number" class="form-control" id="goodsinfo_primary_price" name="goodsinfo_primary_price" size="16" required 
-    placeholder="请输入商品价格">
-   </div>
-  </div>
-  <div class="form-group">
-   <label for="desc" class="col-sm-2 control-label">商品简短描述</label>
-   <div class="col-sm-10">
-    <input type="text" class="form-control" id="goodsinfo_desc" name="goodsinfo_desc" required 
-    placeholder="请输入简短描述">
-   </div>
-  </div>
-  <div class="form-group">
-   <label class="col-sm-2 control-label">是否为永久商品</label>
-  <div class="btn-group col-sm-10" id="points" data-toggle="buttons">
-    <label class="btn btn-success active"><input checked type="radio" name="" value="true">是</label>
-     <label class="btn btn-success"><input type="radio" name="" value="false">否</label>
-   </div>
-  </div>
-  <div class="form-group">
-   <label class="col-sm-2 control-label">有效日期</label>
-  <div class="col-sm-10 input-append date form_datetime" >
-    <input size="16" type="text" value="" id="startTime" readonly>
-   </div>
-  </div>
-  <div class="form-group">
-   <label class="col-sm-2 control-label">商品详细描述</label>
-  <div class="col-sm-10" >
-   <textarea class="form-control" rows="3"></textarea> 
-   </div>
-  </div>
- </form>
-</div>
-<div class="modal-footer">
-	<button type="button" class="btn btn-default" data-dismiss="modal">
-		关闭</button>
-<!-- 	<button type="button" class="btn btn-primary">提交</button> -->
-</div>
-
-
-<script>
-    $(function () {
-
-        var picker1 = $('#startTime').datetimepicker();
-        var picker2 = $("#endTime").datetimepicker();
-
-        //动态设置最小值(选择前面一个日期后：后面一个日期不能小于前面一个)
-        picker1.on('changeDate', function (e) {
-            picker2.datetimepicker('setStartDate', e.date);
-        });
-        //动态设置最大值(选择后面一个日期后：前面一个日期不能大于前面一个）
-        picker2.on('changeDate', function (e) {
-            picker1.datetimepicker('setEndDate', e.date);
-        });
-
-    });
-
-</script>   
+#end

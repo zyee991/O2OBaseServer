@@ -71,6 +71,13 @@ public class ShopController extends Controller {
 		render("update.html");
 	}
 	
+	public void view(){
+		setAttr("title","查看库存信息");
+		String id=getPara("id");
+		List<Record>shoplist=shopService.findById(id);
+		setAttr("shoplist",shoplist);
+		render("view.html");
+	}
 	public void delete(){
 		String id=getPara("id");
 		String shopgoodsid=getPara("shopgoodsid");

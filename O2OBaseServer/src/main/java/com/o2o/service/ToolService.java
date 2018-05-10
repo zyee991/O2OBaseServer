@@ -36,7 +36,7 @@ public class ToolService {
 	}
 	public List<Record> tableData() {
 		String wheresql=" where t.address_tid=d.district_id";
-		List<Record>list=Db.find("select t.*,d.district_name from tb_rent_tools t,tb_district d");
+		List<Record>list=Db.find("select t.* from tb_rent_tools t");
 		return list;
 	}
 	public List<Record> reload(List<Record> list) {
@@ -48,5 +48,9 @@ public class ToolService {
 			}
 		}
 		return list;
+	}
+	public List<Record> getAddressById(String addressid) {
+		
+		return Db.find("select*from view_address a where district_id='"+addressid+"'");
 	}
 }

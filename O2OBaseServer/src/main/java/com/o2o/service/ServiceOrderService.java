@@ -56,5 +56,17 @@ public class ServiceOrderService {
 		return dao.findById(orderId);
 	}
 
+	public List<Record> getServiceOrderById(String id) {
+	   List<Record>list=Db.find("select a.* from v_service_order a");
+		return list;
+	}
+
+	public List<Record> findPaidanDetail(String id) {
+		String wheresql=" where a.mid=m.mid and type='B'";
+		List<Record>list=Db.find("select a.*,m.muser from tb_dispatch a,tb_muser m "+wheresql);
+		return list;
+	}
+
+
 }
  

@@ -49,9 +49,17 @@ public class ServiceController extends Controller {
 		render("update.html");
 	}
 	
+	public void view(){
+		setAttr("title","查看服务基本信息");
+		String id=getPara("id");
+		List<Record> service=serviceService.findServiceById(id);
+		setAttr("service",service);
+		render("view.html");
+	}
 	public void delete(){
 		String id=getPara("id");
 		serviceService.deleteById(id);
 		redirect("/service");
 	}
+	
 }

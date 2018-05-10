@@ -377,6 +377,30 @@ function confirmPOK(pfaid,pid,state){
 	}
 }
 
+//确认兑换
+function confirmExchange(id){
+	var url='/exchangelogs/confirmOK';
+	$.confirm({
+		title : '提示',
+		content : '是否确认？',
+		buttons : {
+			ok : {
+				text : '确定',
+				btnClass : 'btn-success',
+				keys : [ 'enter' ],
+				action : function() {
+					$.post(url,{id:id},function(data){
+						$.alert(data.content);
+					});
+				}
+			},
+			cancel : {
+				text : '取消',
+				btnClass : 'btn-danger'
+			}
+		}
+	})
+}
 /**
  * 日期格式化 用法new Date().format('yyyy-MM-dd HH:ss:mm')
  */

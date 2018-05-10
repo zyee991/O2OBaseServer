@@ -58,4 +58,12 @@ public class FactoryController extends Controller {
 		setAttr("list",list);
 		render("update.html");
 	}
+	
+	public void view(){
+		setAttr("title","查看场地租赁信息");
+		String id=getPara("id");
+		List<Record>list=factoryservice.findById(id);
+		setAttr("list",list);
+		render("view.html");
+	}
 }

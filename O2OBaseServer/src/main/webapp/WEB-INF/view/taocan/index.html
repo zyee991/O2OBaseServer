@@ -45,7 +45,8 @@
 	              valign: 'middle',
 	              formatter: function (value, row, index) {
 	            	  var result = "<a href=\"/taocan/update?id="+row.goodsinfo_id+"\"  class=\"btn btn-warning btn-xs\" role=\"button\">编辑</a>&nbsp;&nbsp;"+
-            						"<a href=\"javascript:void(0);\" onclick=\"remove('/taocan/delete?id=" + row.goodsinfo_id + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">删除</a>";
+	            	  "<a href=\"/taocan/view?id="+row.goodsinfo_id+"\"  class=\"btn btn-success btn-xs\" role=\"button\">查看</a>&nbsp;&nbsp;"+
+            			"<a href=\"javascript:void(0);\" onclick=\"remove('/taocan/delete?id=" + row.goodsinfo_id + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">删除</a>";
 	                  
 	            	  return result;
 	              }
