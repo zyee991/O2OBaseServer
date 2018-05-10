@@ -71,8 +71,8 @@ public class QuickOperationController extends Controller {
 	public void getMsg() {
 		String id = getPara("id");
 		Message message = service.findOne(id);
-		String receiver = message.getMessageReceiver();
-		String sessionId = WebSocketEndpoint.SESSION_MAP.get(receiver).getId();
+		String sender = message.getMessageSender();
+		String sessionId = WebSocketEndpoint.SESSION_MAP.get(sender).getId();
 		message.put("session_id", sessionId);
 		renderJson(message);
 	}

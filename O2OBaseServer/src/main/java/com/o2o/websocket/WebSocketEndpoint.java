@@ -54,7 +54,7 @@ public class WebSocketEndpoint {
 	
 	@OnMessage
 	public void onMessage(String text, Session session) throws IOException {
-		System.out.println("客户端发送消息------" + USER_MAP.get(session.getId()));
+		System.out.println("客户端发送消息---"+text+"---" + USER_MAP.get(session.getId()));
 		Message message = service.findOne(text);
 		MessageHandler.echo(message);
 	}
