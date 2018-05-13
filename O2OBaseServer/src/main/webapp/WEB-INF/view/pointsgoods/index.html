@@ -51,9 +51,9 @@
 									align : 'center',
 									valign : 'middle',
 									formatter : function(value, row, index) {
-										var result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/pointsgoods/update?id="
-												+ row.points_gift_id
-												+ "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">编辑</a>&nbsp;&nbsp;"
+										var result = "<a href=\"/pointsgoods/update?id="
+											+ row.points_gift_id
+											+ "\" class=\"btn btn-warning btn-xs\" role=\"button\">编辑</a>&nbsp;&nbsp;"
 												+ "<a href=\"javascript:void(0);\" onclick=\"remove('/pointsgoods/delete?id="
 												+ row.points_gift_id
 												+ "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">删除</a>&nbsp;&nbsp;"
