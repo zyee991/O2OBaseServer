@@ -58,15 +58,21 @@ public class RealShopController extends Controller {
 	public void update(){
 		setAttr("title","门店信息");
 		String shpid=getPara("id");
-		String district=getPara("district_id");
+		Realshop realShop=Realshop.dao.findById(shpid);		
+		String district=realShop.getDistrictId();
 		String typeid=getPara("typeid");
 		List<Record> dictlist=realShopService.getdictlist(district);
 	/*	List<Record> typelist=realShopService.getTypeList(typeid);*/
 		List<Province> provincelist=realShopService.getProvinceList();
 		List<Sectype> typelist=realShopService.getTypeList();
+		String sectypeid=realShop.getRealshopType();
+		Sectype sectype=Sectype.dao.findById(sectypeid);
+		String sectype_name=sectype.getSecTypeName();
+		setAttr("sectype_name",sectype_name);
 		setAttr("typelist",typelist);
 		setAttr("provincelist",provincelist);
 		setAttr("dictlist",dictlist);
+		System.out.println(dictlist+"----------------");
 		Realshop realshop=realShopService.getshopById(shpid);
 		setAttr("realshop",realshop);
 		render("update.html");

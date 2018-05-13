@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-3">
-			<h4>#(goodsinfo.goodsinfoName)</h4>
+			<h4>#(pointsGift.pointsGiftName)</h4>
 			<img src="#(pointsGift.pointsGiftImg)" class="img-responsive" />
 		</div>
 		<div class="col-sm-9">
@@ -65,7 +65,7 @@
 						<div class="form-group " id="desc">
 							<label class="col-sm-4 control-label">礼物简短描述</label>
 							<div class="col-sm-8">
-								<input type="number" class="form-control" id="pointsGiftDesc"
+								<input type="text" class="form-control" id="pointsGiftDesc"
 									name="pointsGift.pointsGiftDesc" size="16" required value="#(pointsGift.pointsGiftDesc)"
 									placeholder="请输入简短描述" disabled>
 							</div>
@@ -97,8 +97,7 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="btn-group pull-right">
-			    <button type="button" class="btn btn-default" data-dismiss="modal">
-		关闭</button>
+			    <a type="button" class="btn btn-default" href="/pointsgoods" >返回</a>
 			</div>
 		</div>
 	</div>

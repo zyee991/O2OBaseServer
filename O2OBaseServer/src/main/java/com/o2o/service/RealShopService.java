@@ -49,7 +49,7 @@ public class RealShopService {
 
 	public List<Record> getdictlist(String district) {
 		List<Record>list=Db.find("select a.*,b.city_name,c.province_name from tb_district a,tb_city b,tb_province c where a.city_id=b.city_id and "
-				+ "c.province_id=b.province_id");
+				+ "c.province_id=b.province_id and district_id="+district);
 		return list;
 	}
 

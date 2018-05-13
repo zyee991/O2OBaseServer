@@ -24,6 +24,7 @@ import com.o2o.web.FileController;
 import com.o2o.web.GoodsOrderController;
 import com.o2o.web.GoodsTypeController;
 import com.o2o.web.GoodsinfoController;
+import com.o2o.web.MUserController;
 import com.o2o.web.ManagerController;
 import com.o2o.web.NavigationController;
 import com.o2o.web.PointGoodsController;
@@ -39,6 +40,7 @@ import com.o2o.web.TaocanController;
 import com.o2o.web.ToolController;
 import com.o2o.web.ToolsPactController;
 import com.o2o.web.TreeController;
+import com.o2o.web.WUserController;
 import com.o2o.websocket.WebSocketHandler;
 
 /**
@@ -105,6 +107,8 @@ public class O2OConfig extends JFinalConfig {
 		me.add("/echarts",EchartsController.class,"WEB-INF/view/echarts");
 		me.add("/pointsgoods",PointGoodsController.class,"WEB-INF/view/pointsgoods");
 		me.add("/exchangelogs",PointsRecordController.class,"WEB-INF/view/pointrecord");
+		me.add("/WUser",WUserController.class,"WEB-INF/view/WUser");
+		me.add("MUser",MUserController.class,"WEB-INF/view/MUser");
 		
 	}
 	
