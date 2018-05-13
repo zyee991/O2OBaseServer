@@ -24,7 +24,7 @@ public class FileController extends Controller  {
 			try {
 				InputStream in = new FileInputStream(file);
 				FtpUtil ftpUtil = new FtpUtil();
-				path = ftpUtil.uploadFile("goods/image", new Date().getTime()+""+suffix, in);
+				path = ftpUtil.uploadFile( new Date().getTime()+""+suffix, in);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}

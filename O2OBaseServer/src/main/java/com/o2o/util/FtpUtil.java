@@ -72,14 +72,11 @@ public class FtpUtil {
 	 *            输入文件流
 	 * @return
 	 */
-	public String uploadFile(String pathname, String fileName, InputStream inputStream) {
+	public String uploadFile(String fileName, InputStream inputStream) {
 		try {
 			System.out.println("开始上传文件");
 			initFtpClient();
 			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-			CreateDirecroty(pathname);
-			ftpClient.makeDirectory(pathname);
-			ftpClient.changeWorkingDirectory(pathname);
 			ftpClient.enterLocalPassiveMode();
 			if(ftpClient.storeFile(fileName, inputStream)){
 				System.out.println("上传文件成功");
@@ -100,14 +97,14 @@ public class FtpUtil {
 				}
 			}
 			if (null != inputStream) {
-				try {
-					inputStream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					inputStream.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
 			}
 		}
-		String result = new StringBuilder().append(remoteUrl).append("/").append(pathname).append("/").append(fileName).toString();
+		String result = new StringBuilder().append(remoteUrl).append("/").append(fileName).toString();
 		return result;
 	}
 
