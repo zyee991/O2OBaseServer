@@ -122,6 +122,12 @@ public class GoodsOrderController extends Controller {
 	public void orderdetail(){
 		String id=getPara("id");
 		List<Record> list=orderService.findOrderByOrderId(id);
+		Record record=list.get(0);
+		String province=record.get("province_name");
+		String city=record.get("city_name");
+		String district=record.get("district_name");
+		String area=province+" "+city+" "+district;
+		setAttr("area",area);
 		setAttr("list",list);
 		render("order_detail.html");
 	}
