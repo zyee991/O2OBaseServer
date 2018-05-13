@@ -28,7 +28,7 @@
 			<div class="form-group">
 			 <label for="shoplot" class="col-sm-2 control-label">商品原价</label>
 			 <div class="col-sm-10">
-			 <input type="number" class="form-control" id="prePrice" name="prePrice" 
+			 <input type="number" class="form-control" id="prePrice" name="prePrice" value=""
 					readonly>
 			 </div>
 			</div>
@@ -103,7 +103,7 @@ function getgoods(e) {
 	$.post("/shop/getGoods",{typeId:typeId},function(data){
 		if(data) {
 			for(var i in data) {
-				var ele = option.replace("@goodsinfoId",data[i].shop_id).replace("@goodsinfoName",data[i].goodsinfo_name);
+				var ele = option.replace("@goodsinfoId",data[i].goodsinfo_id).replace("@goodsinfoName",data[i].goodsinfo_name);
 				select.append($(ele));
 			}
 		}
@@ -113,7 +113,7 @@ function getgoods(e) {
 function getPrePrice(e){
 	var goodsid=$(e).val();
 	$.post("/shop/getGoodsById",{goodsid:goodsid},function(data){
-		$("#prePrice").value(data.goodsinfo_primary_price);
+		$("#prePrice").val(data[0].goodsinfo_primary_price);
 	})
 }
 </script>

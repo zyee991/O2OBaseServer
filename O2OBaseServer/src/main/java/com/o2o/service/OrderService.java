@@ -82,7 +82,7 @@ public class OrderService {
 
 	public List<Record> findOrderByOrderId(String id) {
 		String wheresql = " where a.user_openid=u.user_openid and t.sec_type_id=a.order_pay_type and a.district_id=d.district_id  and a.order_id='"+id+"'";
-		List<Record>list=Db.find("select a.*,u.user_nickname,t.sec_type_name as pay_type_name from tb_order a,tb_user u,tb_sec_type t,view_address d"+wheresql);
+		List<Record>list=Db.find("select a.*,u.user_nickname,t.sec_type_name as pay_type_name,d.* from tb_order a,tb_user u,tb_sec_type t,view_address d"+wheresql);
 		return list;
 	}
 } 
