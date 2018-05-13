@@ -97,11 +97,11 @@ public class FtpUtil {
 				}
 			}
 			if (null != inputStream) {
-//				try {
-//					inputStream.close();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		String result = new StringBuilder().append(remoteUrl).append("/").append(fileName).toString();
