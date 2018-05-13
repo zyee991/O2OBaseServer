@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.Properties;
 
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
@@ -39,19 +40,20 @@ public class FtpUtil {
 
 	/**
 	 * 初始化ftp服务器
+	 * @throws IOException 
 	 */
-	public void initFtpClient() {
+	public void initFtpClient() throws IOException {
 		ftpClient = new FTPClient();
 		ftpClient.setControlEncoding("utf-8");
 		try {
-			System.out.println("connecting...ftp服务器:" + this.hostname + ":" + this.port);
+			System.out.println("connecting...ftp服务器:" + FtpUtil.hostname + ":" + FtpUtil.port);
 			ftpClient.connect(hostname, port); // 连接ftp服务器
 			ftpClient.login(username, password); // 登录ftp服务器
 			int replyCode = ftpClient.getReplyCode(); // 是否成功登录服务器
 			if (!FTPReply.isPositiveCompletion(replyCode)) {
-				System.out.println("connect failed...ftp服务器:" + this.hostname + ":" + this.port);
+				System.out.println("connect failed...ftp服务器:" + FtpUtil.hostname + ":" + FtpUtil.port);
 			}
-			System.out.println("connect successfu...ftp服务器:" + this.hostname + ":" + this.port);
+			System.out.println("connect successful...ftp服务器:" + FtpUtil.hostname + ":" + FtpUtil.port);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -74,10 +76,11 @@ public class FtpUtil {
 		try {
 			System.out.println("开始上传文件");
 			initFtpClient();
-			ftpClient.setFileType(ftpClient.BINARY_FILE_TYPE);
+			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 			CreateDirecroty(pathname);
 			ftpClient.makeDirectory(pathname);
 			ftpClient.changeWorkingDirectory(pathname);
+			ftpClient.enterLocalPassiveMode();
 			if(ftpClient.storeFile(fileName, inputStream)){
 				System.out.println("上传文件成功");
 			} else {
