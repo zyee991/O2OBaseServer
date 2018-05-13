@@ -43,6 +43,8 @@ import com.o2o.web.TreeController;
 import com.o2o.web.WUserController;
 import com.o2o.websocket.WebSocketHandler;
 
+import cn.dreampie.quartz.QuartzPlugin;
+
 /**
  * 本 demo 仅表达最为粗浅的 jfinal 用法，更为有价值的实用的企业级用法
  * 详见 JFinal 俱乐部: http://jfinal.com/club
@@ -125,8 +127,14 @@ public class O2OConfig extends JFinalConfig {
 		DruidPlugin druidPlugin = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
 		me.add(druidPlugin);
 		
+		// ehcache插件
 		EhCachePlugin ehCachePlugin = new EhCachePlugin();
 		me.add(ehCachePlugin);
+		
+		QuartzPlugin quartzPlugin = new QuartzPlugin();
+		quartzPlugin.setJobs("quartz_job.properties");
+		me.add(quartzPlugin);
+		
 		// 配置ActiveRecord插件
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
 		arp.setShowSql(true);
