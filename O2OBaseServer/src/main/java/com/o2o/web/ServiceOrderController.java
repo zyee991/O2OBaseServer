@@ -62,7 +62,8 @@ public class ServiceOrderController extends Controller {
 		System.out.println(id+"----------------------"+isforward);
 		render("dispatch.html");
 	}
-	
+	//0----待审核   1---待评论    2----已完成
+	//派单成功不改状态。。。由技师确认完成变为1
 	public void saveDispatch(){
 		Dispatch dispatch=getBean(Dispatch.class);
 		String orderid=getPara("dispatch.serviceOrderId");
@@ -98,8 +99,8 @@ public class ServiceOrderController extends Controller {
 						String messageurl = wxSendUrl+"?user_openid="+openId+"&templete_id="+mobanid+"&nickname="+nickName+"&createtime="+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date())+"&ordertatus="+orderStatus+"&type="+type;
 						String messageresult = HttpUtils.doGet(messageurl);
 						if(messageresult.contains("TemplateSenderResult")) {
-							order.setServiceOrderStatus(1);
-                            order.update();			
+							/*order.setServiceOrderStatus(1);
+                            order.update();			*/
 							resultMap.put("status", "1");
 							resultMap.put("content","派单成功");
 						} else {
@@ -127,7 +128,7 @@ public class ServiceOrderController extends Controller {
 		renderJavascript("window.location.href='/service_order'");
 	}
 	
-////确认退款   状态改为3，订单状态改为3
+////确认退款   状态改为3，订单状态改为2
 	public void confirmSRefund(){
 		String orderid=getPara("id");
 		String paystatus=getPara("paystatus");
@@ -137,6 +138,7 @@ public class ServiceOrderController extends Controller {
 		if(order!=null){
 			order.setServicePayStatus(Integer.parseInt(paystatus));
 			order.setServiceOrderStatus(Integer.parseInt(orderstatus));
+			order.update();
 			resultMap.put("status", "1");
 			resultMap.put("content","退款成功成功");
 		}else {

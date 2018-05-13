@@ -31,15 +31,19 @@
             	  sortable:true
 	          },{
 	              title: '状态',
-	              field: 'state',
+	              field: 'status_name',
             	  sortable:true
 	          },{
 	        	  title: "操作",
 	              align: 'center',
 	              valign: 'middle',
 	              formatter: function (value, row, index) {
-                    
-	            	  var result = "<a href=\"javascript:void(0);\" onclick=\"confirmPOK('"+row.pfa_id+"','#(id)',"+row.pfa_state+")\"  class=\"btn btn-warning btn-xs\" role=\"button\">审核</a>&nbsp;&nbsp;";
+                        var result="";
+                        if(row.status_name=='待审批'){
+      	           
+                        	result = "<a href=\"javascript:void(0);\" onclick=\"confirmPOK('"+row.pfa_id+"','#(id)',"+row.pfa_state+")\"  class=\"btn btn-warning btn-xs\" role=\"button\">审核</a>&nbsp;&nbsp;";
+
+                        }
 	                  
 	            	  return result;
 	              }

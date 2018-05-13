@@ -353,7 +353,7 @@ function confirmPOK(pfaid,pid,state){
 					btnClass:'btn-success',
 					keys:['enter'],
 					action:function(){
-						$.post(url, {"status":1,"pfaid":pfaid,"pid":pid},function(){
+						$.post(url, {"status":1,"pfaid":pfaid,"pid":pid},function(data){
 								$.alert("审核成功:通过");
 							})
 					}
@@ -411,7 +411,7 @@ Date.prototype.format = function(fmt) {
        "h+" : this.getHours(),                   //小时 
        "m+" : this.getMinutes(),                 //分 
        "s+" : this.getSeconds(),                 //秒 
-       "q+" : Math.floor((this.getMonth()+3)/3), //季度 
+       "q+" : Math.floor((this.getMonth()+3)/3   ), //季度 
        "S"  : this.getMilliseconds()             //毫秒 
    }; 
    if(/(y+)/.test(fmt)) {

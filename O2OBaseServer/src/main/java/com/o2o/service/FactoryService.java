@@ -53,9 +53,9 @@ public class FactoryService {
 
 	public List<Record> reload(List<Record> list) {
 			for(Record record:list) {
-				if(record.get("state").equals(0) ) {
+				if(record.get("state").equals(false) ) {
 					record.set("status_name", "未租");
-				} else if (record.get("state").equals(1)) {
+				} else if (record.get("state").equals(true)) {
 					record.set("status_name", "已租");
 				} 
 			}

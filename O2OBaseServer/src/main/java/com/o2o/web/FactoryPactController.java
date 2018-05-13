@@ -2,12 +2,15 @@ package com.o2o.web;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.PactEmploy;
 import com.o2o.common.model.PactFactory;
+import com.o2o.common.model.RentFactory;
 import com.o2o.service.FactoryPactService;
 
 public class FactoryPactController extends Controller {
@@ -27,15 +30,23 @@ public class FactoryPactController extends Controller {
 	}
 	
 	public void confirmOK(){
+		Map<String,String>resultMap=new HashMap();
 		String status=getPara("status");
 		String pfaid=getPara("pfaid");
 		String pid=getPara("pid");
+		//场地的状态变成不可租
+		RentFactory rentFactory=RentFactory.dao.findById(pid);
+		rentFactory.setStateT(false);
+		rentFactory.update();
 		Date date=new Date();
 		SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 		String time=df2.format(date);
 		PactFactory pactfactory=PactFactory.dao.findById(pfaid);
 		pactfactory.setPfaState(Integer.parseInt(status));
 		pactfactory.setPfaEtime(date);
+		pactfactory.update();
+		resultMap.put("content","审批通过");
+		renderJson(resultMap);
 		renderJavascript("window.location.href='/recruit?pid='"+pid);
 	}
 }

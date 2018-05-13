@@ -9,7 +9,7 @@ public class ApplicationProperties {
 	static {
 		properties = new Properties();
 		try {
-			properties.load(FtpUtil.class.getClassLoader().getResourceAsStream("ftpconfig.properties"));
+			properties.load(FtpUtil.class.getClassLoader().getResourceAsStream("application.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
