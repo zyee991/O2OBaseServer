@@ -61,7 +61,7 @@ public class GoodsOrderController extends Controller {
 						String type="goodsorder";
 						String nickName = user.getUserNickname();
 						String orderStatus = "已发货";
-						String messageurl = wxSendUrl+"?user_openid="+openId+"&templete_id="+mobanid+"&nickname="+nickName+"&createtime="+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date())+"&ordertatus="+orderStatus+"&type="+type;
+						String messageurl = wxSendUrl+"?user_openid="+openId+"&templete_id="+mobanid+"&nickname="+nickName+"&createtime="+new SimpleDateFormat("yyyy-MM-dd，HH:mm").format(new Date())+"&ordertatus="+orderStatus+"&type="+type;
 						String messageresult = HttpUtils.doGet(messageurl);
 						if(messageresult.contains("TemplateSenderResult")) {
 							order.setOrderStatus(1);

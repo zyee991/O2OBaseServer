@@ -12,6 +12,7 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.template.Engine;
+import com.o2o.common.model.Technology;
 import com.o2o.common.model._MappingKit;
 import com.o2o.index.IndexController;
 import com.o2o.interceptor.LoginInterceptor;
@@ -37,6 +38,7 @@ import com.o2o.web.ServiceController;
 import com.o2o.web.ServiceOrderController;
 import com.o2o.web.ShopController;
 import com.o2o.web.TaocanController;
+import com.o2o.web.TechnologyController;
 import com.o2o.web.ToolController;
 import com.o2o.web.ToolsPactController;
 import com.o2o.web.TreeController;
@@ -110,8 +112,8 @@ public class O2OConfig extends JFinalConfig {
 		me.add("/pointsgoods",PointGoodsController.class,"WEB-INF/view/pointsgoods");
 		me.add("/exchangelogs",PointsRecordController.class,"WEB-INF/view/pointrecord");
 		me.add("/WUser",WUserController.class,"WEB-INF/view/WUser");
-		me.add("MUser",MUserController.class,"WEB-INF/view/MUser");
-		
+		me.add("/MUser",MUserController.class,"WEB-INF/view/MUser");
+		me.add("/technology",TechnologyController.class,"WEB-INF/view/technology");
 	}
 	
 	public void configEngine(Engine me) {
