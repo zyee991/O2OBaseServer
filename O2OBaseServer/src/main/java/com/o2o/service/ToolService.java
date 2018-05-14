@@ -36,7 +36,7 @@ public class ToolService {
 	}
 	public List<Record> tableData() {
 		String wheresql=" where t.address_tid=d.district_id";
-		List<Record>list=Db.find("select t.* from tb_rent_tools t");
+		List<Record>list=Db.find("select t.*,d.* from tb_rent_tools t,view_address d"+wheresql);
 		return list;
 	}
 	public List<Record> reload(List<Record> list) {
@@ -46,6 +46,11 @@ public class ToolService {
 			} else {
 				record.set("status_name", "在租中");
 			}
+			String province_name=record.get("province_name");
+			String city_name=record.get("city_name");
+			String district_name=record.get("district_name");
+			String area=province_name+" "+city_name+" "+district_name;
+			record.set("area", area);
 		}
 		return list;
 	}

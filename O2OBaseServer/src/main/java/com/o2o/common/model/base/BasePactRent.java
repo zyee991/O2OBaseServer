@@ -54,12 +54,12 @@ public abstract class BasePactRent<M extends BasePactRent<M>> extends Model<M> i
 		return get("pre_etime");
 	}
 
-	public M setPreState(java.lang.Boolean preState) {
+	public M setPreState(java.lang.Integer preState) {
 		set("pre_state", preState);
 		return (M)this;
 	}
 	
-	public java.lang.Boolean getPreState() {
+	public java.lang.Integer getPreState() {
 		return get("pre_state");
 	}
 

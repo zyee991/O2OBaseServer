@@ -129,7 +129,7 @@ public class ServiceOrderController extends Controller {
 	}
 	
 ////确认退款   状态改为3，订单状态改为2
-	public void confirmSRefund(){
+	public void confirmSRefun(){
 		String orderid=getPara("id");
 		String paystatus=getPara("paystatus");
 		String orderstatus=getPara("orderstatus");

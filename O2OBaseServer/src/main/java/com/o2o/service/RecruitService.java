@@ -20,12 +20,18 @@ public class RecruitService {
 
 	public List<Record> reload(List<Record> list) {
 		for(Record record:list){
-			if(record.get("pe_state").equals(1)){
+			if(record.get("pe_state").equals(0)){
 				record.set("state", "待审批");
+			}else if(record.get("pe_state").equals(1)){
+				record.set("state", "待确认面试");
 			}else if(record.get("pe_state").equals(2)){
-				record.set("state", "审批通过");
+				record.set("state", "待面试审核");
+			}else if(record.get("pe_state").equals(3)){
+				record.set("state", "面试通过");
+			}else if(record.get("pe_state").equals(4)){
+				record.set("state", "审核不通过");
 			}else{
-				record.set("state", "审批不通过");
+				record.set("state", "面试不通过");
 			}
 		}
 		return list;

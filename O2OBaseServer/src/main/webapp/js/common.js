@@ -220,7 +220,7 @@ function confirmSend(id) {
 }
 
 //确认退款   状态改为3，订单状态改为3
-function confirmRefuncd(id){
+function confirmSRefuncd(id){
 	var url='/goods_order/confirmRefun';
 	$.confirm({
 		title:'提示',
@@ -297,12 +297,13 @@ function confirmSubmit(form) {
 }
 
 //审核通过
+//0---初始投递状态（待审批）   1---审批通过（待确认面试）    4-----审批不通过   2-----确认面试（待确认通过）   3-----面试通过    5-----面试不通过
 function confirmEOK(pemid,rid,state){
 	var url='/recruit/confirmOK';
-	if(state!='1'){
+	if(!state=='0'&&!state=='2'){
 		$.alert("请选择待审批记录");
 		return;
-	}else{
+	}
 		$.confirm({
 			title:'审核',
 			content:'是否确认?',
@@ -312,7 +313,12 @@ function confirmEOK(pemid,rid,state){
 					btnClass:'btn-success',
 					keys:['enter'],
 					action:function(){
-						$.post(url, {"status":2,"pemid":pemid,"rid":rid},function(){
+						if(state=='0'){
+							state='1';
+						}else if(state=='2'){
+							state='3';
+						}
+						$.post(url, {"status":state,"pemid":pemid,"rid":rid},function(){
 								$.alert("审核成功:通过");
 							})
 					}
@@ -321,19 +327,18 @@ function confirmEOK(pemid,rid,state){
 					text:'不通过',
 					btnClass:'btn-danger',
 	                action:function(){
-	                	$.post({
-	                		url:url,
-	                		data:{"status":3,"pemid":pemid,"rid":rid},
-	                		async:true,
-	                		success:function(){
-	                			$.alert("审核成功:不通过");
-	                		}
-	                	})
+	                	if(state=='0'){
+	            			state='4';
+	            		}else if(state=='2'){
+	            			state='5';
+	            		}
+	                	$.post(url, {"status":state,"pemid":pemid,"rid":rid},function(){
+							$.alert("审核成功:不通过");
+						})
 	                }
 				}
 			}
 		});
-	}
 }
 
 //审核通过
@@ -376,7 +381,46 @@ function confirmPOK(pfaid,pid,state){
 		});
 	}
 }
-
+//1----待审批   2------审批通过（待归还）   3----归还完成
+function confirmTOK(pfeid,tid,state){
+	//
+	var url='/pacttools/confirmOK';
+	if(state!='1'){
+		$.alert("请选择待审批记录");
+		return;
+	}else{
+		$.confirm({
+			title:'审核',
+			content:'是否确认?',
+			buttons:{
+				ok:{
+					text:'通过',
+					btnClass:'btn-success',
+					keys:['enter'],
+					action:function(){
+						$.post(url, {"status":2,"pfeid":pfeid,"tid":tid},function(data){
+								$.alert("审核成功:通过");
+							})
+					}
+				},
+				cancel:{
+					text:'不通过',
+					btnClass:'btn-danger',
+	                action:function(){
+	                	$.post({
+	                		url:url,
+	                		data:{"status":4,"pfeid":pfeid,"tid":tid},
+	                		async:true,
+	                		success:function(){
+	                			$.alert("审核成功:不通过");
+	                		}
+	                	})
+	                }
+				}
+			}
+		});
+	}
+}
 //确认兑换
 function confirmExchange(id){
 	var url='/exchangelogs/confirmOK';

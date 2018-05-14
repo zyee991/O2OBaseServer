@@ -47,7 +47,7 @@ public class FactoryService {
 
 	public List<Record> tableData() {
 		String wheresql=" where f.address_pid=d.district_id";
-		List<Record>list=Db.find("select f.*,d.district_name from tb_district d,tb_rent_factory f"+wheresql);
+		List<Record>list=Db.find("select f.*,d.* from view_address d,tb_rent_factory f"+wheresql);
 		return list;
 	}
 
@@ -58,6 +58,12 @@ public class FactoryService {
 				} else if (record.get("state").equals(true)) {
 					record.set("status_name", "已租");
 				} 
+				String province_name=record.get("province_name");
+				String city_name=record.get("city_name");
+				String district_name=record.get("district_name");
+				String area=province_name+" "+city_name+" "+district_name;
+				record.set("area", area);
+
 			}
 		return list;
 	}
