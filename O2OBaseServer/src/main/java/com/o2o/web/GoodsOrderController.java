@@ -61,7 +61,7 @@ public class GoodsOrderController extends Controller {
 						String type="goodsorder";
 						String nickName = user.getUserNickname();
 						String orderStatus = "已发货";
-						String messageurl = wxSendUrl+"?user_openid="+openId+"&templete_id="+mobanid+"&nickname="+nickName+"&createtime="+new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date())+"&ordertatus="+orderStatus+"&type="+type;
+						String messageurl = wxSendUrl+"?user_openid="+openId+"&templete_id="+mobanid+"&nickname="+nickName+"&createtime="+new SimpleDateFormat("yyyy-MM-dd，HH:mm").format(new Date())+"&ordertatus="+orderStatus+"&type="+type;
 						String messageresult = HttpUtils.doGet(messageurl);
 						if(messageresult.contains("TemplateSenderResult")) {
 							order.setOrderStatus(1);
@@ -95,7 +95,7 @@ public class GoodsOrderController extends Controller {
 	}
 	
 	////确认退款   状态改为3，订单状态改为3
-	public void confirmRefund(){
+	public void confirmRefun(){
 		String id=getPara("id");
 		String paystatus=getPara("paystatus");
 		String orderstatus=getPara("orderstatus");
@@ -104,8 +104,9 @@ public class GoodsOrderController extends Controller {
 		if(order!=null){
 			order.setOrderPayStatus(Integer.parseInt(paystatus));
 			order.setOrderStatus(Integer.parseInt(orderstatus));
+			order.update();
 			resultMap.put("status", "1");
-			resultMap.put("content","退款成功成功");
+			resultMap.put("content","退款成功!!!!");
 		}else {
 			resultMap.put("status", "4");
 			resultMap.put("content", "订单信息不存在");
