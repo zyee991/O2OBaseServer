@@ -23,7 +23,7 @@
 				</div>
 			</form>
 
-			<form action="/pointsgoods/save" method="post" class="form-horizontal"
+			<form action="/pointsgoods/modify" method="post" class="form-horizontal"
 				role="form" id="form">
 				<div class="row">
 					<div class="col-sm-6">
@@ -148,7 +148,7 @@
 		var result = data.response;
 		var path = result.path;
 		if (path) {
-			$("#goodsinfoImage").val(path);
+			$("#pointsGiftfoImage").val(path);
 		}
 	});
 

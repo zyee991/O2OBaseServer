@@ -29,13 +29,19 @@ public class PointGoodsController extends Controller {
 	
 	public void save(){
 		PointsGift pointsGift=getBean(PointsGift.class);
-		System.out.println(pointsGift);
 		pointsGift.save();
+		renderJavascript("window.location.href='/pointsgoods'");
+	}
+	
+	public void modify() {
+		PointsGift pointsGift=getBean(PointsGift.class);
+		pointsGift.update();
 		renderJavascript("window.location.href='/pointsgoods'");
 	}
 	
 	public void update(){
 		String id=getPara("id");
+		setAttr("title","编辑积分礼物");
 		PointsGift pointsGift=PointsGift.dao.findById(id);
 		setAttr("pointsGift",pointsGift);
 		render("update.html");
