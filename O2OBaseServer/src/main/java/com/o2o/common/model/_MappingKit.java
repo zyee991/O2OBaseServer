@@ -46,8 +46,6 @@ public class _MappingKit {
 		arp.addMapping("tb_taocan", "tao_good_id", Taocan.class);
 		arp.addMapping("tb_technology", "fat_id", Technology.class);
 		arp.addMapping("tb_user", "user_openid", User.class);
-		arp.addMapping("tb_wx_menu1", "wx_menu1_id", WxMenu1.class);
-		arp.addMapping("tb_wx_menu2", "wx_menu2_id", WxMenu2.class);
 		arp.addMapping("tb_base_manager", "id",Manager.class);
 		arp.addMapping("tb_base_navigation", "id",Navigation.class);
 		arp.addMapping("tb_base_role","id",Role.class);
