@@ -85,4 +85,10 @@ public class OrderService {
 		List<Record>list=Db.find("select a.*,u.user_nickname,t.sec_type_name as pay_type_name,d.* from tb_order a,tb_user u,tb_sec_type t,view_address d"+wheresql);
 		return list;
 	}
+
+	public List<Record> findDetailList(String orderId) {
+	     String wheresql=" where a.shop_id=s.shop_id and order_id='"+orderId+"'";
+	     List<Record>list=Db.find("select a.*,s.* from tb_order_detail a,tb_shop s");
+		return list;
+	}
 } 

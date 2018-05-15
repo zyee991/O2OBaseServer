@@ -43,7 +43,11 @@ public class RealShopService {
 	}
 
 	public void save(Realshop realshop) {
-		realshop.save();
+		try{
+			realshop.save();
+		}catch(Exception e){
+			realshop.update();
+		}
 		
 	}
 

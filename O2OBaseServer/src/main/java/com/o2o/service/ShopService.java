@@ -23,9 +23,13 @@ public class ShopService {
 		return Db.find("select * from tb_goodsinfo where typeid=?",typeid);
 	}
 	public void save(Shop shop, Shangjiaoperation shangjiaoperation) {
-		System.out.println(shop);
+		try{
 		shop.save();
 		shangjiaoperation.save();
+		}catch(Exception e){
+			shop.update();
+			shangjiaoperation.update();
+		}
 	}
 	public List<Record> findById(String id) {
 		List<Record> shoplist=Db.find("select a.*,b.goodsinfo_name from tb_shop a,tb_shangjiaoperation c,tb_goodsinfo b"

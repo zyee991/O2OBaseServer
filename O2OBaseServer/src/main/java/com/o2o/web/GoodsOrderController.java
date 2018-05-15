@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Order;
+import com.o2o.common.model.Shop;
 import com.o2o.common.model.User;
 import com.o2o.service.OrderService;
 import com.o2o.util.ApplicationProperties;
@@ -66,7 +67,13 @@ public class GoodsOrderController extends Controller {
 						if(messageresult.contains("TemplateSenderResult")) {
 							order.setOrderStatus(1);
 							order.update();
-			
+			                List<Record>detaillist=orderService.findDetailList(order.getOrderId());
+			                for(Record record:detaillist){
+			                	Shop shop=Shop.dao.findById(record.get("shop_id"));
+			                	int count = shop.getShopCount();
+			                	shop.setShopCount(count - Integer.valueOf(record.get("order_detail_num")));
+			                	shop.update();
+			                }
 							resultMap.put("status", "1");
 							resultMap.put("content","发货成功");
 						} else {
