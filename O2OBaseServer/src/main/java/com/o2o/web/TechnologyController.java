@@ -49,6 +49,7 @@ public class TechnologyController extends Controller {
 			if(serviceOrder != null) {
 				String serviceId = serviceOrder.getServiceId();
 				technology.setServiceOrderId(serviceOrderId);
+				technology.setFatPrice(serviceOrder.getOrderPrice());
 				Service service = serviceService.findById(serviceId);
 				if(service != null) {
 					technology.setFatName(service.getServiceName());
@@ -61,10 +62,20 @@ public class TechnologyController extends Controller {
 		technology.setFatPhone(manager.getTelephone());
 		technology.setFatState("0");
 		technology.setFatSdate(new Date());
-		technology.set("fmtDate",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+		setAttr("fmtDate",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		setAttr("technology",technology);
 		render("add.html");
 	}
 	
-	
+	public void save() {
+		Technology technology = getBean(Technology.class);
+		if(StringUtils.isNotBlank(technology.getServiceOrderId())) {
+			String serviceOrderId = technology.getServiceOrderId();
+			ServiceOrder serviceOrder = serviceOrderService.findOne(serviceOrderId);
+			serviceOrder.setServiceOrderStatus(1);
+			serviceOrder.update();
+		}
+		service.save(technology);
+		renderJavascript("window.location.href='/technology'");
+	}
 }

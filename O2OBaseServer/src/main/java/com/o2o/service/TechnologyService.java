@@ -32,4 +32,13 @@ public class TechnologyService {
 	public void deleteById(String id) {
 		dao.deleteById(id);
 	}
+
+
+	public void save(Technology technology) {
+		try{
+			technology.save();
+		} catch (Exception e) {
+			technology.update();
+		}
+	}
 }

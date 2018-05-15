@@ -72,4 +72,12 @@ public abstract class BaseServiceOrder<M extends BaseServiceOrder<M>> extends Mo
 		return getInt("service_order_status");
 	}
 
+	public M setOrderPrice(java.lang.Float serviceOrderStatus) {
+		set("order_price", serviceOrderStatus);
+		return (M)this;
+	}
+	
+	public java.lang.Float getOrderPrice() {
+		return getFloat("order_price");
+	}
 }
