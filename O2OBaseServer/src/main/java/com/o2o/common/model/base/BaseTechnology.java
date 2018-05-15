@@ -9,13 +9,13 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseTechnology<M extends BaseTechnology<M>> extends Model<M> implements IBean {
 
-	public M setFatId(java.lang.Integer fatId) {
+	public M setFatId(java.lang.String fatId) {
 		set("fat_id", fatId);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getFatId() {
-		return getInt("fat_id");
+	public java.lang.String getFatId() {
+		return getStr("fat_id");
 	}
 
 	public M setFatName(java.lang.String fatName) {
@@ -88,6 +88,33 @@ public abstract class BaseTechnology<M extends BaseTechnology<M>> extends Model<
 	
 	public java.lang.String getFatState() {
 		return getStr("fat_state");
+	}
+
+	public M setFtype(java.lang.String ftype) {
+		set("ftype", ftype);
+		return (M)this;
+	}
+	
+	public java.lang.String getFtype() {
+		return getStr("ftype");
+	}
+
+	public M setDescrption(java.lang.String descrption) {
+		set("descrption", descrption);
+		return (M)this;
+	}
+	
+	public java.lang.String getDescrption() {
+		return getStr("descrption");
+	}
+
+	public M setServiceOrderId(java.lang.String serviceOrderId) {
+		set("service_order_id", serviceOrderId);
+		return (M)this;
+	}
+	
+	public java.lang.String getServiceOrderId() {
+		return getStr("service_order_id");
 	}
 
 }

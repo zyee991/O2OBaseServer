@@ -9,22 +9,22 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseServiceOrder<M extends BaseServiceOrder<M>> extends Model<M> implements IBean {
 
-	public M setServiceOrderId(java.lang.Integer serviceOrderId) {
+	public M setServiceOrderId(java.lang.String serviceOrderId) {
 		set("service_order_id", serviceOrderId);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getServiceOrderId() {
-		return getInt("service_order_id");
+	public java.lang.String getServiceOrderId() {
+		return getStr("service_order_id");
 	}
 
-	public M setServiceId(java.lang.Integer serviceId) {
+	public M setServiceId(java.lang.String serviceId) {
 		set("service_id", serviceId);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getServiceId() {
-		return getInt("service_id");
+	public java.lang.String getServiceId() {
+		return getStr("service_id");
 	}
 
 	public M setUserOpenid(java.lang.String userOpenid) {

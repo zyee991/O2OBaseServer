@@ -1,14 +1,28 @@
 package com.o2o.web;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
+import com.o2o.common.model.Manager;
+import com.o2o.common.model.Service;
+import com.o2o.common.model.ServiceOrder;
+import com.o2o.common.model.Technology;
+import com.o2o.service.ServiceOrderService;
+import com.o2o.service.ServiceService;
 import com.o2o.service.TechnologyService;
+import com.o2o.util.BaseUtils;
 
 public class TechnologyController extends Controller {
 
 	static TechnologyService service = new TechnologyService();
+	static ServiceOrderService serviceOrderService = new ServiceOrderService();
+	static ServiceService serviceService = new ServiceService();
 
 	public void index() {
 		setAttr("title", "技术需求");
@@ -25,4 +39,32 @@ public class TechnologyController extends Controller {
 		service.deleteById(id);
 		renderJavascript("window.location.href='/technology'");
 	}
+	
+	public void add() {
+		String serviceOrderId = getPara("serviceOrderId");
+		Manager manager = BaseUtils.getManager(this);
+		Technology technology = new Technology();
+		if(StringUtils.isNotBlank(serviceOrderId)) {
+			ServiceOrder serviceOrder = serviceOrderService.findOne(serviceOrderId);
+			if(serviceOrder != null) {
+				String serviceId = serviceOrder.getServiceId();
+				technology.setServiceOrderId(serviceOrderId);
+				Service service = serviceService.findById(serviceId);
+				if(service != null) {
+					technology.setFatName(service.getServiceName());
+					technology.setDescrption(service.getServiceDesc());
+				}
+			}
+		}
+		technology.setFatId(UUID.randomUUID().toString());
+		technology.setFatContacts(manager.getName());
+		technology.setFatPhone(manager.getTelephone());
+		technology.setFatState("0");
+		technology.setFatSdate(new Date());
+		technology.set("fmtDate",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+		setAttr("technology",technology);
+		render("add.html");
+	}
+	
+	
 }

@@ -1,0 +1,77 @@
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true">×</button>
+	<h4 class="modal-title" id="myModalLabel">新增技术需求</h4>
+</div>
+<div class="modal-body">
+	<form class="form-horizontal" role="form" id="form" action="/technology/save" method="post">
+		<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">名称</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="technology.fatName" required value="#(technology.fatName)"
+					placeholder="请输入名称">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="url" class="col-sm-2 control-label">价格</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="technology.fatPrice" required value="#(technology.fatPrice)"
+					placeholder="请输入价格">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="url" class="col-sm-2 control-label">发布时间</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control datetimepicker" name="technology.fatSdate" required value="#(fmtDate)"
+				 id="startTime"	placeholder="请输入发布时间">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="url" class="col-sm-2 control-label">截止时间</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control datetimepicker" name="technology.fatEdate" required value="#(technology.fatEdate)"
+				  id="endTime"	placeholder="请输入截止时间">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="url" class="col-sm-2 control-label">联系人</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="technology.fatContacts" required value="#(technology.fatContacts)"
+					placeholder="请输入联系人">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="url" class="col-sm-2 control-label">联系电话</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="technology.fatPhone" required value="#(technology.fatPhone)"
+					placeholder="请输入联系电话">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="url" class="col-sm-2 control-label">描述</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="technology.descrption" value="#(technology.descrption)"
+					placeholder="请输入联系电话">
+			</div>
+		</div>
+		<input type="hidden" name="technology.fatId" value="#(technology.fatId)" />
+		<input type="hidden" name="technology.serviceOrderId" value="#(technology.serviceOrderId)" />
+		<input type="hidden" name="technology.fatState" value="#(technology.fatState)" />
+
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">
+		关闭</button>
+	<button type="button" class="btn btn-primary" onclick="submitForm('form')">提交</button>
+</div>
+<script>
+
+$('.datetimepicker').datetimepicker({
+    format: 'yyyy-mm-dd hh:ii:ss',
+    autoclose: true,
+    minView: 0,
+    minuteStep:30
+});
+</script>

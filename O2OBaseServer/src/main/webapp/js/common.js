@@ -22,7 +22,6 @@ $(function() {
 	picker2.on('changeDate', function(e) {
 		picker1.datetimepicker('setEndDate', e.date);
 	});
-
 });
 
 function modalShowQO(url) {
