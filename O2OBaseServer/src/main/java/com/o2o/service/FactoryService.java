@@ -36,7 +36,12 @@ public class FactoryService {
 	}
 	
 	public void save(RentFactory rentFactory) {
-		rentFactory.save();	
+		try{
+			rentFactory.save();
+		}catch(Exception e){
+			rentFactory.update();
+		}
+		
 	}
 	
 	public List<Record> findById(String id){

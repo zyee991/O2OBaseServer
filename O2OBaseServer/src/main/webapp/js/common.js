@@ -345,7 +345,7 @@ function confirmEOK(pemid,rid,state){
 function confirmPOK(pfaid,pid,state){
 	//
 	var url='/factoryPact/confirmOK';
-	if(state!='0'){
+	if(state!='1'){
 		$.alert("请选择待审批记录");
 		return;
 	}else{
@@ -358,7 +358,7 @@ function confirmPOK(pfaid,pid,state){
 					btnClass:'btn-success',
 					keys:['enter'],
 					action:function(){
-						$.post(url, {"status":1,"pfaid":pfaid,"pid":pid},function(data){
+						$.post(url, {"status":2,"pfaid":pfaid,"pid":pid},function(data){
 								$.alert("审核成功:通过");
 							})
 					}
@@ -369,7 +369,7 @@ function confirmPOK(pfaid,pid,state){
 	                action:function(){
 	                	$.post({
 	                		url:url,
-	                		data:{"status":2,"pfaid":pfaid,"pid":pid},
+	                		data:{"status":4,"pfaid":pfaid,"pid":pid},
 	                		async:true,
 	                		success:function(){
 	                			$.alert("审核成功:不通过");
@@ -383,9 +383,8 @@ function confirmPOK(pfaid,pid,state){
 }
 //1----待审批   2------审批通过（待归还）   3----归还完成
 function confirmTOK(pfeid,tid,state){
-	//
 	var url='/pacttools/confirmOK';
-	if(state!='1'){
+	if(!state=='1'){
 		$.alert("请选择待审批记录");
 		return;
 	}else{

@@ -23,23 +23,23 @@
 	        	  sortable:true
 	          }, {
 	              title: '开始时间',
-	              field: 'pfe_stime',
+	              field: 'pre_stime',
             	  sortable:true
 	          },{ 
 	              title: '归还时间',
-	              field: 'pfe_etime',
+	              field: 'pre_etime',
             	  sortable:true
 	          },{
 	              title: '支付金额 ',
-	              field: 'pfe_money',
+	              field: 'pre_money',
             	  sortable:true
 	          },{
 	              title: '数量 ',
-	              field: 'pfe_number',
+	              field: 'pre_number',
             	  sortable:true
 	          },{
 	              title: '状态',
-	              field: 'pre_state',
+	              field: 'state',
             	  sortable:true
 	          },{
 	        	  title: "操作",
@@ -47,7 +47,7 @@
 	              valign: 'middle',
 	              formatter: function (value, row, index) {
                         var result="";
-                        if(row.status_name=='待审批'){
+                        if(row.state=='待审批'){
       	           
                         	result = "<a href=\"javascript:void(0);\" onclick=\"confirmTOK('"+row.pre_id+"','#(id)',"+row.pre_state+")\"  class=\"btn btn-warning btn-xs\" role=\"button\">审核</a>&nbsp;&nbsp;";
 

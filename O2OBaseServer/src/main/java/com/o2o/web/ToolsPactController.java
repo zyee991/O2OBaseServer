@@ -23,9 +23,9 @@ public class ToolsPactController extends Controller {
 		render("index.html");
 	}
 	
-	public void tableData(String tid){
+	public void tableData(){
 		String id=getPara("id");
-		List<Record>list=toolPactService.tableData(tid);
+		List<Record>list=toolPactService.tableData(id);
 		renderJson(toolPactService.reload(list));
 	}
 	public void confirmOK(){
