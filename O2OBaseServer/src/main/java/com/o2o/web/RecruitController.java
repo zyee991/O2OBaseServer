@@ -37,6 +37,6 @@ public class RecruitController extends Controller {
 		pactemploy.setPeState(Integer.parseInt(status));
 		pactemploy.setPeEtime(date);
 		pactemploy.update();
-		renderJavascript("window.location.href='/recruit?rid='"+rid);
+		renderJavascript("window.location.href='/recruit?id="+rid+"'");
 	}
 }

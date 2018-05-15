@@ -19,12 +19,14 @@ public class FactoryPactService {
    }
 	public List<Record> reload(List<Record>list){
 		for(Record record:list){
-			if(record.get("pfa_state").equals(0)){
+			if(record.get("pfa_state").equals(1)){
 				record.set("status_name", "待审批");
-			}else if(record.get("pfa_state").equals(1)){
+			}else if(record.get("pfa_state").equals(2)){
 				record.set("status_name", "待归还");
-			}else{
+			}else if(record.get("pfa_state").equals(3)){
 				record.set("status_name", "归还完成");
+			}else{
+				record.set("status", "审批驳回");
 			}
 		}
 		return list;

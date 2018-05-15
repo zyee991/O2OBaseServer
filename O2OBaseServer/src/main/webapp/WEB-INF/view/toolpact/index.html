@@ -11,23 +11,31 @@
 <script>
 	$("#table").bootstrapTable({
 	      method: "post",
-	      url: "/recruit/tableData?id="+#(id),
+	      url: "/pacttools/tableData?id=#(id)",
 	      columns: [
 	          {
-	              title: '应聘者',
+	              title: '租借人',
 	              field: 'muser',
             	  sortable:true
+	          },{
+	        	  title:'工具名称',
+	        	  field:'name_t',
+	        	  sortable:true
 	          }, {
-	              title: '期望薪资',
-	              field: 'pre_income',
+	              title: '开始时间',
+	              field: 'pre_stime',
+            	  sortable:true
+	          },{ 
+	              title: '归还时间',
+	              field: 'pre_etime',
             	  sortable:true
 	          },{
-	              title: '应聘时间',
-	              field: 'pe_stime',
+	              title: '支付金额 ',
+	              field: 'pre_money',
             	  sortable:true
 	          },{
-	              title: '审核时间',
-	              field: 'pe_etime',
+	              title: '数量 ',
+	              field: 'pre_number',
             	  sortable:true
 	          },{
 	              title: '状态',
@@ -38,10 +46,13 @@
 	              align: 'center',
 	              valign: 'middle',
 	              formatter: function (value, row, index) {
-	            	  var result=""; 
-	            	 if(row.state=="待审批"||row.state=="待面试审核"){
-	            	  result= "<a href=\"javascript:void(0);\" onclick=\"confirmEOK('" + row.pem_id+"',"+#(id)+","+row.pe_state + ")\"  class=\"btn btn-warning btn-xs\" role=\"button\">审核</a>&nbsp;&nbsp;";
-	            	 }
+                        var result="";
+                        if(row.state=='待审批'){
+      	           
+                        	result = "<a href=\"javascript:void(0);\" onclick=\"confirmTOK('"+row.pre_id+"','#(id)',"+row.pre_state+")\"  class=\"btn btn-warning btn-xs\" role=\"button\">审核</a>&nbsp;&nbsp;";
+
+                        }
+	                  
 	            	  return result;
 	              }
 	          }

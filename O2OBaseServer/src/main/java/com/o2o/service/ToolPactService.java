@@ -8,8 +8,24 @@ import com.jfinal.plugin.activerecord.Record;
 public class ToolPactService {
 
 	public List<Record> tableData(String tid) {
-		String wheresql=" where t.mid=m.mid";
-		List<Record>list=Db.find("select*from tb_pact_rent t,tb_muser m"+wheresql);
+		String wheresql=" where t.mid=m.mid and t.tid=o.tid and t.tid='"+tid+"'";
+		List<Record>list=Db.find("select t.*,m.muser,o.name_t from tb_pact_rent t,tb_muser m,tb_rent_tools o"+wheresql);
+		return list;
+	}
+
+	public List<Record> reload(List<Record> list) {
+		for(Record record:list) {
+			if(record.get("pre_state").equals(1) ) {
+				record.set("state", "待审批");
+			} else if (record.get("pre_state").equals(2)) {
+				record.set("state", "待归还");
+			}else if(record.get("pre_state").equals(3)){
+				record.set("state", "归还完成");
+			}else{
+				record.set("state", "审批驳回");
+			}
+
+		}
 		return list;
 	}
 
