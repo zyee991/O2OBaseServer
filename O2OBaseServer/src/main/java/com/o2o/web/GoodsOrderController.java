@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Order;
-import com.o2o.common.model.Shop;
 import com.o2o.common.model.User;
 import com.o2o.service.OrderService;
 import com.o2o.util.ApplicationProperties;
@@ -34,9 +33,9 @@ public class GoodsOrderController extends Controller {
 		renderJson(orderService.reload(list));
 	}
 
-	//服务订单状态-----0-待处理 1--待确认   2----已完成
+	// 服务订单状态-----0-待处理 1--待确认 2----已完成
 	public void confirm() {
-		Map<String,String> resultMap = new HashMap<>();
+		Map<String, String> resultMap = new HashMap<>();
 		String mobanurl = ApplicationProperties.get("wxTemplateUrl");
 		String wxSendUrl = ApplicationProperties.get("wxSendUrl");
 		String mobanresult = HttpUtils.doGet(mobanurl);
@@ -52,33 +51,38 @@ public class GoodsOrderController extends Controller {
 					break;
 				}
 			}
-			if(StringUtils.isNotBlank(mobanid)) {
+			if (StringUtils.isNotBlank(mobanid)) {
 				String orderId = getPara("id");
 				Order order = orderService.findOne(orderId);
-				if(order != null) {
+				if (order != null) {
 					String openId = order.getUserOpenid();
 					User user = User.dao.findById(openId);
-					if(user != null) {
-						String type="goodsorder";
+					if (user != null) {
+						String type = "goodsorder";
 						String nickName = user.getUserNickname();
 						String orderStatus = "已发货";
-						String messageurl = wxSendUrl+"?user_openid="+openId+"&templete_id="+mobanid+"&nickname="+nickName+"&createtime="+new SimpleDateFormat("yyyy-MM-dd，HH:mm").format(new Date())+"&ordertatus="+orderStatus+"&type="+type;
+						String messageurl = wxSendUrl + "?user_openid=" + openId + "&templete_id=" + mobanid
+								+ "&nickname=" + nickName + "&createtime="
+								+ new SimpleDateFormat("yyyy-MM-dd，HH:mm").format(new Date()) + "&ordertatus="
+								+ orderStatus + "&type=" + type;
 						String messageresult = HttpUtils.doGet(messageurl);
-						if(messageresult.contains("TemplateSenderResult")) {
+						if (messageresult.contains("TemplateSenderResult")) {
 							order.setOrderStatus(1);
 							order.update();
-			                List<Record>detaillist=orderService.findDetailList(order.getOrderId());
-			               /* for(Record record:detaillist){
-			                	Shop shop=Shop.dao.findById(record.get("shop_id"));
-			                	int count = shop.getShopCount();
-			                	shop.setShopCount(count - Integer.valueOf(record.get("order_detail_num")));
-			                	shop.update();
-			                }*/
+//							List<Record> detaillist = orderService.findDetailList(order.getOrderId());
+							/*
+							 * for(Record record:detaillist){ Shop
+							 * shop=Shop.dao.findById(record.get("shop_id"));
+							 * int count = shop.getShopCount();
+							 * shop.setShopCount(count -
+							 * Integer.valueOf(record.get("order_detail_num")));
+							 * shop.update(); }
+							 */
 							resultMap.put("status", "1");
-							resultMap.put("content","发货成功");
+							resultMap.put("content", "发货成功");
 						} else {
 							resultMap.put("status", "2");
-							resultMap.put("content","消息发送失败");
+							resultMap.put("content", "消息发送失败");
 						}
 					} else {
 						resultMap.put("status", "5");
@@ -96,48 +100,49 @@ public class GoodsOrderController extends Controller {
 			resultMap.put("status", "3");
 			resultMap.put("content", "模版获取失败");
 		}
-		
+
 		renderJson(resultMap);
 
 	}
-	
-	////确认退款   状态改为3，订单状态改为3
-	public void confirmRefun(){
-		String id=getPara("id");
-		String paystatus=getPara("paystatus");
-		String orderstatus=getPara("orderstatus");
-		Map<String,String> resultMap = new HashMap<>();
-		Order order=orderService.findOne(id);
-		if(order!=null){
+
+	//// 确认退款 状态改为3，订单状态改为3
+	public void confirmRefun() {
+		String id = getPara("id");
+		String paystatus = getPara("paystatus");
+		String orderstatus = getPara("orderstatus");
+		Map<String, String> resultMap = new HashMap<>();
+		Order order = orderService.findOne(id);
+		if (order != null) {
 			order.setOrderPayStatus(Integer.parseInt(paystatus));
 			order.setOrderStatus(Integer.parseInt(orderstatus));
 			order.update();
 			resultMap.put("status", "1");
-			resultMap.put("content","退款成功!!!!");
-		}else {
+			resultMap.put("content", "退款成功!!!!");
+		} else {
 			resultMap.put("status", "4");
 			resultMap.put("content", "订单信息不存在");
 		}
 		renderJson(resultMap);
 	}
+
 	public void goodsdetail() {
 		String id = getPara("id");
 		List<Record> goodslist = orderService.findGoodsByOrderId(id);
-		setAttr("goodslist",goodslist);
+		setAttr("goodslist", goodslist);
 		render("goods_detail.html");
 	}
-	
-	public void orderdetail(){
-		String id=getPara("id");
-		List<Record> list=orderService.findOrderByOrderId(id);
-		Record record=list.get(0);
-		String province=record.get("province_name");
-		String city=record.get("city_name");
-		String district=record.get("district_name");
-		String area=province+" "+city+" "+district;
-		setAttr("area",area);
-		setAttr("list",list);
+
+	public void orderdetail() {
+		String id = getPara("id");
+		List<Record> list = orderService.findOrderByOrderId(id);
+		Record record = list.get(0);
+		String province = record.get("province_name");
+		String city = record.get("city_name");
+		String district = record.get("district_name");
+		String area = province + " " + city + " " + district;
+		setAttr("area", area);
+		setAttr("list", list);
 		render("order_detail.html");
 	}
-	
+
 }

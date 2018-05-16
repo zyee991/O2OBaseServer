@@ -3,10 +3,8 @@ package com.o2o.service;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Dispatch;
-import com.o2o.common.model.Muser;
 import com.o2o.common.model.ServiceOrder;
 
 public class ServiceOrderService {

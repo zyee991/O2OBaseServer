@@ -19,7 +19,6 @@ public class _MappingKit {
 		arp.addMapping("tb_base_message", "message_id", Message.class);
 		arp.addMapping("tb_city", "city_id", City.class);
 		arp.addMapping("tb_dispatch", "pac_id", Dispatch.class);
-/*		arp.addMapping("tb_dispatch_qiang", "pacq_id", DispatchQiang.class);*/
 		arp.addMapping("tb_district", "district_id", District.class);
 		arp.addMapping("tb_feedback", "feedback_id", Feedback.class);
 		arp.addMapping("tb_first_type", "first_type_id", Firsttype.class);

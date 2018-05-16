@@ -1,16 +1,13 @@
 package com.o2o.web;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import com.jfinal.core.Controller;
-import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Sectype;
 import com.o2o.common.model.Service;
 import com.o2o.service.ServiceService;
-import com.o2o.util.CommonUtils;
 
 public class ServiceController extends Controller {
 
@@ -27,7 +24,6 @@ public class ServiceController extends Controller {
 	}
 	public void add(){
 		List<Sectype> typelist=serviceService.getTypeList();
-		System.out.println(typelist.toString());
 		setAttr("typelist", typelist);
 		setAttr("newId",UUID.randomUUID());
 		render("add.html");

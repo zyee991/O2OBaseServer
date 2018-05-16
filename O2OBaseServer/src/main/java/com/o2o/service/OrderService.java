@@ -36,15 +36,6 @@ public class OrderService {
 
 	public Page<Record> paginateAll(int i, int j) {
 		String wheresql = " where a.user_openid=u.user_openid and t.sec_type_id=a.order_pay_type";
-		/*if (paystatus != "") {
-			wheresql += " and order_pay_status=" + paystatus;
-		}
-		if (orderstatus != "") {
-			wheresql += " and order_status=" + orderstatus;
-		}
-		if (anotherstatus != null) {
-			wheresql += " and order_status=" + anotherstatus;
-		}*/
 		Page<Record> page = Db.paginate(i, j, "select a.*,u.user_nickname,t.sec_type_name as pay_type_name",
 				"from tb_order a,tb_user u,tb_sec_type t" + wheresql);
 		return page;

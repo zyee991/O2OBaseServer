@@ -1,19 +1,11 @@
 package com.o2o.index;
 
-import java.io.IOException;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
-import org.apache.commons.net.ftp.FTPClient;
-
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.o2o.common.model.Manager;
 import com.o2o.service.ManagerService;
 import com.o2o.util.BaseUtils;
-import com.o2o.util.FtpUtil;
 import com.o2o.util.SecurityAuthentication;
 import com.o2o.web.NavigationController;
 

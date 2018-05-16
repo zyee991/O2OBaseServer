@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.jfinal.plugin.activerecord.Page;
 import com.o2o.common.model.Firsttype;
-import com.o2o.common.model.Navigation;
 import com.o2o.common.model.Sectype;
 
 public class GoodsTypeService {

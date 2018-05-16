@@ -6,7 +6,6 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Manager;
-import com.o2o.common.model.Navigation;
 
 public class ManagerService {
 
