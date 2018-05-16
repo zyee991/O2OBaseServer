@@ -35,7 +35,7 @@ public class ToolsPactController extends Controller {
 		String tid=getPara("tid");
 		//工具的状态变为不可租
 		RentTools renttool=RentTools.dao.findById(tid);
-		renttool.setState(0);
+		renttool.setState(1);
 		renttool.update();
 		Date date=new Date();
 		SimpleDateFormat df2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

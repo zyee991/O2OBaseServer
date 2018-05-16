@@ -68,12 +68,12 @@ public class GoodsOrderController extends Controller {
 							order.setOrderStatus(1);
 							order.update();
 			                List<Record>detaillist=orderService.findDetailList(order.getOrderId());
-			                for(Record record:detaillist){
+			               /* for(Record record:detaillist){
 			                	Shop shop=Shop.dao.findById(record.get("shop_id"));
 			                	int count = shop.getShopCount();
 			                	shop.setShopCount(count - Integer.valueOf(record.get("order_detail_num")));
 			                	shop.update();
-			                }
+			                }*/
 							resultMap.put("status", "1");
 							resultMap.put("content","发货成功");
 						} else {

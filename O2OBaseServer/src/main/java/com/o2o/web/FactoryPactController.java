@@ -36,7 +36,7 @@ public class FactoryPactController extends Controller {
 		String pid=getPara("pid");
 		//场地的状态变成不可租
 		RentFactory rentFactory=RentFactory.dao.findById(pid);
-		rentFactory.setStateT(false);
+		rentFactory.setStateT(true);
 		rentFactory.update();
 		Date date=new Date();
 		SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
