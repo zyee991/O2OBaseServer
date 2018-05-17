@@ -117,7 +117,6 @@ $('#file').fileinput({
 })
 
 $("#file").on("fileuploaded", function(event, data, previewId, index) {
-	alert(1)
 	var result = data.response;
 	var path = result.path;
 	if (path) {

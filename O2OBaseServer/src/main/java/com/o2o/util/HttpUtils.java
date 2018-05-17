@@ -59,7 +59,8 @@ public class HttpUtils {
      * @param params 
      * @return 
      */  
-    public static String doPost(String url, Map params){  
+    @SuppressWarnings("deprecation")
+	public static String doPost(String url, Map<?, ?> params){  
           
         BufferedReader in = null;    
         try {    
@@ -71,12 +72,11 @@ public class HttpUtils {
               
             //设置参数  
             List<NameValuePair> nvps = new ArrayList<NameValuePair>();   
-            for (Iterator iter = params.keySet().iterator(); iter.hasNext();) {  
+            for (Iterator<?> iter = params.keySet().iterator(); iter.hasNext();) {  
                 String name = (String) iter.next();  
                 String value = String.valueOf(params.get(name));  
                 nvps.add(new BasicNameValuePair(name, value));  
                   
-                //System.out.println(name +"-"+value);  
             }  
             request.setEntity(new UrlEncodedFormEntity(nvps,HTTP.UTF_8));  
               

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.jfinal.core.Controller;
-import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Manager;
 import com.o2o.service.ManagerRoleService;
@@ -13,73 +12,73 @@ import com.o2o.service.ManagerService;
 import com.o2o.util.CommonUtils;
 import com.o2o.util.SecurityAuthentication;
 
-public class ManagerController extends Controller{
-	
+public class ManagerController extends Controller {
+
 	static ManagerService managerService = new ManagerService();
 	static ManagerRoleService managerRoleService = new ManagerRoleService();
-	
+
 	public void index() {
-		setAttr("title","用户管理");
+		setAttr("title", "用户管理");
 		render("index.html");
 	}
-	
+
 	public void tableData() {
 		List<Record> list = managerService.tableData();
 		renderJson(list);
 	}
+
 	public void view() {
 		String id = getPara("id");
 		Manager manager = managerService.findById(id);
-		setAttr("manager",manager); 
+		setAttr("manager", manager);
 		render("view.html");
 	}
-	
+
 	public void add() {
 		String id = getPara("id");
-		if(id!=null){
-		Manager manager = managerService.findById(id);
-		setAttr("manager",manager);
+		if (id != null) {
+			Manager manager = managerService.findById(id);
+			setAttr("manager", manager);
 		}
-		setAttr("newId",UUID.randomUUID());
-		setAttr("date",CommonUtils.sdf.format(new Date()));
+		setAttr("newId", UUID.randomUUID());
+		setAttr("date", CommonUtils.sdf.format(new Date()));
 		render("add.html");
 	}
-	
+
 	public void save() {
 		Manager manager = getBean(Manager.class);
 		String password = SecurityAuthentication.crypt(manager.getPassword());
 		manager.setPassword(password);
 		managerService.save(manager);
-//		redirect("/manager");
+		// redirect("/manager");
 		renderJavascript("window.location.href='/manager'");
 	}
-	
+
 	public void update() {
 		String id = getPara("id");
-		Manager manager= managerService.findById(id);
-		setAttr("manager",manager);
-		setAttr("date",CommonUtils.sdf.format(new Date()));
+		Manager manager = managerService.findById(id);
+		setAttr("manager", manager);
+		setAttr("date", CommonUtils.sdf.format(new Date()));
 		render("update.html");
 	}
-	
+
 	public void delete() {
 		String id = getPara("id");
 		managerService.deleteById(id);
-//		redirect("/navigation");
+		// redirect("/navigation");
 		renderJavascript("window.location.href='/manager'");
 	}
-	
+
 	public void saveRelation() {
-		String managerIds= getPara("managerId");
+		String managerIds = getPara("managerId");
 		String roleIds = getPara("roleIds");
-		managerRoleService.save(roleIds,managerIds);
+		managerRoleService.save(roleIds, managerIds);
 		redirect("/role");
 	}
-	
-	
+
 	public void setRole() {
 		String id = getPara("id");
-		setAttr("managerId",id);
+		setAttr("managerId", id);
 		render("setRole.html");
 	}
 }

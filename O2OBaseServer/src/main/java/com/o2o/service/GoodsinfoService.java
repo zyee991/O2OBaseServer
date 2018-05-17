@@ -1,21 +1,16 @@
 package com.o2o.service;
 
 import java.util.List;
-import java.util.Map;
-
-import com.google.gson.Gson;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Goodsinfo;
 import com.o2o.common.model.Sectype;
-import com.o2o.common.model.Taocan;
 
 public class GoodsinfoService {
 
 	private static final Goodsinfo dao = new Goodsinfo().dao();
 	private static final Sectype typedao = new Sectype().dao();
-	private static final Taocan taocanDao = new Taocan().dao();
 
 	// 查询商品
 	public Page<Goodsinfo> paginate(int pageNumber, int pageSize) {
@@ -28,11 +23,10 @@ public class GoodsinfoService {
 	}
 
 	public List<Record> findGoodListById(String id) {
-		String wheresql=" where a.sec_type_id=t.sec_type_id and goodsinfo_id='"+id+"'";
-		List<Record>list=Db.find("select a.*,t.sec_type_name from tb_goodsinfo a,tb_sec_type t"+wheresql);
+		String wheresql = " where a.sec_type_id=t.sec_type_id and goodsinfo_id='" + id + "'";
+		List<Record> list = Db.find("select a.*,t.sec_type_name from tb_goodsinfo a,tb_sec_type t" + wheresql);
 		return list;
 	}
-	
 
 	public void deleteById(String id) {
 		dao.deleteById(id);
@@ -72,30 +66,30 @@ public class GoodsinfoService {
 	}
 
 	public List<Record> findTaocanByTaocanId(String taocanId) {
-		String sql="SELECT tb_taocan.tao_good_id, tb_taocan.taocan_id,tb_taocan.goodsinfo_id,tb_taocan.item_count,tb_sec_type.sec_type_name,"+
-                    "tb_goodsinfo.sec_type_id,tb_goodsinfo.goodsinfo_name FROM tb_taocan"+
-                     " INNER JOIN tb_shangjiaoperation ON tb_taocan.goodsinfo_id = tb_shangjiaoperation.shop_id"+
-                     " INNER JOIN tb_goodsinfo ON tb_shangjiaoperation.goodsinfo_id = tb_goodsinfo.goodsinfo_id"+ 
-                     " INNER JOIN tb_sec_type ON tb_goodsinfo.sec_type_id = tb_sec_type.sec_type_id"+
-                     " where tb_taocan.taocan_id=? ";
-		List<Record> taocanList = Db.find(sql,taocanId);
+		String sql = "SELECT tb_taocan.tao_good_id, tb_taocan.taocan_id,tb_taocan.goodsinfo_id,tb_taocan.item_count,tb_sec_type.sec_type_name,"
+				+ "tb_goodsinfo.sec_type_id,tb_goodsinfo.goodsinfo_name FROM tb_taocan"
+				+ " INNER JOIN tb_shangjiaoperation ON tb_taocan.goodsinfo_id = tb_shangjiaoperation.shop_id"
+				+ " INNER JOIN tb_goodsinfo ON tb_shangjiaoperation.goodsinfo_id = tb_goodsinfo.goodsinfo_id"
+				+ " INNER JOIN tb_sec_type ON tb_goodsinfo.sec_type_id = tb_sec_type.sec_type_id"
+				+ " where tb_taocan.taocan_id=? ";
+		List<Record> taocanList = Db.find(sql, taocanId);
 		return taocanList;
 	}
 
 	public List<Record> tableData() {
-		String wheresql=" where a.sec_type_id=t.sec_type_id and a.goodsinfo_istaocan=0";
-		List<Record>list=Db.find("select a.*,t.sec_type_name from tb_goodsinfo a,tb_sec_type t"+wheresql);
+		String wheresql = " where a.sec_type_id=t.sec_type_id and a.goodsinfo_istaocan=0";
+		List<Record> list = Db.find("select a.*,t.sec_type_name from tb_goodsinfo a,tb_sec_type t" + wheresql);
 		return list;
 	}
 
 	public List<Record> tableDataofTaocan() {
-		String wheresql=" where a.sec_type_id=t.sec_type_id and a.goodsinfo_istaocan=1";
-		List<Record>list=Db.find("select a.*,t.sec_type_name from tb_goodsinfo a,tb_sec_type t"+wheresql);
+		String wheresql = " where a.sec_type_id=t.sec_type_id and a.goodsinfo_istaocan=1";
+		List<Record> list = Db.find("select a.*,t.sec_type_name from tb_goodsinfo a,tb_sec_type t" + wheresql);
 		return list;
 	}
 
 	public Goodsinfo findById(String id) {
-		
+
 		return dao.findById(id);
 	}
 }

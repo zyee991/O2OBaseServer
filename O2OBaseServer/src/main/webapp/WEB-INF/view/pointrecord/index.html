@@ -1,19 +1,4 @@
 #@layout() #define main()
-<!-- <ul class="nav nav-tabs" id="myTab"> -->
-<!-- 	<li class="active"><a -->
-<!-- 		href="/goods_order?order_pay_status=0&order_status=0" -->
-<!-- 		data-toggle="tab"> 待支付</a></li> -->
-<!-- 	<li><a href="/goods_order?order_pay_status=2&order_status=0" -->
-<!-- 		data-toggle="tab">待退款</a></li> -->
-<!-- 	<li><a href="/goods_order?order_pay_status=1&order_status=0" -->
-<!-- 		data-toggle="tab">待发货</a></li> -->
-<!-- 	<li><a -->
-<!-- 		href="/goods_order?order_pay_status=1&order_status=3&another_status=5" -->
-<!-- 		data-toggle="tab">已完成</a></li> -->
-<!-- 	<li><a href="/goods_order?order_pay_status=1&order_status=4" -->
-<!-- 		data-toggle="tab">待退货</a></li> -->
-<!-- 	<li><a href="all" data-toggle="tab">全部</a></li> -->
-<!-- </ul> -->
 <div id="myTabContent" class="tab-content">
 	<div class="tab-pane fade in active" id="unpay">
 		<div class="table-responsive">
@@ -26,12 +11,11 @@
 #end
 <script>
 	function confirm(id) {
-		alert("确认发货");
 		$.post("/goods_order/confirm", {
 			id : id
 		}, function(data) {
 			if (data.success) {
-				alert(data.message);
+				$.alert(data.message);
 			}
 		});
 	}

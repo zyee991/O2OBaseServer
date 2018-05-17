@@ -12,7 +12,6 @@ import com.o2o.common.model.RentFactory;
 
 public class FactoryService {
 	
-    private static final RentFactory dao=new RentFactory().dao();
     private static final Province provincedao=new Province().dao();
     private static final City citydao=new City().dao();
     private static final District districtdao=new District().dao();

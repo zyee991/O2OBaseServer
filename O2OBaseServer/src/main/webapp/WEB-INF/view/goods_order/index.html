@@ -12,12 +12,11 @@
 #end
 <script>
 	function confirm(id) {
-		alert("确认发货");
 		$.post("/goods_order/confirm", {
 			id : id
 		}, function(data) {
 			if (data.success) {
-				alert(data.message);
+				$.alert(data.message);
 			}
 		});
 	}

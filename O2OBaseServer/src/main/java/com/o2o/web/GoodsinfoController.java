@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.jfinal.core.Controller;
-import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Goodsinfo;
 import com.o2o.common.model.Sectype;
@@ -19,14 +18,15 @@ public class GoodsinfoController extends Controller {
 		setAttr("title", "商品基本信息");
 		render("index.html");
 	}
-    
-	public void tableData(){
-		List<Record>list=goodsinfoService.tableData();
+
+	public void tableData() {
+		List<Record> list = goodsinfoService.tableData();
 		renderJson(list);
 	}
+
 	// 查看
 	public void view() {
-		setAttr("title","查看商品基本信息");
+		setAttr("title", "查看商品基本信息");
 		String id = getPara("id");
 		List<Record> list = goodsinfoService.findGoodListById(id);
 		setAttr("goodsinfo", list);
@@ -39,7 +39,7 @@ public class GoodsinfoController extends Controller {
 		String id = getPara("id");
 		Goodsinfo goodsinfo = goodsinfoService.findById(id);
 		setAttr("goodsinfo", goodsinfo);
-		
+
 		List<Sectype> typelist = goodsinfoService.getTypeList();
 		setAttr("typelist", typelist);
 
