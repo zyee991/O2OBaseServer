@@ -50,7 +50,7 @@ public class NavigationService {
 		if(BaseUtils.isSuperUser(manager)) {
 			return findParentNavigation();
 		} else {
-			String sqlPara = "select n.* from tb_base_navigation as n where n.id = ("
+			String sqlPara = "select n.* from tb_base_navigation as n where n.id in ("
 					+ "select rn.navigationId from tb_base_role_navigation as rn where rn.roleId = ("
 					+ "select mr.roleId from tb_base_manager_role as mr where mr.managerId = ?))"
 					+ "and n.parentId is null order by n.sortNumber";
@@ -63,8 +63,8 @@ public class NavigationService {
 		if(BaseUtils.isSuperUser(manager)) {
 			return findChildNavigationByParentId(id);
 		} else { 
-			String sqlPara = "select n.* from tb_base_navigation as n where n.id = ("
-					+ "select rn.navigationId from tb_base_role_navigation as rn where rn.roleId = ("
+			String sqlPara = "select n.* from tb_base_navigation as n where n.id in ("
+					+ "select rn.navigationId from tb_base_role_navigation as rn where rn.roleId in ("
 					+ "select mr.roleId from tb_base_manager_role as mr where mr.managerId = ?))"
 					+ "and n.parentId = ? order by n.sortNumber";
 			List<Navigation> list = dao.find(sqlPara,manager.getId(),id);

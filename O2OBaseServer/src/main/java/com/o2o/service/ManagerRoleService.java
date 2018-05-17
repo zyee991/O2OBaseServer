@@ -29,7 +29,7 @@ public class ManagerRoleService {
 			if(StringUtils.isNotBlank(roleId)) {
 				ManagerRole managerRole = new ManagerRole();
 				managerRole.setId(UUID.randomUUID().toString());
-				managerRole.setRoleId(roleId);
+				managerRole.setManagerId(managerId);
 				managerRole.setRoleId(roleId);
 				managerRole.save();
 			}

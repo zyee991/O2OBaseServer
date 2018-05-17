@@ -8,13 +8,14 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Role;
+import com.o2o.service.ManagerRoleService;
 import com.o2o.service.RoleNavigationService;
 import com.o2o.service.RoleService;
 
 public class RoleController extends Controller {
 
 	static RoleService roleService = new RoleService();
-	static RoleNavigationService roleNavigationService = new RoleNavigationService();
+	static ManagerRoleService managerRoleService = new ManagerRoleService();
 	
 	public void index(){
 		setAttr("title","角色管理");
@@ -49,9 +50,9 @@ public class RoleController extends Controller {
 	}
 	
 	public void saveRelation() {
-		String roleId = getPara("roleId");
-		String navigationIds = getPara("navigationIds");
-		roleNavigationService.save(roleId,navigationIds);
+		String managerId = getPara("managerId");
+		String roleIds = getPara("roleIds");
+		managerRoleService.save(managerId,roleIds);
 		redirect("/role");
 	}
 	
