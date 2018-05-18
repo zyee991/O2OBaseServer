@@ -94,7 +94,7 @@ public class ServiceOrderController extends Controller {
 						String messageurl = wxSendUrl + "?user_openid=" + openId + "&templete_id=" + mobanid
 								+ "&nickname=" + nickName + "&createtime="
 								+ new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()) + "&ordertatus="
-								+ orderStatus + "&type=" + type;
+								+ orderStatus + "&type=" + type+"&order_id=" +orderId;
 						String messageresult = HttpUtils.doGet(messageurl);
 						if (messageresult.contains("TemplateSenderResult")) {
 							/*
