@@ -11,12 +11,13 @@ import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Sectype;
 import com.o2o.common.model.Shangjiaoperation;
 import com.o2o.common.model.Shop;
+import com.o2o.common.model.Taocan;
 import com.o2o.service.ShopService;
 
 public class ShopController extends Controller {
 
 	static ShopService shopService = new ShopService();
-
+	
 	public void index() {
 		setAttr("title", "库存管理");
 		render("index.html");
@@ -40,6 +41,7 @@ public class ShopController extends Controller {
 		shangjiaoperation.setGoodsinfoId(getPara("goodsname"));
 		shangjiaoperation.setShopId(getPara("shopid"));
 		shangjiaoperation.setShopGoodsId(UUID.randomUUID().toString());
+		
 		shop.setShopId(getPara("shopid"));
 		shop.setShopCount(Integer.parseInt(getPara("number")));
 		shop.setShopIstaocan(Boolean.valueOf(getPara("istaocan")));
@@ -52,10 +54,14 @@ public class ShopController extends Controller {
 			Date endtime = sf.parse(date);
 			shop.setEndTime(endtime);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		shopService.save(shop, shangjiaoperation);
+		List<Taocan> taocanList = shopService.findTaocanListByGoodsinfoId(shangjiaoperation.getGoodsinfoId());
+		for(Taocan taocan:taocanList) {
+			taocan.setTaoShopid(shop.getShopId());
+			taocan.update();
+		}
 		renderJavascript("window.location.href='/shop'");
 	}
 

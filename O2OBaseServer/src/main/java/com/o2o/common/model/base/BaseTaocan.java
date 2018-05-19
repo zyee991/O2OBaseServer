@@ -44,5 +44,13 @@ public abstract class BaseTaocan<M extends BaseTaocan<M>> extends Model<M> imple
 	public java.lang.Integer getItemCount() {
 		return getInt("item_count");
 	}
-
+	
+	public M setTaoShopid(java.lang.String taoShopid) {
+		set("tao_shopid", taoShopid);
+		return (M)this;
+	}
+	
+	public java.lang.String getTaoShopid() {
+		return getStr("tao_shopid");
+	}
 }

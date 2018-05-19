@@ -8,6 +8,7 @@ import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Sectype;
 import com.o2o.common.model.Shangjiaoperation;
 import com.o2o.common.model.Shop;
+import com.o2o.common.model.Taocan;
 
 public class ShopService {
 
@@ -23,8 +24,8 @@ public class ShopService {
 	}
 	public void save(Shop shop, Shangjiaoperation shangjiaoperation) {
 		try{
-		shop.save();
-		shangjiaoperation.save();
+			shop.save();
+			shangjiaoperation.save();
 		}catch(Exception e){
 			shop.update();
 			shangjiaoperation.update();
@@ -42,7 +43,8 @@ public class ShopService {
 	}
 	public List<Sectype> getTypeList() {
 		List<Sectype> typelist = typedao
-				.find("select a.* from tb_sec_type a where a.first_type_id=1 and a.sec_type_id <> 0");
+//				.find("select a.* from tb_sec_type a where a.first_type_id=1 and a.sec_type_id <> 0");
+				.find("select a.* from tb_sec_type a where a.first_type_id=1");
 		/*
 		 * Gson gson=new Gson(); String str=gson.toJson(typelist);
 		 */
@@ -60,6 +62,10 @@ public class ShopService {
 	public List<Record> tableData() {
 		List<Record>list=Db.find("select*from view_shop_on_all");
 		return list;
+	}
+	public List<Taocan> findTaocanListByGoodsinfoId(String goodsinfoId) {
+		List<Taocan> taocanList = Taocan.dao.find("select * from tb_taocan where taocan_id = ?",goodsinfoId);
+		return taocanList;
 	}
 	
 
