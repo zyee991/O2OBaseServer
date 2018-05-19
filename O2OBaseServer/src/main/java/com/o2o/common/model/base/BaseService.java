@@ -107,5 +107,22 @@ public abstract class BaseService<M extends BaseService<M>> extends Model<M> imp
 	public java.lang.String getServiceDescdetail() {
 		return getStr("service_descdetail");
 	}
-
+	
+	public M setServiceIson(java.lang.Boolean serviceIson) {
+		set("service_ison", serviceIson);
+		return (M)this;
+	}
+	
+	public java.lang.Boolean getServiceIson() {
+		return get("service_ison");
+	}
+	
+	public M setEndTime(java.util.Date endTime) {
+		set("end_time", endTime);
+		return (M)this;
+	}
+	
+	public java.util.Date getEndTime() {
+		return get("end_time");
+	}
 }
