@@ -41,6 +41,7 @@ import com.o2o.web.ToolController;
 import com.o2o.web.ToolsPactController;
 import com.o2o.web.TreeController;
 import com.o2o.web.WUserController;
+import com.o2o.web.WxHeadController;
 import com.o2o.websocket.WebSocketHandler;
 
 import cn.dreampie.quartz.QuartzPlugin;
@@ -112,6 +113,7 @@ public class O2OConfig extends JFinalConfig {
 		me.add("/WUser",WUserController.class,"WEB-INF/view/WUser");
 		me.add("/MUser",MUserController.class,"WEB-INF/view/MUser");
 		me.add("/technology",TechnologyController.class,"WEB-INF/view/technology");
+		me.add("/WxHead",WxHeadController.class,"WEB-INF/view/WxHead");
 	}
 	
 	public void configEngine(Engine me) {

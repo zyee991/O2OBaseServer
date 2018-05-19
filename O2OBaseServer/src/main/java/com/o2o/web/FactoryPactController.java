@@ -35,7 +35,7 @@ public class FactoryPactController extends Controller {
 		String pid = getPara("pid");
 		// 场地的状态变成不可租
 		RentFactory rentFactory = RentFactory.dao.findById(pid);
-		rentFactory.setStateT(true);
+		rentFactory.setState(true);
 		rentFactory.update();
 		Date date = new Date();
 		PactFactory pactfactory = PactFactory.dao.findById(pfaid);
