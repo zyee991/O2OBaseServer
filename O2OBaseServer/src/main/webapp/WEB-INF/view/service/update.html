@@ -23,7 +23,7 @@
 				</div>
 			</form>
 
-			<form action="/goods_info/save" method="post" class="form-horizontal"
+			<form action="/service/save" method="post" class="form-horizontal"
 				role="form" id="form">
 				<div class="row">
 					<div class="col-sm-6">
@@ -59,10 +59,10 @@
 							<div class="btn-group col-sm-8" id="points" data-toggle="buttons">
 								<label class="btn btn-success #(service.servicePointsFlag == true ? 'active':'')" onclick="changePointsFlag(1)">
 								<input #(service.servicePointsFlag == true ? 'checked':'')
-									type="radio" name="service.servicePointsFlag" value="1">启用积分</label>
+									type="radio" name="service.servicePointsFlag" value="true">启用积分</label>
 								<label class="btn btn-success #(service.servicePointsFlag == false ? 'active':'')" onclick="changePointsFlag(0)">
 								<input type="radio" #(service.servicePointsFlag == false ? 'checked':'')
-									name="service.servicePointsFlag" value="0">不启用积分</label>
+									name="service.servicePointsFlag" value="false">不启用积分</label>
 							</div>
 						</div>
 					</div>
@@ -106,11 +106,11 @@
 								<label class="btn btn-success 
 								#(service.serviceForever == true ? 'active' : '')"  onclick="changeForever(1)">
 								<input #(service.serviceForever == true ? 'checked' : '')
-									type="radio" name="service.serviceForever" value="1">是</label>
+									type="radio" name="service.serviceForever" value="true">是</label>
 								<label class="btn btn-success 
 								#(service.serviceForever == false ? 'active' : '')"  onclick="changeForever(0)"><input
 								#(service.serviceForever == false ? 'checked' : '') type="radio"
-									name="service.serviceForever" value="0">否</label>
+									name="service.serviceForever" value="false">否</label>
 							</div>
 						</div>
 					</div>
@@ -155,7 +155,7 @@
 		<div class="col-sm-12">
 			<div class="btn-group pull-right">
 			    <button type="button" class="btn btn-success" onclick="save('form')">保存</button>
-			    <a type="button" class="btn btn-default" href="/goods_info">返回</a>
+			    <a type="button" class="btn btn-default" href="/service">返回</a>
 			</div>
 		</div>
 	</div>

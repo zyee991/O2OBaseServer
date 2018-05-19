@@ -38,18 +38,18 @@
 			<label class="col-sm-2 control-label">是否上架</label>
 			<div class="btn-group col-sm-10" id="points" data-toggle="buttons">
 				<label class="btn btn-success active"><input checked
-					type="radio" name="service.servicePointsFlag" value="1">上架</label>
+					type="radio" name="service.serviceIson" value="true">上架</label>
 				<label class="btn btn-success"><input type="radio"
-					name="service.serviceIson" value="0">下架</label>
+					name="service.serviceIson" value="false">下架</label>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2 control-label">是否启用积分</label>
 			<div class="btn-group col-sm-10" id="points" data-toggle="buttons">
 				<label class="btn btn-success active" onclick="changePointsFlag(1)"><input checked
-					type="radio" name="service.servicePointsFlag" value="1">启用积分</label>
+					type="radio" name="service.servicePointsFlag" value="true">启用积分</label>
 				<label class="btn btn-success" onclick="changePointsFlag(0)"><input type="radio"
-					name="service.servicePointsFlag" value="0">不启用积分</label>
+					name="service.servicePointsFlag" value="false">不启用积分</label>
 			</div>
 		</div>
 		<div class="form-group" id="PointsFlag">
@@ -87,9 +87,9 @@
 			<label class="col-sm-2 control-label">是否为永久商品</label>
 			<div class="btn-group col-sm-10" id="isforever" data-toggle="buttons">
 				<label class="btn btn-success active" onclick="changeForever(1)"><input
-					checked type="radio" name="service.serviceFoever" value="1">是</label>
+					checked type="radio" name="service.serviceForever" value="1">是</label>
 				<label class="btn btn-success" onclick="changeForever(0)"><input
-					type="radio" name="service.serviceFoever" value="0">否</label>
+					type="radio" name="service.serviceForever" value="0">否</label>
 			</div>
 		</div>
 		<div class="form-group hidden" id="forever">
