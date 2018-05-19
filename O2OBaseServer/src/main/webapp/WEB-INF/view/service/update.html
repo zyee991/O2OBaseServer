@@ -124,6 +124,24 @@
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="col-sm-4 control-label">是否上架</label>
+							<div class="btn-group col-sm-8" id="isforever" data-toggle="buttons">
+								<label class="btn btn-success 
+								#(service.serviceIson == true ? 'active' : '')" >
+								<input #(service.serviceIson == true ? 'checked' : '')
+									type="radio" name="service.serviceIson" value="true">是</label>
+								<label class="btn btn-success 
+								#(service.serviceIson == false ? 'active' : '')" ><input
+								#(service.serviceIson == false ? 'checked' : '') type="radio"
+									name="service.serviceIson" value="false">否</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				
 				<input type="hidden" id="serviceId" name="service.serviceId"
 					value="#(service.serviceId)" />
