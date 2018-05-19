@@ -40,7 +40,7 @@ public class NavigationService {
 	}
 	
 	public List<Navigation> findNavigationByRoleId(String roleId) {
-		String sqlPara = "select n.* from tb_base_navigation as n where n.id = ("
+		String sqlPara = "select n.* from tb_base_navigation as n where n.id in ("
 				+ "select rn.navigationId from tb_base_role_navigation as rn where "
 				+ "rn.roleId = ? ) order by n.sortNumber";
 		return dao.find(sqlPara,roleId);
