@@ -23,7 +23,7 @@ public class ServiceOrderService {
 				record.set("status_name", "待支付");
 			}else if(record.get("service_order_status").equals(1)){
 				record.set("status_name", "待评论");
-			}else if(record.get("service_pay_status").equals("2")){
+			}else if(record.get("service_pay_status").equals(2)){
 				record.set("status_name", "待退款");
 			}else if(record.get("service_pay_status").equals(3)&&record.get("service_order_status").equals(2)){
 				record.set("status_name","退款完成");

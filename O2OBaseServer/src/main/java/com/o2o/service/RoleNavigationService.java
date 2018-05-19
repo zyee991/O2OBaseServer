@@ -22,7 +22,10 @@ public class RoleNavigationService {
 			idValues.add(roleNavigation.getId());
 		}
 		if(idValues.size() > 0 ){
-			dao.deleteById(idValues.toArray());
+			for(String id:idValues) {
+				dao.deleteById(id);
+			}
+			
 		}
 		for(String navigationId : navigationIdArray) {
 			if(StringUtils.isNotBlank(navigationId)) {

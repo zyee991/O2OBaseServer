@@ -14,7 +14,7 @@ import com.o2o.service.RoleService;
 public class RoleController extends Controller {
 
 	static RoleService roleService = new RoleService();
-	static ManagerRoleService managerRoleService = new ManagerRoleService();
+	static RoleNavigationService roleNavigationService = new RoleNavigationService();
 
 	public void index() {
 		setAttr("title", "角色管理");
@@ -49,9 +49,9 @@ public class RoleController extends Controller {
 	}
 
 	public void saveRelation() {
-		String managerId = getPara("managerId");
-		String roleIds = getPara("roleIds");
-		managerRoleService.save(managerId,roleIds);
+		String roleId = getPara("roleId");
+		String navigationIds = getPara("navigationIds");
+		roleNavigationService.save(roleId,navigationIds);
 		redirect("/role");
 	}
 
