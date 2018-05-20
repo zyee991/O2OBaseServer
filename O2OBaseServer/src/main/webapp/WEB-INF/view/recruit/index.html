@@ -11,7 +11,7 @@
 <script>
 	$("#table").bootstrapTable({
 	      method: "post",
-	      url: "/recruit/tableData?id="+#(id),
+	      url: "/recruit/tableData?id=#(id)",
 	      columns: [
 	          {
 	              title: '应聘者',
@@ -40,7 +40,7 @@
 	              formatter: function (value, row, index) {
 	            	  var result=""; 
 	            	 if(row.state=="待审批"||row.state=="待面试审核"){
-	            	  result= "<a href=\"javascript:void(0);\" onclick=\"confirmEOK('" + row.pem_id+"',"+#(id)+","+row.pe_state + ")\"  class=\"btn btn-warning btn-xs\" role=\"button\">审核</a>&nbsp;&nbsp;";
+	            	  result= "<a href=\"javascript:void(0);\" onclick=\"confirmEOK('" + row.pem_id+"','#(id)',"+row.pe_state + ")\"  class=\"btn btn-warning btn-xs\" role=\"button\">审核</a>&nbsp;&nbsp;";
 	            	 }
 	            	  return result;
 	              }
