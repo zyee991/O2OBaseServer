@@ -6,9 +6,23 @@
 <div class="modal-body">
 	<form class="form-horizontal">
 		<div class="form-group">
+			<label class="col-sm-2 control-label"></label>
+			<div class="col-sm-10">
+				<div class="col-sm-12"><img src="#(recruitInfo.img)" class="img-responsive" /></div>
+			</div>
+		</div>
+		<div class="form-group">
 			<label for="file" class="col-sm-2 control-label">附件上传</label>
 			<div class="col-sm-10">
 				<input type="file" class="form-control" id="file" name="file">
+			</div>
+		</div>
+	</form>
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label for="file" class="col-sm-2 control-label">上传图片</label>
+			<div class="col-sm-10">
+				<input type="file" class="form-control" id="file-img" name="file">
 			</div>
 		</div>
 	</form>
@@ -94,6 +108,7 @@
 			name="recruitInfo.attachment" value="#(recruitInfo.attachment)" />
 			<input type="hidden" id="rid" name="recruitInfo.rid" value="#(recruitInfo.rid)"/>
 			<input type="hidden" id="realse_time" name="recruitInfo.realseTime" value=""/>
+			<input type="hidden" id="Image" name="rentFactory.img" value="#(recruitInfo.img)" />
 	</form>
 </div>
 <div class="modal-footer">
@@ -146,5 +161,24 @@ $("#file").on("fileuploaded", function(event, data, previewId, index) {
 	    autoclose: true,
 	    minView: 0,
 	    minuteStep:1
+	});
+	
+	$('#file-img').fileinput({
+		allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
+		language : "zh",
+		dropZoneEnabled : false,
+		showCaption : false,
+		autoReplace : true,
+		showUpload : true, //是否显示上传按钮
+		showRemove : true,//显示移除按钮
+		uploadUrl : "/file/save",
+	})
+
+	$("#file-img").on("fileuploaded", function(event, data, previewId, index) {
+		var result = data.response;
+		var path = result.path;
+		if (path) {
+			$("#Image").val(path);
+		}
 	});
 </script>
