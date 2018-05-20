@@ -1,5 +1,7 @@
 package com.o2o.web;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,6 +47,7 @@ public class EmployeeController extends Controller {
 
 	public void add() {
 		setAttr("newId", UUID.randomUUID());
+		setAttr("newDate",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		render("add.html");
 	}
 

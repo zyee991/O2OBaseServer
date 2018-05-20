@@ -27,12 +27,12 @@ public abstract class BaseRecruitInfo<M extends BaseRecruitInfo<M>> extends Mode
 		return getStr("experice");
 	}
 
-	public M setPosition(java.lang.String position) {
+	public M setPostion(java.lang.String position) {
 		set("position", position);
 		return (M)this;
 	}
 	
-	public java.lang.String getPosition() {
+	public java.lang.String getPostion() {
 		return getStr("position");
 	}
 

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 import com.o2o.bean.GlobalUser;
 import com.o2o.common.model.Message;
 import com.o2o.message.MessageFactory;
@@ -75,5 +77,23 @@ public class QuickOperationController extends Controller {
 		String sessionId = WebSocketEndpoint.SESSION_MAP.get(sender).getId();
 		message.put("session_id", sessionId);
 		renderJson(message);
+	}
+	
+	public void getUndoNum() {
+		String sqlPara = "select SUM(number) as total from view_base_undo ";
+		List<Record> recordList = Db.find(sqlPara);
+		if(recordList != null && recordList.size() > 0) {
+			renderJson(recordList.get(0));
+		}
+	}
+	
+	public void undo() {
+		setAttr("title","待办");
+		render("undo.html");
+	}
+	
+	public void getUndoList() {
+		List<Record> recordList = Db.find("select * from view_base_undo");
+		renderJson(recordList);
 	}
 }

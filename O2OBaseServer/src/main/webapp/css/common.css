@@ -15,6 +15,13 @@
 	
 }
 
+.alert-undo {
+	position: fixed;
+    z-index: 999;
+    right: 2%;
+    top: 30%;
+}
+
 @-webkit-keyframes shake {  
   
     0%, 100% {-webkit-transform: translateX(0);}  
@@ -34,7 +41,7 @@
     -webkit-animation-duration:1s;  
     -moz--name:shake;  
     -moz-animation-duration:1s;  
-    }  
+}  
   
 a#btn{  
     display:block;  
@@ -53,4 +60,4 @@ a#btn{
     color:#FFFFFF;  
     text-decoration:none;  
     border-radius:5px;  
-    }  
+}  

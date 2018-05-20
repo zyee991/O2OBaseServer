@@ -133,9 +133,9 @@ public class O2OConfig extends JFinalConfig {
 		EhCachePlugin ehCachePlugin = new EhCachePlugin();
 		me.add(ehCachePlugin);
 		
-		QuartzPlugin quartzPlugin = new QuartzPlugin();
-		quartzPlugin.setJobs("quartz_job.properties");
-		me.add(quartzPlugin);
+//		QuartzPlugin quartzPlugin = new QuartzPlugin();
+//		quartzPlugin.setJobs("quartz_job.properties");
+//		me.add(quartzPlugin);
 		
 		// 配置ActiveRecord插件
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
