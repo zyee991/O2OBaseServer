@@ -38,16 +38,16 @@ public class ServiceOrderController extends Controller {
 	public void dispatch() {
 		String id = getPara("id");
 		String isforward = getPara("is_forward");
-		String m_type = "";
-		List<Record> muserlist = null;
-		// 选择厂内人员
+	/*	String m_type = "";*/
+		List<Record> muserlist =serviceOrderService.finMuserList(); ;
+		/*// 选择厂内人员
 		if (isforward == "0") {
 			m_type = "A";
-			muserlist = serviceOrderService.finMuserList(m_type);
+			muserlist = 
 		} else {
 			m_type = "B";
 			muserlist = serviceOrderService.finMuserList(m_type);
-		}
+		}*/
 		Date date = new Date();
 		SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String time = df2.format(date);
