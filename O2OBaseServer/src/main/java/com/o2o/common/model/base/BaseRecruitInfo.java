@@ -64,7 +64,7 @@ public abstract class BaseRecruitInfo<M extends BaseRecruitInfo<M>> extends Mode
 	}
 
 	public M setWorkpalce(java.lang.String workpalce) {
-		set("workplace", workpalce);
+		set("workpalce", workpalce);
 		return (M)this;
 	}
 	
