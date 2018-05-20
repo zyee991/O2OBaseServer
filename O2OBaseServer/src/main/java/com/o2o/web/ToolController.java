@@ -71,4 +71,10 @@ public class ToolController extends Controller {
 		RentTools.dao.deleteById(id);
 		renderJavascript("window.location.href='/tools'");
 	}
+	
+	public void save(){
+		RentTools rentTools = getBean(RentTools.class);
+		toolservice.save(rentTools);
+		renderJavascript("window.location.href='/tools'");
+	}
 }

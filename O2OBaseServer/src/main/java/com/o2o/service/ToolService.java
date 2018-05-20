@@ -8,6 +8,7 @@ import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.City;
 import com.o2o.common.model.District;
 import com.o2o.common.model.Province;
+import com.o2o.common.model.RentTools;
 
 public class ToolService {
 
@@ -60,5 +61,13 @@ public class ToolService {
 	public List<Record> getAddressById(String addressid) {
 
 		return Db.find("select*from view_address a where district_id='" + addressid + "'");
+	}
+
+	public void save(RentTools rentTools) {
+		try{
+			rentTools.save();
+		} catch (Exception e){
+			rentTools.update();
+		}
 	}
 }
