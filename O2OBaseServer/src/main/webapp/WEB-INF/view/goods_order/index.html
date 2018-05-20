@@ -63,7 +63,9 @@
               			"<a href=\"javascript:void(0);\" onclick=\"modalShow('/goods_order/goodsdetail?id=" + row.order_id + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">商品详情</a>&nbsp;&nbsp;"+
               			"<a href=\"javascript:void(0);\" onclick=\"modalShow('/goods_order/orderdetail?id=" + row.order_id + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">订单详情</a>"; 
 	            	  }
-	                  
+	                  if(row.status_name=='待支付'){
+                      result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/goods_order/goodsdetail?id=" + row.order_id + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">商品详情</a>&nbsp;&nbsp;";
+	                  }
 	            	  return result;
 	              }
 	          }
