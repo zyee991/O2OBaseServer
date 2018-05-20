@@ -59,9 +59,11 @@ public class OrderService {
 				record.set("status_name", "待退款");
 			} else if(record.get("order_status").equals(0)&&record.get("order_pay_status").equals(3)){
 				record.set("status_name", "退款成功");
-			}else {
+			}else if(record.get("order_pay_status").equals(0)&&record.get("order_status").equals(0)){
+				record.set("status_name", "待支付");
+			} else{
 				record.set("status_name", "已完成");
-			} 
+			}
 		}
 		
 		return list;
