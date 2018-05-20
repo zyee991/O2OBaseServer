@@ -18,13 +18,13 @@ public abstract class BaseRentTools<M extends BaseRentTools<M>> extends Model<M>
 		return getStr("tid");
 	}
 
-	public M setTypId(java.lang.String typId) {
+	public M setTypId(java.lang.Integer typId) {
 		set("typ_id", typId);
 		return (M)this;
 	}
 	
-	public java.lang.String getTypId() {
-		return getStr("typ_id");
+	public java.lang.Integer getTypId() {
+		return getInt("typ_id");
 	}
 
 	public M setNameT(java.lang.String nameT) {
@@ -106,6 +106,15 @@ public abstract class BaseRentTools<M extends BaseRentTools<M>> extends Model<M>
 	
 	public java.lang.Integer getStock() {
 		return getInt("stock");
+	}
+
+	public M setImg(java.lang.String img) {
+		set("img", img);
+		return (M)this;
+	}
+	
+	public java.lang.String getImg() {
+		return getStr("img");
 	}
 
 }

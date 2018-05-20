@@ -4,6 +4,13 @@
 	<h4 class="modal-title" id="myModalLabel">添加场地租赁信息</h4>
 </div>
 <div class="modal-body">
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label for="file" class="col-sm-2 control-label">上传图片</label>
+			<div class="col-sm-10">
+				<input type="file" class="form-control" id="file" name="file">
+			</div>
+		</div>
 	</form>
 	<form action="/factory/save" method="post" class="form-horizontal"
 		role="form" id="form">
@@ -64,29 +71,31 @@
 			</div>
 		</div>
 		<div class="form-group">
-                        <label class="col-sm-2 control-label"><i>*</i>所在地址</label>
-                        <div class="col-sm-3">
-                            <select name="input_province" id="input_province" class="form-control" onchange="getcity(this)">
-                                <option value="">--请选择--</option>
-                                #for(province:provincelist)
-                                <option value="#(province.province_id)">#(province.province_name)</option>
-                                #end
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
-                            <select name="input_city" id="input_city" class="form-control" onchange="getarea(this)">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
-                            <select name="rentFactory.addressPid" id="input_area" class="form-control">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                    </div>
+            <label class="col-sm-2 control-label"><i>*</i>所在地址</label>
+            <div class="col-sm-3">
+                <select name="input_province" id="input_province" class="form-control" onchange="getcity(this)">
+                    <option value="">--请选择--</option>
+                    #for(province:provincelist)
+                    <option value="#(province.province_id)">#(province.province_name)</option>
+                    #end
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <select name="input_city" id="input_city" class="form-control" onchange="getarea(this)">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <select name="rentFactory.addressPid" id="input_area" class="form-control">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
 		<input type="hidden" id="serviceId" name="rentFactory.pid"
 			value="#(newId)" />
 		<input type="hidden" id="state" name="rentFactory.state" value="0"/>
+		<input type="hidden" id="Image"
+			name="rentFactory.img" value="" />
 	</form>
 </div>
 <div class="modal-footer">
@@ -146,4 +155,25 @@
 			}
 		})
 	}
+	
+	
+	$('#file').fileinput({
+		allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
+		language : "zh",
+		dropZoneEnabled : false,
+		showCaption : false,
+		autoReplace : true,
+		showUpload : true, //是否显示上传按钮
+		showRemove : true,//显示移除按钮
+		uploadUrl : "/file/save",
+	})
+
+	$("#file").on("fileuploaded", function(event, data, previewId, index) {
+		var result = data.response;
+		var path = result.path;
+		if (path) {
+			$("#Image").val(path);
+		}
+	});
+
 </script>

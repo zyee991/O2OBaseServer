@@ -4,6 +4,13 @@
 	<h4 class="modal-title" id="myModalLabel">添加工具租赁信息</h4>
 </div>
 <div class="modal-body">
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label for="file" class="col-sm-2 control-label">故障图片</label>
+			<div class="col-sm-10">
+				<input type="file" class="form-control" id="file" name="file">
+			</div>
+		</div>
 	</form>
 	<form action="/tools/save" method="post" class="form-horizontal"
 		role="form" id="form">
@@ -71,9 +78,11 @@
 			</div>
 		</div>
 		      
-		<input type="hidden" id="serviceId" name="rentFactory.pid"
+		<input type="hidden" id="serviceId" name="rentTools.tid"
 			value="#(newId)" />
-		<input type="hidden" id="state" name="rentFactory.state" value="0"/>
+		<input type="hidden" id="state" name="rentTools.state" value="0"/>
+		<input type="hidden" id="Image"
+			name="rentTools.img" value="" />
 	</form>
 </div>
 <div class="modal-footer">
@@ -133,4 +142,24 @@
 			}
 		})
 	}
+	
+	$('#file').fileinput({
+		allowedFileExtensions : [ 'jpg', 'png', 'gif' ],
+		language : "zh",
+		dropZoneEnabled : false,
+		showCaption : false,
+		autoReplace : true,
+		showUpload : true, //是否显示上传按钮
+		showRemove : true,//显示移除按钮
+		uploadUrl : "/file/save",
+	})
+
+	$("#file").on("fileuploaded", function(event, data, previewId, index) {
+		var result = data.response;
+		var path = result.path;
+		if (path) {
+			$("#Image").val(path);
+		}
+	});
+
 </script>

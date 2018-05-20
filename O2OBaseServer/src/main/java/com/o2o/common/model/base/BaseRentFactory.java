@@ -99,4 +99,22 @@ public abstract class BaseRentFactory<M extends BaseRentFactory<M>> extends Mode
 		return get("state");
 	}
 
+	public M setPlace(java.lang.String place) {
+		set("place", place);
+		return (M)this;
+	}
+	
+	public java.lang.String getPlace() {
+		return getStr("place");
+	}
+
+	public M setImg(java.lang.String img) {
+		set("img", img);
+		return (M)this;
+	}
+	
+	public java.lang.String getImg() {
+		return getStr("img");
+	}
+
 }

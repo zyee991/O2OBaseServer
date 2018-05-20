@@ -90,15 +90,6 @@ public abstract class BaseTechnology<M extends BaseTechnology<M>> extends Model<
 		return getStr("fat_state");
 	}
 
-	public M setFtype(java.lang.String ftype) {
-		set("ftype", ftype);
-		return (M)this;
-	}
-	
-	public java.lang.String getFtype() {
-		return getStr("ftype");
-	}
-
 	public M setDescrption(java.lang.String descrption) {
 		set("descrption", descrption);
 		return (M)this;
@@ -115,6 +106,15 @@ public abstract class BaseTechnology<M extends BaseTechnology<M>> extends Model<
 	
 	public java.lang.String getServiceOrderId() {
 		return getStr("service_order_id");
+	}
+
+	public M setImg(java.lang.String img) {
+		set("img", img);
+		return (M)this;
+	}
+	
+	public java.lang.String getImg() {
+		return getStr("img");
 	}
 
 }

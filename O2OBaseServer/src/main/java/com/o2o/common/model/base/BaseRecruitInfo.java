@@ -18,15 +18,6 @@ public abstract class BaseRecruitInfo<M extends BaseRecruitInfo<M>> extends Mode
 		return getStr("rid");
 	}
 
-	public M setExperice(java.lang.String experice) {
-		set("experice", experice);
-		return (M)this;
-	}
-	
-	public java.lang.String getExperice() {
-		return getStr("experice");
-	}
-
 	public M setPostion(java.lang.String postion) {
 		set("postion", postion);
 		return (M)this;
@@ -34,15 +25,6 @@ public abstract class BaseRecruitInfo<M extends BaseRecruitInfo<M>> extends Mode
 	
 	public java.lang.String getPostion() {
 		return getStr("postion");
-	}
-
-	public M setValidity(java.util.Date Validity) {
-		set("Validity", Validity);
-		return (M)this;
-	}
-	
-	public java.util.Date getValidity() {
-		return get("Validity");
 	}
 
 	public M setRealseTime(java.util.Date realseTime) {
@@ -54,40 +36,22 @@ public abstract class BaseRecruitInfo<M extends BaseRecruitInfo<M>> extends Mode
 		return get("realse_time");
 	}
 
-	public M setNumber(java.lang.Integer number) {
-		set("number", number);
+	public M setExperice(java.lang.String experice) {
+		set("experice", experice);
 		return (M)this;
 	}
 	
-	public java.lang.Integer getNumber() {
-		return getInt("number");
+	public java.lang.String getExperice() {
+		return getStr("experice");
 	}
 
-	public M setWorkpalce(java.lang.String workpalce) {
-		set("workpalce", workpalce);
+	public M setCategory(java.lang.String category) {
+		set("category", category);
 		return (M)this;
 	}
 	
-	public java.lang.String getWorkpalce() {
-		return getStr("workpalce");
-	}
-
-	public M setAttachment(java.lang.String attachment) {
-		set("attachment", attachment);
-		return (M)this;
-	}
-	
-	public java.lang.String getAttachment() {
-		return getStr("attachment");
-	}
-
-	public M setCompany(java.lang.String company) {
-		set("company", company);
-		return (M)this;
-	}
-	
-	public java.lang.String getCompany() {
-		return getStr("company");
+	public java.lang.String getCategory() {
+		return getStr("category");
 	}
 
 	public M setEducation(java.lang.String education) {
@@ -108,13 +72,49 @@ public abstract class BaseRecruitInfo<M extends BaseRecruitInfo<M>> extends Mode
 		return getStr("description");
 	}
 
-	public M setCategory(java.lang.String category) {
-		set("category", category);
+	public M setCompany(java.lang.String company) {
+		set("company", company);
 		return (M)this;
 	}
 	
-	public java.lang.String getCategory() {
-		return getStr("category");
+	public java.lang.String getCompany() {
+		return getStr("company");
+	}
+
+	public M setWorkpalce(java.lang.String workpalce) {
+		set("workpalce", workpalce);
+		return (M)this;
+	}
+	
+	public java.lang.String getWorkpalce() {
+		return getStr("workpalce");
+	}
+
+	public M setNumber(java.lang.Integer number) {
+		set("number", number);
+		return (M)this;
+	}
+	
+	public java.lang.Integer getNumber() {
+		return getInt("number");
+	}
+
+	public M setValidity(java.util.Date Validity) {
+		set("Validity", Validity);
+		return (M)this;
+	}
+	
+	public java.util.Date getValidity() {
+		return get("Validity");
+	}
+
+	public M setAttachment(java.lang.String attachment) {
+		set("attachment", attachment);
+		return (M)this;
+	}
+	
+	public java.lang.String getAttachment() {
+		return getStr("attachment");
 	}
 
 	public M setPhone(java.lang.String phone) {
@@ -133,6 +133,15 @@ public abstract class BaseRecruitInfo<M extends BaseRecruitInfo<M>> extends Mode
 	
 	public java.lang.Integer getSalary() {
 		return getInt("salary");
+	}
+
+	public M setImg(java.lang.String img) {
+		set("img", img);
+		return (M)this;
+	}
+	
+	public java.lang.String getImg() {
+		return getStr("img");
 	}
 
 }
