@@ -27,13 +27,13 @@ public abstract class BaseRecruitInfo<M extends BaseRecruitInfo<M>> extends Mode
 		return getStr("experice");
 	}
 
-	public M setPostion(java.lang.String position) {
-		set("position", position);
+	public M setPostion(java.lang.String postion) {
+		set("postion", postion);
 		return (M)this;
 	}
 	
 	public java.lang.String getPostion() {
-		return getStr("position");
+		return getStr("postion");
 	}
 
 	public M setValidity(java.util.Date Validity) {
@@ -63,13 +63,13 @@ public abstract class BaseRecruitInfo<M extends BaseRecruitInfo<M>> extends Mode
 		return getInt("number");
 	}
 
-	public M setWorkplace(java.lang.String workplace) {
-		set("workplace", workplace);
+	public M setWorkpalce(java.lang.String workpalce) {
+		set("workplace", workpalce);
 		return (M)this;
 	}
 	
-	public java.lang.String getWorkplace() {
-		return getStr("workplace");
+	public java.lang.String getWorkpalce() {
+		return getStr("workpalce");
 	}
 
 	public M setAttachment(java.lang.String attachment) {
