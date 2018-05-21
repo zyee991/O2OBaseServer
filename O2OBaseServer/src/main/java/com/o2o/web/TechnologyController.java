@@ -78,4 +78,18 @@ public class TechnologyController extends Controller {
 		service.save(technology);
 		renderJavascript("window.location.href='/technology'");
 	}
+	
+	public void update() {
+		String id = getPara("id");
+		Technology technology = service.findOne(id);
+		setAttr("technology",technology);
+		render("update.html");
+	}
+	
+	public void view() {
+		String id = getPara("id");
+		Technology technology = service.findOne(id);
+		setAttr("technology",technology);
+		render("view.html");
+	}
 }

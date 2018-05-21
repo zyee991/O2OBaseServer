@@ -41,4 +41,9 @@ public class TechnologyService {
 			technology.update();
 		}
 	}
+
+
+	public Technology findOne(String id) {
+		return dao.findById(id);
+	}
 }
