@@ -122,7 +122,6 @@ public class ServiceOrderController extends Controller {
 			resultMap.put("content", "模版获取失败");
 		}
 
-		System.out.println(resultMap);
 		renderJavascript("window.location.href='/service_order'");
 	}
 

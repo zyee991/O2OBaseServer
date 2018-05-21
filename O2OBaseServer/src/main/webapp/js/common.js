@@ -318,7 +318,6 @@ function confirmEOK(pemid,rid,state){
 							state='3';
 						}
 						$.post(url, {"status":state,"pemid":pemid,"rid":rid},function(data){
-							alert(data)
 								$.alert("审核成功:通过");
 								window.location.href=data.url;
 							})
@@ -362,6 +361,7 @@ function confirmPOK(pfaid,pid,state){
 					action:function(){
 						$.post(url, {"status":2,"pfaid":pfaid,"pid":pid},function(data){
 								$.alert("审核成功:通过");
+								window.location.href=data.url;
 							})
 					}
 				},
@@ -373,8 +373,9 @@ function confirmPOK(pfaid,pid,state){
 	                		url:url,
 	                		data:{"status":4,"pfaid":pfaid,"pid":pid},
 	                		async:true,
-	                		success:function(){
+	                		success:function(data){
 	                			$.alert("审核成功:不通过");
+								window.location.href=data.url;
 	                		}
 	                	})
 	                }
@@ -401,6 +402,7 @@ function confirmTOK(pfeid,tid,state){
 					action:function(){
 						$.post(url, {"status":2,"pfeid":pfeid,"tid":tid},function(data){
 								$.alert("审核成功:通过");
+								window.location.href=data.url;
 							})
 					}
 				},
@@ -412,8 +414,9 @@ function confirmTOK(pfeid,tid,state){
 	                		url:url,
 	                		data:{"status":4,"pfeid":pfeid,"tid":tid},
 	                		async:true,
-	                		success:function(){
+	                		success:function(data){
 	                			$.alert("审核成功:不通过");
+								window.location.href=data.url;
 	                		}
 	                	})
 	                }

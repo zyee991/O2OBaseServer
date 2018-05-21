@@ -36,7 +36,7 @@ public class RecruitController extends Controller {
 		pactemploy.setPeEtime(date);
 		pactemploy.update();
 		Map<String,String> resultMap = new HashMap<>();
-		resultMap.put("url", "/recruit?id"+rid);
+		resultMap.put("url", "/recruit?id="+rid);
 		renderJson(resultMap);
 	}
 }

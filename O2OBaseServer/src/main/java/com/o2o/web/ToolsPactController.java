@@ -43,7 +43,7 @@ public class ToolsPactController extends Controller {
 		pacttools.setPreEtime(date);
 		pacttools.update();
 		resultMap.put("content", "审批通过");
+		resultMap.put("url", "/pacttools?id="+tid);
 		renderJson(resultMap);
-		renderJavascript("window.location.href='/pacttools?tid='" + tid);
 	}
 }

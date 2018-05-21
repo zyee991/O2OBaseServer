@@ -43,7 +43,7 @@ public class FactoryPactController extends Controller {
 		pactfactory.setPfaEtime(date);
 		pactfactory.update();
 		resultMap.put("content", "审批通过");
+		resultMap.put("url", "/factoryPact?id="+pid);
 		renderJson(resultMap);
-		renderJavascript("window.location.href='/recruit?pid='" + pid);
 	}
 }
