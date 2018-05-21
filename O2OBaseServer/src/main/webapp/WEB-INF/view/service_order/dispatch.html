@@ -29,10 +29,36 @@
 	<button type="button" class="btn btn-default" data-dismiss="modal">
 		关闭</button>
 	<button type="button" class="btn btn-primary"
-		onclick="confirmSubmit('form')">提交</button>
+		onclick="confirmDispatchSend('form')">提交</button>
 </div>
 
 
 <script>
- 
+//确认发货
+function confirmDispatchSend(form) {
+	$.confirm({
+		title : '提示',
+		content : '是否确认发货？',
+		buttons : {
+			ok : {
+				text : '确定',
+				btnClass : 'btn-success',
+				keys : [ 'enter' ],
+				action : function() {
+					$("#" + form).ajaxSubmit({
+						
+						async:false,
+						success : function() {
+//							$("#myModal").modal('hide');
+						}
+					})
+				}
+			},
+			cancel : {
+				text : '取消',
+				btnClass : 'btn-danger'
+			}
+		}
+	})
+}
 </script>

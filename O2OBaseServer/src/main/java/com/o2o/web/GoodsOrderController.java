@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.Order;
+import com.o2o.common.model.Shop;
 import com.o2o.common.model.User;
 import com.o2o.service.OrderService;
 import com.o2o.util.ApplicationProperties;
@@ -64,20 +65,22 @@ public class GoodsOrderController extends Controller {
 						String messageurl = wxSendUrl + "?user_openid=" + openId + "&templete_id=" + mobanid
 								+ "&nickname=" + nickName + "&createtime="
 								+ new SimpleDateFormat("yyyy-MM-dd，HH:mm").format(new Date()) + "&ordertatus="
-								+ orderStatus + "&type=" + type+"&order_id=" +orderId;
+								+ orderStatus + "&type=" + type + "&order_id=" + orderId;
+						System.out.println(messageurl);
 						String messageresult = HttpUtils.doGet(messageurl);
 						if (messageresult.contains("TemplateSenderResult")) {
 							order.setOrderStatus(1);
 							order.update();
-//							List<Record> detaillist = orderService.findDetailList(order.getOrderId());
-							/*
-							 * for(Record record:detaillist){ Shop
-							 * shop=Shop.dao.findById(record.get("shop_id"));
-							 * int count = shop.getShopCount();
-							 * shop.setShopCount(count -
-							 * Integer.valueOf(record.get("order_detail_num")));
-							 * shop.update(); }
-							 */
+							List<Record> detaillist = orderService.findDetailList(order.getOrderId());
+
+							for (Record record : detaillist) {
+								String shopId = record.getStr("shop_id");
+								Shop shop = Shop.dao.findById(shopId);
+								int count = shop.getShopCount();
+								int num  = record.getInt("order_detail_num");
+								shop.setShopCount(count - num);
+								shop.update();
+							}
 							resultMap.put("status", "1");
 							resultMap.put("content", "发货成功");
 						} else {

@@ -280,7 +280,7 @@ function confirmSubmit(form) {
 				action : function() {
 					$("#" + form).ajaxSubmit({
 						
-						async:true,
+						async:false,
 						success : function() {
 							$("#myModal").modal('hide');
 						}
@@ -317,8 +317,10 @@ function confirmEOK(pemid,rid,state){
 						}else if(state=='2'){
 							state='3';
 						}
-						$.post(url, {"status":state,"pemid":pemid,"rid":rid},function(){
+						$.post(url, {"status":state,"pemid":pemid,"rid":rid},function(data){
+							alert(data)
 								$.alert("审核成功:通过");
+								window.location.href=data.url;
 							})
 					}
 				},
@@ -331,8 +333,9 @@ function confirmEOK(pemid,rid,state){
 	            		}else if(state=='2'){
 	            			state='5';
 	            		}
-	                	$.post(url, {"status":state,"pemid":pemid,"rid":rid},function(){
+	                	$.post(url, {"status":state,"pemid":pemid,"rid":rid},function(data){
 							$.alert("审核成功:不通过");
+							window.location.href=data.url;
 						})
 	                }
 				}

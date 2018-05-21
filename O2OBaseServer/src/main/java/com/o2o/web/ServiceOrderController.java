@@ -82,24 +82,23 @@ public class ServiceOrderController extends Controller {
 				}
 			}
 			if (StringUtils.isNotBlank(mobanid)) {
-				String orderId = getPara("id");
+				String orderId = getPara("dispatch.serviceOrderId");
 				ServiceOrder order = serviceOrderService.findOne(orderId);
 				if (order != null) {
 					String openId = order.getUserOpenid();
 					User user = User.dao.findById(openId);
 					if (user != null) {
-						String type = "serviceorder";
+						String type = "servicesorder";
 						String nickName = user.getUserNickname();
-						String orderStatus = "已发货";
+						String orderStatus = "已派单";
 						String messageurl = wxSendUrl + "?user_openid=" + openId + "&templete_id=" + mobanid
 								+ "&nickname=" + nickName + "&createtime="
-								+ new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()) + "&ordertatus="
+								+ new SimpleDateFormat("yyyy-MM-dd+HH:mm").format(new Date()) + "&ordertatus="
 								+ orderStatus + "&type=" + type+"&order_id=" +orderId;
 						String messageresult = HttpUtils.doGet(messageurl);
 						if (messageresult.contains("TemplateSenderResult")) {
-							/*
-							 * order.setServiceOrderStatus(1); order.update();
-							 */
+							order.setServiceOrderStatus(3);
+							order.update();
 							resultMap.put("status", "1");
 							resultMap.put("content", "派单成功");
 						} else {
@@ -123,7 +122,7 @@ public class ServiceOrderController extends Controller {
 			resultMap.put("content", "模版获取失败");
 		}
 
-		renderJson(resultMap);
+		System.out.println(resultMap);
 		renderJavascript("window.location.href='/service_order'");
 	}
 

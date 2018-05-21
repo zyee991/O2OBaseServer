@@ -1,7 +1,10 @@
 package com.o2o.web;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
 import com.o2o.common.model.PactEmploy;
@@ -32,6 +35,8 @@ public class RecruitController extends Controller {
 		pactemploy.setPeState(Integer.parseInt(status));
 		pactemploy.setPeEtime(date);
 		pactemploy.update();
-		renderJavascript("window.location.href='/recruit?id=" + rid + "'");
+		Map<String,String> resultMap = new HashMap<>();
+		resultMap.put("url", "/recruit?id"+rid);
+		renderJson(resultMap);
 	}
 }

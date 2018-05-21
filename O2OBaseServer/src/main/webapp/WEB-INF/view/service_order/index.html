@@ -52,9 +52,7 @@
 	            	  var result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/service_order/orderdetail?id=" + row.service_order_id + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">订单详情</a>&nbsp;&nbsp;"+
             						"<a href=\"javascript:void(0);\" onclick=\"modalShow('/service_order/paidandetail?id=" + row.service_order_id + "')\"  class=\"btn btn-danger btn-xs\" role=\"button\">派单详情</a>";
 	            	  if(row.status_name == '待派单') {
-	            		  result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/technology/add?serviceOrderId="+row.service_order_id+"')\" class=\"btn btn-info btn-xs\" role=\"button\">技术需求</a>&nbsp;&nbsp;"+
-	            			  "<a href=\"javascript:void(0);\" onclick=\"modalShow('/service_order/dispatch?id="+row.service_order_id+"&is_forward=0')\" class=\"btn btn-success btn-xs\" role=\"button\">厂内派单</a>&nbsp;&nbsp;"+
-	            		   "<a href=\"javascript:void(0);\" onclick=\"modalShow('/service_order/dispatch?id="+row.service_order_id+"&is_forward=1')\" class=\"btn btn-success btn-xs\" role=\"button\">外派</a>&nbsp;&nbsp;"+
+	            		  result = "<a href=\"javascript:void(0);\" onclick=\"modalShow('/service_order/dispatch?id="+row.service_order_id+"')\" class=\"btn btn-success btn-xs\" role=\"button\">派单</a>&nbsp;&nbsp;"+
                 			"<a href=\"javascript:void(0);\" onclick=\"modalShow('/service_order/orderdetail?id=" + row.service_order_id + "')\"  class=\"btn btn-warning btn-xs\" role=\"button\">订单详情</a>&nbsp;&nbsp;"
 	            	  }
 	            	  
