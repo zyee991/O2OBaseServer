@@ -93,7 +93,7 @@ public class QuickOperationController extends Controller {
 	}
 	
 	public void getUndoList() {
-		List<Record> recordList = Db.find("select * from view_base_undo");
+		List<Record> recordList = Db.find("select * from view_base_undo where number != 0");
 		renderJson(recordList);
 	}
 }

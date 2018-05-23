@@ -70,9 +70,9 @@ public class ManagerController extends Controller {
 	}
 
 	public void saveRelation() {
-		String managerIds = getPara("managerId");
+		String managerId = getPara("managerId");
 		String roleIds = getPara("roleIds");
-		managerRoleService.save(roleIds, managerIds);
+		managerRoleService.save(managerId, roleIds);
 		redirect("/role");
 	}
 
