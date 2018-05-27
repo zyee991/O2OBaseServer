@@ -139,8 +139,8 @@ public class O2OConfig extends JFinalConfig {
 		
 		// 配置ActiveRecord插件
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
-		arp.setShowSql(true);
-		arp.setDevMode(true);
+		arp.setShowSql(false);
+		arp.setDevMode(false);
 		// 所有映射在 MappingKit 中自动化搞定
 		_MappingKit.mapping(arp);
 		me.add(arp);
