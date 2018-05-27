@@ -39,12 +39,7 @@ public class _JFinalDemoGenerator {
 		// 设置是否生成链式 setter 方法
 		generator.setGenerateChainSetter(false);
 		// 添加不需要生成的表名
-		generator.addExcludedTable("tb_base_navigation");
-		generator.addExcludedTable("tb_base_manager");
-		generator.addExcludedTable("tb_base_role");
-		generator.addExcludedTable("tb_base_role_navigation");
-		generator.addExcludedTable("tb_base_manager_role");
-		generator.addExcludedTable("tb_shangjiaoperation1");
+		// generator.addExcludedTable("tb_shangjiaoperation1");
 		// 设置是否在 Model 中生成 dao 对象
 		generator.setGenerateDaoInModel(true);
 		// 设置是否生成链式 setter 方法
