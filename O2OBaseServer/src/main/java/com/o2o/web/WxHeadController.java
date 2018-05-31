@@ -31,4 +31,22 @@ public class WxHeadController extends Controller {
 		wxHeadService.save(announcement);
 		renderJavascript("window.location.href='/WxHead'");
 	}
+	
+	public void update(){
+		String id=getPara("id");
+		Announcement announcement=wxHeadService.findById(id);
+		setAttr("announcement",announcement);
+		render("update.html");
+	}
+	public void view(){
+		String id=getPara("id");
+		Announcement announcement=wxHeadService.findById(id);
+		setAttr("announcement",announcement);
+		render("view.html");
+	}
+	public void delete(){
+		String id=getPara("id");
+		wxHeadService.deleteById(id);
+		renderJavascript("window.location.href='/WxHead'");
+	}
 }

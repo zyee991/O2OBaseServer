@@ -34,4 +34,12 @@ public class WxHeadService {
 		
 	}
 
+	public Announcement findById(String id) {
+		return Announcement.dao.findById(id);
+	}
+
+	public void deleteById(String id) {
+		Announcement.dao.deleteById(id);
+	}
+
 }
